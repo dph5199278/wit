@@ -1,0 +1,120 @@
+version: "3"
+services:
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/certs:/certs
+    depends_on:
+      - contact-center
+
+  contact-center:
+    build:
+      context: ./contact-center/
+      dockerfile: Dockerfile
+    image: contact-center:develop
+    restart: always
+    ports:
+      - "${CC_WEB_PORT:-8035}:8035"
+      - "8036:8036"
+    volumes:
+      - ./contact-center/data:/data
+      - ./contact-center/logs:/logs
+    environment:
+      - JAVA_OPTS=-Xmx12288m -Xms2048m -XX:PermSize=256m -XX:MaxPermSize=1024m -Djava.net.preferIPv4Stack=true
+      - SERVER_PORT=8035
+      - SERVER_LOG_PATH=/logs
+      - SERVER_LOG_LEVEL=${LOG_LEVEL:-WARN}
+      - WEB_UPLOAD_PATH=/data
+      - SPRING_FREEMARKER_CACHE=true
+      - SPRING_DATA_ELASTICSEARCH_PROPERTIES_PATH_DATA=/data
+      - UK_IM_SERVER_PORT=8036
+      - UK_IM_SERVER_HOST=localhost
+      - UK_IM_SERVER_THREADS=10
+      # set a separated port for SSL
+      - CS_IM_SERVER_SSL_PORT=${CC_SOCKET_PORT:-8036}
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cosinee?useUnicode=true&characterEncoding=UTF-8
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${DB_PASSWD:-123456}
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+      - SPRING_REDIS_PASSWORD=${DB_PASSWD:-123456}
+      - SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
+      - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+      - SPRING_ACTIVEMQ_BROKER_URL=tcp://activemq:61616
+      - CSKEFU_MODULE_CALLOUT=false
+      - CSKEFU_MODULE_CONTACTS=true
+      - CSKEFU_MODULE_CHATBOT=true
+      - SKYPE_CHANNEL_CRM=${SKYPE_CHANNEL_CRM:-placeholder}
+      - BOT_THRESHOLD_FAQ_BEST_REPLY=${BOT_THRESHOLD_FAQ_BEST_REPLY:-0.9}
+      - BOT_THRESHOLD_FAQ_SUGG_REPLY=${BOT_THRESHOLD_FAQ_SUGG_REPLY:-0.3}
+      - CSKEFU_SETTINGS_WEBIM_VISITOR_SEPARATE=false
+    depends_on:
+      - mysql
+      - redis
+      - elasticsearch
+      - activemq
+
+  activemq:
+    build:
+      context: ./dadabase/activemq/
+      dockerfile: Dockerfile
+    image: activemq:5.15.14
+    restart: always
+    environment:
+      - ACTIVEMQ_ADMIN_LOGIN=admin
+      - ACTIVEMQ_ADMIN_PASSWORD=${DB_PASSWD:-123456}
+      - ACTIVEMQ_ENABLED_SCHEDULER=true
+      - ACTIVEMQ_MIN_MEMORY=1024
+      - ACTIVEMQ_MAX_MEMORY=4096
+    volumes:
+      - ./database/activemq/data:/opt/activemq/data
+      - ./database/activemq/logs:/var/log/activemq
+    ports:
+      - 61616:61616
+  #      - "${ACTIVEMQ_PORT1:-8051}:8161"
+  #      - "${ACTIVEMQ_PORT2:-8052}:61616"
+  #      - "${ACTIVEMQ_PORT3:-8053}:61613"
+
+  mysql:
+    image: mysql:8.0.25
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWD:-123456}
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=${DB_PASSWD:-123456}
+    ports:
+      - "${MYSQL_PORT:-8037}:3306"
+    volumes:
+      - ./database/mysql/data:/var/lib/mysql
+    command: --max_allowed_packet=536870912 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --lower_case_table_names=1
+
+  redis:
+    image: redis:6.0.13
+    environment:
+      - REDIS_PASSWORD=${DB_PASSWD:-123456}
+    restart: always
+    volumes:
+      - ./database/redis/data:/data
+    ports:
+      - "${REDIS_PORT:-8041}:6379"
+
+  elasticsearch:
+    # checkout spring data elasticsearch's document to known which version of es should be used.
+    # https://docs.spring.io/spring-data/elasticsearch/docs/3.2.6.RELEASE/reference/html/#preface.versions
+    image: elasticsearch:6.8.13
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      # override default cluster.name
+      - cluster.name=elasticsearch
+      # disable bootstrap check for development environment
+      - discovery.type=single-node
+    volumes:
+      - ./database/elasticsearch/data:/usr/share/elasticsearch/data
