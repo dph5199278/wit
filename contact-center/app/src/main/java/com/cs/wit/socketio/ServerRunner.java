@@ -35,6 +35,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -150,5 +151,10 @@ public class ServerRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         server.start();
         MainContext.setIMServerStatus(true);    // IMServer 启动成功
+    }
+
+    @PreDestroy
+    public void stop() {
+        server.stop();
     }
 }  
