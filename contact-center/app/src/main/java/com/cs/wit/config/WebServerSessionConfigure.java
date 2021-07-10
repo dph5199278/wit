@@ -23,8 +23,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.lang.NonNull;
@@ -44,7 +44,7 @@ import java.time.Duration;
  */
 
 @Configuration
-@EnableRedisHttpSession()
+@EnableRedisHttpSession
 public class WebServerSessionConfigure {
 
     /**
@@ -83,7 +83,7 @@ public class WebServerSessionConfigure {
 
     @Bean
     public RedisTemplate<Object, Object> sessionRedisTemplate() {
-        JedisConnectionFactory factory = createJedisConnectionFactory(sessionDb);
+        LettuceConnectionFactory factory = createJedisConnectionFactory(sessionDb);
         factory.afterPropertiesSet();
 
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
@@ -99,7 +99,7 @@ public class WebServerSessionConfigure {
      */
     @Bean
     public AuthRedisTemplate authRedisTemplate() {
-        JedisConnectionFactory factory = createJedisConnectionFactory(tokenDb);
+        LettuceConnectionFactory factory = createJedisConnectionFactory(tokenDb);
         factory.afterPropertiesSet();
 
         AuthRedisTemplate template = new AuthRedisTemplate();
@@ -110,7 +110,7 @@ public class WebServerSessionConfigure {
     }
 
     @NonNull
-    private JedisConnectionFactory createJedisConnectionFactory(int tokenDb) {
+    private LettuceConnectionFactory createJedisConnectionFactory(int tokenDb) {
         RedisStandaloneConfiguration standaloneConfiguration = new RedisStandaloneConfiguration();
         standaloneConfiguration.setHostName(host);
         standaloneConfiguration.setDatabase(tokenDb);
@@ -118,11 +118,12 @@ public class WebServerSessionConfigure {
         if (StringUtils.isNotBlank(pass)) {
             standaloneConfiguration.setPassword(pass);
         }
-        JedisClientConfiguration jedisClientConfiguration = JedisClientConfiguration.builder()
-                .connectTimeout(Duration.ofMillis(timeout))
-                .readTimeout(Duration.ofMillis(timeout))
+
+        LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
+                .commandTimeout(Duration.ofMillis(timeout))
+                .shutdownTimeout(Duration.ofMillis(timeout))
                 .build();
-        return new JedisConnectionFactory(standaloneConfiguration, jedisClientConfiguration);
+        return new LettuceConnectionFactory(standaloneConfiguration, clientConfiguration);
     }
 
 }

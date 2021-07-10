@@ -16,7 +16,6 @@
  */
 package com.cs.wit.config;
 
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.basic.TextEncryptor;
 import com.cs.wit.exception.InstantMessagingExceptionListener;
 import com.corundumstudio.socketio.AuthorizationListener;

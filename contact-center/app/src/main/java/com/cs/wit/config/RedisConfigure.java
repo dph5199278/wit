@@ -15,24 +15,21 @@
  */
 package com.cs.wit.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.lang.NonNull;
 
 import java.util.concurrent.Executors;
 
 @Configuration
 public class RedisConfigure {
 
-    @Autowired
-    JedisConnectionFactory jedisConnectionFactory;
-
     @Bean
-    RedisMessageListenerContainer redisContainer() {
+    RedisMessageListenerContainer redisContainer(@NonNull final RedisConnectionFactory factory) {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-        container.setConnectionFactory(jedisConnectionFactory);
+        container.setConnectionFactory(factory);
         container.setTaskExecutor(Executors.newFixedThreadPool(100));
         return container;
     }
