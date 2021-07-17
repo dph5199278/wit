@@ -45,7 +45,7 @@ public class AgentReport implements java.io.Serializable {
     private String workresult;
     private String dataid;
 
-    private String datestr = MainUtils.simpleDateFormat.format(new Date());
+    private String datestr = MainUtils.simpleDateFormat.get().format(new Date());
     private String hourstr = new SimpleDateFormat("HH").format(new Date());
     private String datehourstr = new SimpleDateFormat("yyyy-MM-dd HH").format(new Date());
 

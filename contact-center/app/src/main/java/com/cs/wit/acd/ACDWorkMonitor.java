@@ -147,7 +147,7 @@ public class ACDWorkMonitor {
             }
             if (status.equals(MainContext.AgentStatusEnum.READY.toString())) {
                 int count = workMonitorRes.countByAgentAndDatestrAndStatusAndOrgi(
-                        agent, MainUtils.simpleDateFormat.format(new Date()),
+                        agent, MainUtils.simpleDateFormat.get().format(new Date()),
                         MainContext.AgentStatusEnum.READY.toString(), orgi
                                                                                  );
                 if (count == 0) {
@@ -156,7 +156,7 @@ public class ACDWorkMonitor {
             }
             if (current.equals(MainContext.AgentStatusEnum.NOTREADY.toString())) {
                 List<WorkMonitor> workMonitorList = workMonitorRes.findByOrgiAndAgentAndDatestrAndFirsttime(
-                        orgi, agent, MainUtils.simpleDateFormat.format(new Date()), true);
+                        orgi, agent, MainUtils.simpleDateFormat.get().format(new Date()), true);
                 if (workMonitorList.size() > 0) {
                     WorkMonitor firstWorkMonitor = workMonitorList.get(0);
                     if (firstWorkMonitor.getFirsttimes() == 0) {
@@ -167,7 +167,7 @@ public class ACDWorkMonitor {
                 }
             }
             workMonitor.setCreatetime(new Date());
-            workMonitor.setDatestr(MainUtils.simpleDateFormat.format(new Date()));
+            workMonitor.setDatestr(MainUtils.simpleDateFormat.get().format(new Date()));
 
             workMonitor.setName(agent);
             workMonitor.setOrgi(orgi);

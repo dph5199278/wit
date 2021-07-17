@@ -26,7 +26,7 @@ public class CronToolsTest {
     @Test
     public void getFinalFireTime() {
         try {
-            System.out.println(MainUtils.dateFormate.format(CronTools.getFinalFireTime("0 0/40 0/1 * * ?",new Date())));
+            System.out.println(MainUtils.dateFormate.get().format(CronTools.getFinalFireTime("0 0/40 0/1 * * ?",new Date())));
         } catch (ParseException e) {
             e.printStackTrace();
         }

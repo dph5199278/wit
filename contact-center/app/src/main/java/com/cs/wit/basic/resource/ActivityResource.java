@@ -122,7 +122,7 @@ public class ActivityResource extends Resource {
                 }
             } else {
                 task = new UKefuCallOutTask();
-                task.setName(this.jobDetail.getName() + "_" + MainUtils.dateFormate.format(new Date()));
+                task.setName(this.jobDetail.getName() + "_" + MainUtils.dateFormate.get().format(new Date()));
                 task.setBatid(formFilter.getBatid());
 
                 task.setOrgi(this.jobDetail.getOrgi());
@@ -153,7 +153,7 @@ public class ActivityResource extends Resource {
                 formFilter.setExecnum(formFilter.getExecnum() + 1);
 
                 MainUtils.copyProperties(task, filter);
-                filter.setName(this.formFilter.getName() + "_" + MainUtils.dateFormate.format(new Date()));
+                filter.setName(this.formFilter.getName() + "_" + MainUtils.dateFormate.get().format(new Date()));
                 filter.setExecnum(formFilter.getExecnum());
                 this.callOutFilterRes.save(filter);
             }

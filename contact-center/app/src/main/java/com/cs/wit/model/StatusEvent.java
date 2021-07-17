@@ -153,7 +153,7 @@ public class StatusEvent implements Serializable, Comparable<StatusEvent>{
 	private String satisfaction 	;		//满意度评价
 	private Date satisfdate ;				//满意度调查提交时间
 	
-	private String datestr = MainUtils.simpleDateFormat.format(new Date());
+	private String datestr = MainUtils.simpleDateFormat.get().format(new Date());
 	private String hourstr = new SimpleDateFormat("HH").format(new Date());
 	
 

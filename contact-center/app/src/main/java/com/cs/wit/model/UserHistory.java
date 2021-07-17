@@ -59,7 +59,7 @@ public class UserHistory implements java.io.Serializable {
     private String sessionid;
     private String param;
     private int times;
-    private String createdate = MainUtils.simpleDateFormat.format(new Date());
+    private String createdate = MainUtils.simpleDateFormat.get().format(new Date());
     private String model;
 
     @Id

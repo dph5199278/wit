@@ -18,9 +18,7 @@ package com.cs.wit.config;
 
 import com.cs.wit.basic.TextEncryptor;
 import com.cs.wit.exception.InstantMessagingExceptionListener;
-import com.corundumstudio.socketio.AuthorizationListener;
 import com.corundumstudio.socketio.Configuration;
-import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import org.apache.commons.lang3.StringUtils;
@@ -50,8 +48,8 @@ public class MessagingServerConfigure {
     @Value("${web.upload-path}")
     private String path;
 
-    @Value("${uk.im.server.threads}")
-    private String threads;
+    @Value("${uk.im.server.threads:100}")
+    private int threads;
 
     private SocketIOServer server;
 
@@ -73,6 +71,7 @@ public class MessagingServerConfigure {
 //		config.setHostname("localhost");
         config.setPort(port);
 
+        config.setUseLinuxNativeEpoll("Linux".equalsIgnoreCase(System.getProperty("os.name")));
 //		config.getSocketConfig().setReuseAddress(true);
 //		config.setSocketConfig(new SocketConfig());
 //		config.setOrigin("*");
@@ -95,15 +94,9 @@ public class MessagingServerConfigure {
 
 
 //	    config.setSSLProtocol("https");
-        int workThreads = StringUtils.isNotBlank(threads) && threads.matches("[\\d]{1,6}") ? Integer.parseInt(
-                threads) : 100;
-        config.setWorkerThreads(workThreads);
+        config.setWorkerThreads(threads);
 //		config.setStoreFactory(new HazelcastStoreFactory());
-        config.setAuthorizationListener(new AuthorizationListener() {
-            public boolean isAuthorized(HandshakeData data) {
-                return true;
-            }
-        });
+        config.setAuthorizationListener(data -> true);
         config.getSocketConfig().setReuseAddress(true);
         config.getSocketConfig().setSoLinger(0);
         config.getSocketConfig().setTcpNoDelay(true);

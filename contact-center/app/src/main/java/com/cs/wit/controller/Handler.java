@@ -186,7 +186,7 @@ public class Handler {
                 try {
 
                     rangeQuery = QueryBuilders.rangeQuery("calltime").from(
-                            MainUtils.dateFormate.parse(request.getParameter("callbegin")).getTime());
+                            MainUtils.dateFormate.get().parse(request.getParameter("callbegin")).getTime());
                 } catch (ParseException e) {
 
                     e.printStackTrace();
@@ -198,9 +198,9 @@ public class Handler {
 
                     if (rangeQuery == null) {
                         rangeQuery = QueryBuilders.rangeQuery("calltime").to(
-                                MainUtils.dateFormate.parse(request.getParameter("callend")).getTime());
+                                MainUtils.dateFormate.get().parse(request.getParameter("callend")).getTime());
                     } else {
-                        rangeQuery.to(MainUtils.dateFormate.parse(request.getParameter("callend")).getTime());
+                        rangeQuery.to(MainUtils.dateFormate.get().parse(request.getParameter("callend")).getTime());
                     }
                 } catch (ParseException e) {
 
@@ -219,7 +219,7 @@ public class Handler {
                 try {
 
                     rangeQuery = QueryBuilders.rangeQuery("aptime").from(
-                            MainUtils.dateFormate.parse(request.getParameter("apbegin")).getTime());
+                            MainUtils.dateFormate.get().parse(request.getParameter("apbegin")).getTime());
                 } catch (ParseException e) {
 
                     e.printStackTrace();
@@ -231,9 +231,9 @@ public class Handler {
 
                     if (rangeQuery == null) {
                         rangeQuery = QueryBuilders.rangeQuery("aptime").to(
-                                MainUtils.dateFormate.parse(request.getParameter("apend")).getTime());
+                                MainUtils.dateFormate.get().parse(request.getParameter("apend")).getTime());
                     } else {
-                        rangeQuery.to(MainUtils.dateFormate.parse(request.getParameter("apend")).getTime());
+                        rangeQuery.to(MainUtils.dateFormate.get().parse(request.getParameter("apend")).getTime());
                     }
                 } catch (ParseException e) {
 

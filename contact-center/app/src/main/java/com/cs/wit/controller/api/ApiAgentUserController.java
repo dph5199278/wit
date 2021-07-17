@@ -219,7 +219,7 @@ public class ApiAgentUserController extends Handler {
                             acdMessageHelper.getSuccessMessage(agentService, agentUser.getChannel(), orgi));
                     outMessage.setMessageType(MediaType.TEXT.toString());
                     outMessage.setCalltype(CallType.IN.toString());
-                    outMessage.setCreatetime(MainUtils.dateFormate.format(new Date()));
+                    outMessage.setCreatetime(MainUtils.dateFormate.get().format(new Date()));
                     outMessage.setAgentUser(agentUser);
                     outMessage.setAgentService(agentService);
 

@@ -89,10 +89,10 @@ public class ProcessedSummaryController extends Handler {
             }
             try {
                 if (!StringUtils.isBlank(begin) && begin.matches("[\\d]{4}-[\\d]{2}-[\\d]{2}")) {
-                    list.add(cb.greaterThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.simpleDateFormat.parse(begin)));
+                    list.add(cb.greaterThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.simpleDateFormat.get().parse(begin)));
                 }
                 if (!StringUtils.isBlank(end) && end.matches("[\\d]{4}-[\\d]{2}-[\\d]{2}")) {
-                    list.add(cb.lessThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.parse(end + " 23:59:59")));
+                    list.add(cb.lessThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.get().parse(end + " 23:59:59")));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -198,10 +198,10 @@ public class ProcessedSummaryController extends Handler {
             }
             try {
                 if (!StringUtils.isBlank(begin) && begin.matches("[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}")) {
-                    list.add(cb.greaterThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.parse(begin)));
+                    list.add(cb.greaterThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.get().parse(begin)));
                 }
                 if (!StringUtils.isBlank(end) && end.matches("[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}")) {
-                    list.add(cb.lessThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.parse(end)));
+                    list.add(cb.lessThanOrEqualTo(root.get("createtime").as(Date.class), MainUtils.dateFormate.get().parse(end)));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -90,7 +90,7 @@ public class BatchResource extends Resource {
 
                 event.getDSData().getReport().setOrgi(this.jobDetail.getOrgi());
                 event.getDSData().getReport().setDataid(this.jobDetail.getId());
-                event.getDSData().getReport().setTitle(this.jobDetail.getName() + "_" + MainUtils.dateFormate.format(new Date()));
+                event.getDSData().getReport().setTitle(this.jobDetail.getName() + "_" + MainUtils.dateFormate.get().format(new Date()));
             } else {
                 event.getDSData().getReport().setError(true);
                 if (tempFile != null) {

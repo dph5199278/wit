@@ -196,15 +196,15 @@ public class ExcelImportProecess extends DataProcess {
                                 } else {
                                     if (valuestr.matches("[\\d]{4}-[\\d]{2}-")) {
                                         if ("date".equals(tp.getDefaultfieldvalue())) {
-                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.parse(valuestr));
+                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.get().parse(valuestr));
                                         } else {
-                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.format(MainUtils.simpleDateFormat.parse(valuestr)));
+                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.get().format(MainUtils.simpleDateFormat.get().parse(valuestr)));
                                         }
                                     } else if (valuestr.matches("[\\d]{4}-[\\d]{2}-[\\d]{2} [\\d]{2}:[\\d]{2}:[\\d]{2}")) {
                                         if ("date".equals(tp.getDefaultfieldvalue())) {
-                                            values.put(tp.getFieldname(), MainUtils.dateFormate.parse(valuestr));
+                                            values.put(tp.getFieldname(), MainUtils.dateFormate.get().parse(valuestr));
                                         } else {
-                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.format(MainUtils.dateFormate.parse(valuestr)));
+                                            values.put(tp.getFieldname(), MainUtils.simpleDateFormat.get().format(MainUtils.dateFormate.get().parse(valuestr)));
                                         }
 
                                     }

@@ -18,7 +18,9 @@ package com.cs.wit.config;
 import com.cs.wit.basic.auth.AuthRedisTemplate;
 import com.cs.wit.cache.RedisKey;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -28,7 +30,9 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.lang.NonNull;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FlushMode;
+import org.springframework.session.config.SessionRepositoryCustomizer;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
@@ -73,11 +77,18 @@ public class WebServerSessionConfigure {
 
     @Primary
     @Bean
-    public RedisIndexedSessionRepository redisIndexedSessionRepository(@NonNull RedisTemplate<Object, Object> sessionRedisTemplate) {
+    public RedisIndexedSessionRepository redisIndexedSessionRepository(@NonNull RedisTemplate<Object, Object> sessionRedisTemplate,
+                                                                       @NonNull ApplicationEventPublisher applicationEventPublisher,
+                                                                       @NonNull ObjectProvider<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers) {
         RedisIndexedSessionRepository repository = new RedisIndexedSessionRepository(sessionRedisTemplate);
         repository.setDefaultMaxInactiveInterval(maxInactiveIntervalInSeconds);
         repository.setFlushMode(FlushMode.IMMEDIATE);
         repository.setRedisKeyNamespace(RedisKey.CACHE_SESSIONS);
+        //  应用事件分发，设置后才能使session监听生效
+        repository.setApplicationEventPublisher(applicationEventPublisher);
+        repository.setDatabase(sessionDb);
+        sessionRepositoryCustomizers.orderedStream()
+                .forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
         return repository;
     }
 
@@ -126,4 +137,8 @@ public class WebServerSessionConfigure {
         return new LettuceConnectionFactory(standaloneConfiguration, clientConfiguration);
     }
 
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 }

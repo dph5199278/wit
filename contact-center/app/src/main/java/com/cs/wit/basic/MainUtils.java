@@ -66,6 +66,8 @@ import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -74,10 +76,9 @@ import java.util.regex.Pattern;
 public class MainUtils {
     private static final ObjectMapper JSON = new ObjectMapper();
     private static final MD5 md5 = new MD5();
-    private static final Random random = new Random();
-    public static SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    public static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    public static SimpleDateFormat timeRangeDateFormat = new SimpleDateFormat("HH:mm");
+    public static Supplier<SimpleDateFormat> dateFormate = () -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static Supplier<SimpleDateFormat> simpleDateFormat = () -> new SimpleDateFormat("yyyy-MM-dd");
+    public static Supplier<SimpleDateFormat> timeRangeDateFormat = () -> new SimpleDateFormat("HH:mm");
 
     static {
         JSON.setSerializationInclusion(Include.NON_NULL);
@@ -653,7 +654,7 @@ public class MainUtils {
      */
     public static boolean isInWorkingHours(String timeRanges) {
         boolean workintTime = true;
-        String timeStr = timeRangeDateFormat.format(new Date());
+        String timeStr = timeRangeDateFormat.get().format(new Date());
         if (StringUtils.isNotBlank(timeRanges)) {        //设置了 工作时间段
             workintTime = false;                    //将 检查结果设置为 False ， 如果当前时间是在 时间范围内，则 置为 True
             String[] timeRange = timeRanges.split(",");
@@ -856,7 +857,7 @@ public class MainUtils {
             for (AdType ad : adList) {
                 weight += ad.getWeight();
             }
-            int n = random.nextInt(weight), m = 0;
+            int n = ThreadLocalRandom.current().nextInt(weight), m = 0;
             for (AdType ad : adList) {
                 if (m <= n && n < m + ad.getWeight()) {
                     adType = ad;
@@ -1124,7 +1125,7 @@ public class MainUtils {
         workSession.setSessionid(session);
         workSession.setOrgi(orgi);
 
-        workSession.setDatestr(MainUtils.simpleDateFormat.format(new Date()));
+        workSession.setDatestr(MainUtils.simpleDateFormat.get().format(new Date()));
 
         return workSession;
     }

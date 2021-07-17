@@ -105,7 +105,7 @@ public class AgentEventHandler {
 
             WorkSessionRepository workSessionRepository = MainContext.getContext().getBean(WorkSessionRepository.class);
             int count = workSessionRepository.countByAgentAndDatestrAndOrgi(
-                    userid, MainUtils.simpleDateFormat.format(new Date()), orgi);
+                    userid, MainUtils.simpleDateFormat.get().format(new Date()), orgi);
 
             workSessionRepository.save(
                     MainUtils.createWorkSession(userid, MainUtils.getContextID(client.getSessionId().toString()),

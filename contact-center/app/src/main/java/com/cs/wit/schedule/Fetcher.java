@@ -120,7 +120,7 @@ public class Fetcher implements Runnable {
             }
             this.job.getReport().setOrgi(this.job.getOrgi());
             this.job.getReport().setDataid(this.job.getId());
-            this.job.getReport().setTitle(this.job.getName() + "_" + MainUtils.dateFormate.format(new Date()));
+            this.job.getReport().setTitle(this.job.getName() + "_" + MainUtils.dateFormate.get().format(new Date()));
 
             this.job.getReport().setUserid(this.job.getCreater());
             this.job.getReport().setUsername(this.job.getUsername());
