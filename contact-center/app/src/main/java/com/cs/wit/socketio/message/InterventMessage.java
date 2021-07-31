@@ -116,7 +116,7 @@ public class InterventMessage implements java.io.Serializable {
     public JsonObject toJsonObject() throws JsonProcessingException {
         // Creating Object of ObjectMapper define in Jakson Api
         ObjectMapper mapper = new ObjectMapper();
-        return (new JsonParser()).parse(mapper.writeValueAsString(this)).getAsJsonObject();
+        return JsonParser.parseString(mapper.writeValueAsString(this)).getAsJsonObject();
     }
 
     public MediaType toMediaType() {
@@ -138,4 +138,5 @@ public class InterventMessage implements java.io.Serializable {
     public void setSession(String session) {
         this.session = session;
     }
+
 }

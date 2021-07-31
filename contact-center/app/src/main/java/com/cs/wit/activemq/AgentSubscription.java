@@ -49,8 +49,7 @@ public class AgentSubscription {
     @JmsListener(destination = Constants.INSTANT_MESSAGING_MQ_TOPIC_AGENT, containerFactory = "jmsListenerContainerTopic")
     public void onMessage(final String payload) {
         logger.info("[onMessage] payload {}", payload);
-        JsonParser parser = new JsonParser();
-        JsonObject j = parser.parse(payload).getAsJsonObject();
+        JsonObject j = JsonParser.parseString(payload).getAsJsonObject();
         logger.debug("[onMessage] message body {}", j.toString());
         try {
             if (!j.has("id")) {
@@ -66,4 +65,5 @@ public class AgentSubscription {
             logger.error("onMessage", e);
         }
     }
+
 }

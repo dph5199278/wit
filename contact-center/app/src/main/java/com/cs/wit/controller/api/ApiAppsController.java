@@ -55,7 +55,7 @@ public class ApiAppsController extends Handler {
     @Menu(type = "apps", subtype = "apps", access = true)
     public ResponseEntity<String> operations(HttpServletRequest request, @RequestBody final String body, @Valid String q) {
         logger.info("[operations] body {}, q {}", body, q);
-        final JsonObject j = StringUtils.isBlank(body) ? (new JsonObject()) : (new JsonParser()).parse(
+        final JsonObject j = StringUtils.isBlank(body) ? (new JsonObject()) : JsonParser.parseString(
                 body).getAsJsonObject();
 
         JsonObject json = new JsonObject();
@@ -128,4 +128,5 @@ public class ApiAppsController extends Handler {
 
         return resp;
     }
+
 }

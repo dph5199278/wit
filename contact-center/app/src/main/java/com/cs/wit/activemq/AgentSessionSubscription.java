@@ -37,7 +37,7 @@ public class AgentSessionSubscription {
     public void onMessage(final String msg) {
         logger.info("[onMessage] payload {}", msg);
         try {
-            final JsonObject json = new JsonParser().parse(msg).getAsJsonObject();
+            final JsonObject json = JsonParser.parseString(msg).getAsJsonObject();
             // 把登出消息通知给浏览器
             NettyClients.getInstance().publishLeaveEventMessage(
                     json.get("agentno").getAsString(),
@@ -46,6 +46,5 @@ public class AgentSessionSubscription {
             logger.warn("[onMessage] error", e);
         }
     }
-
 
 }

@@ -74,7 +74,6 @@ public class ApiSysDicController extends Handler {
         return new ResponseEntity<>(new RestResult(RestResultType.OK, Dict.getInstance().getDic(code)), HttpStatus.OK);
     }
 
-
     /**
      * 创建联系人类型
      * @param creator
@@ -118,7 +117,6 @@ public class ApiSysDicController extends Handler {
         return result;
     }
 
-
     /**
      * 数据字典
      * @param request
@@ -128,7 +126,7 @@ public class ApiSysDicController extends Handler {
     @RequestMapping(method = RequestMethod.POST)
     @Menu(type = "apps", subtype = "sysdict", access = true)
     public ResponseEntity<String> operations(HttpServletRequest request, @RequestBody final String body) {
-        final JsonObject j = (new JsonParser()).parse(body).getAsJsonObject();
+        final JsonObject j = JsonParser.parseString(body).getAsJsonObject();
         logger.info("[sysdict api] operations payload {}", j.toString());
         JsonObject result = new JsonObject();
         HttpHeaders headers = RestUtils.header();
@@ -148,6 +146,5 @@ public class ApiSysDicController extends Handler {
         }
         return new ResponseEntity<String>(result.toString(), headers, HttpStatus.OK);
     }
-
 
 }

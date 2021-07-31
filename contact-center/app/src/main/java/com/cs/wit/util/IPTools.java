@@ -50,7 +50,7 @@ public class IPTools {
 	public IP findGeography(String remote) {
 		IP ip = new IP();
 		try{
-			DataBlock block = _searcher.binarySearch(remote!=null ? remote : "127.0.0.1")  ;
+			DataBlock block = _searcher.memorySearch(remote!=null ? remote : "127.0.0.1")  ;
 			if(block!=null && block.getRegion() != null){
 				String[] region = block.getRegion().split("[\\|]") ;
 				if(region.length == 5){

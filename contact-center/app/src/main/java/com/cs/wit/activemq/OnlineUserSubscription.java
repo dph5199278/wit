@@ -52,14 +52,12 @@ public class OnlineUserSubscription {
     public void publish(final JsonObject j) {
         j.addProperty("node", appNodeId);
         brokerPublisher.send(Constants.INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER, j.toString(), true);
-
     }
 
     @JmsListener(destination = Constants.INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER, containerFactory = "jmsListenerContainerTopic")
     public void onMessage(final String payload){
         logger.info("[onMessage] payload {}", payload);
-        JsonParser parser = new JsonParser();
-        JsonObject j = parser.parse(payload).getAsJsonObject();
+        JsonObject j = JsonParser.parseString(payload).getAsJsonObject();
         logger.debug("[instant messaging] message body {}", j.toString());
         try {
             NettyClients.getInstance().publishIMEventMessage(j.get("id").getAsString(),
@@ -69,4 +67,5 @@ public class OnlineUserSubscription {
             logger.error("onMessage", e);
         }
     }
+
 }

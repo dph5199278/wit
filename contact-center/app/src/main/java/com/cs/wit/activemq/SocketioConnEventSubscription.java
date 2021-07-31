@@ -63,8 +63,7 @@ public class SocketioConnEventSubscription {
         logger.info("[onMessage] payload {}", payload);
 
         try {
-            JsonParser parser = new JsonParser();
-            JsonObject j = parser.parse(payload).getAsJsonObject();
+            JsonObject j = JsonParser.parseString(payload).getAsJsonObject();
             if (j.has("userId") && j.has("orgi") && j.has("isAdmin")) {
                 final AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
                         j.get("userId").getAsString(),
@@ -115,4 +114,5 @@ public class SocketioConnEventSubscription {
             logger.error("onMessage", e);
         }
     }
+
 }
