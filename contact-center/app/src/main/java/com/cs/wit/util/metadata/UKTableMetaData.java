@@ -16,7 +16,7 @@
  */
 package com.cs.wit.util.metadata;
 
-import org.hibernate.annotations.common.util.StringHelper;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -60,7 +60,7 @@ public class UKTableMetaData {
 			catalog = rs.getString("TABLE_CAT");
 			schema = rs.getString("TABLE_SCHEM");
 			if(upcase){
-				name =  rs.getString("TABLE_NAME").toUpperCase() ;
+				name =  StringUtils.upperCase(rs.getString("TABLE_NAME"));
 			}else{
 				name = rs.getString("TABLE_NAME");
 			}
@@ -72,7 +72,7 @@ public class UKTableMetaData {
 	}
 	/**
 	 * 
-	 * @param tablename
+	 * @param tableName
 	 * @param meta
 	 * @param extras
 	 * @throws SQLException
@@ -109,7 +109,7 @@ public class UKTableMetaData {
 	public void addColumn(ResultSet rs , boolean upcase ) throws SQLException {
 		String column = rs.getString("COLUMN_NAME");
 		if(upcase){
-			column = column!=null ? column.toUpperCase() : column ;
+			column = column!=null ? StringUtils.upperCase(column) : column ;
 		}
 		if (column == null)
 			return;
@@ -118,15 +118,15 @@ public class UKTableMetaData {
 			UKColumnMetadata info = new UKColumnMetadata(rs , upcase);
 			columnMetaData.add(info) ;
 			if(upcase){
-				columName.put(info.getName().toUpperCase(),"");
+				columName.put(StringUtils.upperCase(info.getName()),"");
 			}else{
-				columName.put(info.getName().toLowerCase(),"");
+				columName.put(StringUtils.lowerCase(info.getName()),"");
 			}
 		}
 	}
 	/**
 	 * 
-	 * @param rs
+	 * @param name
 	 * @throws SQLException
 	 */
 	public void addSqlColumn(String name , String typeName , int typeCode , int columSize) throws SQLException {
@@ -137,7 +137,7 @@ public class UKTableMetaData {
 		if (columName.get(name) == null) {
 			UKColumnMetadata info = new UKColumnMetadata(name , typeName , typeCode , columSize);
 			columnMetaData.add(info) ;
-			columName.put(info.getName().toLowerCase(),"");
+			columName.put(StringUtils.lowerCase(info.getName()),"");
 		}
 	}
 	/**
@@ -150,13 +150,13 @@ public class UKTableMetaData {
 
 		try {
 			if (meta.storesUpperCaseIdentifiers()) {
-				rs = meta.getColumns(StringHelper.toUpperCase(catalog),
-						StringHelper.toUpperCase(schema), StringHelper
-								.toUpperCase(name), "%");
+				rs = meta.getColumns(StringUtils.upperCase(catalog),
+						StringUtils.upperCase(schema), StringUtils
+								.upperCase(name), "%");
 			} else if (meta.storesLowerCaseIdentifiers()) {
-				rs = meta.getColumns(StringHelper.toLowerCase(catalog),
-						StringHelper.toLowerCase(schema), StringHelper
-								.toLowerCase(name), "%");
+				rs = meta.getColumns(StringUtils.lowerCase(catalog),
+						StringUtils.lowerCase(schema), StringUtils
+								.lowerCase(name), "%");
 			} else {
 				rs = meta.getColumns(catalog, schema, name, "%");
 			}
@@ -177,7 +177,7 @@ public class UKTableMetaData {
 	private void initColumns(ResultSetMetaData meta) throws SQLException {
 		for(int i=1 ; i<=meta.getColumnCount(); i++){
 			Object tbName = meta.getColumnName(i) ;
-			if(tbName!=null && String.valueOf(tbName).toLowerCase().indexOf("rownum")<0){
+			if(tbName!=null && StringUtils.lowerCase(String.valueOf(tbName)).indexOf("rownum")<0){
 				addSqlColumn(meta.getColumnName(i) , meta.getColumnTypeName(i) , meta.getColumnType(i) , meta.getColumnDisplaySize(i));
 			}
 		}

@@ -16,7 +16,7 @@
  */
 package com.cs.wit.util.metadata;
 
-import org.hibernate.annotations.common.util.StringHelper;
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -58,10 +58,10 @@ public class UKDatabaseMetadata{
 		boolean upcase = false ;
 		try {
 			if(properties!=null && properties.get("schema")!=null && schema==null){
-				schema = properties.get("upcase")!=null?((String)properties.get("schema")).toUpperCase():(String)properties.get("schema") ;
+				schema = properties.get("upcase")!=null?StringUtils.upperCase((String)properties.get("schema")):(String)properties.get("schema") ;
 			}
 			if(properties!=null && properties.get("upcase")!=null){
-				upcase = properties.get("upcase")!=null &&  properties.get("upcase").toString().toLowerCase().equals("true");
+				upcase = properties.get("upcase")!=null &&  StringUtils.lowerCase(properties.get("upcase").toString()).equals("true");
 			}
 			UKTableMetaData table = null;
 			Statement statement = null;
@@ -71,14 +71,14 @@ public class UKDatabaseMetadata{
 					rs = meta.getTables(catalog, schema, name, TYPES);
 				} else if ((isQuoted && meta.storesUpperCaseIdentifiers() && meta.storesUpperCaseQuotedIdentifiers())
 						|| (!isQuoted && meta.storesUpperCaseIdentifiers())) {
-					rs = meta.getTables(StringHelper.toUpperCase(catalog),
-							StringHelper.toUpperCase(schema), StringHelper
-									.toUpperCase(name), TYPES);
+					rs = meta.getTables(StringUtils.upperCase(catalog),
+							StringUtils.upperCase(schema), StringUtils
+									.upperCase(name), TYPES);
 				} else if ((isQuoted && meta.storesLowerCaseQuotedIdentifiers())
 						|| (!isQuoted && meta.storesLowerCaseIdentifiers())) {
-					rs = meta.getTables(StringHelper.toLowerCase(catalog),
-							StringHelper.toLowerCase(schema), StringHelper
-									.toLowerCase(name), TYPES);
+					rs = meta.getTables(StringUtils.lowerCase(catalog),
+							StringUtils.lowerCase(schema), StringUtils
+									.lowerCase(name), TYPES);
 				}else if(schema!=null && schema.equals("hive")){
 					statement = this.connection.createStatement() ;
 					if(properties.get("database")!=null){
@@ -136,7 +136,7 @@ public class UKDatabaseMetadata{
 				schema = (String)properties.get("schema") ;
 			}
 			if(properties!=null && properties.get("upcase")!=null){
-				upcase = properties.get("upcase")!=null &&  properties.get("upcase").toString().toLowerCase().equals("true");
+				upcase = properties.get("upcase")!=null &&  StringUtils.lowerCase(properties.get("upcase").toString()).equals("true");
 			}
 			ResultSet rs = null;
 			try {
@@ -144,14 +144,14 @@ public class UKDatabaseMetadata{
 					rs = meta.getTables(catalog, schema, name, TYPES);
 				} else if ((isQuoted && meta.storesUpperCaseQuotedIdentifiers())
 						|| (!isQuoted && meta.storesUpperCaseIdentifiers())) {
-					rs = meta.getTables(StringHelper.toUpperCase(catalog),
-							StringHelper.toUpperCase(schema), StringHelper
-									.toUpperCase(name), TYPES);
+					rs = meta.getTables(StringUtils.upperCase(catalog),
+							StringUtils.upperCase(schema), StringUtils
+									.upperCase(name), TYPES);
 				} else if ((isQuoted && meta.storesLowerCaseQuotedIdentifiers())
 						|| (!isQuoted && meta.storesLowerCaseIdentifiers())) {
-					rs = meta.getTables(StringHelper.toLowerCase(catalog),
-							StringHelper.toLowerCase(schema), StringHelper
-									.toLowerCase(name), TYPES);
+					rs = meta.getTables(StringUtils.lowerCase(catalog),
+							StringUtils.lowerCase(schema), StringUtils
+									.lowerCase(name), TYPES);
 				} else {
 					rs = meta.getTables(catalog, schema, name, TYPES);
 				}
@@ -174,7 +174,7 @@ public class UKDatabaseMetadata{
 	
 	/**
 	 * 
-	 * @param name
+	 * @param statement
 	 * @param schema
 	 * @param catalog
 	 * @param isQuoted

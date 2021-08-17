@@ -28,36 +28,36 @@ import java.util.Map;
 
 
 public interface ReportData extends Serializable{
-	public Level getRow() ;
-	public Level getCol() ;
-	public void setRow(Level level) ;
-	public List<List<ValueData>> getData() ;
-	public String getViewData() ;
-	public void setPageSize(int pageSize);
-	public int getPageSize() ;
-	public int getPage();
-	public void setPage(int page) ;
-	public void setViewData(String viewData) ;
-	public void exchangeColRow() ;	//行列转换
-	public void merge(ReportData data) ;
-	public Date getDate() ;
-	public void setDate(Date createtime) ;
-	public void setException(Exception ex) ;
-	public Exception getException ();
-	public RequestData getRequestData();
-	public void setRequestData(RequestData data);
+	Level getRow() ;
+	Level getCol() ;
+	void setRow(Level level) ;
+	List<List<ValueData>> getData() ;
+	String getViewData() ;
+	void setPageSize(int pageSize);
+	int getPageSize() ;
+	int getPage();
+	void setPage(int page) ;
+	void setViewData(String viewData) ;
+	void exchangeColRow() ;	//行列转换
+	void merge(ReportData data) ;
+	Date getDate() ;
+	void setDate(Date createtime) ;
+	void setException(Exception ex) ;
+	Exception getException ();
+	RequestData getRequestData();
+	void setRequestData(RequestData data);
 	
-	public QueryText getQueryText() ;
-	public void setQueryText(QueryText queryText) ;
+	QueryText getQueryText() ;
+	void setQueryText(QueryText queryText) ;
 	
-	public void setTotal(long total) ;
-	public long getTotal() ;
+	void setTotal(long total) ;
+	long getTotal() ;
 	
-	public Map<String , Object> getOptions() ;
+	Map<String , Object> getOptions() ;
 	
-	public void setOptions(Map<String , Object> options);
+	void setOptions(Map<String , Object> options);
 	
-	public void setQueryTime(long queryTime) ;
+	void setQueryTime(long queryTime) ;
 	
-	public long getQueryTime() ;
+	long getQueryTime() ;
 }
