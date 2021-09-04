@@ -16,17 +16,21 @@
  */
 package com.cs.wit.persistence.repository;
 
-import com.alibaba.druid.pool.DruidDataSource;
+import lombok.RequiredArgsConstructor;
 import mondrian.olap.Connection;
 import mondrian.olap.DriverManager;
 import mondrian.olap.Util;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
+import javax.sql.DataSource;
+
 @Service
+@RequiredArgsConstructor
 public class DataSourceService {
-    @Autowired
-    private DruidDataSource dataSource;
+
+    @NonNull
+    private final DataSource dataSource;
 
     /**
      * @param xml

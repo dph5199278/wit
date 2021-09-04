@@ -83,13 +83,12 @@ public class CubeService {
 			Query query = connection.parseQuery(mdx);
 			Result result = connection.execute(query) ;
 			Axis[] axises = result.getAxes();
-			cubeReportData.setData(new ArrayList<List<ValueData>>());
+			cubeReportData.setData(new ArrayList<>());
 			for (int i = 0; i < axises.length; i++) {
 				if (i == 0) {
 					cubeReportData.setCol(createTitle(axises[i], i , cols));
 				} else {
 					cubeReportData.setRow(createTitle(axises[i], i , cols));
-//					cubeReportData.setTotal(axises[i].getDataSize());
 				}
 			}
 			if(cubeReportData.getRow()==null){
