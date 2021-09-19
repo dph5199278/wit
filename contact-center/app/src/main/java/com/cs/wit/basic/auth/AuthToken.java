@@ -56,8 +56,8 @@ public class AuthToken {
      * @param key
      * @param seconds
      */
-    private void expire(final String key, final long seconds) {
-        authRedisTemplate.expire(key, seconds, TimeUnit.SECONDS);
+    private boolean expire(final String key, final long seconds) {
+        return Boolean.TRUE.equals(authRedisTemplate.expire(key, seconds, TimeUnit.SECONDS));
     }
 
 
@@ -76,10 +76,7 @@ public class AuthToken {
      */
     public void putUserByAuth(final String auth, final User loginUser) {
         if (StringUtils.isNotBlank(auth) && loginUser != null) {
-            String serialized = SerializeUtil.serialize(loginUser);
-            final String key = authKey(auth);
-            redisValOps.set(key, serialized);
-            expire(key, timeout);
+            redisValOps.set(authKey(auth), SerializeUtil.serialize(loginUser), timeout, TimeUnit.SECONDS);
         } else {
             logger.warn("[putLoginUserByAuth] error Invalid params.");
         }
@@ -93,7 +90,8 @@ public class AuthToken {
      * @return
      */
     public boolean existUserByAuth(final String auth) {
-        return authRedisTemplate.hasKey(authKey(auth));
+        final String key = authKey(auth);
+        return authRedisTemplate.hasKey(key) ? (expire(key, timeout) ? true : true) : false;
     }
 
     /**
@@ -103,9 +101,11 @@ public class AuthToken {
      * @return
      */
     public User findUserByAuth(final String auth) {
-        String serialized = redisValOps.get(authKey(auth));
+        final String key = authKey(auth);
+        String serialized = redisValOps.get(key);
         if (StringUtils.isNotBlank(serialized)) {
-            return (User) SerializeUtil.deserialize(serialized);
+            expire(key, timeout);
+            return SerializeUtil.deserialize(serialized);
         }
         return null;
     }
