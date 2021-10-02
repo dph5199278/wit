@@ -45,6 +45,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -53,18 +54,31 @@ import java.util.Date;
 public class AgentEventHandler {
     final static private Logger logger = LoggerFactory.getLogger(AgentEventHandler.class);
 
-    protected SocketIOServer server;
-
-    public AgentEventHandler(SocketIOServer server) {
+    public AgentEventHandler(@NonNull final SocketIOServer server
+            , @NonNull final BrokerPublisher brokerPublisher
+            , @NonNull final AgentStatusRepository agentStatusRes
+            , @NonNull final AgentUserProxy agentUserProxy
+            , @NonNull final AgentProxy agentProxy
+            , @NonNull final AgentSessionProxy agentSessionProxy
+            , @NonNull final UserProxy userProxy
+    ) {
         this.server = server;
+
+        this.brokerPublisher = brokerPublisher;
+        this.agentStatusRes = agentStatusRes;
+        this.agentUserProxy = agentUserProxy;
+        this.agentProxy = agentProxy;
+        this.agentSessionProxy = agentSessionProxy;
+        this.userProxy = userProxy;
     }
 
-    private static BrokerPublisher brokerPublisher;
-    private static AgentStatusRepository agentStatusRes;
-    private static AgentUserProxy agentUserProxy;
-    private static AgentProxy agentProxy;
-    private static AgentSessionProxy agentSessionProxy;
-    private static UserProxy userProxy;
+    private final SocketIOServer server;
+    private final BrokerPublisher brokerPublisher;
+    private final AgentStatusRepository agentStatusRes;
+    private final AgentUserProxy agentUserProxy;
+    private final AgentProxy agentProxy;
+    private final AgentSessionProxy agentSessionProxy;
+    private final UserProxy userProxy;
 
     @OnConnect
     public void onConnect(SocketIOClient client) {
@@ -335,46 +349,27 @@ public class AgentEventHandler {
         }
     }
 
-
-    private static AgentStatusRepository getAgentStatusRes() {
-        if (agentStatusRes == null) {
-            agentStatusRes = MainContext.getContext().getBean(AgentStatusRepository.class);
-        }
+    private AgentStatusRepository getAgentStatusRes() {
         return agentStatusRes;
     }
 
-    private static BrokerPublisher getBrokerPublisher() {
-        if (brokerPublisher == null) {
-            brokerPublisher = MainContext.getContext().getBean(BrokerPublisher.class);
-        }
+    private BrokerPublisher getBrokerPublisher() {
         return brokerPublisher;
     }
 
-    private static AgentUserProxy getAgentUserProxy() {
-        if (agentUserProxy == null) {
-            agentUserProxy = MainContext.getContext().getBean(AgentUserProxy.class);
-        }
+    private AgentUserProxy getAgentUserProxy() {
         return agentUserProxy;
     }
 
-    private static AgentProxy getAgentProxy() {
-        if (agentProxy == null) {
-            agentProxy = MainContext.getContext().getBean(AgentProxy.class);
-        }
+    private AgentProxy getAgentProxy() {
         return agentProxy;
     }
 
-    private static AgentSessionProxy getAgentSessionProxy() {
-        if (agentSessionProxy == null) {
-            agentSessionProxy = MainContext.getContext().getBean(AgentSessionProxy.class);
-        }
+    private AgentSessionProxy getAgentSessionProxy() {
         return agentSessionProxy;
     }
 
-    public static UserProxy getUserProxy() {
-        if (userProxy == null) {
-            userProxy = MainContext.getContext().getBean(UserProxy.class);
-        }
+    public UserProxy getUserProxy() {
         return userProxy;
     }
 }

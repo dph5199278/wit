@@ -16,44 +16,11 @@
  */
 package com.cs.wit.socketio.client;
 
-import com.cs.wit.basic.MainUtils;
 import com.corundumstudio.socketio.SocketIOClient;
-import com.google.common.collect.ArrayListMultimap;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
-public class NettyIMClient implements NettyClient {
-
-    private ArrayListMultimap<String, SocketIOClient> imClientsMap = ArrayListMultimap.create();
-
-    public int size() {
-        return imClientsMap.size();
-    }
-
-    public List<SocketIOClient> getClients(String key) {
-        return imClientsMap.get(key);
-    }
-
-    public void putClient(String key, SocketIOClient client) {
-        imClientsMap.put(key, client);
-    }
-
-    @Override
-    public int removeClient(String key, String id) {
-        List<SocketIOClient> keyClients = this.getClients(key);
-        for (SocketIOClient client : keyClients) {
-            if (MainUtils.getContextID(client.getSessionId().toString()).equals(id)) {
-                keyClients.remove(client);
-                break;
-            }
-        }
-        if (keyClients.size() == 0) {
-            imClientsMap.removeAll(key);
-        }
-        return keyClients.size();
-    }
+public class NettyIMClient extends AbstractNettyClient {
 
     public Boolean checkClient(String key, String id) {
         List<SocketIOClient> keyClients = this.getClients(key);

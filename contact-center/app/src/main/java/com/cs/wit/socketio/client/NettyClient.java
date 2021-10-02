@@ -18,13 +18,55 @@ package com.cs.wit.socketio.client;
 
 import com.corundumstudio.socketio.SocketIOClient;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface NettyClient {
 
+    /**
+     * 已连接的客户端数
+     * @return
+     */
+    int size();
+
+    /**
+     * 获取当前所有已连接的客户端
+     * @return
+     */
+    List<SocketIOClient> getAllClients();
+
+    /**
+     * 获取map形式的所有已连接的客户端
+     * @return
+     */
+    Map<String, Collection<SocketIOClient>> asMap();
+
+    /**
+     * 获取缓存中的客户端
+     * @param key
+     * @return
+     */
     List<SocketIOClient> getClients(String key);
 
+    /**
+     * 将连接的客户端放入缓存
+     * @param key
+     * @param client
+     */
     void putClient(String key, SocketIOClient client);
 
-    int removeClient(String key, String id); // 返回该KEY剩余的连接客户端的数量
+    /**
+     * 返回该KEY剩余的连接客户端的数量
+     * @param key
+     * @param id
+     * @return
+     */
+    int removeClient(String key, String id);
+
+    /**
+     * 删除当前连接key的所有缓存客户端
+     * @param key
+     */
+    void removeAll(final String key);
 }

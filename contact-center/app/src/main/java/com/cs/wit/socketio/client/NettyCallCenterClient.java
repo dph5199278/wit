@@ -16,40 +16,11 @@
  */
 package com.cs.wit.socketio.client;
 
-import com.cs.wit.basic.MainUtils;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.google.common.collect.ArrayListMultimap;
-
-import java.util.List;
-
 /**
  * 呼叫中心登录坐席
  * @author iceworld
  *
  */
-public class NettyCallCenterClient implements NettyClient{
-	
-	private ArrayListMultimap<String, SocketIOClient> callCenterMap = ArrayListMultimap.create();
-	
-	public List<SocketIOClient> getClients(String key){
-		return callCenterMap.get(key) ;
-	}
-	
-	public void putClient(String key , SocketIOClient client){
-		callCenterMap.put(key, client) ;
-	}
-	
-	public int removeClient(String key , String id){
-		List<SocketIOClient> keyClients = this.getClients(key) ;
-		for(SocketIOClient client : keyClients){
-			if(MainUtils.getContextID(client.getSessionId().toString()).equals(id)){
-				keyClients.remove(client) ;
-				break ;
-			}
-		}
-		if(keyClients.size() == 0){
-			callCenterMap.removeAll(key) ;
-		}
-		return keyClients.size();
-	}
+public class NettyCallCenterClient extends AbstractNettyClient {
+
 }

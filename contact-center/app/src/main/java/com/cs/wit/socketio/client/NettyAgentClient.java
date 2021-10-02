@@ -16,40 +16,16 @@
  */
 package com.cs.wit.socketio.client;
 
-import com.corundumstudio.socketio.SocketIOClient;
-import com.google.common.collect.ArrayListMultimap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
-public class NettyAgentClient implements NettyClient {
-
-    private static final Logger logger = LoggerFactory.getLogger(NettyAgentClient.class);
-
-    private ArrayListMultimap<String, SocketIOClient> agentClientsMap = ArrayListMultimap.create();
-
-    public List<SocketIOClient> getClients(String key) {
-        return agentClientsMap.get(key);
-    }
-
-    public void putClient(String key, SocketIOClient client) {
-//        logger.info("[putClient] userId {}", key);
-        agentClientsMap.put(key, client);
-//        // 更新缓存
-//        MainContext.getCache().putWebIMAgentSocketioSessionId(key, MainContext.SYSTEM_ORGI,
-//                                                              MainUtils.getContextID(client.getSessionId().toString()));
-    }
+@Slf4j
+public class NettyAgentClient extends AbstractNettyClient {
 
     @Deprecated
+    @Override
     public int removeClient(String key, String id) {
-        logger.warn("[removeClient] should not happen, call NettClients.removeClient instead.");
+        log.warn("[removeClient] should not happen, call NettClients.removeClient instead.");
         return 0;
-    }
-
-
-    public void removeAll(final String key) {
-        agentClientsMap.removeAll(key);
     }
 
 }

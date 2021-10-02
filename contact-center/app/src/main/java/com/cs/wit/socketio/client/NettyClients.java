@@ -36,12 +36,12 @@ public class NettyClients {
     private final Logger logger = LoggerFactory.getLogger(NettyClient.class);
     private static NettyClients clients = new NettyClients();
 
-    private NettyIMClient imClients = new NettyIMClient();
-    private NettyAgentClient agentClients = new NettyAgentClient();
-    private NettyIMClient entIMClients = new NettyIMClient();
-    private NettyCallCenterClient callCenterClients = new NettyCallCenterClient();
-    private NettyCalloutClient calloutClients = new NettyCalloutClient();
-    private NettyChatbotClient chatbotClients = new NettyChatbotClient();
+    private NettyClient imClients = new NettyIMClient();
+    private NettyClient agentClients = new NettyAgentClient();
+    private NettyClient entIMClients = new NettyEntIMClient();
+    private NettyClient callCenterClients = new NettyCallCenterClient();
+    private NettyClient calloutClients = new NettyCalloutClient();
+    private NettyClient chatbotClients = new NettyChatbotClient();
 
     public int size() {
         return imClients.size();
@@ -51,11 +51,11 @@ public class NettyClients {
         return clients;
     }
 
-    public NettyCallCenterClient getCallCenterClients() {
+    public NettyClient getCallCenterClients() {
         return this.callCenterClients;
     }
 
-    public NettyIMClient getIMClients() {
+    public NettyClient getIMClients() {
         return imClients;
     }
 

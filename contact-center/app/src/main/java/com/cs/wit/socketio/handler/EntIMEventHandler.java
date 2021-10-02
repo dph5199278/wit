@@ -32,27 +32,22 @@ import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
 
 import java.util.List;
 
 public class EntIMEventHandler     
-{  
-	protected SocketIOServer server;
-	
-    @Autowired  
-    public EntIMEventHandler(SocketIOServer server)   
-    {  
-        this.server = server ;
-    }
+{
+	public EntIMEventHandler(@NonNull final SocketIOServer server, @NonNull PeerSyncEntIM peerSyncEntIM)
+	{
+		this.server = server ;
+		this.peerSyncEntIM = peerSyncEntIM;
+	}
 
-    @Autowired
-    private PeerSyncEntIM peerSyncEntIM;
+	private final SocketIOServer server;
+	private final PeerSyncEntIM peerSyncEntIM;
 
-    public PeerSyncEntIM getPeerSyncEntIM() {
-        if (peerSyncEntIM == null) {
-            peerSyncEntIM = MainContext.getContext().getBean(PeerSyncEntIM.class);
-        }
-
+	private PeerSyncEntIM getPeerSyncEntIM() {
         return peerSyncEntIM;
     }
 

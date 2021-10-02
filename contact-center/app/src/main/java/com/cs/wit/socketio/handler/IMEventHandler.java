@@ -43,39 +43,40 @@ import com.corundumstudio.socketio.annotation.OnEvent;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.lang.NonNull;
 
 import java.net.InetSocketAddress;
 
 @SuppressWarnings("unused")
 public class IMEventHandler {
     private static final Logger logger = LoggerFactory.getLogger(IMEventHandler.class);
-    private static AgentUserProxy agentUserProxy;
-    private static AgentServiceRepository agentServiceRepository;
-    private static ACDVisitorDispatcher acdVisitorDispatcher;
-    protected SocketIOServer server;
 
-    public IMEventHandler(SocketIOServer server) {
+    public IMEventHandler(@NonNull final SocketIOServer server
+            , @NonNull final AgentUserProxy agentUserProxy
+            , @NonNull final AgentServiceRepository agentServiceRepository
+            , @NonNull final ACDVisitorDispatcher acdVisitorDispatcher
+    ) {
         this.server = server;
+
+        this.agentUserProxy = agentUserProxy;
+        this.agentServiceRepository = agentServiceRepository;
+        this.acdVisitorDispatcher = acdVisitorDispatcher;
     }
 
-    private static AgentUserProxy getAgentUserProxy() {
-        if (agentUserProxy == null) {
-            agentUserProxy = MainContext.getContext().getBean(AgentUserProxy.class);
-        }
+    private final SocketIOServer server;
+    private final AgentUserProxy agentUserProxy;
+    private final AgentServiceRepository agentServiceRepository;
+    private final ACDVisitorDispatcher acdVisitorDispatcher;
+
+    private AgentUserProxy getAgentUserProxy() {
         return agentUserProxy;
     }
 
-    private static AgentServiceRepository getAgentServiceRepository() {
-        if (agentServiceRepository == null) {
-            agentServiceRepository = MainContext.getContext().getBean(AgentServiceRepository.class);
-        }
+    private AgentServiceRepository getAgentServiceRepository() {
         return agentServiceRepository;
     }
 
-    private static ACDVisitorDispatcher getAcdVisitorDispatcher() {
-        if (acdVisitorDispatcher == null) {
-            acdVisitorDispatcher = MainContext.getContext().getBean(ACDVisitorDispatcher.class);
-        }
+    private ACDVisitorDispatcher getAcdVisitorDispatcher() {
         return acdVisitorDispatcher;
     }
 
