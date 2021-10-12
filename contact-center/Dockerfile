@@ -1,5 +1,6 @@
-FROM adoptopenjdk:8u292-b10-jre-hotspot
-MAINTAINER Dely <dph5199278@163.com>
+FROM openjdk:8u302-jre
+LABEL author="Dely"
+LABEL email="dph5199278@163.com"
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG VCS_REF
