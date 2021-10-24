@@ -85,7 +85,7 @@ spring:
       web-stat-filter:
         enabled: true
         url-pattern: /*
-        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*"
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*,/druid2/*"
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/cosinee?useUnicode=true&characterEncoding=UTF-8
