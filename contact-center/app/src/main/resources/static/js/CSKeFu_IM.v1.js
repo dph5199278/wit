@@ -1,15 +1,20 @@
-var title = "智文客服-全渠道智能客服" ;
-var socket  , newuser = [] , newmessage = [] , ring = [];
+const title = "智文客服-全渠道智能客服";
+let socket, newuser = [], newmessage = [], ring = [];
 newuser['mp3'] = '/images/new.mp3'; 
 newmessage['mp3'] = '/images/message.mp3';
 ring['mp3'] = '/images/ring.mp3';
 $(document).ready(function(){
-    var protocol = window.location.protocol.replace(/:/g,'');
-    socket = io(protocol+'://'+hostname+':'+port+'/im/agent?orgi='+orgi+"&userid="+userid+"&session="+session+"&admin="+adminuser , {transports: ['websocket'], upgrade: false});
+	const protocol = window.location.protocol.replace(/:/g, '');
+	socket = io(protocol+'://'+hostname+':'+port+'/im/agent?orgi='+orgi+"&userid="+userid+"&session="+session+"&admin="+adminuser , {transports: ['websocket'], upgrade: false});
+    let timer = null;
     socket.on('connect',function() {
 		console.log("连接初始化成功");
+		clearTimeout(timer);
 		//请求服务端记录 当前用户在线事件
     }).on('disconnect',function() {
+		timer = setTimeout(function() {
+			top.layer.alert('当前已离线');
+		}, 4000);
 		console.log("连接已断开");       
 		//请求服务端记录，当前用户离线
     });
@@ -113,10 +118,10 @@ $(document).ready(function(){
 			window.location.href = "/logout.html?code=2";
 		}, 2000);
 	});
-	/****每分钟执行一次，与服务器交互，保持会话****/
+	/****每5秒执行一次，与服务器交互，保持会话****/
 	setInterval(function(){
 		WebIM.ping();
-	} , 60000);
+	} , 5000);
 });
 
 var WebIM = {
