@@ -73,7 +73,7 @@ public class WebServerSessionConfigure {
     private int tokenDb;
 
     @Value("${spring.redis.timeout}")
-    private int timeout;
+    private Duration timeout;
 
     @Primary
     @Bean
@@ -131,8 +131,8 @@ public class WebServerSessionConfigure {
         }
 
         LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
-                .commandTimeout(Duration.ofMillis(timeout))
-                .shutdownTimeout(Duration.ofMillis(timeout))
+                .commandTimeout(timeout)
+                .shutdownTimeout(timeout)
                 .build();
         return new LettuceConnectionFactory(standaloneConfiguration, clientConfiguration);
     }

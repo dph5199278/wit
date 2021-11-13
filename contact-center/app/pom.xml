@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
 
-        <elasticsearch.version>6.8.18</elasticsearch.version>
+        <elasticsearch.version>6.8.20</elasticsearch.version>
         <activemq.version>5.15.15</activemq.version>
 
         <spring-data-elasticsearch.version>3.2.13.RELEASE</spring-data-elasticsearch.version>
@@ -69,7 +69,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.26</version>
+            <version>8.0.27</version>
         </dependency>
         <dependency>
             <groupId>net.java.dev.jna</groupId>
@@ -422,6 +422,15 @@
 
     <build>
         <plugins>
+            <!-- 编译编码设定 -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -438,6 +447,26 @@
                         <nonFilteredFileExtension>xlsx</nonFilteredFileExtension>
                     </nonFilteredFileExtensions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-sql-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/sql</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>../config/sql/</directory>
+                                    <includes>
+                                        <include>**/*.sql</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>pl.project13.maven</groupId>
@@ -478,101 +507,12 @@
                     <injectAllReactorProjects>true</injectAllReactorProjects>
                 </configuration>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <fork>true</fork>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.springframework</groupId>
-                        <artifactId>springloaded</artifactId>
-                        <version>1.2.8.RELEASE</version>
-                    </dependency>
-                </dependencies>
-            </plugin>-->
-            <!-- 编译编码设定 -->
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!--<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <attachClasses>true</attachClasses>
-                    <warSourceExcludes>**/WEB-INF</warSourceExcludes>
-                    <packagingExcludes>**/WEB-INF,**/resources</packagingExcludes>
-                    <webResources>
-                        <resource>
-                            <directory>../config/sql/</directory>
-                            <includes>
-                                <include>**/*.sql</include>
-                            </includes>
-                        </resource>
-                    </webResources>
-                </configuration>
-                <version>2.1.1</version>
-            </plugin>-->
-            <!-- 打包jar文件时，配置manifest文件，加入lib包的jar依赖 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>${java.run.main.class}</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-            <!-- 拷贝依赖的jar包到lib目录 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-dependencies-runtime</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/lib
-                            </outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            <includeScope>runtime</includeScope>
-                            <excludeTransitive>false</excludeTransitive>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>copy-dependencies-system</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-dependencies</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>
-                                ${project.build.directory}/lib
-                            </outputDirectory>
-                            <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
-                            <overWriteIfNewer>true</overWriteIfNewer>
-                            <includeScope>system</includeScope>
-                            <excludeTransitive>true</excludeTransitive>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- 打包跳过测试 -->
@@ -585,20 +525,6 @@
             </plugin>
 
         </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                    <include>**/*.json</include>
-                    <include>**/*.ftl</include>
-                </includes>
-            </resource>
-        </resources>
         <defaultGoal>compile</defaultGoal>
     </build>
     <repositories>
