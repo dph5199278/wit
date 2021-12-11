@@ -9,7 +9,6 @@ source $baseDir/utils.sh
 MYSQL_WRITEMODE_IP=`parse_host ${SPRING_DATASOURCE_URL}`
 MYSQL_WRITEMODE_PORT=`parse_port ${SPRING_DATASOURCE_URL}`
 CONTACT_CENTER_DB=`parse_dbname ${SPRING_DATASOURCE_URL}`
-CONTACT_CENTER_WAR=/opt/wit/contact-center.war
 MYSQL_SCRIPT_NAME=cosinee-MySQL-slim.sql
 
 # functions
@@ -29,27 +28,16 @@ function import_db(){
 
 function init_db(){
     println "extract SQL script ..."
-    if [ -f $CONTACT_CENTER_WAR ]; then
-        cd /tmp
-        if [ -d ROOT ]; then 
-            rm -rf ROOT
-        fi
-
-        unzip -q $CONTACT_CENTER_WAR -d ROOT
-        if [ -f /tmp/ROOT/$MYSQL_SCRIPT_NAME ]; then
-            println "start to import database ..."
-            import_db /tmp/ROOT/$MYSQL_SCRIPT_NAME
-            # verify status
-            if [ ! $? -eq 0 ]; then
-                exit 1
-            fi
-            rm -rf /tmp/ROOT
-        else
-            println "SQL script not exist."
+    if [ -f /tmp/ROOT/$MYSQL_SCRIPT_NAME ]; then
+        println "start to import database ..."
+        import_db /tmp/ROOT/$MYSQL_SCRIPT_NAME
+        # verify status
+        if [ ! $? -eq 0 ]; then
             exit 1
         fi
     else
-        println "War file not exist."
+        println "SQL script not exist."
+        exit 1
     fi
 }
 

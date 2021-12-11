@@ -15,7 +15,10 @@ cd $baseDir
 ./mysql.upgrade.db.sh
 
 if [ $? -eq 0 ]; then
-    java -jar contact-center.war
+    if [ -f /tmp/ROOT ]; then
+        rm -rf /tmp/ROOT
+    fi
+    java -jar contact-center.jar
 else
     echo "Fail to resolve mysql database instance."
     exit 1

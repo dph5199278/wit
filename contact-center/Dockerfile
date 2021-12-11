@@ -1,4 +1,4 @@
-FROM openjdk:8u302-jre
+FROM openjdk:8u312-jre
 LABEL author="Dely"
 LABEL email="dph5199278@163.com"
 
@@ -13,13 +13,6 @@ ENV APPLICATION_BUILD_DATESTR=$APPLICATION_BUILD_DATESTR
 LABEL org.label-schema.vcs-ref=$VCS_REF \
           org.label-schema.vcs-url="https://github.com/dph5199278/wit"
 
-# install other lib and configure timezone
-RUN apt-get update && \
-   apt-get install --no-install-recommends -y tzdata iputils-ping mysql-client-8.0 zip unzip vim-tiny libfontconfig1 libfreetype6 && \ 
-   ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime && \
-   DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --frontend noninteractive tzdata && \
-   rm -rf /var/lib/apt/lists/*
-
 # Set the locale
 ENV LANG C.UTF-8
 ENV LANGUAGE en_US:en
@@ -27,16 +20,30 @@ ENV LC_ALL C.UTF-8
 
 # create dirs
 RUN /bin/bash -c "mkdir -p /{data,logs}"
+RUN /bin/bash -c "mkdir -p /{opt/wit,opt/wit/upgrade}"
 
-# build WAR
-RUN mkdir -p /opt/wit
-COPY ./app/target/contact-center-*.war /opt/wit/contact-center.war
+# install other lib and configure timezone
+RUN set -eux; \
+   apt-get update && \
+   apt-get install --no-install-recommends -y tzdata iputils-ping default-mysql-client && \
+   ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime && \
+   DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --frontend noninteractive tzdata && \
+   rm -rf /var/lib/apt/lists/*
+
+# copy shell
 COPY ./assets/mysql.setup.db.sh /opt/wit
 COPY ./assets/mysql.upgrade.db.sh /opt/wit
 COPY ./assets/utils.sh /opt/wit
 COPY ./assets/docker-entrypoint.sh /opt/wit
 RUN chmod +x /opt/wit/*.sh
 
+# build JAR
+COPY ./app/target/contact-center-*.jar /opt/wit/contact-center.jar
+
+# copy sql script
+COPY ./app/target/sql/cosinee-MySQL-slim.sql /tmp/ROOT/cosinee-MySQL-slim.sql
+COPY ./app/target/sql/upgrade/* /tmp/ROOT/upgrade/
+
 WORKDIR /opt/wit
 EXPOSE 8000-10000
-CMD ["./docker-entrypoint.sh"]
+ENTRYPOINT ["/opt/wit/docker-entrypoint.sh"]

@@ -43,9 +43,10 @@ services:
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWD:-123456}
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
-      - SPRING_REDIS_PASSWORD=${DB_PASSWD:-123456}
-      - SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
-      - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
+      - SPRING_REDIS_PASSWORD=${DB_PASSWD:-}
+      - SPRING_ELASTICSEARCH_REST_URIS=http://elasticsearch:9200
+      #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
+      #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
       - SPRING_ACTIVEMQ_BROKER_URL=tcp://activemq:61616
       - CSKEFU_MODULE_CALLOUT=false
       - CSKEFU_MODULE_CONTACTS=true
@@ -62,7 +63,7 @@ services:
 
   activemq:
     build:
-      context: ./dadabase/activemq/
+      context: ./database/activemq/
       dockerfile: Dockerfile
     image: activemq:5.15.15
     restart: always
@@ -82,7 +83,7 @@ services:
   #      - "${ACTIVEMQ_PORT3:-8053}:61613"
 
   mysql:
-    image: mysql:8.0.26
+    image: mysql:8.0.27
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWD:-123456}
@@ -107,7 +108,8 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/docs/3.2.6.RELEASE/reference/html/#preface.versions
-    image: elasticsearch:6.8.18
+    image: elasticsearch:6.8.20
+    restart: always
     ports:
       - 9200:9200
       - 9300:9300
