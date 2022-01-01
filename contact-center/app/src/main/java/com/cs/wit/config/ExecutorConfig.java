@@ -20,6 +20,7 @@ import com.cs.wit.config.plugins.CalloutPluginPresentCondition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
@@ -29,6 +30,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  *
  */
 @Configuration
+@EnableAsync
 public class ExecutorConfig {
 	private static int CORE_POOL_SIZE = 7;
 	private static int MAX_POOL_SIZE = 100;
@@ -84,6 +86,7 @@ public class ExecutorConfig {
         taskScheduler.setPoolSize(CORE_POOL_SIZE);
         taskScheduler.setWaitForTasksToCompleteOnShutdown(true);
         taskScheduler.setThreadNamePrefix("cs-schedule-");
+		taskScheduler.setAwaitTerminationSeconds(10);
         return  taskScheduler;
     }
 }

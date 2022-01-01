@@ -23,7 +23,6 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -50,12 +49,21 @@ public class SocketioConnEventSubscription {
     @Autowired
     private Cache cache;
 
-    @Value("${application.node.id}")
-    private String appNodeId;
+    @Autowired
+    private BrokerPublisher brokerPublisher;
 
     @PostConstruct
     public void setup() {
         logger.info("ActiveMQ Subscription is setup successfully.");
+    }
+
+    /**
+     * Publish Message into ActiveMQ
+     *
+     * @param payload
+     */
+    public void publish(final JsonObject payload) {
+        brokerPublisher.send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toString(), false, Constants.WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD);
     }
 
     @JmsListener(destination = Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, containerFactory = "jmsListenerContainerQueue")
@@ -68,7 +76,7 @@ public class SocketioConnEventSubscription {
                 final AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
                         j.get("userId").getAsString(),
                         j.get("orgi").getAsString());
-                if (agentStatus != null && (!agentStatus.isConnected())) {
+                if (agentStatus != null && (!cache.existConnectAlive(j.get("orgi").getAsString(), j.get("userId").getAsString()))) {
                     /**
                      * 处理该坐席为离线
                      */

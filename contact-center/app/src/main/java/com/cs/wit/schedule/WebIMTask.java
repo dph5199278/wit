@@ -37,12 +37,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @EnableScheduling
@@ -75,130 +77,138 @@ public class WebIMTask {
     private Cache cache;
 
     @Scheduled(fixedDelay = 5000, initialDelay = 20000) // 处理超时消息，每5秒执行一次
+    @Async("scheduleTaskExecutor")
     public void task() {
-        final List<SessionConfig> sessionConfigList = acdPolicyService.initSessionConfigList();
-        if (sessionConfigList != null && sessionConfigList.size() > 0 && MainContext.getContext() != null) {
-            for (final SessionConfig sessionConfig : sessionConfigList) {
-                if (sessionConfig.isSessiontimeout()) {        //设置了启用 超时提醒
-                    final List<AgentUserTask> agentUserTask = agentUserTaskRes.findByLastmessageLessThanAndStatusAndOrgi(
-                            MainUtils.getLastTime(sessionConfig.getTimeout()),
-                            MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi());
-                    for (final AgentUserTask task : agentUserTask) {        // 超时未回复
-                        cache.findOneAgentUserByUserIdAndOrgi(
-                                task.getUserid(), MainContext.SYSTEM_ORGI).ifPresent(p -> {
-                            if (StringUtils.isNotBlank(p.getAgentno())) {
-                                AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
-                                        p.getAgentno(), task.getOrgi());
-                                task.setAgenttimeouttimes(task.getAgenttimeouttimes() + 1);
-                                if (agentStatus != null && (task.getWarnings() == null || task.getWarnings().equals(
-                                        "0"))) {
-                                    task.setWarnings("1");
-                                    task.setWarningtime(new Date());
+        if(null != MainContext.getContext()) {
+            Optional.ofNullable(acdPolicyService.initSessionConfigList())
+                    .ifPresent(sessionConfigList -> {
+                        sessionConfigList.parallelStream()
+                                .forEach(sessionConfig -> {
+                                    // 座席未应答的超时操作
+                                    if(sessionConfig.isAgentreplaytimeout()) {
+                                        agentUserTaskRes.findByLastgetmessageLessThanAndStatusAndOrgi(
+                                                MainUtils.getLastTime(sessionConfig.getAgenttimeout()),
+                                                MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi())
+                                                .parallelStream()
+                                                .forEach(task -> {
+                                                    // 超时未回复
+                                                    cache.findOneAgentUserByUserIdAndOrgi(
+                                                            task.getUserid(), sessionConfig.getOrgi()).ifPresent(p -> {
+                                                        AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
+                                                                p.getAgentno(), task.getOrgi());
+                                                        if (agentStatus != null && (task.getReptimes() == null || task.getReptimes().equals("0"))) {
+                                                            task.setReptimes("1");
+                                                            task.setReptime(new Date());
 
-                                    // 发送提示消息
-                                    processMessage(
-                                            sessionConfig, sessionConfig.getTimeoutmsg(), agentStatus.getUsername(),
-                                            p, agentStatus, task);
-                                    agentUserTaskRes.save(task);
-                                } else if (sessionConfig.isResessiontimeout() && agentStatus != null && task.getWarningtime() != null && MainUtils.getLastTime(
-                                        sessionConfig.getRetimeout()).after(task.getWarningtime())) {    //再次超时未回复
-                                    /**
-                                     * 设置了再次超时,断开
-                                     */
-                                    processMessage(
-                                            sessionConfig, sessionConfig.getRetimeoutmsg(),
-                                            sessionConfig.getServicename(),
-                                            p, agentStatus, task);
-                                    try {
-                                        acdAgentService.finishAgentService(p, task.getOrgi());
-                                    } catch (Exception e) {
-                                        logger.warn("[task] exception: ", e);
+                                                            //发送提示消息
+                                                            processMessage(
+                                                                    sessionConfig, sessionConfig.getAgenttimeoutmsg(),
+                                                                    sessionConfig.getServicename(), p, agentStatus, task);
+                                                            agentUserTaskRes.save(task);
+                                                        }
+                                                    });
+                                                });
                                     }
-                                }
-                            }
-                        });
-                    }
-                } else if (sessionConfig.isResessiontimeout()) {    //未启用超时提醒，只设置了超时断开
-                    List<AgentUserTask> agentUserTask = agentUserTaskRes.findByLastmessageLessThanAndStatusAndOrgi(
-                            MainUtils.getLastTime(sessionConfig.getRetimeout()),
-                            MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi());
-                    for (final AgentUserTask task : agentUserTask) {        // 超时未回复
-                        cache.findOneAgentUserByUserIdAndOrgi(
-                                task.getUserid(), MainContext.SYSTEM_ORGI).ifPresent(p -> {
-                            AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
-                                    p.getAgentno(), task.getOrgi());
-                            if (agentStatus != null && task.getWarningtime() != null && MainUtils.getLastTime(
-                                    sessionConfig.getRetimeout()).after(task.getWarningtime())) {    //再次超时未回复
-                                /**
-                                 * 设置了再次超时,断开
-                                 */
-                                processMessage(
-                                        sessionConfig, sessionConfig.getRetimeoutmsg(), agentStatus.getUsername(),
-                                        p, agentStatus, task);
-                                try {
-                                    acdAgentService.finishAgentService(p, task.getOrgi());
-                                } catch (Exception e) {
-                                    logger.warn("[task] exception: ", e);
-                                }
-                            }
-                        });
-                    }
-                }
-                if (sessionConfig.isQuene()) {    // 启用排队超时功能，超时断开
-                    List<AgentUserTask> agentUserTask = agentUserTaskRes.findByLogindateLessThanAndStatusAndOrgi(
-                            MainUtils.getLastTime(sessionConfig.getQuenetimeout()),
-                            MainContext.AgentUserStatusEnum.INQUENE.toString(), sessionConfig.getOrgi());
-                    for (final AgentUserTask task : agentUserTask) {        // 超时未回复
-                        cache.findOneAgentUserByUserIdAndOrgi(
-                                task.getUserid(), MainContext.SYSTEM_ORGI).ifPresent(p -> {
-                            /**
-                             * 设置了超时,断开
-                             */
-                            processMessage(
-                                    sessionConfig, sessionConfig.getQuenetimeoutmsg(), sessionConfig.getServicename(),
-                                    p, null, task);
-                            try {
-                                acdAgentService.finishAgentService(p, task.getOrgi());
-                            } catch (Exception e) {
-                                logger.warn("[task] exception: ", e);
-                            }
-                        });
-                    }
-                }
-            }
-        }
-    }
 
-    @Scheduled(fixedDelay = 5000, initialDelay = 20000) // 每5秒执行一次
-    public void agent() {
-        List<SessionConfig> sessionConfigList = acdPolicyService.initSessionConfigList();
-        if (sessionConfigList != null && sessionConfigList.size() > 0) {
-            for (final SessionConfig sessionConfig : sessionConfigList) {
-                // ? 为什么还要重新取一次？
-//                sessionConfig = automaticServiceDist.initSessionConfig(sessionConfig.getOrgi());
-                if (sessionConfig != null && MainContext.getContext() != null && sessionConfig.isAgentreplaytimeout()) {
-                    List<AgentUserTask> agentUserTask = agentUserTaskRes.findByLastgetmessageLessThanAndStatusAndOrgi(
-                            MainUtils.getLastTime(sessionConfig.getAgenttimeout()),
-                            MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi());
-                    for (final AgentUserTask task : agentUserTask) {        // 超时未回复
-                        cache.findOneAgentUserByUserIdAndOrgi(
-                                task.getUserid(), MainContext.SYSTEM_ORGI).ifPresent(p -> {
-                            AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
-                                    p.getAgentno(), task.getOrgi());
-                            if (agentStatus != null && (task.getReptimes() == null || task.getReptimes().equals("0"))) {
-                                task.setReptimes("1");
-                                task.setReptime(new Date());
+                                    // 访客未应答的超时操作
+                                    final Date timeout = MainUtils.getLastTime(sessionConfig.getTimeout());
+                                    final Date reTimeout = MainUtils.getLastTime(sessionConfig.getRetimeout());
+                                    if (sessionConfig.isSessiontimeout()) {
+                                        //设置了启用 超时提醒
+                                        agentUserTaskRes.findByLastmessageLessThanAndStatusAndOrgi(
+                                                timeout,
+                                                MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi())
+                                                .parallelStream()
+                                                .forEach(task -> {
+                                                    // 超时未回复
+                                                    cache.findOneAgentUserByUserIdAndOrgi(
+                                                            task.getUserid(), sessionConfig.getOrgi()).ifPresent(p -> {
+                                                        if (StringUtils.isNotBlank(p.getAgentno())) {
+                                                            AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
+                                                                    p.getAgentno(), task.getOrgi());
+                                                            task.setAgenttimeouttimes(task.getAgenttimeouttimes() + 1);
+                                                            if (agentStatus != null && (task.getWarnings() == null || task.getWarnings().equals(
+                                                                    "0"))) {
+                                                                task.setWarnings("1");
+                                                                task.setWarningtime(new Date());
 
-                                //发送提示消息
-                                processMessage(
-                                        sessionConfig, sessionConfig.getAgenttimeoutmsg(),
-                                        sessionConfig.getServicename(), p, agentStatus, task);
-                                agentUserTaskRes.save(task);
-                            }
-                        });
-                    }
-                }
-            }
+                                                                // 发送提示消息
+                                                                processMessage(
+                                                                        sessionConfig, sessionConfig.getTimeoutmsg(), agentStatus.getUsername(),
+                                                                        p, agentStatus, task);
+                                                                agentUserTaskRes.save(task);
+                                                            } else if (sessionConfig.isResessiontimeout() && agentStatus != null && task.getWarningtime() != null && reTimeout.after(task.getWarningtime())) {    //再次超时未回复
+                                                                /**
+                                                                 * 设置了再次超时,断开
+                                                                 */
+                                                                processMessage(
+                                                                        sessionConfig, sessionConfig.getRetimeoutmsg(),
+                                                                        sessionConfig.getServicename(),
+                                                                        p, agentStatus, task);
+                                                                try {
+                                                                    acdAgentService.finishAgentService(p, task.getOrgi());
+                                                                } catch (Exception e) {
+                                                                    logger.warn("[task] exception: ", e);
+                                                                }
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                    } else if (sessionConfig.isResessiontimeout()) {
+                                        //未启用超时提醒，只设置了超时断开
+                                        agentUserTaskRes.findByLastmessageLessThanAndStatusAndOrgi(
+                                                reTimeout,
+                                                MainContext.AgentUserStatusEnum.INSERVICE.toString(), sessionConfig.getOrgi())
+                                                .parallelStream()
+                                                .forEach(task -> {
+                                                    // 超时未回复
+                                                    cache.findOneAgentUserByUserIdAndOrgi(
+                                                            task.getUserid(), sessionConfig.getOrgi()).ifPresent(p -> {
+                                                        AgentStatus agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(
+                                                                p.getAgentno(), task.getOrgi());
+                                                        if (agentStatus != null && task.getWarningtime() != null && reTimeout.after(task.getWarningtime())) {    //再次超时未回复
+                                                            /**
+                                                             * 设置了再次超时,断开
+                                                             */
+                                                            processMessage(
+                                                                    sessionConfig, sessionConfig.getRetimeoutmsg(), agentStatus.getUsername(),
+                                                                    p, agentStatus, task);
+                                                            try {
+                                                                acdAgentService.finishAgentService(p, task.getOrgi());
+                                                            } catch (Exception e) {
+                                                                logger.warn("[task] exception: ", e);
+                                                            }
+                                                        }
+                                                    });
+                                                });
+                                    }
+
+                                    // 启用排队超时功能，超时断开
+                                    if (sessionConfig.isQuene()) {
+                                        agentUserTaskRes.findByLogindateLessThanAndStatusAndOrgi(
+                                                MainUtils.getLastTime(sessionConfig.getQuenetimeout()),
+                                                MainContext.AgentUserStatusEnum.INQUENE.toString(), sessionConfig.getOrgi())
+                                                .parallelStream()
+                                                .forEach(task -> {
+                                                    // 超时未回复
+                                                    cache.findOneAgentUserByUserIdAndOrgi(
+                                                            task.getUserid(), MainContext.SYSTEM_ORGI).ifPresent(p -> {
+                                                        /**
+                                                         * 设置了超时,断开
+                                                         */
+                                                        processMessage(
+                                                                sessionConfig, sessionConfig.getQuenetimeoutmsg(), sessionConfig.getServicename(),
+                                                                p, null, task);
+                                                        try {
+                                                            acdAgentService.finishAgentService(p, task.getOrgi());
+                                                        } catch (Exception e) {
+                                                            logger.warn("[task] exception: ", e);
+                                                        }
+                                                    });
+                                                });
+                                    }
+                                });
+                    });
         }
     }
 
