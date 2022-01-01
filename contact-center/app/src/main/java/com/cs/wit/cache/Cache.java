@@ -16,6 +16,7 @@
 package com.cs.wit.cache;
 
 import com.cs.wit.aspect.AgentUserAspect;
+import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.exception.CSKefuCacheException;
 import com.cs.wit.model.*;
@@ -31,6 +32,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.text.MessageFormat;
+import java.time.Duration;
 import java.util.*;
 
 @Component
@@ -758,4 +761,11 @@ public class Cache {
         redisCommand.delHashKV(RedisKey.getUserSessionKeyByOrgi(orgi), agentno);
     }
 
+    public void putConnectAlive(String orgi, String userid) {
+        redisCommand.put(MessageFormat.format("ALIVE::{0}::{1}", orgi, userid), "ALIVE", Duration.ofSeconds(Constants.WEBIM_SOCKETIO_AGENT_ONLINE_THRESHOLD));
+    }
+
+    public boolean existConnectAlive(String orgi, String userid) {
+        return redisCommand.exists(MessageFormat.format("ALIVE::{0}::{1}", orgi, userid));
+    }
 }

@@ -17,8 +17,12 @@
 
 package com.cs.wit.controller.apps;
 
+import com.cs.wit.cache.Cache;
 import com.cs.wit.controller.Handler;
+import com.cs.wit.model.User;
 import com.cs.wit.util.Menu;
+import lombok.RequiredArgsConstructor;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,13 +30,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/message")
 public class MessageController extends Handler{
+
+    @NonNull
+    private final Cache cache;
 	
     @RequestMapping("/ping")
     @Menu(type = "message" , subtype = "ping" , admin= true)
     public ModelAndView ping(ModelMap map , HttpServletRequest request) {
+
+        final User logined = super.getUser(request);
+        final String orgi = logined.getOrgi();
+
+        // 每次ping,确认存活
+        cache.putConnectAlive(orgi, logined.getId());
+
         return request(super.createRequestPageTempletResponse("/apps/message/ping"));
     }
 }

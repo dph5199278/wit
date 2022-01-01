@@ -22,6 +22,7 @@ import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.plugins.PluginRegistry;
 import com.cs.wit.basic.plugins.PluginsLoader;
+import com.cs.wit.cache.Cache;
 import com.cs.wit.config.plugins.CalloutPluginPresentCondition;
 import com.cs.wit.config.plugins.ChatbotPluginPresentCondition;
 import com.cs.wit.peer.PeerSyncEntIM;
@@ -75,9 +76,10 @@ public class ServerRunner implements CommandLineRunner {
             , @NonNull final AgentStatusRepository agentStatusRes
             , @NonNull final AgentProxy agentProxy
             , @NonNull final AgentSessionProxy agentSessionProxy
-            , @NonNull final UserProxy userProxy) {
+            , @NonNull final UserProxy userProxy
+            , @NonNull final Cache cache) {
         SocketIONamespace agentSocketIONameSpace = server.addNamespace(MainContext.NameSpaceEnum.AGENT.getNamespace());
-        agentSocketIONameSpace.addListeners(new AgentEventHandler(server, brokerPublisher, agentStatusRes, agentUserProxy, agentProxy, agentSessionProxy, userProxy));
+        agentSocketIONameSpace.addListeners(new AgentEventHandler(server, brokerPublisher, agentStatusRes, agentUserProxy, agentProxy, agentSessionProxy, userProxy, cache));
         return agentSocketIONameSpace;
     }
 

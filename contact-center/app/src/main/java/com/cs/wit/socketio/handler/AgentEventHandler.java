@@ -21,7 +21,7 @@ import com.cs.wit.activemq.BrokerPublisher;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
-import com.cs.wit.model.AgentStatus;
+import com.cs.wit.cache.Cache;
 import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.AgentStatusRepository;
@@ -61,6 +61,7 @@ public class AgentEventHandler {
             , @NonNull final AgentProxy agentProxy
             , @NonNull final AgentSessionProxy agentSessionProxy
             , @NonNull final UserProxy userProxy
+            , @NonNull final Cache cache
     ) {
         this.server = server;
 
@@ -70,6 +71,7 @@ public class AgentEventHandler {
         this.agentProxy = agentProxy;
         this.agentSessionProxy = agentSessionProxy;
         this.userProxy = userProxy;
+        this.cache = cache;
     }
 
     private final SocketIOServer server;
@@ -79,6 +81,7 @@ public class AgentEventHandler {
     private final AgentProxy agentProxy;
     private final AgentSessionProxy agentSessionProxy;
     private final UserProxy userProxy;
+    private final Cache cache;
 
     @OnConnect
     public void onConnect(SocketIOClient client) {
@@ -94,23 +97,25 @@ public class AgentEventHandler {
         if (StringUtils.isNotBlank(userid) && StringUtils.isNotBlank(session)) {
 
             // 验证当前的SSO中的session是否和传入的session匹配
-            if (getAgentSessionProxy().isInvalidSessionId(userid, session, orgi)) {
+            if (agentSessionProxy.isInvalidSessionId(userid, session, orgi)) {
                 // 该session信息不合法
                 logger.info("[onConnect] invalid sessionId {}", session);
                 return;
             }
+
+            // 每次ping,确认存活
+            cache.putConnectAlive(orgi, userid);
 
             client.set("agentno", userid);
             client.set("session", session);
             client.set("connectid", connectid);
 
             // 更新AgentStatus到数据库
-            getAgentStatusRes().findOneByAgentnoAndOrgi(userid, orgi).ifPresent(p -> {
+            agentStatusRes.findOneByAgentnoAndOrgi(userid, orgi).ifPresent(p -> {
                 p.setUpdatetime(new Date());
-                p.setConnected(true);
                 // 设置agentSkills
-                p.setSkills(getUserProxy().getSkillsMapByAgentno(userid));
-                getAgentStatusRes().save(p);
+                p.setSkills(userProxy.getSkillsMapByAgentno(userid));
+                agentStatusRes.save(p);
             });
 
             // 工作工作效率
@@ -149,12 +154,6 @@ public class AgentEventHandler {
             // 该坐席和服务器没有连接了，但是也不能保证该坐席是停止办公了，可能稍后TA又打开网页
             // 所以，此处做一个30秒的延迟，如果该坐席30秒内没重新建立连接，则撤退该坐席
             // 更新该坐席状态，设置为"无连接"，不会分配新访客
-            final AgentStatus agentStatus = MainContext.getCache().findOneAgentStatusByAgentnoAndOrig(userid, orgi);
-
-            if (agentStatus != null) {
-                agentStatus.setConnected(false);
-                MainContext.getCache().putAgentStatusByOrgi(agentStatus, agentStatus.getOrgi());
-            }
 
             /**
              * 业务断开
@@ -164,7 +163,7 @@ public class AgentEventHandler {
             payload.put("userId", userid);
             payload.put("orgi", orgi);
             payload.put("isAdmin", StringUtils.isNotBlank(admin) && admin.equalsIgnoreCase("true"));
-            getBrokerPublisher().send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toJSONString(),
+            brokerPublisher.send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toJSONString(),
                                       false,
                                       Constants.WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD);
         }
@@ -205,10 +204,10 @@ public class AgentEventHandler {
         if (received.valid()) {
 
             // 获得AgentUser
-            final AgentUser agentUser = getAgentUserProxy().findOne(received.getAgentuserid()).get();
+            final AgentUser agentUser = agentUserProxy.findOne(received.getAgentuserid()).get();
 
             // 验证当前的SSO中的session是否和传入的session匹配
-            if (getAgentSessionProxy().isInvalidSessionId(
+            if (agentSessionProxy.isInvalidSessionId(
                     agentno, session, agentUser.getOrgi())) {
                 // 该session信息不合法
                 logger.info("[onIntervetionEvent] invalid sessionId {}", session);
@@ -217,7 +216,7 @@ public class AgentEventHandler {
                 return;
             }
 
-            final User supervisor = getUserProxy().findOne(received.getSupervisorid());
+            final User supervisor = userProxy.findOne(received.getSupervisorid());
             final Date now = new Date();
 
             // 创建消息
@@ -261,7 +260,7 @@ public class AgentEventHandler {
             chatMessage.setMsgtype(received.toMediaType().toString());
             chatMessage.setCalltype(MainContext.CallType.OUT.toString());
 
-            getAgentProxy().sendChatMessageByAgent(chatMessage, agentUser);
+            agentProxy.sendChatMessageByAgent(chatMessage, agentUser);
         } else {
             logger.warn("[onEvent] intervention invalid message", received.toString());
         }
@@ -297,7 +296,7 @@ public class AgentEventHandler {
 
 
         // 验证当前的SSO中的session是否和传入的session匹配
-        if (getAgentSessionProxy().isInvalidSessionId(
+        if (agentSessionProxy.isInvalidSessionId(
                 agentno, session, received.getOrgi())) {
             // 该session信息不合法
             logger.info("[onMessageEvent] invalid sessionId {}", session);
@@ -343,33 +342,10 @@ public class AgentEventHandler {
                 received.setMsgtype(MainContext.MediaType.TEXT.toString());
             }
 
-            getAgentProxy().sendChatMessageByAgent(received, agentUser);
+            agentProxy.sendChatMessageByAgent(received, agentUser);
         } else {
             logger.warn("[onEvent] message: unknown condition.");
         }
     }
 
-    private AgentStatusRepository getAgentStatusRes() {
-        return agentStatusRes;
-    }
-
-    private BrokerPublisher getBrokerPublisher() {
-        return brokerPublisher;
-    }
-
-    private AgentUserProxy getAgentUserProxy() {
-        return agentUserProxy;
-    }
-
-    private AgentProxy getAgentProxy() {
-        return agentProxy;
-    }
-
-    private AgentSessionProxy getAgentSessionProxy() {
-        return agentSessionProxy;
-    }
-
-    public UserProxy getUserProxy() {
-        return userProxy;
-    }
 }

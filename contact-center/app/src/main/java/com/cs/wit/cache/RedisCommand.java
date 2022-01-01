@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
+import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -70,6 +71,11 @@ public class RedisCommand {
         return result;
     }
 
+    public boolean put(final String key, final String serialized, final Duration timeout) {
+        redisValOps.set(key, serialized, timeout);
+        return true;
+    }
+
     public String get(final String key) {
         return redisValOps.get(key);
     }
@@ -111,7 +117,7 @@ public class RedisCommand {
      * @return
      */
     public boolean exists(final String key) {
-        return redis.hasKey(key);
+        return Boolean.TRUE.equals(redis.hasKey(key));
     }
 
 

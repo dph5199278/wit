@@ -104,28 +104,29 @@ public class Constants {
     /**
      * Instant Messaging Events
      */
-    public final static String INSTANT_MESSAGING_MQ_TOPIC_AGENT = "cskefu.webim.agent";
+    public final static String INSTANT_MESSAGING_MQ_TOPIC_AGENT = "wit.webim.agent";
     // freeswitch 通知消息
     public final static String INSTANT_MESSAGING_MQ_QUEUE_PBX = "pbx.*.events";
-    public final static String INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER = "cskefu.webim.onlineuser";
-    public final static String WEBIM_SOCKETIO_AGENT_DISCONNECT = "cskefu.socketio.agent.disconnect";
+    public final static String INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER = "wit.webim.onlineuser";
+    public final static String WEBIM_SOCKETIO_AGENT_DISCONNECT = "wit.socketio.agent.disconnect";
     // 黑名单
-    public final static String WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST = "cskefu.im.onlineuser.blacklist";
+    public final static String WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST = "wit.im.onlineuser.blacklist";
     // 坐席socketio断开到判定为离线的时长
     public final static int WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD = 10;
+    public final static int WEBIM_SOCKETIO_AGENT_ONLINE_THRESHOLD = WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD - 2;
     // 发送消息给访客: 接收来自路由的消息并判断渠道
-    public final static String INSTANT_MESSAGING_MQ_TOPIC_VISITOR = "cskefu.outbound.visitor";
+    public final static String INSTANT_MESSAGING_MQ_TOPIC_VISITOR = "wit.outbound.visitor";
 
     // 发送给聊天机器人并处理返回结果
-    public final static String INSTANT_MESSAGING_MQ_QUEUE_CHATBOT = "cskefu.outbound.chatbot";
-    public static final String AUDIT_AGENT_MESSAGE = "cskefu.agent.audit";
+    public final static String INSTANT_MESSAGING_MQ_QUEUE_CHATBOT = "wit.outbound.chatbot";
+    public static final String AUDIT_AGENT_MESSAGE = "wit.agent.audit";
 
 
     /**
      * 登录用户的唯一登录会话管理
      */
     // web session single sign on
-    public final static String MQ_TOPIC_WEB_SESSION_SSO = "cskefu.agent.session.retired";
+    public final static String MQ_TOPIC_WEB_SESSION_SSO = "wit.agent.session.retired";
 
     /**
      * Attachment File Type
