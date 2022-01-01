@@ -23,7 +23,8 @@
         <spring-data-elasticsearch.version>3.2.13.RELEASE</spring-data-elasticsearch.version>
         <spring-session.version>Corn-SR6</spring-session.version>
 
-        <log4j-api.version>2.15.0</log4j-api.version>
+        <log4j-api.version>2.12.4</log4j-api.version>
+        <logback.version>1.2.9</logback.version>
 
         <maven-jar-plugin.version>3.2.0</maven-jar-plugin.version>
         <!-- 主类地址，一定要配置，否则打包时运行会出错 -->
@@ -40,6 +41,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <artifactId>logback-core</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <artifactId>logback-classic</artifactId>
+            <groupId>ch.qos.logback</groupId>
+            <version>${logback.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -270,7 +282,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
+            <version>1.2.79</version>
         </dependency>
         <dependency>
             <groupId>com.github.binarywang</groupId>
@@ -426,6 +438,12 @@
             <artifactId>log4j-to-slf4j</artifactId>
             <groupId>org.apache.logging.log4j</groupId>
             <version>${log4j-api.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>log4j-api</artifactId>
+                    <groupId>org.apache.logging.log4j</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
