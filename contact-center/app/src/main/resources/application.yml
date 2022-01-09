@@ -16,8 +16,8 @@
 # https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/htmlsingle/
 # https://stackoverflow.com/questions/35531661/using-env-variable-in-spring-boots-application-properties
 spring:
-#  profiles:
-#    active: coisn,druid
+  profiles:
+    active: dev
   ##############################################
   # ActiveMQ消息服务
   ##############################################
@@ -224,15 +224,6 @@ cskefu:
 endpoints:
   prometheus:
     enabled: true
-
-##############################################
-# 日志及临时文件存储
-##############################################
-logging:
-  file:
-    path: ../logs
-  level:
-    root: info
 
 ##############################################
 # Actuator 监控数据采集

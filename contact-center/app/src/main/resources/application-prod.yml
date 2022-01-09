@@ -1,0 +1,16 @@
+spring:
+  main:
+    banner-mode: console
+  jpa:
+    show-sql: false
+##############################################
+# 日志及临时文件存储
+##############################################
+logging:
+  file:
+    clean-history-on-start: false
+    max-history: 30
+    max-size: 10MB
+    path: logs
+  level:
+    root: warn
