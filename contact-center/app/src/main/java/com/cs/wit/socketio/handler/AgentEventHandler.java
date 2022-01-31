@@ -16,9 +16,13 @@
  */
 package com.cs.wit.socketio.handler;
 
-import com.alibaba.fastjson.JSONObject;
-import com.cs.wit.activemq.BrokerPublisher;
-import com.cs.wit.basic.Constants;
+import com.corundumstudio.socketio.AckRequest;
+import com.corundumstudio.socketio.SocketIOClient;
+import com.corundumstudio.socketio.SocketIOServer;
+import com.corundumstudio.socketio.annotation.OnConnect;
+import com.corundumstudio.socketio.annotation.OnDisconnect;
+import com.corundumstudio.socketio.annotation.OnEvent;
+import com.cs.wit.activemq.SocketioConnEventSubscription;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.cache.Cache;
@@ -35,13 +39,8 @@ import com.cs.wit.socketio.message.AgentStatusMessage;
 import com.cs.wit.socketio.message.ChatMessage;
 import com.cs.wit.socketio.message.InterventMessage;
 import com.cs.wit.socketio.message.Message;
-import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.SocketIOClient;
-import com.corundumstudio.socketio.SocketIOServer;
-import com.corundumstudio.socketio.annotation.OnConnect;
-import com.corundumstudio.socketio.annotation.OnDisconnect;
-import com.corundumstudio.socketio.annotation.OnEvent;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.google.gson.JsonObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +54,7 @@ public class AgentEventHandler {
     final static private Logger logger = LoggerFactory.getLogger(AgentEventHandler.class);
 
     public AgentEventHandler(@NonNull final SocketIOServer server
-            , @NonNull final BrokerPublisher brokerPublisher
+            , @NonNull final SocketioConnEventSubscription socketioConnEventSubscription
             , @NonNull final AgentStatusRepository agentStatusRes
             , @NonNull final AgentUserProxy agentUserProxy
             , @NonNull final AgentProxy agentProxy
@@ -65,7 +64,7 @@ public class AgentEventHandler {
     ) {
         this.server = server;
 
-        this.brokerPublisher = brokerPublisher;
+        this.socketioConnEventSubscription = socketioConnEventSubscription;
         this.agentStatusRes = agentStatusRes;
         this.agentUserProxy = agentUserProxy;
         this.agentProxy = agentProxy;
@@ -75,7 +74,7 @@ public class AgentEventHandler {
     }
 
     private final SocketIOServer server;
-    private final BrokerPublisher brokerPublisher;
+    private final SocketioConnEventSubscription socketioConnEventSubscription;
     private final AgentStatusRepository agentStatusRes;
     private final AgentUserProxy agentUserProxy;
     private final AgentProxy agentProxy;
@@ -159,13 +158,11 @@ public class AgentEventHandler {
              * 业务断开
              * 在超时发生了一段时间后触发
              */
-            JSONObject payload = new JSONObject();
-            payload.put("userId", userid);
-            payload.put("orgi", orgi);
-            payload.put("isAdmin", StringUtils.isNotBlank(admin) && admin.equalsIgnoreCase("true"));
-            brokerPublisher.send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toJSONString(),
-                                      false,
-                                      Constants.WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD);
+            JsonObject payload = new JsonObject();
+            payload.addProperty("userId", userid);
+            payload.addProperty("orgi", orgi);
+            payload.addProperty("isAdmin", StringUtils.isNotBlank(admin) && admin.equalsIgnoreCase("true"));
+            socketioConnEventSubscription.publish(payload);
         }
     }
 

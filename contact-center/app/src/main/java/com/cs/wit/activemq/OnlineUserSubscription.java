@@ -18,7 +18,6 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -31,10 +30,6 @@ import javax.annotation.PostConstruct;
 public class OnlineUserSubscription {
 
     private final static Logger logger = LoggerFactory.getLogger(OnlineUserSubscription.class);
-
-    @Value("${application.node.id}")
-    private String appNodeId;
-
 
     @Autowired
     private BrokerPublisher brokerPublisher;
@@ -50,7 +45,6 @@ public class OnlineUserSubscription {
      * @param j
      */
     public void publish(final JsonObject j) {
-        j.addProperty("node", appNodeId);
         brokerPublisher.send(Constants.INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER, j.toString(), true);
     }
 

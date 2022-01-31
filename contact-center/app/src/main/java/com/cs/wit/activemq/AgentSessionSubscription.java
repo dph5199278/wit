@@ -21,6 +21,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -28,8 +29,19 @@ import org.springframework.stereotype.Component;
 public class AgentSessionSubscription {
     private final static Logger logger = LoggerFactory.getLogger(AgentSessionSubscription.class);
 
+    @Autowired
+    private BrokerPublisher brokerPublisher;
+
     /**
-     * 接收坐席会话监控消息
+     * 发送坐席单点登录消息
+     * @param payload
+     */
+    public void publish(JsonObject payload) {
+        brokerPublisher.send(Constants.MQ_TOPIC_WEB_SESSION_SSO, payload.toString(), true);
+    }
+
+    /**
+     * 接收坐席单点登录消息
      *
      * @param msg
      */

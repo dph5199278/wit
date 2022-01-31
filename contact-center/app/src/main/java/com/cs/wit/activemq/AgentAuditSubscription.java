@@ -54,6 +54,16 @@ public class AgentAuditSubscription {
     @NonNull
     private final AgentUserRepository agentUserRes;
 
+    @NonNull
+    private final BrokerPublisher brokerPublisher;
+
+    /**
+     * 发送坐席会话监控消息
+     * @param payload
+     */
+    public void publish(JsonObject payload) {
+        brokerPublisher.send(Constants.AUDIT_AGENT_MESSAGE, payload.toString(), true);
+    }
 
     /**
      * 接收坐席会话监控消息

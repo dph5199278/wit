@@ -15,8 +15,7 @@
  */
 package com.cs.wit.proxy;
 
-import com.cs.wit.activemq.BrokerPublisher;
-import com.cs.wit.basic.Constants;
+import com.cs.wit.activemq.AgentSessionSubscription;
 import com.cs.wit.cache.Cache;
 import com.google.gson.JsonObject;
 import org.apache.commons.lang.StringUtils;
@@ -38,7 +37,7 @@ public class AgentSessionProxy {
     private Cache cache;
 
     @Autowired
-    private BrokerPublisher brokerPublisher;
+    private AgentSessionSubscription agentSessionSubscription;
 
     /**
      * 更新User的Session记录
@@ -77,10 +76,13 @@ public class AgentSessionProxy {
         //
         logger.info("[publishAgentLeaveEvent] notify logut browser, expired session {}", expired);
         JsonObject payload = new JsonObject();
-        payload.addProperty("agentno", agentno);   // 坐席ID
-        payload.addProperty("orgi", orgi);         // 租户Id
-        payload.addProperty("expired", expired);    // 之后的Id
-        brokerPublisher.send(Constants.MQ_TOPIC_WEB_SESSION_SSO, payload.toString(), true);
+        // 坐席ID
+        payload.addProperty("agentno", agentno);
+        // 租户Id
+        payload.addProperty("orgi", orgi);
+        // 之后的Id
+        payload.addProperty("expired", expired);
+        agentSessionSubscription.publish(payload);
     }
 
 

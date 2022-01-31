@@ -16,12 +16,10 @@
 
 package com.cs.wit.controller.apps;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cs.wit.acd.ACDAgentService;
 import com.cs.wit.acd.ACDPolicyService;
 import com.cs.wit.acd.basic.ACDMessageHelper;
-import com.cs.wit.activemq.BrokerPublisher;
-import com.cs.wit.basic.Constants;
+import com.cs.wit.activemq.BlackListEventSubscription;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.cache.Cache;
@@ -33,6 +31,7 @@ import com.cs.wit.persistence.repository.*;
 import com.cs.wit.proxy.*;
 import com.cs.wit.socketio.message.Message;
 import com.cs.wit.util.Menu;
+import com.google.gson.JsonObject;
 import freemarker.template.TemplateException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
@@ -114,7 +113,7 @@ public class AgentAuditController extends Handler {
     private final BlackEntityProxy blackEntityProxy;
 
     @NonNull
-    private final BrokerPublisher brokerPublisher;
+    private final BlackListEventSubscription blackListEventSubscription;
 
     @NonNull
     private final AgentServiceProxy agentServiceProxy;
@@ -611,18 +610,17 @@ public class AgentAuditController extends Handler {
          * 添加黑名单
          * 一定时间后触发函数
          */
-        JSONObject payload = new JSONObject();
+        JsonObject payload = new JsonObject();
 
         int timeSeconds = blackEntity.getControltime() * 3600;
-        payload.put("userId", userid);
-        payload.put("orgi", orgi);
+        payload.addProperty("userId", userid);
+        payload.addProperty("orgi", orgi);
         ModelAndView view = end(request, agentuserid);
         // 更新或创建黑名单
         blackEntityProxy.updateOrCreateBlackEntity(blackEntity, logined, userid, orgi, agentserviceid);
 
         // 创建定时任务 取消拉黑
-        brokerPublisher.send(
-                Constants.WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST, payload.toJSONString(), false, timeSeconds);
+        blackListEventSubscription.publish(payload, timeSeconds);
 
         return view;
     }

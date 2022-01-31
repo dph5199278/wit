@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.persistence.repository.BlackListRepository;
+import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -41,6 +42,17 @@ public class BlackListEventSubscription {
 
     @NonNull
     private final BlackListRepository blackListRes;
+
+    @NonNull
+    private final BrokerPublisher brokerPublisher;
+
+    /**
+     * 发送移除黑名单的消息
+     * @param payload
+     */
+    public void publish(JsonObject payload, int timeSeconds) {
+        brokerPublisher.send(Constants.WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST, payload.toString(), false, timeSeconds);
+    }
 
     /**
      * 拉黑访客到达拉黑时间后，从黑名单中移除

@@ -16,8 +16,7 @@
 
 package com.cs.wit.proxy;
 
-import com.cs.wit.activemq.BrokerPublisher;
-import com.cs.wit.basic.Constants;
+import com.cs.wit.activemq.AgentAuditSubscription;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.exception.CSKefuCacheException;
@@ -43,7 +42,7 @@ public class AgentAuditProxy {
     private final static Logger logger = LoggerFactory.getLogger(AgentAuditProxy.class);
 
     @Autowired
-    private BrokerPublisher brokerPublisher;
+    private AgentAuditSubscription agentAuditSubscription;
 
     @Autowired
     private Cache cache;
@@ -86,7 +85,6 @@ public class AgentAuditProxy {
         json.addProperty("event", event.toString());
         // 发送或者接收的对应的坐席的ID
         json.addProperty("agentno", agentUser.getAgentno());
-        brokerPublisher.send(
-                Constants.AUDIT_AGENT_MESSAGE, json.toString(), true);
+        agentAuditSubscription.publish(json);
     }
 }

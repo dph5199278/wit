@@ -16,8 +16,10 @@
  */
 package com.cs.wit.socketio;
 
+import com.corundumstudio.socketio.SocketIONamespace;
+import com.corundumstudio.socketio.SocketIOServer;
 import com.cs.wit.acd.ACDVisitorDispatcher;
-import com.cs.wit.activemq.BrokerPublisher;
+import com.cs.wit.activemq.SocketioConnEventSubscription;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.plugins.PluginRegistry;
@@ -35,8 +37,6 @@ import com.cs.wit.proxy.UserProxy;
 import com.cs.wit.socketio.handler.AgentEventHandler;
 import com.cs.wit.socketio.handler.EntIMEventHandler;
 import com.cs.wit.socketio.handler.IMEventHandler;
-import com.corundumstudio.socketio.SocketIONamespace;
-import com.corundumstudio.socketio.SocketIOServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -72,14 +72,14 @@ public class ServerRunner implements CommandLineRunner {
     @Bean(name = "agentNamespace")
     public SocketIONamespace getAgentSocketIONameSpace(@NonNull final SocketIOServer server
             , @NonNull final AgentUserProxy agentUserProxy
-            , @NonNull final BrokerPublisher brokerPublisher
+            , @NonNull final SocketioConnEventSubscription socketioConnEventSubscription
             , @NonNull final AgentStatusRepository agentStatusRes
             , @NonNull final AgentProxy agentProxy
             , @NonNull final AgentSessionProxy agentSessionProxy
             , @NonNull final UserProxy userProxy
             , @NonNull final Cache cache) {
         SocketIONamespace agentSocketIONameSpace = server.addNamespace(MainContext.NameSpaceEnum.AGENT.getNamespace());
-        agentSocketIONameSpace.addListeners(new AgentEventHandler(server, brokerPublisher, agentStatusRes, agentUserProxy, agentProxy, agentSessionProxy, userProxy, cache));
+        agentSocketIONameSpace.addListeners(new AgentEventHandler(server, socketioConnEventSubscription, agentStatusRes, agentUserProxy, agentProxy, agentSessionProxy, userProxy, cache));
         return agentSocketIONameSpace;
     }
 
