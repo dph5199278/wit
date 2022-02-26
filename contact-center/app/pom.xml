@@ -17,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
 
-        <elasticsearch.version>6.8.22</elasticsearch.version>
+        <elasticsearch.version>6.8.23</elasticsearch.version>
 
         <spring-data-elasticsearch.version>3.2.13.RELEASE</spring-data-elasticsearch.version>
         <spring-session.version>Corn-SR6</spring-session.version>

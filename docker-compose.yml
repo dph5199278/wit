@@ -79,7 +79,7 @@ services:
        - "${ARTEMIS_PORT2:-8052}:61616"
 
   mysql:
-    image: mysql:8.0.27
+    image: mysql:8.0.28
     restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWD:-123456}
@@ -104,7 +104,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/docs/3.2.6.RELEASE/reference/html/#preface.versions
-    image: elasticsearch:6.8.22
+    image: elasticsearch:6.8.23
     restart: always
     ports:
       - 9200:9200
