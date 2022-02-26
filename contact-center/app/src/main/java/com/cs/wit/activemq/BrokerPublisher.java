@@ -11,10 +11,11 @@
 
 package com.cs.wit.activemq;
 
-import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonObject;
 import lombok.RequiredArgsConstructor;
-import org.apache.activemq.ScheduledMessage;
-import org.apache.activemq.command.ActiveMQTopic;
+import org.apache.activemq.artemis.api.core.Message;
+import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
+import org.apache.activemq.artemis.jms.client.ActiveMQTopic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
@@ -46,18 +47,11 @@ public class BrokerPublisher {
      */
     public void send(final String destination, final String payload, final boolean isTopic, final int delay) {
         try {
-            if (isTopic) {
-                jmsTemplate.convertAndSend(new ActiveMQTopic(destination), payload, m -> {
-                    m.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, 1000 * delay);
-                    return m;
-                });
-            } else {
-                // 默认为Queue
-                jmsTemplate.convertAndSend(destination, payload, m -> {
-                    m.setLongProperty(ScheduledMessage.AMQ_SCHEDULED_DELAY, 1000 * delay);
-                    return m;
-                });
-            }
+            jmsTemplate.convertAndSend(isTopic ? new ActiveMQTopic(destination) : new ActiveMQQueue(destination),
+                    payload, m -> {
+                m.setLongProperty(Message.HDR_SCHEDULED_DELIVERY_TIME.toString(),  1000L * delay + System.currentTimeMillis());
+                return m;
+            });
             logger.debug("[send] send succ, dest {}, payload {}", destination, payload);
         } catch (Exception e) {
             logger.warn("[send] error happens.", e);
@@ -66,12 +60,8 @@ public class BrokerPublisher {
 
     public void send(final String destination, final String payload, boolean isTopic) {
         try {
-            if (isTopic) {
-                jmsTemplate.convertAndSend(new ActiveMQTopic(destination), payload);
-            } else {
-                // 默认为Queue
-                jmsTemplate.convertAndSend(destination, payload);
-            }
+            jmsTemplate.convertAndSend(isTopic ? new ActiveMQTopic(destination) : new ActiveMQQueue(destination),
+                    payload);
             logger.debug("[send] send success, dest {}, payload {}", destination, payload);
         } catch (Exception e) {
             logger.warn("[send] error happens.", e);
@@ -82,21 +72,13 @@ public class BrokerPublisher {
         send(destination, payload, false);
     }
 
-    public void send(final String destination, final JSONObject payload) {
-        send(destination, payload.toJSONString());
-    }
-
-    public void send(final String destination, final org.json.JSONObject payload) {
-        send(destination, payload.toString());
-    }
-
     public void send(final String destination, final Map<String, String> payload) {
-        JSONObject obj = new JSONObject();
+        JsonObject obj = new JsonObject();
 
         for (Map.Entry<String, String> entry : payload.entrySet()) {
-            obj.put(entry.getKey(), entry.getValue());
+            obj.addProperty(entry.getKey(), entry.getValue());
         }
 
-        send(destination, obj.toJSONString());
+        send(destination, obj.toString());
     }
 }

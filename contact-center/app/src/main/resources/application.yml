@@ -19,15 +19,17 @@ spring:
   profiles:
     active: dev
   ##############################################
-  # ActiveMQ消息服务
+  # Artemis消息服务
   ##############################################
-  activemq:
-    broker-url: tcp://localhost:61616
-    password: admin
+  artemis:
+    mode: native
+    host: localhost
+    port: 61616
+    user: artemis
+    password: artemis
     pool:
       enabled: true
       max-connections: 50
-    user: admin
   ##############################################
   # Spring Data
   ##############################################

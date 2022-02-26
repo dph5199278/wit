@@ -44,9 +44,9 @@ public class MainContext {
 
     public static String SYSTEM_ORGI = "cskefu";
 
-    private static final Set<String> modules = new HashSet<String>();
+    private static final Set<String> modules = new HashSet<>();
 
-    public static Map<String, Class<?>> csKeFuResourceMap = new HashMap<String, Class<?>>();
+    public static Map<String, Class<?>> csKeFuResourceMap = new HashMap<>();
 
     private static ApplicationContext applicationContext;
 

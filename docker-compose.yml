@@ -59,28 +59,24 @@ services:
       - mysql
       - redis
       - elasticsearch
-      - activemq
+      - artemis
 
-  activemq:
+  artemis:
     build:
-      context: ./database/activemq/
+      context: ./database/artemis/
       dockerfile: Dockerfile
-    image: activemq:5.15.15
+    image: artemis:2.10.1
     restart: always
     environment:
-      - ACTIVEMQ_ADMIN_LOGIN=admin
-      - ACTIVEMQ_ADMIN_PASSWORD=${DB_PASSWD:-123456}
-      - ACTIVEMQ_ENABLED_SCHEDULER=true
-      - ACTIVEMQ_MIN_MEMORY=1024
-      - ACTIVEMQ_MAX_MEMORY=4096
+      - ARTEMIS_USER=artemis
+      - ARTEMIS_PASSWORD=artemis
+      - ANONYMOUS_LOGIN=false
+      - EXTRA_ARGS=--http-host 0.0.0.0 --relax-jolokia
     volumes:
-      - ./database/activemq/data:/opt/activemq/data
-      - ./database/activemq/logs:/var/log/activemq
+      - "./database/artemis/data:/var/lib/artemis-instance"
     ports:
-      - 61616:61616
-  #      - "${ACTIVEMQ_PORT1:-8051}:8161"
-  #      - "${ACTIVEMQ_PORT2:-8052}:61616"
-  #      - "${ACTIVEMQ_PORT3:-8053}:61613"
+       - "${ARTEMIS_PORT1:-8051}:8161"
+       - "${ARTEMIS_PORT2:-8052}:61616"
 
   mysql:
     image: mysql:8.0.27
@@ -93,7 +89,7 @@ services:
       - "${MYSQL_PORT:-8037}:3306"
     volumes:
       - ./database/mysql/data:/var/lib/mysql
-    command: --max_allowed_packet=536870912 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --lower_case_table_names=1
+    command: --max_allowed_packet=536870912 --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION --lower_case_table_names=1
 
   redis:
     image: redis:6.2.6

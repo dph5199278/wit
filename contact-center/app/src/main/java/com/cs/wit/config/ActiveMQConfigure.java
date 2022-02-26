@@ -36,8 +36,9 @@ public class ActiveMQConfigure {
     // queue模式的ListenerContainer
     @Bean
     public JmsListenerContainerFactory<?> jmsListenerContainerQueue(@Qualifier("jmsConnectionFactory") ConnectionFactory connectionFactory) {
-        DefaultJmsListenerContainerFactory bean = new DefaultJmsListenerContainerFactory();
-        bean.setConnectionFactory(connectionFactory);
-        return bean;
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setPubSubDomain(false);
+        return factory;
     }
 }
