@@ -19,7 +19,10 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,7 +31,7 @@ import java.util.Date;
 /**
  *
  */
-@Document(indexName = "kbs_topic", type = "kbs_topic")
+@Document(indexName = "kbs_topic")
 @Entity
 @Table(name = "uk_kbs_topic")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -62,9 +65,10 @@ public class KbsTopic extends ESBean implements java.io.Serializable , UKAgg{
 
 	private boolean approval ;		//是否已经审批通过
 
-
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date begintime ;		//有效期开始
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date endtime ;			//有效期结束
 
 	private boolean top ;		//是否置顶
@@ -89,8 +93,10 @@ public class KbsTopic extends ESBean implements java.io.Serializable , UKAgg{
 	private String orgi;
 	private String creater;
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime = new Date();
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date updatetime = new Date();
 	private String memo;
 	private String organ;

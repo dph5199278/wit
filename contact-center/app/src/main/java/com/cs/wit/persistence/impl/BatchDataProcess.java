@@ -22,6 +22,7 @@ import com.cs.wit.util.dsdata.process.JPAProcess;
 import com.cs.wit.util.es.UKDataBean;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.lang.NonNull;
 
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class BatchDataProcess implements JPAProcess {
 
     @Override
     public void end() throws IOException {
-        MainContext.getTemplet().getClient().bulk(request, RequestOptions.DEFAULT);
+        MainContext.getContext().getBean(RestHighLevelClient.class).bulk(request, RequestOptions.DEFAULT);
         request.requests().clear();
     }
 }

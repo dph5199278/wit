@@ -20,11 +20,14 @@ package com.cs.wit.model;
 import com.cs.wit.basic.MainUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.Date;
-@Document(indexName = "publishedreport", type = "publishedreport")
+@Document(indexName = "publishedreport")
 @Entity
 @Table(name = "uk_publishedreport")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -39,10 +42,12 @@ public class PublishedReport implements java.io.Serializable {
 	private String dataid;
 	private String dataflag;
 	private int startindex;
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date startdate;
 	private int dataversion;
 	private String creater;
 	private String reportcontent;
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime;
 	private Report report ;
 

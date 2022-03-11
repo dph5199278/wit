@@ -284,9 +284,11 @@ server:
     # Setting max size of post requests to 100MB
     max-http-form-post-size: 100MB
     max-swallow-size: 100MB
-    max-threads: 400
-    protocol-header: x-forwarded-proto
-    remote-ip-header: x-forwarded-for
+    threads:
+      max: 400
+    remoteip:
+      protocol-header: x-forwarded-proto
+      remote-ip-header: x-forwarded-for
 
 ##############################################
 # 百度统计 Key

@@ -18,12 +18,15 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Document(indexName = "contact_notes", type = "contact_notes")
+@Document(indexName = "contact_notes")
 @Entity
 @Table(name = "cs_contact_notes")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -31,7 +34,9 @@ public class ContactNotes {
 
     private String id = MainUtils.getUUID();
     private String contactid;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date createtime;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date updatetime;
     private String category;
     private String content;

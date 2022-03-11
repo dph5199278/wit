@@ -154,8 +154,9 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
         searchQueryBuilder.withPageable(page);
 
         Page<Contacts> entCustomerList = null;
-        if (elasticsearchRestTemplate.indexExists(Contacts.class)) {
-            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), Contacts.class);
+        if (elasticsearchRestTemplate.indexOps(Contacts.class).exists()) {
+            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), Contacts.class, elasticsearchRestTemplate.getIndexCoordinatesFor(
+                    Contacts.class));
         }
         if (entCustomerList != null && entCustomerList.getContent().size() > 0) {
             List<String> ids = new ArrayList<>();

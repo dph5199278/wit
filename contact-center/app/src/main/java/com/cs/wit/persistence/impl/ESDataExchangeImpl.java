@@ -17,20 +17,22 @@
 package com.cs.wit.persistence.impl;
 
 import com.cs.wit.basic.Constants;
-import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.*;
 import com.cs.wit.persistence.repository.OrganRepository;
 import com.cs.wit.persistence.repository.UKefuCallOutTaskRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.util.es.UKDataBean;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
+import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -48,12 +50,10 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RequiredArgsConstructor
+@Slf4j
 @Repository("esdataservice")
 public class ESDataExchangeImpl {
 
@@ -66,11 +66,14 @@ public class ESDataExchangeImpl {
     @NonNull
     private final OrganRepository organRes;
 
+    @NonNull
+    private final RestHighLevelClient client;
+
     public void saveIObject(UKDataBean dataBean) throws IOException {
         if (dataBean.getId() == null) {
             dataBean.setId((String) dataBean.getValues().get("id"));
         }
-        MainContext.getTemplet().getClient().index(this.saveBulk(dataBean), RequestOptions.DEFAULT);
+        client.index(this.saveBulk(dataBean), RequestOptions.DEFAULT);
     }
 
     @NonNull
@@ -112,14 +115,20 @@ public class ESDataExchangeImpl {
 
     public void deleteById(String type, String id) {
         if (!StringUtils.isBlank(type) && !StringUtils.isBlank(id)) {
-            MainContext.getTemplet().delete(Constants.SYSTEM_INDEX, type, id);
+            final DeleteRequest request = new DeleteRequest(Constants.SYSTEM_INDEX, type, id);
+            try {
+                client.delete(request, RequestOptions.DEFAULT);
+            }
+            catch(IOException e) {
+                log.error("Error while deleting item request: " + request, e);
+            }
         }
     }
 
 
     public UKDataBean getIObjectByPK(UKDataBean dataBean) throws IOException {
         if (dataBean.getTable() != null) {
-            GetResponse getResponse = MainContext.getTemplet().getClient()
+            GetResponse getResponse = client
                     .get(new GetRequest(Constants.SYSTEM_INDEX,
                             dataBean.getTable().getTablename(), dataBean.getId()), RequestOptions.DEFAULT);
             dataBean.setValues(getResponse.getSource());
@@ -134,7 +143,7 @@ public class ESDataExchangeImpl {
     public UKDataBean getIObjectByPK(String type, String id) throws IOException {
         UKDataBean dataBean = new UKDataBean();
         if (!StringUtils.isBlank(type)) {
-            GetResponse getResponse = MainContext.getTemplet().getClient()
+            GetResponse getResponse = client
                     .get(new GetRequest(Constants.SYSTEM_INDEX,
                             type, id), RequestOptions.DEFAULT);
             dataBean.setValues(getResponse.getSource());
@@ -170,7 +179,7 @@ public class ESDataExchangeImpl {
             request.types(types);
         }
 
-        SearchResponse response = MainContext.getTemplet().getClient().search(request, RequestOptions.DEFAULT);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
         List<String> users = new ArrayList<>();
         List<String> organs = new ArrayList<>();
         List<String> taskList = new ArrayList<>();
@@ -260,7 +269,9 @@ public class ESDataExchangeImpl {
                 }
             }
         }
-        return new PageImpl<>(dataBeanList, page, (int) response.getHits().getTotalHits());
+        return new PageImpl<>(dataBeanList, page, Optional.ofNullable(response.getHits().getTotalHits())
+                                                                .map(hits -> (int)hits.value)
+                                                                .orElse(0));
     }
 
 
@@ -280,7 +291,7 @@ public class ESDataExchangeImpl {
         if (!StringUtils.isBlank(types)) {
             request.types(types);
         }
-        SearchResponse response = MainContext.getTemplet().getClient().search(request, RequestOptions.DEFAULT);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
         List<String> users = new ArrayList<>();
         List<String> organs = new ArrayList<>();
         List<String> taskList = new ArrayList<>();
@@ -378,7 +389,9 @@ public class ESDataExchangeImpl {
                 }
             }
         }
-        return new PageImpl<>(dataBeanList, page, (int) response.getHits().getTotalHits());
+        return new PageImpl<>(dataBeanList, page, Optional.ofNullable(response.getHits().getTotalHits())
+                                                          .map(hits -> (int)hits.value)
+                                                          .orElse(0));
     }
 
 

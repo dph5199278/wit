@@ -4,8 +4,8 @@ services:
     image: nginx
     restart: always
     ports:
-      - 80:80
-      - 443:443
+      - "80:80"
+      - "443:443"
     volumes:
       - ./nginx/logs:/var/log/nginx
       - ./nginx/conf.d:/etc/nginx/conf.d
@@ -65,13 +65,14 @@ services:
     build:
       context: ./database/artemis/
       dockerfile: Dockerfile
-    image: artemis:2.10.1
+    image: artemis:2.12.0
     restart: always
     environment:
       - ARTEMIS_USER=artemis
       - ARTEMIS_PASSWORD=artemis
       - ANONYMOUS_LOGIN=false
       - EXTRA_ARGS=--http-host 0.0.0.0 --relax-jolokia
+      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     volumes:
       - "./database/artemis/data:/var/lib/artemis-instance"
     ports:
@@ -104,16 +105,17 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/docs/3.2.6.RELEASE/reference/html/#preface.versions
-    image: elasticsearch:6.8.23
+    image: elasticsearch:7.6.2
     restart: always
     ports:
-      - 9200:9200
-      - 9300:9300
+      - "9200:9200"
+      - "9300:9300"
     environment:
       # override default cluster.name
       - cluster.name=elasticsearch
       # disable bootstrap check for development environment
       - discovery.type=single-node
+      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     volumes:
       - ./database/elasticsearch/data:/usr/share/elasticsearch/data
       - ./database/elasticsearch/config:/usr/share/elasticsearch/config

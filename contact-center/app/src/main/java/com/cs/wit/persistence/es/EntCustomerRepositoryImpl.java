@@ -142,8 +142,8 @@ public class EntCustomerRepositoryImpl implements EntCustomerEsCommonRepository 
         searchQueryBuilder.withPageable(page);
 
         Page<EntCustomer> entCustomerList = null;
-        if (elasticsearchRestTemplate.indexExists(EntCustomer.class)) {
-            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), EntCustomer.class);
+        if (elasticsearchRestTemplate.indexOps(EntCustomer.class).exists()) {
+            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), EntCustomer.class, elasticsearchRestTemplate.getIndexCoordinatesFor(EntCustomer.class));
         }
         if (entCustomerList != null && entCustomerList.getContent().size() > 0) {
             List<String> ids = new ArrayList<>();

@@ -18,14 +18,17 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Document(indexName = "report", type = "report")
+@Document(indexName = "report")
 @Entity
 @Table(name = "uk_report")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -43,6 +46,7 @@ public class Report extends ESBean implements java.io.Serializable {
 	private int objectcount;    //用来标记报表默认打开是否加载数据
 	private String dicid;    //目录ID
 	private String description;
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime = new Date();
 	private String html;            //改变用处，用于存储 是否允许里面访问移动端报表
 	private String status;
@@ -52,6 +56,7 @@ public class Report extends ESBean implements java.io.Serializable {
 	private String reportpackage;    //报表路径
 	private String useacl;            //启用权限控制    ,  变更用处，  用于控制是否覆盖上级目录的权限
 	private String reportmodel;    //自助查询的是 保存 Model 的ID
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date updatetime;        //修改时间
 
 

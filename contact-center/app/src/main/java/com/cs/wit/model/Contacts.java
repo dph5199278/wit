@@ -18,6 +18,7 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -25,7 +26,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 import javax.persistence.*;
 import java.util.Date;
 
-@Document(indexName = "contacts", type = "contacts")
+@Document(indexName = "contacts")
 @Entity
 @Table(name = "uk_contacts")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -148,6 +149,7 @@ public class Contacts extends ESBean implements java.io.Serializable{
 	private String weiboid;
 	private String qqcode;
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date touchtime;
 	private boolean datastatus;
 	private String processid;
@@ -159,10 +161,12 @@ public class Contacts extends ESBean implements java.io.Serializable{
 	private String memo;
 	private String updateusername;
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date updatetime = new Date();
 	private String orgi;
 	private String compper;
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime = new Date();
 
 	@Field(type = FieldType.Text, fielddata = true)

@@ -19,6 +19,6 @@ package com.cs.wit.persistence.es;
 import com.cs.wit.model.KbsTopic;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
-public interface KbsTopicRepository extends  ElasticsearchRepository<KbsTopic, String> , KbsTopicEsCommonRepository {
+public interface KbsTopicRepository extends  ElasticsearchRepository<KbsTopic, String> {
 	
 }

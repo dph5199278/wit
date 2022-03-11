@@ -18,7 +18,10 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -29,7 +32,7 @@ import java.util.List;
 /**
  * 表 uk_xiaoe_topic
  */
-@Document(indexName = "xiaoe_topic", type = "xiaoe_topic")
+@Document(indexName = "xiaoe_topic")
 @Entity
 @Table(name = "uk_xiaoe_topic")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -59,9 +62,10 @@ public class Topic implements java.io.Serializable{
 	private String summary ;	//摘要
 	private boolean anonymous ;		//是否匿名提问
 
-
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date begintime ;		//有效期开始
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date endtime ;			//有效期结束
 
 	private boolean top ;		//是否置顶
@@ -89,8 +93,10 @@ public class Topic implements java.io.Serializable{
 	private String orgi;
 	private String creater;
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime = new Date();
 
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date updatetime = new Date();
 	private String memo;
 	private String organ;

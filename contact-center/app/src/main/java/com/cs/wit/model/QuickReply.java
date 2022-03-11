@@ -18,12 +18,15 @@ package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import javax.persistence.*;
 import java.util.Date;
 
-@Document(indexName = "quickreply", type = "quickreply")
+@Document(indexName = "quickreply")
 @Entity
 @Table(name = "uk_quickreply")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -36,6 +39,7 @@ public class QuickReply {
 
 	private String type ;		//公用 /私有
 	private String creater; 	//创建人
+	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
 	private Date createtime = new Date();	//创建时间
 
 	private String orgi ;		//

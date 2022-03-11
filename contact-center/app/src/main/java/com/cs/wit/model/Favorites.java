@@ -20,6 +20,7 @@ package com.cs.wit.model;
 import com.cs.wit.basic.MainUtils;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -28,7 +29,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Document(indexName = "favorites", type = "favorites", createIndex = false)
+@Document(indexName = "favorites", createIndex = false)
 @Entity
 @Table(name = "uk_favorites")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -43,7 +44,9 @@ public class Favorites implements java.io.Serializable {
     // @Parent(type = "uk_workorders")
     private String orderid;
     private WorkOrders workOrders;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date createtime = new Date();
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date updatetime = new Date();
     private String creater;
     private String username;

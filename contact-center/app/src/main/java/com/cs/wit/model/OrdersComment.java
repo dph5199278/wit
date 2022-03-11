@@ -20,6 +20,7 @@ package com.cs.wit.model;
 import com.cs.wit.basic.MainUtils;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -28,7 +29,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
-@Document(indexName = "orderscomment", type = "orderscomment")
+@Document(indexName = "orderscomment")
 @Entity
 @Table(name = "uk_orderscomment")
 @org.hibernate.annotations.Proxy(lazy = false)
@@ -38,10 +39,12 @@ public class OrdersComment implements UKAgg {
     private String id = MainUtils.getUUID();
     private String username;
     private String creater;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date createtime = new Date();
     @Field(index = false, type = FieldType.Text)
     private String dataid;
     private String content;    //评论内容
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
     private Date updatetime = new Date();
     private boolean optimal;    //变更用处，流程回复
     private boolean prirep;    //变更用处， 是否私密回复

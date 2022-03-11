@@ -29,7 +29,6 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,8 +48,6 @@ public class MainContext {
     public static Map<String, Class<?>> csKeFuResourceMap = new HashMap<>();
 
     private static ApplicationContext applicationContext;
-
-    private static ElasticsearchRestTemplate templet;
 
     private static RedisCommand redisCommand;
 
@@ -332,10 +329,6 @@ public class MainContext {
         }
     }
 
-    public static ElasticsearchRestTemplate getTemplet() {
-        return templet;
-    }
-
 
     public enum CallServiceStatus {
         INQUENE("就绪", 1),
@@ -615,10 +608,6 @@ public class MainContext {
             }
             throw new IllegalArgumentException();
         }
-    }
-
-    public static void setTemplet(ElasticsearchRestTemplate templet) {
-        MainContext.templet = templet;
     }
 
     public enum WorkStatusEnum {

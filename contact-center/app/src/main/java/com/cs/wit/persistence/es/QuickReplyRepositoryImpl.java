@@ -30,7 +30,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.query.DeleteQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -42,8 +42,6 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 @Component
 @RequiredArgsConstructor
 public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
-    @NonNull
-    private final UKResultMapper ukResultMapper;
 
     @NonNull
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
@@ -60,10 +58,10 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
             boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
         }
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
-        searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(page);
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, ukResultMapper);
+        searchQueryBuilder.withHighlightBuilder(new HighlightBuilder().field("title", 200));
+        Query searchQuery = searchQueryBuilder.build().setPageable(page);
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return pages;
     }
@@ -94,9 +92,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         }
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            pages = elasticsearchRestTemplate.queryForList(searchQuery, QuickReply.class);
+        Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            pages = elasticsearchRestTemplate.queryForList(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return pages;
     }
@@ -113,9 +111,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
 
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, ukResultMapper);
+        Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return pages;
     }
@@ -133,9 +131,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         }
 
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withQuery(termQuery("creater", user)).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, ukResultMapper);
+        Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return pages;
     }
@@ -150,9 +148,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withFilter(QueryBuilders.boolQuery().must(beginFilter).must(endFilter)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
 
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class);
+        Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            pages = elasticsearchRestTemplate.queryForPage(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return pages;
     }
@@ -173,9 +171,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         }
 
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(page);
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            list = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class);
+        Query searchQuery = searchQueryBuilder.build().setPageable(page);
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            list = elasticsearchRestTemplate.queryForPage(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return list;
     }
@@ -209,9 +207,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         }
 
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
-        SearchQuery searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
-        if (elasticsearchRestTemplate.indexExists(QuickReply.class)) {
-            list = elasticsearchRestTemplate.queryForList(searchQuery, QuickReply.class);
+        Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
+        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+            list = elasticsearchRestTemplate.queryForList(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
         }
         return list;
     }
