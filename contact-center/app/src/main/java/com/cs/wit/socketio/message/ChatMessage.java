@@ -18,17 +18,22 @@ package com.cs.wit.socketio.message;
 
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.proxy.OnlineUserProxy;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "uk_chat_message")
@@ -69,9 +74,11 @@ public class ChatMessage implements java.io.Serializable {
     private String channel;
     private String model;            //消息所属模块， WebIM/EntIM
     private String chatype;        //对话类型，是私聊还是群聊 或者是智能机器人对话
-    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
     private Date lastagentmsgtime;    //前一条的坐席发送消息时间
-    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
     private Date lastmsgtime;        //前一条的访客发送消息时间
     private int agentreplytime;    //坐席回复消息时长		单位：秒
     private int agentreplyinterval;//坐席回复消息时间间隔 ， 单位：秒
@@ -185,8 +192,9 @@ public class ChatMessage implements java.io.Serializable {
     private String calltype;
 
     //    @Field(type = FieldType.Date, format = DateFormat.custom,pattern = "yyyy-MM-dd")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
-    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
     private Date createtime = new Date();
 
     public String getType() {

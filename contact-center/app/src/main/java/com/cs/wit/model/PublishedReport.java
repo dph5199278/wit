@@ -18,15 +18,20 @@
 package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.apache.commons.codec.binary.Base64;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import javax.persistence.*;
-import java.util.Date;
 @Document(indexName = "publishedreport")
 @Entity
 @Table(name = "uk_publishedreport")
@@ -42,12 +47,14 @@ public class PublishedReport implements java.io.Serializable {
 	private String dataid;
 	private String dataflag;
 	private int startindex;
-	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
 	private Date startdate;
 	private int dataversion;
 	private String creater;
 	private String reportcontent;
-	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
 	private Date createtime;
 	private Report report ;
 

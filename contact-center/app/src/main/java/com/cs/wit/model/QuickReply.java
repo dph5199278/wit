@@ -17,14 +17,18 @@
 package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import javax.persistence.*;
-import java.util.Date;
 
 @Document(indexName = "quickreply")
 @Entity
@@ -39,7 +43,8 @@ public class QuickReply {
 
 	private String type ;		//公用 /私有
 	private String creater; 	//创建人
-	@Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
 	private Date createtime = new Date();	//创建时间
 
 	private String orgi ;		//

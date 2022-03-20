@@ -18,15 +18,20 @@
 package com.cs.wit.model;
 
 import com.cs.wit.basic.MainUtils;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-
-import javax.persistence.*;
-import java.util.Date;
 
 @Data
 @Document(indexName = "favorites", createIndex = false)
@@ -44,9 +49,11 @@ public class Favorites implements java.io.Serializable {
     // @Parent(type = "uk_workorders")
     private String orderid;
     private WorkOrders workOrders;
-    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
     private Date createtime = new Date();
-    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
     private Date updatetime = new Date();
     private String creater;
     private String username;
