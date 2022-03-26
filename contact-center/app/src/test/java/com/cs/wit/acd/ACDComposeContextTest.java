@@ -2,32 +2,17 @@ package com.cs.wit.acd;
 
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.model.AgentUser;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-public class ACDComposeContextTest extends TestCase {
+public class ACDComposeContextTest {
 
-    private final static Logger logger = LoggerFactory.getLogger(ACDComposeContextTest.class);
-
-    public ACDComposeContextTest(String testName) {
-        super(testName);
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite() {
-        return new TestSuite(ACDComposeContextTest.class);
-    }
-
+    @Test
     public void testSetAndGet(){
         ACDComposeContext ctx = new ACDComposeContext();
         ctx.setAgentUser(new AgentUser());
         ctx.getAgentUser().setOrgi("foo");
-        assertEquals(ctx.getAgentUser().getOrgi(), "foo");
+        Assertions.assertEquals(ctx.getAgentUser().getOrgi(), "foo");
     }
 
 }

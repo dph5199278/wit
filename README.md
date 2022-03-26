@@ -1,4 +1,4 @@
-<h3 style="text-align: center">
+<h3 align="center">
   <b>
   Initialization by <a href="https://github.com/zhangyanbo2007/youkefu">youkefu</a>.</br>
   Fork from
@@ -24,6 +24,7 @@
 3. 开源讲究的是自由开放、求同存异、朝气创新
 4. 本人不会强调自己做了什么，提交记录里看得见
 5. 本项目不能保证兼容原项目的插件，如这是必须的，请自行二开
+6. 欢迎热心人士将本项目PR到原项目
 
 ## 项目依赖
 1. Spring Boot（最高到2.7，不考虑升级3）
@@ -39,5 +40,5 @@
 
 ## 开源许可协议
 Copyright (2021) <a href="https://github.com/dph5199278/" target="_blank">Dely</a>
-
+<br>
 [Apache License Version 2.0](https://github.com/dph5199278/wit/blob/master/LICENSE)

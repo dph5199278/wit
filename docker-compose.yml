@@ -65,7 +65,7 @@ services:
     build:
       context: ./database/artemis/
       dockerfile: Dockerfile
-    image: artemis:2.12.0
+    image: artemis:2.15.0
     restart: always
     environment:
       - ARTEMIS_USER=artemis
@@ -105,7 +105,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/docs/3.2.6.RELEASE/reference/html/#preface.versions
-    image: elasticsearch:7.6.2
+    image: elasticsearch:7.9.3
     restart: always
     ports:
       - "9200:9200"

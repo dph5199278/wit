@@ -258,8 +258,7 @@ management:
     shutdown:
       enabled: false
   server:
-    servlet:
-      context-path: /actuator
+    base-path: /actuator
 
 ##############################################
 # 服务端口

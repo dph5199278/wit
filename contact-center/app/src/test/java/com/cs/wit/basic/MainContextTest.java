@@ -16,32 +16,21 @@
  */
 package com.cs.wit.basic;
 
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MainContextTest extends TestCase {
+public class MainContextTest {
     private final static Logger logger = LoggerFactory.getLogger(MainContextTest.class);
 
-    public MainContextTest(String testName) {
-        super(testName);
-    }
-
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite() {
-        return new TestSuite(MainContextTest.class);
-    }
-
+    @Test
     public void testChannelTypeEnum() {
         logger.info("[testChannelTypeEnum] toString {}", MainContext.ChannelType.WEBIM);
         logger.info("[testChannelTypeEnum] valueOf {} ", MainContext.ChannelType.toValue("webim"));
 
-        assertEquals(MainContext.ChannelType.WEBIM.toString(), "webim");
-        assertEquals(MainContext.ChannelType.toValue("webim"), MainContext.ChannelType.WEBIM);
+        Assertions.assertEquals(MainContext.ChannelType.WEBIM.toString(), "webim");
+        Assertions.assertEquals(MainContext.ChannelType.toValue("webim"), MainContext.ChannelType.WEBIM);
     }
 
 }

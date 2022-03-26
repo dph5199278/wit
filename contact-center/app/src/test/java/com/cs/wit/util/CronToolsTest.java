@@ -16,10 +16,9 @@
 package com.cs.wit.util;
 
 import com.cs.wit.basic.MainUtils;
-import org.junit.Test;
-
 import java.text.ParseException;
 import java.util.Date;
+import org.junit.jupiter.api.Test;
 
 public class CronToolsTest {
 

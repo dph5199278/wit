@@ -8,9 +8,11 @@ spring:
 ##############################################
 logging:
   file:
-    clean-history-on-start: true
-    max-history: 1
-    max-size: 2MB
     path: target/logs
   level:
     root: info
+  logback:
+    rollingpolicy:
+      clean-history-on-start: true
+      max-history: 1
+      max-file-size: 2MB
