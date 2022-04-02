@@ -12,6 +12,8 @@
 package com.cs.wit.activemq;
 
 import com.google.gson.JsonObject;
+import java.util.Map;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.activemq.artemis.api.core.Message;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
@@ -21,9 +23,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
@@ -36,7 +35,7 @@ public class BrokerPublisher {
 
     @PostConstruct
     public void setup() {
-        logger.info("[ActiveMQ Publisher] setup successfully.");
+        logger.info("[Publisher] setup successfully.");
     }
 
 

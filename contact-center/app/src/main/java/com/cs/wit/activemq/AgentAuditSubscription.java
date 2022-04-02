@@ -27,6 +27,7 @@ import com.cs.wit.socketio.client.NettyClients;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -34,8 +35,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 /**
  * 会话监控
@@ -101,7 +100,7 @@ public class AgentAuditSubscription {
                             agentUserAudit.getSubscribers().size(),
                             StringUtils.join(agentUserAudit.getSubscribers().keySet(), "|"));
 
-                    // 发送消息给坐席监控，不需要分布式，因为这条消息已经是从ActiveMQ使用Topic多机广播
+                    // 发送消息给坐席监控，不需要分布式，因为这条消息已经是从MQ使用Topic多机广播
                     for (final String subscriber : agentUserAudit.getSubscribers().keySet()) {
                         logger.info("[onMessage] process subscriber {}", subscriber);
                         if (!StringUtils.equals(subscriber, agentno)) {

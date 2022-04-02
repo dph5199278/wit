@@ -20,14 +20,13 @@ import com.cs.wit.model.AgentStatus;
 import com.cs.wit.persistence.repository.AgentStatusRepository;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.Date;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
-import java.util.Date;
 
 /**
  * 处理SocketIO的离线事件
@@ -54,11 +53,11 @@ public class SocketioConnEventSubscription {
 
     @PostConstruct
     public void setup() {
-        logger.info("ActiveMQ Subscription is setup successfully.");
+        logger.info("Subscription is setup successfully.");
     }
 
     /**
-     * Publish Message into ActiveMQ
+     * Publish Message
      *
      * @param payload
      */

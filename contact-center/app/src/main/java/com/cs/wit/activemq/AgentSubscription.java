@@ -33,7 +33,7 @@ public class AgentSubscription {
     private BrokerPublisher brokerPublisher;
 
     /**
-     * Publish Message into ActiveMQ
+     * Publish Message
      *
      * @param j
      */

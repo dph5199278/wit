@@ -1,10 +1,9 @@
 package com.cs.wit.peer;
 
+import com.cs.compose4j.AbstractContext;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.AgentStatus;
 import com.cs.wit.socketio.message.Message;
-import com.cs.compose4j.AbstractContext;
-
 import java.util.Date;
 
 public class PeerContext extends AbstractContext {
@@ -28,7 +27,7 @@ public class PeerContext extends AbstractContext {
     // 接收消息人ID
     private String touser;
 
-    // Distribute，在本机没有连接，是否通过ActiveMQ发布到多机
+    // Distribute，在本机没有连接，是否通过MQ发布到多机
     private boolean isDist;
 
     // 消息类型

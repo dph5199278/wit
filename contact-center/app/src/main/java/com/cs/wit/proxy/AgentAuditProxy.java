@@ -24,14 +24,13 @@ import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.AgentUserAudit;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
+import java.io.Serializable;
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * 会话监控常用方法
@@ -71,7 +70,7 @@ public class AgentAuditProxy {
     }
 
     /**
-     * 使用ActiveMQ，异步且支持分布式
+     * 使用MQ，异步且支持分布式
      *
      * @param agentUser
      * @param data

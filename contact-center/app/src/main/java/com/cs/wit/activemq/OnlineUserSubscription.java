@@ -15,13 +15,12 @@ import com.cs.wit.socketio.client.NettyClients;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * IM OnlineUser
@@ -36,11 +35,11 @@ public class OnlineUserSubscription {
 
     @PostConstruct
     public void setup() {
-        logger.info("ActiveMQ Subscription is setup successfully.");
+        logger.info("Subscription is setup successfully.");
     }
 
     /**
-     * Publish Message into ActiveMQ
+     * Publish Message
      *
      * @param j
      */
