@@ -15,17 +15,20 @@
  */
 package com.cs.wit.acd;
 
-import com.cs.wit.acd.basic.ACDComposeContext;
-import com.cs.wit.acd.basic.IACDDispatcher;
-import com.cs.wit.acd.middleware.visitor.*;
 import com.cs.compose4j.Composer;
 import com.cs.compose4j.exception.Compose4jRuntimeException;
+import com.cs.wit.acd.basic.ACDComposeContext;
+import com.cs.wit.acd.basic.IACDDispatcher;
+import com.cs.wit.acd.middleware.visitor.ACDVisAllocatorMw;
+import com.cs.wit.acd.middleware.visitor.ACDVisBindingMw;
+import com.cs.wit.acd.middleware.visitor.ACDVisBodyParserMw;
+import com.cs.wit.acd.middleware.visitor.ACDVisServiceMw;
+import com.cs.wit.acd.middleware.visitor.ACDVisSessionCfgMw;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 处置访客分配
@@ -64,33 +67,30 @@ public class ACDVisitorDispatcher implements IACDDispatcher {
      * 建立访客处理管道
      */
     private void buildPipeline() {
-        pipleline = new Composer<>();
-
-        /**
-         * 1) 设置基本信息
-         */
-        pipleline.use(acdVisBodyParserMw);
-
-        /**
-         * 1) 绑定技能组或坐席(包括邀请时的坐席)
-         */
-        pipleline.use(acdVisBindingMw);
-
-        /**
-         * 1) 坐席配置:工作时间段，有无就绪在线坐席
-         *
-         */
-        pipleline.use(acdVisSessionCfgMw);
-
-        /**
-         * 1）选择坐席，确定AgentService
-         */
-        pipleline.use(acdVisServiceMw);
-
-        /**
-         * 1）根据策略筛选坐席
-         */
-        pipleline.use(acdVisAllocatorMw);
+        pipleline = new Composer<ACDComposeContext>()
+        .use(
+            /**
+             * 1) 设置基本信息
+             */
+            acdVisBodyParserMw,
+            /**
+             * 1) 绑定技能组或坐席(包括邀请时的坐席)
+             */
+            acdVisBindingMw,
+            /**
+             * 1) 坐席配置:工作时间段，有无就绪在线坐席
+             *
+             */
+            acdVisSessionCfgMw,
+            /**
+             * 1）选择坐席，确定AgentService
+             */
+            acdVisServiceMw,
+            /**
+             * 1）根据策略筛选坐席
+             */
+            acdVisAllocatorMw
+        );
     }
 
     @Override

@@ -17,6 +17,9 @@
 
 package com.cs.wit.peer;
 
+import com.cs.compose4j.Composer;
+import com.cs.compose4j.Middleware;
+import com.cs.compose4j.exception.Compose4jRuntimeException;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainContext.ChannelType;
@@ -28,9 +31,7 @@ import com.cs.wit.peer.im.ComposeMw1;
 import com.cs.wit.peer.im.ComposeMw2;
 import com.cs.wit.peer.im.ComposeMw3;
 import com.cs.wit.socketio.message.Message;
-import com.cs.compose4j.Composer;
-import com.cs.compose4j.Middleware;
-import com.cs.compose4j.exception.Compose4jRuntimeException;
+import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -38,8 +39,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 客服与访客间消息处理类
@@ -67,16 +66,17 @@ public class PeerSyncIM implements ApplicationContextAware {
 
     @PostConstruct
     public void postConstruct() {
-        composer = new Composer<>();
+        composer = new Composer<PeerContext>()
 
         /**
          * 加载中间件
          */
-        // 发布消息的准备工作
-        composer.use(imMw1);
-
-        // 通过webim发送消息
-        composer.use(imMw2);
+        .use(
+            // 发布消息的准备工作
+            imMw1,
+            // 通过webim发送消息
+            imMw2
+        );
 
         // 通过Skype发送消息
         if (MainContext.hasModule(Constants.CSKEFU_MODULE_SKYPE)) {
