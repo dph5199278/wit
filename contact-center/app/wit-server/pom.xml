@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>contact-center</artifactId>
+    <groupId>com.cs.wit</groupId>
+    <version>1.0.0</version>
+  </parent>
+
+  <artifactId>wit-server</artifactId>
+  <name>${project.artifactId}</name>
+  <description>主服务</description>
+  <packaging>jar</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wit-core</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wit-database</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${project.parent.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-sql-resources</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.parent.build.directory}/sql</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>../../config/sql/</directory>
+                  <includes>
+                    <include>**/*.sql</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <outputDirectory>${project.parent.build.directory}</outputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+    <defaultGoal>compile</defaultGoal>
+  </build>
+</project>
