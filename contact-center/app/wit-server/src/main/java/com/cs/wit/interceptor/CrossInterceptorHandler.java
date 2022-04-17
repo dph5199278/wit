@@ -22,10 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class CrossInterceptorHandler extends HandlerInterceptorAdapter {
+public class CrossInterceptorHandler implements AsyncHandlerInterceptor {
     private final static Logger logger = LoggerFactory.getLogger(CrossInterceptorHandler.class);
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)

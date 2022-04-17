@@ -35,11 +35,11 @@ import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorContro
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 @Slf4j
-public class UserInterceptorHandler extends HandlerInterceptorAdapter {
+public class UserInterceptorHandler implements AsyncHandlerInterceptor {
 
     private static UserProxy userProxy;
     private static AgentSessionProxy agentSessionProxy;

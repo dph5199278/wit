@@ -35,6 +35,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -45,7 +46,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class LogInterceptorHandler implements org.springframework.web.servlet.HandlerInterceptor {
+public class LogInterceptorHandler implements AsyncHandlerInterceptor {
 
     @NonNull
     private final RequestLogRepository requestLogRes;
