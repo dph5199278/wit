@@ -14,30 +14,17 @@
   <name>${project.artifactId}</name>
   <description>数据库模块</description>
 
-  <properties>
-    <tomcat.version>5.5.23</tomcat.version>
-  </properties>
-
   <dependencies>
     <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>${tomcat.version}</version>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-core</artifactId>
       <scope>provided</scope>
     </dependency>
 
+    <!-- LOG -->
     <dependency>
-      <groupId>tomcat</groupId>
-      <artifactId>jasper-compiler</artifactId>
-      <version>${tomcat.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-      <scope>provided</scope>
+      <groupId>org.slf4j</groupId>
+      <artifactId>log4j-over-slf4j</artifactId>
     </dependency>
 
     <!-- SQL -->
@@ -46,70 +33,56 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
 
-    <!-- 项目只提供了mysql数据，因此这部分完全用不了，但进行保留 -->
+    <!-- SQL Framework -->
     <dependency>
-      <groupId>com.oracle.database.jdbc</groupId>
-      <artifactId>ojdbc11</artifactId>
-      <!--<scope>runtime</scope>-->
-      <scope>provided</scope>
+      <groupId>pentaho</groupId>
+      <artifactId>mondrian</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>servlet-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>javax.servlet</groupId>
+          <artifactId>jsp-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
-    <dependency>
-      <groupId>com.oracle.database.nls</groupId>
-      <artifactId>orai18n</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-lang</groupId>
-      <artifactId>commons-lang</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-math</groupId>
-      <artifactId>commons-math</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>commons-collections</groupId>
-      <artifactId>commons-collections</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.commons</groupId>
-      <artifactId>commons-vfs2</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>net.hydromatic</groupId>
-      <artifactId>eigenbase-properties</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>net.hydromatic</groupId>
-      <artifactId>eigenbase-resgen</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>commons-dbcp</groupId>
-      <artifactId>commons-dbcp</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.olap4j</groupId>
-      <artifactId>olap4j</artifactId>
-    </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>druid-spring-boot-starter</artifactId>
     </dependency>
   </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- https://mvnrepository.com/artifact/pentaho/mondrian -->
+      <dependency>
+        <groupId>pentaho</groupId>
+        <artifactId>mondrian</artifactId>
+        <version>3.14.0.24-200</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <repositories>
+    <repository>
+      <id>pentaho.omni</id>
+      <url>https://nexus.pentaho.org/repository/omni/</url>
+    </repository>
+  </repositories>
 
 </project>

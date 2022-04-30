@@ -1,5 +1,0 @@
-Title: mondrian
-Version: 3.14.0.0-12
-VersionMajor: 3
-VersionMinor: 130
-Vendor: Pentaho
