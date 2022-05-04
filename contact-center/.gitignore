@@ -16,11 +16,4 @@ sftp-config.json
 ~$*.ppt*
 ~$*.doc*
 admin/localrc
-app/target/
-app/wit-core/target/
-app/wit-database/target/
-app/wit-server/target/
-app/.classpath
-app/.project
-app/.settings/
 logPath_IS_UNDEFINED/

@@ -16,8 +16,6 @@
  */
 package com.cs.wit.util.mobile;
 
-import org.apache.commons.lang.StringUtils;
-
 public class MobileAddress {
     private static final String ZH = "中国";
 	private String id ;			//ID
@@ -32,7 +30,8 @@ public class MobileAddress {
 	
 	public MobileAddress(String code , String areacode , String province , String city , String isp){
 		this.code = code ;
-		if(!StringUtils.isBlank(areacode)){
+		if(null != areacode
+		&& !"".equals(areacode.trim())){
 			if(areacode.startsWith("0")){
 				this.areacode = areacode ;
 			}else{

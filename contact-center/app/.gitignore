@@ -11,3 +11,13 @@ src/main/resources/templates/admin/channel/*
 # ignore app views within plugins
 src/main/resources/templates/apps/callout
 src/main/resources/templates/apps/chatbot
+
+# Modules
+/target/
+/wit-core/target/
+/wit-database/target/
+/wit-mobile/target/
+/wit-server/target/
+.classpath
+.project
+.settings/

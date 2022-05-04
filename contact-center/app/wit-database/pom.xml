@@ -15,12 +15,6 @@
   <description>数据库模块</description>
 
   <dependencies>
-    <dependency>
-      <groupId>org.apache.tomcat.embed</groupId>
-      <artifactId>tomcat-embed-core</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- LOG -->
     <dependency>
       <groupId>org.slf4j</groupId>

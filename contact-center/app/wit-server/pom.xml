@@ -23,6 +23,11 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>wit-mobile</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>wit-database</artifactId>
     </dependency>
   </dependencies>

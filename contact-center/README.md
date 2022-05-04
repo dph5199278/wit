@@ -3,6 +3,7 @@
 ## 项目介绍
 * wit-core           核心模块
 * wit-database       数据库模块
+* wit-mobile         手机号搜索
 * wit-server         主服务
 
 ## 文档

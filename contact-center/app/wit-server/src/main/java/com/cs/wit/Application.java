@@ -21,8 +21,6 @@ import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.plugins.PluginRegistry;
 import com.cs.wit.config.AppCtxRefreshEventListener;
 import com.cs.wit.util.ClassHelper;
-import com.cs.wit.util.mobile.MobileNumberUtils;
-import java.io.IOException;
 import javax.servlet.MultipartConfigElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -90,21 +88,7 @@ public class Application {
     @Value("${spring.servlet.multipart.max-request-size}")
     private DataSize multipartMaxRequest;
 
-    /**
-     * Init local resources
-     */
-    protected static void init() {
-        try {
-            MobileNumberUtils.init();
-        } catch (IOException e) {
-            logger.error("Application Startup Error", e);
-            System.exit(1);
-        }
-    }
-
     public static void main(String[] args) {
-        Application.init();
-
         /*
          该APP中加载多个配置文件
          http://roufid.com/load-multiple-configuration-files-different-directories-spring-boot/
