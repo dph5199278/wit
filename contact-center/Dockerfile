@@ -1,4 +1,4 @@
-FROM openjdk:8u312-jre
+FROM openjdk:8u332-jre
 LABEL author="Dely"
 LABEL email="dph5199278@163.com"
 
@@ -38,7 +38,7 @@ COPY ./assets/docker-entrypoint.sh /opt/wit
 RUN chmod +x /opt/wit/*.sh
 
 # build JAR
-COPY ./app/target/contact-center-*.jar /opt/wit/contact-center.jar
+COPY ./app/target/contact-center.jar /opt/wit/contact-center.jar
 
 # copy sql script
 COPY ./app/target/sql/cosinee-MySQL-slim.sql /tmp/ROOT/cosinee-MySQL-slim.sql

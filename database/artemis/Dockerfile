@@ -1,4 +1,4 @@
-FROM openjdk:11.0.14.1-jre
+FROM openjdk:11.0.5-jre
 
 ENV ARTEMIS_VERSION 2.15.0
 ENV ARTEMIS apache-artemis-$ARTEMIS_VERSION

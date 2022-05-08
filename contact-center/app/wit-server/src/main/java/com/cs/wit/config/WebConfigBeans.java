@@ -16,6 +16,7 @@
  */
 package com.cs.wit.config;
 
+import java.util.Optional;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -41,14 +42,12 @@ public class WebConfigBeans {
      */
     @PostConstruct
     public void initEditableValidation() {
-    	
-        ConfigurableWebBindingInitializer initializer = (ConfigurableWebBindingInitializer) handlerAdapter
-            .getWebBindingInitializer();
-        if (initializer.getConversionService() != null) {
-            GenericConversionService genericConversionService = (GenericConversionService) initializer
-                .getConversionService();
-            genericConversionService.addConverter(new StringToDateConverter());
-        }
-
+        Optional.ofNullable((ConfigurableWebBindingInitializer) handlerAdapter
+                .getWebBindingInitializer())
+                .map(initializer -> (GenericConversionService) initializer
+                        .getConversionService())
+                .ifPresent(genericConversionService -> {
+                    genericConversionService.addConverter(new StringToDateConverter());
+                });
     }
 }

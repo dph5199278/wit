@@ -20,31 +20,37 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.Nullable;
 
 public class StringToDateConverter implements Converter<String, Date> {
-    private static final String dateFormat      = "yyyy-MM-dd HH:mm:ss";
-    private static final String shortDateFormat = "yyyy-MM-dd";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final String SHORT_DATE_FORMAT = "yyyy-MM-dd";
+    private static final String DATE_FORMAT_SLASH      = "yyyy/MM/dd HH:mm:ss";
+    private static final String SHORT_DATE_FORMAT_SLASH = "yyyy/MM/dd";
 
     /** 
      * @see org.springframework.core.convert.converter.Converter#convert(java.lang.Object)
      */
     @Override
-    public Date convert(String source) {
+    public Date convert(@Nullable String source) {
         if (StringUtils.isBlank(source)) {
             return null;
         }
         source = source.trim();
         try {
             if (source.contains("-")) {
-                SimpleDateFormat formatter;
-                if (source.contains(":")) {
-                    formatter = new SimpleDateFormat(dateFormat);
-                } else {
-                    formatter = new SimpleDateFormat(shortDateFormat);
-                }
-                Date dtDate = formatter.parse(source);
-                return dtDate;
-            } else if (source.matches("^\\d+$")) {
+                return new SimpleDateFormat(source.contains(":")
+                        ? DATE_FORMAT
+                        : SHORT_DATE_FORMAT)
+                        .parse(source);
+            }
+            else if(source.contains("/")) {
+                return new SimpleDateFormat(source.contains(":")
+                        ? DATE_FORMAT_SLASH
+                        : SHORT_DATE_FORMAT_SLASH)
+                        .parse(source);
+            }
+            else if (source.matches("^\\d+$")) {
                 Long lDate = new Long(source);
                 return new Date(lDate);
             }
