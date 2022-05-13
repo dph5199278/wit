@@ -62,10 +62,7 @@ services:
       - artemis
 
   artemis:
-    build:
-      context: ./database/artemis/
-      dockerfile: Dockerfile
-    image: artemis:2.15.0
+    image: dph5199278/activemq-artemis:2.15.0
     restart: always
     environment:
       - ARTEMIS_USER=artemis
