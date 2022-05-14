@@ -21,12 +21,12 @@ import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.AgentService;
 import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.SessionConfig;
-import com.cs.wit.util.IP;
-import com.cs.wit.util.IPTools;
+import com.cs.wit.util.ip.IP;
+import com.cs.wit.util.ip.IPTools;
+import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -34,9 +34,11 @@ import org.springframework.stereotype.Component;
 public class ACDMessageHelper {
     private final static Logger logger = LoggerFactory.getLogger(ACDMessageHelper.class);
 
-    @Autowired
+    @Resource
     private ACDPolicyService acdPolicyService;
 
+    @Resource
+    private IPTools ipTools;
 
     /**
      * 通过 AgentUser获得ComposeContext
@@ -46,7 +48,7 @@ public class ACDMessageHelper {
      * @param initiator
      * @return
      */
-    public static ACDComposeContext getComposeContextWithAgentUser(final AgentUser agentUser, final boolean isInvite, final String initiator) {
+    public ACDComposeContext getComposeContextWithAgentUser(final AgentUser agentUser, final boolean isInvite, final String initiator) {
         ACDComposeContext ctx = new ACDComposeContext();
         ctx.setOnlineUserId(agentUser.getUserid());
         ctx.setOnlineUserNickname(agentUser.getNickname());
@@ -65,7 +67,7 @@ public class ACDMessageHelper {
         if (StringUtils.isNotBlank(agentUser.getIpaddr())) {
             ctx.setIp(agentUser.getIpaddr());
             // TODO set IP Data
-            ctx.setIpdata(IPTools.getInstance().findGeography(agentUser.getIpaddr()));
+            ctx.setIpdata(ipTools.findGeography(agentUser.getIpaddr()));
         }
 
         ctx.setInvite(isInvite);

@@ -37,6 +37,7 @@ import com.cs.wit.proxy.UserProxy;
 import com.cs.wit.socketio.handler.AgentEventHandler;
 import com.cs.wit.socketio.handler.EntIMEventHandler;
 import com.cs.wit.socketio.handler.IMEventHandler;
+import com.cs.wit.util.ip.IPTools;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import javax.annotation.PreDestroy;
@@ -62,9 +63,11 @@ public class ServerRunner implements CommandLineRunner {
     public SocketIONamespace getIMSocketIONameSpace(@NonNull final SocketIOServer server
             , @NonNull final AgentUserProxy agentUserProxy
             , @NonNull final AgentServiceRepository agentServiceRepository
-            , @NonNull final ACDVisitorDispatcher acdVisitorDispatcher) {
+            , @NonNull final ACDVisitorDispatcher acdVisitorDispatcher
+            , @NonNull final IPTools ipTools
+    ) {
         SocketIONamespace imSocketNameSpace = server.addNamespace(MainContext.NameSpaceEnum.IM.getNamespace());
-        imSocketNameSpace.addListeners(new IMEventHandler(server, agentUserProxy, agentServiceRepository, acdVisitorDispatcher));
+        imSocketNameSpace.addListeners(new IMEventHandler(server, agentUserProxy, agentServiceRepository, acdVisitorDispatcher, ipTools));
         return imSocketNameSpace;
     }
 

@@ -28,28 +28,28 @@ import com.cs.wit.model.AgentUser;
 import com.cs.wit.persistence.repository.AgentStatusRepository;
 import java.util.Date;
 import java.util.List;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ACDAgentDispatcher implements IACDDispatcher {
     private final static Logger logger = LoggerFactory.getLogger(ACDAgentDispatcher.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
-    @Autowired
+    @Resource
     private AgentStatusRepository agentStatusRes;
 
-    @Autowired
+    @Resource
     private RedisCommand redisCommand;
 
-    @Autowired
+    @Resource
     private ACDVisitorDispatcher acdVisitorDispatcher;
 
-    @Autowired
+    @Resource
     private ACDMessageHelper acdMessageHelper;
 
     @Override

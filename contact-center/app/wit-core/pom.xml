@@ -185,12 +185,6 @@
       <artifactId>thumbnailator</artifactId>
     </dependency>
 
-    <!-- ip -->
-    <dependency>
-      <groupId>org.lionsoul</groupId>
-      <artifactId>ip2region</artifactId>
-    </dependency>
-
     <!-- Aviator -->
     <dependency>
       <groupId>com.googlecode.aviator</groupId>

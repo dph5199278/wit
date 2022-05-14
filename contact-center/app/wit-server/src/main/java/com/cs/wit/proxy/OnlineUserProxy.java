@@ -50,12 +50,12 @@ import com.cs.wit.persistence.repository.UserTraceRepository;
 import com.cs.wit.socketio.message.OtherMessageItem;
 import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.HttpClientUtil;
-import com.cs.wit.util.IP;
-import com.cs.wit.util.IPTools;
 import com.cs.wit.util.MobileDevice;
 import com.cs.wit.util.OnlineUserUtils;
 import com.cs.wit.util.WebIMClient;
 import com.cs.wit.util.WebSseEmitterClient;
+import com.cs.wit.util.ip.IP;
+import com.cs.wit.util.ip.IPTools;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import freemarker.template.TemplateException;
@@ -331,6 +331,7 @@ public class OnlineUserProxy {
      * 根据user判断追踪，在浏览器里，用fingerprint2生成的ID作为唯一标识
      */
     public static OnlineUser online(
+            final IPTools ipTools,
             final User user,
             final String orgi,
             final String sessionid,
@@ -409,7 +410,7 @@ public class OnlineUserProxy {
                 // 地理信息
                 String ip = MainUtils.getIpAddr(request);
                 onlineUser.setIp(ip);
-                IP ipdata = IPTools.getInstance().findGeography(ip);
+                IP ipdata = ipTools.findGeography(ip);
                 onlineUser.setCountry(ipdata.getCountry());
                 onlineUser.setProvince(ipdata.getProvince());
                 onlineUser.setCity(ipdata.getCity());

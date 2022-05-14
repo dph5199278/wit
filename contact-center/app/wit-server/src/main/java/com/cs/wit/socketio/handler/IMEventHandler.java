@@ -38,8 +38,8 @@ import com.cs.wit.socketio.message.AgentStatusMessage;
 import com.cs.wit.socketio.message.ChatMessage;
 import com.cs.wit.socketio.util.HumanUtils;
 import com.cs.wit.socketio.util.IMServiceUtils;
-import com.cs.wit.util.IP;
-import com.cs.wit.util.IPTools;
+import com.cs.wit.util.ip.IP;
+import com.cs.wit.util.ip.IPTools;
 import java.net.InetSocketAddress;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -54,18 +54,22 @@ public class IMEventHandler {
             , @NonNull final AgentUserProxy agentUserProxy
             , @NonNull final AgentServiceRepository agentServiceRepository
             , @NonNull final ACDVisitorDispatcher acdVisitorDispatcher
+            , @NonNull final IPTools ipTools
     ) {
         this.server = server;
 
         this.agentUserProxy = agentUserProxy;
         this.agentServiceRepository = agentServiceRepository;
         this.acdVisitorDispatcher = acdVisitorDispatcher;
+
+        this.ipTools = ipTools;
     }
 
     private final SocketIOServer server;
     private final AgentUserProxy agentUserProxy;
     private final AgentServiceRepository agentServiceRepository;
     private final ACDVisitorDispatcher acdVisitorDispatcher;
+    private final IPTools ipTools;
 
     private AgentUserProxy getAgentUserProxy() {
         return agentUserProxy;
@@ -139,7 +143,7 @@ public class IMEventHandler {
 
                 IP ipdata = null;
                 if ((StringUtils.isNotBlank(ip))) {
-                    ipdata = IPTools.getInstance().findGeography(ip);
+                    ipdata = ipTools.findGeography(ip);
                 }
 
                 /*

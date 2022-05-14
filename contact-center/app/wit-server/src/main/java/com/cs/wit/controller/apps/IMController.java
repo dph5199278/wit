@@ -62,13 +62,13 @@ import com.cs.wit.persistence.repository.UserHistoryRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.socketio.util.RichMediaUtils;
 import com.cs.wit.util.BrowserClient;
-import com.cs.wit.util.IP;
-import com.cs.wit.util.IPTools;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.MobileDevice;
 import com.cs.wit.util.PinYinTools;
 import com.cs.wit.util.StreamingFileUtil;
 import com.cs.wit.util.WebIMClient;
+import com.cs.wit.util.ip.IP;
+import com.cs.wit.util.ip.IPTools;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
@@ -165,6 +165,9 @@ public class IMController extends Handler {
     private String path;
     @Value("${cskefu.settings.webim.visitor-separate}")
     private Boolean channelWebIMVisitorSeparate;
+
+    @NonNull
+    private final IPTools ipTools;
 
     @PostConstruct
     private void init() {
@@ -275,7 +278,7 @@ public class IMController extends Handler {
                 String ip = MainUtils.getIpAddr(request);
                 userHistory.setHostname(ip);
                 userHistory.setIp(ip);
-                IP ipdata = IPTools.getInstance().findGeography(ip);
+                IP ipdata = ipTools.findGeography(ip);
                 userHistory.setCountry(ipdata.getCountry());
                 userHistory.setProvince(ipdata.getProvince());
                 userHistory.setCity(ipdata.getCity());
@@ -473,6 +476,7 @@ public class IMController extends Handler {
 
             if (StringUtils.isNotBlank(sign)) {
                 OnlineUserProxy.online(
+                        ipTools,
                         super.getIMUser(request, sign, null, sessionid),
                         orgi,
                         sessionid,
@@ -787,7 +791,7 @@ public class IMController extends Handler {
                 if (StringUtils.isNotBlank(type)) {
                     map.addAttribute("type", type);
                 }
-                IP ipdata = IPTools.getInstance().findGeography(MainUtils.getIpAddr(request));
+                IP ipdata = ipTools.findGeography(MainUtils.getIpAddr(request));
                 map.addAttribute("skillGroups", OnlineUserProxy.organ(invite.getOrgi(), ipdata, invite, true));
 
                 if (consult) {

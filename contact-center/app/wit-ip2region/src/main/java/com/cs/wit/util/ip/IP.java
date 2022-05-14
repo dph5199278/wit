@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cs.wit.util;
+package com.cs.wit.util.ip;
 
-public class IP implements java.io.Serializable{
+public class IP implements java.io.Serializable {
 	
 	/**
 	 * 

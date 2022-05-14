@@ -28,6 +28,11 @@
 
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>wit-ip2region</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>wit-database</artifactId>
     </dependency>
   </dependencies>

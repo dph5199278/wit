@@ -25,7 +25,7 @@ import com.cs.wit.model.SNSAccount;
 import com.cs.wit.model.SessionConfig;
 import com.cs.wit.model.User;
 import com.cs.wit.socketio.message.Message;
-import com.cs.wit.util.IP;
+import com.cs.wit.util.ip.IP;
 
 public class ACDComposeContext extends Message {
 

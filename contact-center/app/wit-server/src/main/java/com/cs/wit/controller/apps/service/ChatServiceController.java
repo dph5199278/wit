@@ -46,9 +46,9 @@ import com.cs.wit.proxy.LeaveMsgProxy;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.proxy.UserProxy;
 import com.cs.wit.socketio.message.Message;
-import com.cs.wit.util.IP;
-import com.cs.wit.util.IPTools;
 import com.cs.wit.util.Menu;
+import com.cs.wit.util.ip.IP;
+import com.cs.wit.util.ip.IPTools;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -140,6 +140,9 @@ public class ChatServiceController extends Handler {
 
     @NonNull
     private final ACDMessageHelper acdMessageHelper;
+
+    @NonNull
+    private final IPTools ipTools;
 
     @RequestMapping("/history/index")
     @Menu(type = "service", subtype = "history", admin = true)
@@ -381,7 +384,7 @@ public class ChatServiceController extends Handler {
                             agentService.getUserid(), agentService.getOrgi());
 
                     if (onlineUser != null) {
-                        IP ipdata = IPTools.getInstance().findGeography(onlineUser.getIp());
+                        IP ipdata = ipTools.findGeography(onlineUser.getIp());
                         acdVisitorDispatcher.enqueue(ACDMessageHelper.getWebIMComposeContext(
                                 onlineUser.getUserid(),
                                 onlineUser.getUsername(),
@@ -448,7 +451,7 @@ public class ChatServiceController extends Handler {
             agentUser.setAgentno(null);
             agentUser.setSkill(null);
             agentUserRes.save(agentUser);
-            ACDComposeContext ctx = ACDMessageHelper.getComposeContextWithAgentUser(
+            ACDComposeContext ctx = acdMessageHelper.getComposeContextWithAgentUser(
                     agentUser, false, MainContext.ChatInitiatorType.USER.toString());
             acdVisitorDispatcher.enqueue(ctx);
         }

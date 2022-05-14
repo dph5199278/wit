@@ -9,6 +9,7 @@
         <module>wit-database</module>
         <module>wit-server</module>
         <module>wit-mobile</module>
+        <module>wit-ip2region</module>
     </modules>
     <packaging>pom</packaging>
     <name>dely-contact-center</name>
@@ -364,6 +365,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>wit-mobile</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>wit-ip2region</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
