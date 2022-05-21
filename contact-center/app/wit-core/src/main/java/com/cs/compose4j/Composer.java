@@ -13,7 +13,7 @@ import java.util.List;
  * @param <T> the type parameter
  */
 public class Composer<T extends AbstractContext> {
-    private final List<Middleware> middlewares = new ArrayList<>();
+    private final List<Middleware<T>> middlewares = new ArrayList<>();
 
     /**
      * Instantiates a new Composer.
@@ -24,43 +24,35 @@ public class Composer<T extends AbstractContext> {
     /**
      * 使用中间件
      *
-     * @param mw 中间件
+     * @param mwArr 中间件数组
      * @return the composer
      */
-    public Composer<T> use(Middleware mw) {
-        this.middlewares.add(mw);
-        return this;
-    }
-
-    /**
-     * Use composer.
-     *
-     * @param mwArr the mw arr
-     * @return the composer
-     */
-    public Composer<T> use(Middleware... mwArr) {
+    @SafeVarargs
+    public final Composer<T> use(Middleware<T>... mwArr) {
         if(null == mwArr || 0 == mwArr.length) {
             return this;
         }
         if(1 == mwArr.length) {
-            return use(mwArr[0]);
+            this.middlewares.add(mwArr[0]);
+            return this;
         }
 
         return use(Arrays.asList(mwArr));
     }
 
     /**
-     * Use composer.
+     * 使用中间件
      *
-     * @param mwCollection the mw collection
+     * @param mwCollection 中间件集合
      * @return the composer
      */
-    public Composer<T> use(Collection<Middleware> mwCollection) {
+    public Composer<T> use(Collection<Middleware<T>> mwCollection) {
         if(null == mwCollection || mwCollection.isEmpty()) {
             return this;
         }
         if(1 == mwCollection.size()) {
-            return use(mwCollection.iterator().next());
+            this.middlewares.add(mwCollection.iterator().next());
+            return this;
         }
 
         this.middlewares.addAll(mwCollection);

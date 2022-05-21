@@ -15,13 +15,13 @@ public class Functional<T extends AbstractContext> {
      * @param context  the context
      * @param deque    the deque
      */
-    public Functional(final T context, final Deque<Middleware> deque) {
+    public Functional(final T context, final Deque<Middleware<T>> deque) {
         this.context = context;
         this.deque = deque;
     }
 
     private final T context;
-    private final Deque<Middleware> deque;
+    private final Deque<Middleware<T>> deque;
 
     /**
      * Apply.
