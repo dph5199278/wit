@@ -12,9 +12,9 @@ public class MobileNumberTest {
      */
     @Test
     public void number() {
-        MobileNumberUtils mobileNumberUtils = new MobileNumberUtils(new AnnotationConfigApplicationContext());
-        mobileNumberUtils.setup();
-        mobileNumberUtils.getAddress("18099999999")
+        MobileNumberTools tools = new MobileNumberTools(new AnnotationConfigApplicationContext());
+        tools.setup();
+        tools.getAddress("18099999999")
             .ifPresent(address -> {
                 System.out.println("Areacode:" + address.getAreacode());
                 System.out.println("Code:" + address.getCode());

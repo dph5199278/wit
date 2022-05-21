@@ -34,11 +34,11 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 @RequiredArgsConstructor
-public class MobileNumberUtils {
+public class MobileNumberTools {
     private final Map<String, MobileAddress> MOBILE_ADDRESS_MAP = new HashMap<>();
 
     @NonNull
-    final ApplicationContext applicationContext;
+    private final ApplicationContext applicationContext;
 
     @PostConstruct
     public void setup() {

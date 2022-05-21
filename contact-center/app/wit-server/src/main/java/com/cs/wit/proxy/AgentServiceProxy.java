@@ -41,8 +41,7 @@ import com.cs.wit.persistence.repository.StatusEventRepository;
 import com.cs.wit.persistence.repository.TagRelationRepository;
 import com.cs.wit.persistence.repository.TagRepository;
 import com.cs.wit.persistence.repository.WeiXinUserRepository;
-import com.cs.wit.util.mobile.MobileAddress;
-import com.cs.wit.util.mobile.MobileNumberUtils;
+import com.cs.wit.util.mobile.MobileNumberTools;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -101,6 +100,9 @@ public class AgentServiceProxy {
 
     @NonNull
     private final ContactsRepository contactsRes;
+
+    @NonNull
+    private final MobileNumberTools mobileNumberTools;
 
     /**
      * 关联关系
@@ -187,8 +189,8 @@ public class AgentServiceProxy {
                             }
                             view.addObject("statusEvent", statusEvent);
                         });
-                MobileAddress ma = MobileNumberUtils.getAddress(agentUser.getPhone());
-                view.addObject("mobileAddress", ma);
+                view.addObject("mobileAddress", mobileNumberTools.getAddress(agentUser.getPhone())
+                    .orElse(null));
             }
         }
     }
