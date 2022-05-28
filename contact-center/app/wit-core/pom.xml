@@ -203,12 +203,6 @@
       <artifactId>jsoup</artifactId>
     </dependency>
 
-    <!-- Audio tagger -->
-    <dependency>
-      <groupId>org</groupId>
-      <artifactId>jaudiotagger</artifactId>
-    </dependency>
-
     <!-- Other dependencies -->
     <dependency>
       <groupId>net.java.dev.jna</groupId>
@@ -218,10 +212,6 @@
     <dependency>
       <groupId>cglib</groupId>
       <artifactId>cglib</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>lt.jave</groupId>
-      <artifactId>jave</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>

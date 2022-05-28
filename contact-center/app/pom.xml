@@ -10,6 +10,7 @@
         <module>wit-server</module>
         <module>wit-mobile</module>
         <module>wit-ip2region</module>
+        <module>wit-media</module>
     </modules>
     <packaging>pom</packaging>
     <name>dely-contact-center</name>
@@ -154,7 +155,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.2.8</version>
+                <version>1.2.9</version>
             </dependency>
 
             <!-- Websocket -->
@@ -278,9 +279,9 @@
                 <version>3.3.0</version>
             </dependency>
             <dependency>
-                <groupId>lt.jave</groupId>
+                <groupId>com.github.vip-zpf</groupId>
                 <artifactId>jave</artifactId>
-                <version>1.0.2</version>
+                <version>1.1.1</version>
             </dependency>
             <dependency>
                 <groupId>commons-beanutils</groupId>
@@ -360,6 +361,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>wit-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>wit-media</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

@@ -14,21 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cs.wit.util;
+package com.cs.wit.util.media;
 
-import it.sauronsoftware.jave.AudioAttributes;
 import it.sauronsoftware.jave.Encoder;
 import it.sauronsoftware.jave.EncoderException;
 import it.sauronsoftware.jave.EncodingAttributes;
-import it.sauronsoftware.jave.InputFormatException;
+import it.sauronsoftware.jave.audio.AudioAttributes;
 import java.io.File;
 import org.jaudiotagger.audio.AudioFileIO;
 import org.jaudiotagger.audio.mp3.MP3AudioHeader;
 import org.jaudiotagger.audio.mp3.MP3File;
 
+/**
+ * The type Amr convert.
+ */
 public class AMRConvert {
 
-	public static void mp3(File source , File target) throws IllegalArgumentException, InputFormatException, EncoderException {
+	/**
+	 * Mp3.
+	 *
+	 * @param source the source
+	 * @param target the target
+	 * @throws IllegalArgumentException the illegal argument exception
+	 * @throws EncoderException         the encoder exception
+	 */
+	public static void mp3(File source , File target) throws IllegalArgumentException, EncoderException {
 		AudioAttributes audio = new AudioAttributes();
 		Encoder encoder = new Encoder();
 
@@ -40,8 +50,14 @@ public class AMRConvert {
 
 		encoder.encode(source, target, attrs);
 	}
-	
-	public static int getMp3TrackLength(File mp3File) {  
+
+	/**
+	 * Gets mp3 track length.
+	 *
+	 * @param mp3File the mp3 file
+	 * @return the mp3 track length
+	 */
+	public static int getMp3TrackLength(File mp3File) {
 	    try {  
 	        MP3File f = (MP3File) AudioFileIO.read(mp3File);  
 	        MP3AudioHeader audioHeader = (MP3AudioHeader)f.getAudioHeader();  
