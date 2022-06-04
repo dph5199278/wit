@@ -19,6 +19,7 @@ package com.cs.wit.persistence.es;
 import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 import com.cs.wit.model.Topic;
+import com.cs.wit.util.es.SearchTools;
 import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -62,7 +63,10 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, Topic.class, elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Topic.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -88,7 +92,10 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, Topic.class, elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Topic.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -108,7 +115,10 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withQuery(termQuery("creater", user)).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, Topic.class, elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Topic.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -124,7 +134,10 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withFilter(QueryBuilders.boolQuery().must(beginFilter).must(endFilter)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery,  Topic.class, elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Topic.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -148,7 +161,9 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build();
         if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
-            list = elasticsearchRestTemplate.queryForList(searchQuery,  Topic.class, elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class));
+            list = SearchTools.listUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Topic.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)));
         }
         return list;
     }

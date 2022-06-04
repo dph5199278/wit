@@ -21,6 +21,7 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import com.cs.wit.model.EntCustomer;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.UserRepository;
+import com.cs.wit.util.es.SearchTools;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +38,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
@@ -146,7 +148,11 @@ public class EntCustomerRepositoryImpl implements EntCustomerEsCommonRepository 
 
         Page<EntCustomer> entCustomerList = null;
         if (elasticsearchRestTemplate.indexOps(EntCustomer.class).exists()) {
-            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), EntCustomer.class, elasticsearchRestTemplate.getIndexCoordinatesFor(EntCustomer.class));
+            final NativeSearchQuery searchQuery = searchQueryBuilder.build();
+            entCustomerList = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, EntCustomer.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(EntCustomer.class)),
+                searchQuery);
         }
         if (entCustomerList != null && entCustomerList.getContent().size() > 0) {
             List<String> ids = new ArrayList<>();

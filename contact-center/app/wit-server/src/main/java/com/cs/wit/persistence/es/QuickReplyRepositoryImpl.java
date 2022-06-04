@@ -20,6 +20,7 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.QuickReply;
+import com.cs.wit.util.es.SearchTools;
 import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +37,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.query.DeleteQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.lang.NonNull;
@@ -64,7 +64,10 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         searchQueryBuilder.withHighlightBuilder(new HighlightBuilder().field("title", 200));
         Query searchQuery = searchQueryBuilder.build().setPageable(page);
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -97,7 +100,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForList(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            pages = SearchTools.listUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)));
         }
         return pages;
     }
@@ -116,7 +121,10 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -136,7 +144,10 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withQuery(termQuery("creater", user)).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery, QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -153,7 +164,10 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            pages = elasticsearchRestTemplate.queryForPage(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            pages = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery);
         }
         return pages;
     }
@@ -176,19 +190,22 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build().setPageable(page);
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            list = elasticsearchRestTemplate.queryForPage(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            list = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery);
         }
         return list;
     }
 
     @Override
     public void deleteByCate(String cate, String orgi) {
-        DeleteQuery deleteQuery = new DeleteQuery();
+        NativeSearchQueryBuilder deleteQuery = new NativeSearchQueryBuilder();
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         boolQueryBuilder.must(termQuery("orgi", orgi));
         boolQueryBuilder.must(termQuery("cate", cate));
-        deleteQuery.setQuery(boolQueryBuilder);
-        elasticsearchRestTemplate.delete(deleteQuery);
+        deleteQuery.withQuery(boolQueryBuilder);
+        elasticsearchRestTemplate.delete(deleteQuery.build(), QuickReply.class);
     }
 
     @Override
@@ -212,7 +229,9 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
         if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
-            list = elasticsearchRestTemplate.queryForList(searchQuery,  QuickReply.class, elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class));
+            list = SearchTools.listUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)));
         }
         return list;
     }

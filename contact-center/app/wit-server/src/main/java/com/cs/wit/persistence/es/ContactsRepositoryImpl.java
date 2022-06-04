@@ -21,6 +21,7 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 import com.cs.wit.model.Contacts;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.UserRepository;
+import com.cs.wit.util.es.SearchTools;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +37,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -158,8 +160,11 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
 
         Page<Contacts> entCustomerList = null;
         if (elasticsearchRestTemplate.indexOps(Contacts.class).exists()) {
-            entCustomerList = elasticsearchRestTemplate.queryForPage(searchQueryBuilder.build(), Contacts.class, elasticsearchRestTemplate.getIndexCoordinatesFor(
-                    Contacts.class));
+            final NativeSearchQuery searchQuery = searchQueryBuilder.build();
+            entCustomerList = SearchTools.pageUnwrapSearchHits(
+                elasticsearchRestTemplate.search(searchQuery, Contacts.class,
+                    elasticsearchRestTemplate.getIndexCoordinatesFor(Contacts.class)),
+                searchQuery);
         }
         if (entCustomerList != null && entCustomerList.getContent().size() > 0) {
             List<String> ids = new ArrayList<>();

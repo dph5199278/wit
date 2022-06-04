@@ -31,10 +31,18 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.Operator;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.elasticsearch.core.SearchHitSupport;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.query.Query;
 
+/**
+ * The type Search tools.
+ */
 public class SearchTools {
 
     public static PageImpl<UKDataBean> search(String orgi, List<FormFilterItem> itemList, MetadataTable metadataTable, boolean loadRef, int p, int ps) throws IOException {
@@ -265,5 +273,40 @@ public class SearchTools {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Page unwrap search hits page.
+     *
+     * @param <T>        the type parameter
+     * @param searchHits the search hits
+     * @param query      the query
+     * @return the page
+     */
+    public static <T> Page<T> pageUnwrapSearchHits(SearchHits<T> searchHits, Query query) {
+        return pageUnwrapSearchHits(searchHits, query.getPageable());
+    }
+
+    /**
+     * Page unwrap search hits page.
+     *
+     * @param <T>        the type parameter
+     * @param searchHits the search hits
+     * @param pageable   the pageable
+     * @return the page
+     */
+    public static <T> Page<T> pageUnwrapSearchHits(SearchHits<T> searchHits, Pageable pageable) {
+        return (Page<T>) SearchHitSupport.unwrapSearchHits(SearchHitSupport.searchPageFor(searchHits, pageable));
+    }
+
+    /**
+     * List unwrap search hits list.
+     *
+     * @param <T>        the type parameter
+     * @param searchHits the search hits
+     * @return the list
+     */
+    public static <T> List<T> listUnwrapSearchHits(SearchHits<T> searchHits) {
+        return (List<T>) SearchHitSupport.unwrapSearchHits(searchHits);
     }
 }
