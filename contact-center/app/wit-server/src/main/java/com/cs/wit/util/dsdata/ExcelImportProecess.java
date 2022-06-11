@@ -43,7 +43,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
@@ -443,13 +442,13 @@ public class ExcelImportProecess extends DataProcess {
                     dataType = "number";
                     break;
                 case BLANK:
-                    dataType = determineDataType(dt, HSSFDateUtil.isCellDateFormatted(cell), cell.getCellStyle().getDataFormat() == 58);
+                    dataType = determineDataType(dt, DateUtil.isCellDateFormatted(cell), cell.getCellStyle().getDataFormat() == 58);
                     break;
                 case NUMERIC:
-                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    if (DateUtil.isCellDateFormatted(cell)) {
                         dataType = "datetime";
                     } else {
-                        dataType = determineDataType(dt, cell.getCellStyle().getDataFormat() == 58, HSSFDateUtil.isCellDateFormatted(cell));
+                        dataType = determineDataType(dt, cell.getCellStyle().getDataFormat() == 58, DateUtil.isCellDateFormatted(cell));
                     }
                     break;
                 case FORMULA: {

@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFDataFormat;
-import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -210,7 +210,7 @@ public class ExcelImportUtils {
                     strCell = "";
                     break;
                 case NUMERIC:
-                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    if (DateUtil.isCellDateFormatted(cell)) {
                         SimpleDateFormat sdf = null;
                         if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
                             sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -225,7 +225,7 @@ public class ExcelImportUtils {
                         strCell = sdf.format(org.apache.poi.ss.usermodel.DateUtil.getJavaDate(value));
                     } else {
 
-                        if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                        if (DateUtil.isCellDateFormatted(cell)) {
                             SimpleDateFormat sdf = null;
                             if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
                                 sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -287,7 +287,7 @@ public class ExcelImportUtils {
                     dataType = "number";
                     break;
                 case BLANK:
-                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    if (DateUtil.isCellDateFormatted(cell)) {
                         if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
                             dataType = "datetime";
                         } else {// 日期
@@ -306,7 +306,7 @@ public class ExcelImportUtils {
                     }
                     break;
                 case NUMERIC:
-                    if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                    if (DateUtil.isCellDateFormatted(cell)) {
                         if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
                             dataType = "datetime";
                         } else {// 日期
@@ -316,7 +316,7 @@ public class ExcelImportUtils {
                     } else if (cell.getCellStyle().getDataFormat() == 58) {
                         dataType = "datetime";
                     } else {
-                        if (HSSFDateUtil.isCellDateFormatted(cell)) {
+                        if (DateUtil.isCellDateFormatted(cell)) {
                             if (cell.getCellStyle().getDataFormat() == HSSFDataFormat.getBuiltinFormat("h:mm")) {
                                 dataType = "datetime";
                             } else {// 日期
