@@ -47,7 +47,7 @@ services:
       - SPRING_ELASTICSEARCH_REST_URIS=http://elasticsearch:9200
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
-      - SPRING_ACTIVEMQ_BROKER_URL=tcp://activemq:61616
+      - SPRING_ARTEMIS_BROKER-URL=tcp://artemis:61616
       - CSKEFU_MODULE_CALLOUT=false
       - CSKEFU_MODULE_CONTACTS=true
       - CSKEFU_MODULE_CHATBOT=true

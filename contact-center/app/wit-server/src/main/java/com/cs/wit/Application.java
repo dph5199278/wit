@@ -25,7 +25,6 @@ import javax.servlet.MultipartConfigElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
@@ -93,13 +92,10 @@ public class Application {
          该APP中加载多个配置文件
          http://roufid.com/load-multiple-configuration-files-different-directories-spring-boot/
          */
-        SpringApplication app = new SpringApplicationBuilder(Application.class)
-                .properties("spring.config.name:application,git")
-                .build();
-
-        app.setAddCommandLineProperties(false);
-        app.addListeners(new AppCtxRefreshEventListener());
-        MainContext.setApplicationContext(app.run(args));
+        MainContext.setApplicationContext(new SpringApplicationBuilder(Application.class)
+            .addCommandLineProperties(false)
+            .listeners(new AppCtxRefreshEventListener())
+            .run(args));
     }
 
     @Bean

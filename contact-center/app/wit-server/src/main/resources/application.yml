@@ -16,6 +16,8 @@
 # https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/htmlsingle/
 # https://stackoverflow.com/questions/35531661/using-env-variable-in-spring-boots-application-properties
 spring:
+  config:
+    import: git.properties
   profiles:
     active: dev
   ##############################################
@@ -23,13 +25,12 @@ spring:
   ##############################################
   artemis:
     mode: native
-    host: localhost
-    port: 61616
     user: artemis
     password: artemis
     pool:
       enabled: true
       max-connections: 50
+    broker-url: tcp://localhost:61616
   ##############################################
   # Spring Data
   ##############################################
@@ -119,7 +120,8 @@ spring:
       template_update_delay: 0
       url_escaping_charset: UTF-8
     suffix: .ftlh
-    template-loader-path: classpath:/templates/
+    template-loader-path:
+      - classpath:/templates/
   jpa:
     properties:
       hibernate:
