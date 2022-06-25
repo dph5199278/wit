@@ -17,7 +17,6 @@
 package com.cs.wit.util.mail;
 
 import java.io.UnsupportedEncodingException;
-import java.security.Security;
 import java.util.List;
 import java.util.Properties;
 import javax.activation.DataHandler;
@@ -121,7 +120,6 @@ public class MailSender {
 		props.put("mail.smtp.host", smtpHostName);
 		//ssl
 		if(!StringUtils.isBlank(seclev)&&seclev.equals("true")) {
-			Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());  
 			final String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";  
 			props.put("mail.smtp.socketFactory.class", SSL_FACTORY);
 			props.put("mail.smtp.socketFactory.fallback", "false");
