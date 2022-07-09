@@ -25,7 +25,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -39,10 +38,10 @@ public class ContactNotes {
     private String id = MainUtils.getUUID();
     private String contactid;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date createtime;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date updatetime;
     private String category;
     private String content;

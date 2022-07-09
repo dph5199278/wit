@@ -181,7 +181,7 @@
 </div>
 <script>
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 	});
 	var searchData = $("#search :input").serializeArray()
@@ -192,7 +192,7 @@
 	layui.use(['laypage', 'layer'], function(){
 		  var laypage = layui.laypage
 		  ,layer = layui.layer;
-		  laypage({
+		  laypage.render({
 				cont: 'page'
 				,pages: <#if agentServiceList??>${agentServiceList.totalPages}<#else>0</#if> //总页数
 				,curr:<#if agentServiceList??>${agentServiceList.number+1}<#else>0</#if>

@@ -67,7 +67,7 @@
 <script>
 //Demo
 layui.use('form', function(){
-  var form = layui.form();
+  var form = layui.form;
   form.on('submit(selUserOrgan)', function(data){
 	  var targetIFrame = eval(iframe);
 	  var keys = "" , names = "" ;

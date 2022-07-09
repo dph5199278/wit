@@ -383,7 +383,7 @@
 	}
 	var form ;
 	layui.use('form', function(){
-		form = layui.form();
+		form = layui.form;
 		form.render('checkbox'); //刷新select选择框渲染
 		form.on("checkbox(disdesc)",function(data){
 			if(data.elem.checked){

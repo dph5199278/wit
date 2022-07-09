@@ -112,7 +112,7 @@
         var laypage = layui.laypage
             , layer = layui.layer;
 
-        laypage({
+        laypage.render({
             cont: 'page'
             , pages: <#if leaveMsgList ??> ${ leaveMsgList.totalPages } <#else> 0</#if> //总页数
 				, curr:<#if leaveMsgList ??> ${ leaveMsgList.number + 1 }<#else> 0</#if>

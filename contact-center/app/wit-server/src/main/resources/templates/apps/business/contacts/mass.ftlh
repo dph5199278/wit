@@ -60,7 +60,7 @@
     var theMassSelect= "text";
 
     layui.use('form', function () {
-        var form = layui.form();
+        var form = layui.form;
         form.render(); //更新全部
         form.verify({
             massMessageToOnlineUserText: function (value) {
@@ -139,7 +139,7 @@
         layer.close(layer.index);
         if(multiMediaDialogWin.length>0){
             parent.$('#admin').attr('src' , '/admin/skype/index.html');
-            parent.layui.element().tabChange('ukefutab','admin');
+            parent.layui.element.tabChange('ukefutab','admin');
         } else {
             parent.$('#agentdesktop').attr('data-href' , '/admin/skype/index.html').click();
         }

@@ -234,7 +234,7 @@
 <script>
 	//Demo
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 		form.verify({
 			entemail: function(value){
@@ -259,14 +259,14 @@
 		});
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 	layui.use('laydate', function() {
 		var laydate = layui.laydate;
 
 		var date = {
 			min : '1950-01-01 00:00:00',
-			max : laydate.now(),
+			max : 0,
 			istoday : false
 		};
 

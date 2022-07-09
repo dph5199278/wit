@@ -134,7 +134,7 @@ $('#province').change(function(){
 	loadURL('/res/dic.html?id='+$(this).val()+"&name=city&attr=lay-ignore&style=display:inline-block;" , '#contacts_city');
 })
 layui.use('form', function(){
-  var form = layui.form();
+  var form = layui.form;
   form.render();
 });
 </script>

@@ -10,10 +10,10 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
 <link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
-<link rel="stylesheet" href="/css/layui.css">
+<link rel="stylesheet" href="/layui/css/layui.css">
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="/css/flexboxgrid.min.css">
-<script src="/layui.js"></script>
+<script src="/layui/layui.js"></script>
 <script language="javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
 		top.location.href = "/login.html" ;
@@ -29,7 +29,7 @@
 		</#if>
 	});   
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 	});
 
 	function preLogin() {

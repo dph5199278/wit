@@ -74,7 +74,7 @@
 
 <script>
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 		form.on("radio(reservation)" , function(data){
 			if(data.value == '1'){
@@ -85,13 +85,13 @@
 		});
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 	layui.use('laydate', function() {
 		var laydate = layui.laydate;
 
 		var date = {
-			min: laydate.now(),
+			min: 0,
 			istime:true,
 			format:"YYYY-MM-DD hh:mm:ss",
 			istoday : false

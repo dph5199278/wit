@@ -222,13 +222,13 @@
 
     });
     layui.use('form', function(){
-        var form = layui.form();
+        var form = layui.form;
     });
     layui.use(['laypage', 'layer'], function(){
         var laypage = layui.laypage
             ,layer = layui.layer;
 
-        laypage({
+        laypage.render({
             cont: 'page'
             ,pages: <#if entCustomerList??>${entCustomerList.totalPages}<#else>0</#if> //总页数
             ,curr:<#if entCustomerList??>${entCustomerList.number+1}<#else>0</#if>

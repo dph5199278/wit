@@ -11,7 +11,7 @@
 	    
 		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?t=1489039620156"/>
 	    <link rel="stylesheet" type="text/css" href="/im/css/ukefu.css">
-	    <link rel="stylesheet" type="text/css" href="/im/css/layui.css">
+	    <link rel="stylesheet" type="text/css" href="/layui/css/layui.css">
 	    <link rel="stylesheet" id="skin" type="text/css" href="/im/css/default/ukefu.css">
 	</head>
 	<body style="overflow:hidden;" class="<#if type?? && type='text'>ukefu-point-text</#if>">

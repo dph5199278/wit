@@ -139,7 +139,7 @@
 	});
 
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		// form.render(); //更新全部
 		form.on('submit(contactsForm)', function(data){
 			console.log("contactForm", data.field)

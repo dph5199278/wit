@@ -104,7 +104,7 @@
 </div>
 <script>
 	layui.use('form', function(){
-	  var form = layui.form();
+	  var form = layui.form;
 	  form.render();
 	  form.on("switch(median_tip)" , function(data){
 		  if(data.elem.checked == true){

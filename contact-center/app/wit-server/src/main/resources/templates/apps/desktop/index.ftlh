@@ -153,11 +153,19 @@
 </div>
 
 <script>
-	layui.use(['laypage', 'layer'], function(){
-		  var laypage = layui.laypage
-		  ,layer = layui.layer;
-		  
-		  laypage({
+	$(function() {
+		layui.use(['layer', 'laypage'], function(){
+			const LAYER = layui.layer;
+			<#if msg?? && msg == 'username_exist'>
+			LAYER.msg('用户名存在，请重新填写',{icon: 2, time: 3000})
+			<#elseif msg?? && msg == 'email_exist'>
+			LAYER.msg('邮件存在，请重新填写',{icon: 2, time: 3000})
+			<#elseif msg?? && msg == 'mobile_exist'>
+			LAYER.msg('手机存在，请重新填写',{icon: 2, time: 3000})
+			</#if>
+
+			const laypage = layui.laypage;
+			laypage.render({
 				cont: 'page'
 				,pages: <#if onlineUserList??>${onlineUserList.totalPages}<#else>0</#if> //总页数
 				,curr:<#if onlineUserList??>${onlineUserList.number+1}<#else>0</#if>
@@ -167,13 +175,7 @@
 						location.href = "/apps/onlineuser.html?p="+data.curr ;
 					}
 				}
-		   });
-		  <#if msg?? && msg == 'username_exist'>
-			layer.msg('用户名存在，请重新填写',{icon: 2, time: 3000})
-		  <#elseif msg?? && msg == 'email_exist'>
-			layer.msg('邮件存在，请重新填写',{icon: 2, time: 3000})
-		  <#elseif msg?? && msg == 'mobile_exist'>
-			layer.msg('手机存在，请重新填写',{icon: 2, time: 3000})
-		  </#if>
+			});
 		});
+	});
 </script>

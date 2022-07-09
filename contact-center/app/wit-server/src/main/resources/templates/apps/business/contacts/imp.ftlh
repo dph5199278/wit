@@ -76,7 +76,7 @@
 		var target = $(this).attr("data-target");
 	});
 	layui.use('form', function(){
-	  var form = layui.form();
+	  var form = layui.form;
 	  form.render();
 	});
 </script>

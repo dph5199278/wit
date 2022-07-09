@@ -26,7 +26,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -109,11 +108,11 @@ public class WorkOrders extends ESBean implements UKAgg {
     private String creater;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date createtime = new Date();
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date updatetime = new Date();
     private String memo;
 

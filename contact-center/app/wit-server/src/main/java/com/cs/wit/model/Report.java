@@ -28,7 +28,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -52,7 +51,7 @@ public class Report extends ESBean implements java.io.Serializable {
 	private String dicid;    //目录ID
 	private String description;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
 	private Date createtime = new Date();
 	private String html;            //改变用处，用于存储 是否允许里面访问移动端报表
 	private String status;
@@ -63,7 +62,7 @@ public class Report extends ESBean implements java.io.Serializable {
 	private String useacl;            //启用权限控制    ,  变更用处，  用于控制是否覆盖上级目录的权限
 	private String reportmodel;    //自助查询的是 保存 Model 的ID
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-	@Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
 	private Date updatetime;        //修改时间
 
 

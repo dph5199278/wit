@@ -522,7 +522,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
     })
     document.getElementById('chat_msg_list_cca').scrollTop = document.getElementById('chat_msg_list_cca').scrollHeight;
     layui.use('element', function(){
-        var element = layui.element();
+        var element = layui.element;
     });
     layui.use('layer', function() {
         layer = layui.layer;

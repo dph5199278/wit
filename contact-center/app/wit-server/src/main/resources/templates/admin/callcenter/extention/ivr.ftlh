@@ -103,7 +103,7 @@
 </div>
 <script>
 	layui.use('form', function(){
-	  var form = layui.form();
+	  var form = layui.form;
 	  form.render();
 	  form.on("radio(enable_ai)" , function(data){
 		  $('#ai_tip').show();		

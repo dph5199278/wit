@@ -108,11 +108,11 @@
 </div>
 <script>
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 	
 </script>

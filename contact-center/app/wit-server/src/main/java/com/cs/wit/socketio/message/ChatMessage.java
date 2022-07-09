@@ -30,7 +30,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -75,10 +74,10 @@ public class ChatMessage implements java.io.Serializable {
     private String model;            //消息所属模块， WebIM/EntIM
     private String chatype;        //对话类型，是私聊还是群聊 或者是智能机器人对话
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date lastagentmsgtime;    //前一条的坐席发送消息时间
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date lastmsgtime;        //前一条的访客发送消息时间
     private int agentreplytime;    //坐席回复消息时长		单位：秒
     private int agentreplyinterval;//坐席回复消息时间间隔 ， 单位：秒
@@ -194,7 +193,7 @@ public class ChatMessage implements java.io.Serializable {
     //    @Field(type = FieldType.Date, format = DateFormat.custom,pattern = "yyyy-MM-dd")
     //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd",timezone="GMT+8")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
-    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "8uuuu-MM-dd HH:mm:ss.SSS")
+    @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date createtime = new Date();
 
     public String getType() {

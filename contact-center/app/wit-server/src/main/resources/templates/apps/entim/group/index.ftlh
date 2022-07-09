@@ -235,7 +235,7 @@
 <script>
 	layui.use('element', function(){
 	  var $ = layui.jquery
-	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
+	  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 	});
 	var hostname = location.hostname ;
 	var socket = io.connect(location.protocol+"//"+top.hostname+":"+top.port+"/im/ent?userid=${user.id!''!''}&orgi=${user.orgi!''}&contextid=${contextid!''}&group=${contextid!''}",{transports: ['websocket'], upgrade: false});

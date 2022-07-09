@@ -98,7 +98,7 @@
 
 <script>
 layui.use('form', function() {
-	var form = layui.form();
+	var form = layui.form;
 	form.render(); //更新全部
 	form.on("radio(image)" , function(data){
 		if(data.elem.checked){
@@ -125,7 +125,7 @@ layui.use('upload', function(){
 	var target = $(this).attr("data-target");
 });
 layui.use('element', function(){
-	var element = layui.element();
+	var element = layui.element;
 	element.init();
 });
 

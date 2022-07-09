@@ -82,7 +82,7 @@
 		  var laypage = layui.laypage
 		  ,layer = layui.layer;
 		  
-		  laypage({
+		  laypage.render({
 				cont: 'page'
 				,pages: <#if agentUserList??>${agentUserList.totalPages}<#else>0</#if> //总页数
 				,curr:<#if agentUserList??>${agentUserList.number+1}<#else>0</#if>

@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="/js/select/css/select2.min.css"/>	
 	<link rel="stylesheet" type="text/css" href="/js/kindeditor/themes/default/default.css">
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
-	<link rel="stylesheet" href="/css/layui.css">
+	<link rel="stylesheet" href="/layui/css/layui.css">
 	<link rel="stylesheet" href="/res/css.html">
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
 	
@@ -25,7 +25,7 @@
 	<script src="/js/select/js/select2.min.js"></script>
 	<script src="/js/select/js/i18n/zh-CN.js"></script>
 	
-	<script src="/layui.js"></script>
+	<script src="/layui/layui.js"></script>
 	<script src="/js/cskefu.js"></script>
 	<script type="text/javascript" src="/js/kindeditor/kindeditor.js"></script>
 	<script type="text/javascript" src="/js/kindeditor/lang/zh-CN.js"></script>
@@ -57,7 +57,7 @@
 	</div>
 	<script>
 		layui.use('element', function() {
-			var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 			//监听导航点击
 			element.on('nav(layui)', function(elem) {
 				

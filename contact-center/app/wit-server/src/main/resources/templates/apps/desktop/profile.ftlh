@@ -57,7 +57,7 @@
 <script>
 //Demo
 layui.use('form', function(){
-  var form = layui.form();
+  var form = layui.form;
   form.on('submit(*)', function(data){
 	  layerhelper.close('mainajaxwin');
 	  return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。

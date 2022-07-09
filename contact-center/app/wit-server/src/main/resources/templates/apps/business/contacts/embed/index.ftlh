@@ -116,7 +116,7 @@
 	});
 
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 	  	form.on('submit(contactsForm)', function(data){
 	  		var targetIFrame = eval(iframe);
 	  		var selectedContactId = $("input:checked.ctxid").val();
@@ -148,7 +148,7 @@
 	layui.use(['laypage'], function(){
 		  var laypage = layui.laypage ;
 		  
-		  laypage({
+		  laypage.render({
 				cont: 'page'
 				,pages: <#if contactsList??>${contactsList.totalPages}<#else>0</#if> //总页数
 				,curr:<#if contactsList??>${contactsList.number+1}<#else>0</#if>

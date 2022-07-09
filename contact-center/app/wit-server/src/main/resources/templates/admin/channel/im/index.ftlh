@@ -84,7 +84,7 @@
 	layui.use(['laypage', 'layer'], function(){
 		  var laypage = layui.laypage
 		  ,layer = layui.layer;
-		  laypage({
+		  laypage.render({
 				cont: 'page'
 				,pages: <#if snsAccountList??>${snsAccountList.totalPages}<#else>0</#if> //总页数
 				,curr:<#if snsAccountList??>${snsAccountList.number+1}<#else>0</#if>

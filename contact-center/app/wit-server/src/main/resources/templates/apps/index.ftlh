@@ -12,7 +12,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico?t=${.now?long}</#if>"/>
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/darktooltip.css" />
-	<link rel="stylesheet" href="css/layui.css">
+	<link rel="stylesheet" href="/layui/css/layui.css">
 	<link rel="stylesheet" href="/js/ztree/zTreeStyle/zTreeStyle.css">
 	<link rel="stylesheet" href="/js/select/css/select2.min.css"/>
 	<link rel="stylesheet" href="/res/css.html">
@@ -25,7 +25,7 @@
 	<script src="/js/moment-timezone.js"></script>
 	<script src="/js/moment-timezone-with-data.js"></script>
 
-	<script src="/layui.js"></script>
+	<script src="/layui/layui.js"></script>
 	<script src="/js/utils.js"></script>
 	<script src="/js/cskefu.js"></script>
 	<script src="/im/js/socket.io.js"></script>
@@ -114,7 +114,7 @@
 										title: false,
 										closeBtn: 0, //不显示关闭按钮
 										shade: [0],
-										area: ["260px", "520px"],
+										area: ["285px", "520px"],
 										offset: "rb", //右下角弹出
 										anim: 2,
 										shade: 0,
@@ -426,7 +426,7 @@
 	var timeDifference=${timeDifference};
 
 	layui.use('element', function(){
-		var $ = layui.jquery,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
+		var $ = layui.jquery,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 		//触发事件
 		$(".layui-tab").on("click",function(e){
 			if($(e.target).is(".layui-tab-close")){

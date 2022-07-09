@@ -10,9 +10,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title>智文客服-全渠道智能客服</title>
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?t=${.now?long}"/>
-<link rel="stylesheet" href="/css/layui.css">
+<link rel="stylesheet" href="/layui/css/layui.css">
 <link rel="stylesheet" href="/css/login.css">
-<script src="/layui.js"></script>
+<script src="/layui/layui.js"></script>
 <script src="/js/jquery-1.10.2.min.js"></script>
 </head>
 
@@ -59,7 +59,7 @@
 		top.location.href = "/apps/organization/add.html" ;
 	}
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 	});
 </script>

@@ -12,7 +12,7 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?t=1487250759056"/>
 	<link rel="stylesheet" href="/js/ztree/zTreeStyle/zTreeStyle.css">
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
-	<link rel="stylesheet" href="/css/layui.css">
+	<link rel="stylesheet" href="/layui/css/layui.css">
 	<link rel="stylesheet" href="/res/css.html">
 	
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
@@ -20,8 +20,8 @@
 	<script src="/js/jquery.form.js"></script>
 	<script src="/js/ztree/jquery.ztree.all.min.js"></script>
 	<script src="/js/echarts.common.min.js"></script>
-	<script language="javascript" src="/js/theme/wonderland.js"></script>
-	<script src="/layui.js"></script>
+	<script src="/js/theme/wonderland.js"></script>
+	<script src="/layui/layui.js"></script>
 	<script src="/js/cskefu.js"></script>
 </head>
 
@@ -38,7 +38,7 @@
 	</div>
 	<script>
 		layui.use('element', function() {
-			var element = layui.element(); //导航的hover效果、二级菜单等功能，需要依赖element模块
+			var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
 			//监听导航点击
 			element.on('nav(layui)', function(elem) {
 				

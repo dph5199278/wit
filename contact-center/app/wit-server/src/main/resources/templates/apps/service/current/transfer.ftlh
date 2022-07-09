@@ -88,7 +88,7 @@
 	});
 
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 		//监听提交
 		form.on('submit(contactsForm)', function(data){
 			if(!data.field.agentno){

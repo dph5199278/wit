@@ -70,10 +70,10 @@
 </div>
 <script>
 	layui.use('element', function(){
-	  var element = layui.element();
+	  var element = layui.element;
 	});
 	layui.use('form', function(){
-		  var form = layui.form();
+		  var form = layui.form;
 		  form.on("checkbox(save)" , function(data){
 			  if(data.elem.checked){
 				  loadURL('/ent/im/group/seluser.html?id=${imGroup.id!''}&user='+data.value);

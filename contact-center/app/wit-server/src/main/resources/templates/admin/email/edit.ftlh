@@ -85,7 +85,7 @@
 </div>
 <script>
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 		form.on("checkbox(ssl)" , function(data){
 			if(data.elem.checked == true){
@@ -97,6 +97,6 @@
 		});
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 </script>

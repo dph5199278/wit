@@ -21,7 +21,7 @@
 </div>
 <script>
 layui.use('form', function(){
-  var form = layui.form();
+  var form = layui.form;
   form.render();
 });
 </script>

@@ -89,8 +89,8 @@
 		<div class="content-bottom">
 			<span id="welcome-message">
 				<p>欢迎使用智文客服企业聊天</p>
-				<p>QQ群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=ef3061d99653e2f43619ddcefbf76ac2399196d89fd589501e19ae64423a5a31"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="智文客服开源社区" title="智文客服开源社区"></a></p>
-				<p>详情请咨询：<a href="https://www.chatopera.com" target="_blank" style="color:#32c24d;">智文客服</a></p>
+				<p>QQ群：<a target="_blank" href="#"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="智文客服开源社区" title="智文客服开源社区"></a></p>
+				<p>详情请咨询：<a href="#" target="_blank" style="color:#32c24d;">智文客服</a></p>
 			</span>
 		</div>
 	</div>
@@ -237,7 +237,7 @@
 <script>
 	layui.use('element', function(){
 	  var $ = layui.jquery
-	  ,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
+	  ,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 	});
 	var hostname = location.hostname ;
 	var socket = io.connect(location.protocol+"//"+top.hostname+":"+top.port+"/im/ent?userid=${user.id!''!''}&orgi=${user.orgi!''}&contextid=${contextid!''}",{transports: ['websocket'], upgrade: false});

@@ -361,7 +361,7 @@
 </form>	
 <script language="javascript"> 		
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 		form.render('select'); //刷新select选择框渲染
 		form.on("checkbox(timeout)" , function(data){
 			if(data.elem.checked == true){

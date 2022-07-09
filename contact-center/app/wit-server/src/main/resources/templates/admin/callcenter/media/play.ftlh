@@ -39,7 +39,7 @@
 </div>
 <script language="javascript">
 	layui.use('element', function(){
-	  var element = layui.element();
+	  var element = layui.element;
 	  element.init();
 	});
 	$( 'audio' ).audioPlayer();

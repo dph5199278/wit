@@ -104,7 +104,7 @@
 		loadURL('/apps/report/cubemeasure/fktableid.html?tableid='+$('#fktable option:selected').attr("idval"), '#fktableiddiv');
 	}) */
 	layui.use('form', function() {
-		var form = layui.form();
+		var form = layui.form;
 		form.render(); //更新全部
 		form.on('radio(calculatedmember)', function(data){
 			  if("0" == data.value){
@@ -115,7 +115,7 @@
 			});  
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 	$('#attributedemo').on("click",function(){
 		if($('#attribute').val() == ""){

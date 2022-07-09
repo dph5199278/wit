@@ -204,7 +204,7 @@
     layui.use(['laypage', 'layer'], function() {
         var laypage = layui.laypage,
             layer = layui.layer;
-        laypage({
+        laypage.render({
             cont: 'page'
             ,pages: <#if contactsList??>${contactsList.totalPages}<#else>0</#if>    //总页数
             ,curr:<#if contactsList??>${contactsList.number+1}<#else>0</#if>
@@ -248,7 +248,7 @@
                 // 返回可用的触达渠道列表 data.data
                 if(multiMediaDialogWin.length > 0){
                     multiMediaDialogWin.load(function(){
-                        parent.layui.element().tabChange('ukefutab','multiMediaDialogWin');
+                        parent.layui.element.tabChange('ukefutab','multiMediaDialogWin');
                     }).attr('src' , '/agent/proactive.html?contactid='+id+'&channels='+data.data);
                 } else {
                     // 使用API调用，由SocketIO传达弹屏通知，跳转到该访客页面

@@ -429,11 +429,11 @@
 		var target = $(this).attr("data-target");
 	});
 	layui.use('form', function(){
-		var form = layui.form();
+		var form = layui.form;
 		form.render('select'); //刷新select选择框渲染
 	});
 	layui.use('element', function(){
-		var element = layui.element();
+		var element = layui.element;
 	});
 			
 	$(document)

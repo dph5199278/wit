@@ -10,9 +10,9 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
 <link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
-<link rel="stylesheet" href="/css/layui.css">
+<link rel="stylesheet" href="/layui/css/layui.css">
 <link rel="stylesheet" href="/res/css.html">
-<script src="/layui.js"></script>
+<script src="/layui/layui.js"></script>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="/js/cskefu.js"></script>
 <script language="javascript">
@@ -121,7 +121,7 @@
 	</div>
 	<script>
 			layui.use('element', function(){
-			  var $ = layui.jquery,element = layui.element(); //Tab的切换功能，切换事件监听等，需要依赖element模块
+			  var $ = layui.jquery,element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
 			  //触发事件
 			  $('.iframe_btn').on('click', function(){
 				var type = $(this).data('type');
