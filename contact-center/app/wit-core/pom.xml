@@ -92,11 +92,6 @@
       <artifactId>netty-transport-native-epoll</artifactId>
       <classifier>linux-x86_64</classifier>
     </dependency>
-    <dependency>
-      <groupId>io.netty</groupId>
-      <artifactId>netty-transport-native-kqueue</artifactId>
-      <classifier>osx-x86_64</classifier>
-    </dependency>
 
     <!-- Quartz -->
     <dependency>
@@ -115,12 +110,6 @@
     <dependency>
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
-    </dependency>
-
-    <!-- Http Tools -->
-    <dependency>
-      <groupId>com.mashape.unirest</groupId>
-      <artifactId>unirest-java</artifactId>
     </dependency>
 
     <!-- HttpClient -->
@@ -199,11 +188,6 @@
     <dependency>
       <groupId>net.java.dev.jna</groupId>
       <artifactId>jna</artifactId>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/cglib/cglib -->
-    <dependency>
-      <groupId>cglib</groupId>
-      <artifactId>cglib</artifactId>
     </dependency>
     <dependency>
       <groupId>commons-codec</groupId>
