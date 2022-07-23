@@ -1,4 +1,4 @@
-FROM openjdk:8u332-jre
+FROM openjdk:11.0.15-jre
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG VCS_REF

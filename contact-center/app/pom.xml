@@ -22,7 +22,7 @@
 
         <java.version>11</java.version>
 
-        <spring-boot.version>2.5.14</spring-boot.version>
+        <spring-boot.version>2.6.10</spring-boot.version>
 
         <joda-time.version>2.10.13</joda-time.version>
 
