@@ -44,7 +44,7 @@ services:
       - SPRING_REDIS_HOST=redis
       - SPRING_REDIS_PORT=6379
       - SPRING_REDIS_PASSWORD=${DB_PASSWD:-}
-      - SPRING_ELASTICSEARCH_REST_URIS=http://elasticsearch:9200
+      - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
       - SPRING_ARTEMIS_BROKER-URL=tcp://artemis:61616

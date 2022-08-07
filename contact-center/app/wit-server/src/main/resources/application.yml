@@ -95,8 +95,7 @@ spring:
     username: root
   # Elasticsearch
   elasticsearch:
-    rest:
-      uris: http://localhost:9200
+    uris: http://localhost:9200
   ##############################################
   # FREEMARKER (FreeMarkerAutoConfiguration)
   ##############################################
