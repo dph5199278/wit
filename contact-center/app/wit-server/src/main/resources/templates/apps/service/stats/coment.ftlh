@@ -144,11 +144,11 @@ var end = {
 
 document.getElementById('start_time').onclick = function () {
 	start.elem = this;
-	laydate(start);
+	laydate.render(start);
 };
 document.getElementById('end_time').onclick = function () {
 	end.elem = this;
-	laydate(end);
+	laydate.render(end);
 };
 
 

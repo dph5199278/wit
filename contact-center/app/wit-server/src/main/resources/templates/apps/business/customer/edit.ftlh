@@ -207,7 +207,7 @@
 
 		document.getElementById('getdate').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 	});
 </script>

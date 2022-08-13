@@ -99,7 +99,7 @@
 		
 		document.getElementById('reservtime').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 
 	});

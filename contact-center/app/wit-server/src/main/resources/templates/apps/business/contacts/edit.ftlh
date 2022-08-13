@@ -198,12 +198,12 @@
 
 		document.getElementById('getdate').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 		
 		document.getElementById('cusbirthday').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 
 	});

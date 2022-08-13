@@ -272,12 +272,12 @@
 
 		document.getElementById('getdate').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 		
 		document.getElementById('birthday').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 
 	});

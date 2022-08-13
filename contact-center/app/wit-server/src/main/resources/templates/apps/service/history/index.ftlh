@@ -241,11 +241,11 @@
 	};
 	document.getElementById('begin').onclick = function () {
 		start.elem = this;
-		laydate(start);
+		laydate.render(start);
 	};
 	document.getElementById('end').onclick = function () {
 		end.elem = this;
-		laydate(end);
+		laydate.render(end);
 	};
 	
 	function deptorservice(data){

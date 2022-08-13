@@ -111,12 +111,12 @@
 
 		document.getElementById('begintime').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 		
 		document.getElementById('endtime').onclick = function() {
 			date.elem = this;
-			laydate(date);
+			laydate.render(date);
 		}
 
 	});
