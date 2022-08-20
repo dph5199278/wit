@@ -141,12 +141,8 @@ var end = {
 	}
 };
 
-document.getElementById('start_time').onclick = function () {
-	start.elem = this;
-	laydate.render(start);
-};
-document.getElementById('end_time').onclick = function () {
-	end.elem = this;
-	laydate.render(end);
-};
+start.elem = document.getElementById('start_time');
+laydate.render(start);
+end.elem = document.getElementById('end_time');
+laydate.render(end);
 </script>

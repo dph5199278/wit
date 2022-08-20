@@ -43,14 +43,14 @@
 							<label class="layui-form-label">有效期开始：</label>
 							<div class="layui-input-inline">
 								<input type="text" name="begintime" id="begintime" readOnly="readOnly" autocomplete="off"
-									class="layui-input" onclick="layui.laydate.render({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+									class="layui-input" onclick="layui.laydate.render({elem: this, show: true, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 								<i class="layui-icon" style="position: absolute;right: 3px;top: 6px;font-size: 25px;">&#xe637;</i>
 							</div>
 						</div>
 						<div class="layui-inline uckefu-inline">
 							<label class="layui-form-label">有效期结束：</label>
 							<div class="layui-input-inline">
-								<input type="text" id="endtime" name="endtime" autocomplete="off" class="layui-input" onclick="layui.laydate.render({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+								<input type="text" id="endtime" name="endtime" autocomplete="off" class="layui-input" onclick="layui.laydate.render({elem: this, show: true, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 								<i class="layui-icon" style="position: absolute;right: 3px;top: 6px;font-size: 25px;">&#xe637;</i>
 							</div>
 						</div>

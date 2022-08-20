@@ -270,15 +270,11 @@
 			istoday : false
 		};
 
-		document.getElementById('getdate').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
-		
-		document.getElementById('birthday').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
+		date.elem = document.getElementById('getdate');
+		laydate.render(date);
+
+		date.elem = document.getElementById('birthday');
+		laydate.render(date);
 
 	});
 	$('#entcustomer_province').change(function(){

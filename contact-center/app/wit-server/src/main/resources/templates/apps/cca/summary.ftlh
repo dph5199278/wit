@@ -96,11 +96,9 @@
 			format:"YYYY-MM-DD hh:mm:ss",
 			istoday : false
 		};
-		
-		document.getElementById('reservtime').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
+
+		date.elem = document.getElementById('reservtime');
+		laydate.render(date);
 
 	});
 	$(".tags").select2();

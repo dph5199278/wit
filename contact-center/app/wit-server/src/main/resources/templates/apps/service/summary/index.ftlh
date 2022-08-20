@@ -230,13 +230,9 @@
 			start.max = datas; //结束日选好后，重置开始日的最大日期
 		}
 	};
-	document.getElementById('begin').onclick = function () {
-		start.elem = this;
-		laydate.render(start);
-	};
-	document.getElementById('end').onclick = function () {
-		end.elem = this;
-		laydate.render(end);
-	};
+	start.elem = document.getElementById('begin');
+	laydate.render(start);
+	end.elem = document.getElementById('end');
+	laydate.render(end);
 </script>
 

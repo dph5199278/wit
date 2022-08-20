@@ -205,9 +205,7 @@
 			istoday : false
 		};
 
-		document.getElementById('getdate').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
+		date.elem = document.getElementById('getdate');
+		laydate.render(date);
 	});
 </script>

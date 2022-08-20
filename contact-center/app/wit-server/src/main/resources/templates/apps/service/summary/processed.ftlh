@@ -34,11 +34,11 @@
 										<div class="layui-input-inline" style="width: auto;margin-right:0px;">
 											<label class="layui-form-label" style="width: auto;">拨打时间：</label>
 											<div class="layui-input-inline" style="width: auto;margin-right:0px;">
-										      <input name="begin" class="layui-input ukefu-input" placeholder="开始时间" value="${begin!''}" onclick="layui.laydate.render({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+										      <input name="begin" class="layui-input ukefu-input" placeholder="开始时间" value="${begin!''}" onclick="layui.laydate.render({elem: this, show: true, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 										    </div>
 											<label class="layui-form-label" style="width: auto;">~</label>
 											<div class="layui-input-inline" style="width: auto;margin-right:0px;">
-										      <input name="end" class="layui-input ukefu-input" placeholder="结束时间" value="${end!''}" onclick="layui.laydate.render({elem: this, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
+										      <input name="end" class="layui-input ukefu-input" placeholder="结束时间" value="${end!''}" onclick="layui.laydate.render({elem: this, show: true, istime: true, format: 'YYYY-MM-DD hh:mm:ss'})">
 										    </div>
 										</div>
 									</div>

@@ -109,15 +109,11 @@
 			istoday : false
 		};
 
-		document.getElementById('begintime').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
-		
-		document.getElementById('endtime').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
+		date.elem = document.getElementById('begintime');
+		laydate.render(date);
+
+		date.elem = document.getElementById('endtime');
+		laydate.render(date);
 
 	});
 	KindEditor.create('#content', {

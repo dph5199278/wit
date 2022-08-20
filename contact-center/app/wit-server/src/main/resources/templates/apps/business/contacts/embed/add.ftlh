@@ -185,15 +185,11 @@
 			istoday : false
 		};
 
-		document.getElementById('getdate').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
-		
-		document.getElementById('cusbirthday').onclick = function() {
-			date.elem = this;
-			laydate.render(date);
-		}
+		date.elem = document.getElementById('getdate');
+		laydate.render(date);
+
+		date.elem = document.getElementById('cusbirthday');
+		laydate.render(date);
 
 	});
 </script>
