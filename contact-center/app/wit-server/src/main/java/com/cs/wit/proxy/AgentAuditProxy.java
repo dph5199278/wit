@@ -40,6 +40,7 @@ public class AgentAuditProxy {
 
     private final static Logger logger = LoggerFactory.getLogger(AgentAuditProxy.class);
 
+    @Lazy
     @Autowired
     private AgentAuditSubscription agentAuditSubscription;
 
