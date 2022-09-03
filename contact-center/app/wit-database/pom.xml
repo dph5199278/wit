@@ -67,7 +67,7 @@
       <dependency>
         <groupId>pentaho</groupId>
         <artifactId>mondrian</artifactId>
-        <version>3.14.0.31-241</version>
+        <version>9.4.0.0-137</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

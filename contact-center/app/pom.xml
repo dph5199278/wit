@@ -22,9 +22,11 @@
 
         <java.version>11</java.version>
 
-        <spring-boot.version>2.6.10</spring-boot.version>
+        <spring-boot.version>2.6.11</spring-boot.version>
 
         <joda-time.version>2.10.13</joda-time.version>
+
+        <fastjson.version>2.0.12</fastjson.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
@@ -152,7 +154,7 @@
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
             </dependency>
 
             <!-- SMS -->
@@ -221,6 +223,11 @@
                 <groupId>net.java.dev.jna</groupId>
                 <artifactId>jna</artifactId>
                 <version>5.5.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.vip-zpf</groupId>
