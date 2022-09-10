@@ -244,7 +244,6 @@ body .layui-layer-dir .layui-layer-content{padding: 10px; max-height: 280px; ove
 
 .site-text a{color: #01AAED;}
 .site-h1{margin-bottom: 5px; line-height: 30px; padding-bottom: 5px; padding-left:5px;padding-top:5px;background-color:#f5f5f5;color: #393D49;padding-right: 5px; border-bottom: 1px solid #eee;  font-size: 16px; font-weight: 500;margin-top:0px;}
-.site-h1 .layui-icon{position: relative; top: 0px; font-size: 50px; margin-right: 0px;}
 .site-text{position:relative;}
 .site-text p{margin-bottom: 10px;  line-height:22px;}
 .site-text em{padding: 0 3px; font-weight: 500; font-style: italic; color: #666;}
