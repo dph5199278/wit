@@ -19,13 +19,12 @@ package com.cs.wit.util.ip;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.lionsoul.ip2region.DataBlock;
-import org.lionsoul.ip2region.DbConfig;
-import org.lionsoul.ip2region.DbMakerConfigException;
-import org.lionsoul.ip2region.DbSearcher;
+import org.lionsoul.ip2region.xdb.Searcher;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
@@ -37,54 +36,65 @@ import org.springframework.util.StringUtils;
 @Slf4j
 @RequiredArgsConstructor
 public class IPTools {
-	private DbSearcher _searcher = null ;
+	private Searcher _searcher = null;
+
+	private final ConcurrentMap<String, IP> caches = new ConcurrentHashMap<>();
 
 	@NonNull
 	private final ApplicationContext applicationContext;
+
+	private final static IP EMPTY = new IP();
 
 	@PostConstruct
 	public void setup() {
 		try {
 			final Resource resource = applicationContext.getResource(
-					"classpath:/config/ip2region.db");
+					"classpath:/config/ip2region.xdb");
 			log.info("init with file [{}]", resource.getURL());
 			if(resource.exists()) {
 				try(InputStream inputStream = resource.getInputStream();
 						ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int)resource.contentLength())) {
 					StreamUtils.copy(inputStream, outputStream);
-					_searcher = new DbSearcher(new DbConfig(), outputStream.toByteArray());
+					_searcher = Searcher.newWithBuffer(outputStream.toByteArray());
 				}
 			}
-		} catch (DbMakerConfigException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 	public IP findGeography(String remote) {
-		IP ip = new IP();
+		// 先找缓存
+		if (caches.containsKey(remote)) {
+			return caches.get(remote);
+		}
+
+		// 缓存找不到，再来查询
+		IP ip = EMPTY;
 		try {
-			DataBlock block = _searcher.memorySearch(remote!=null ? remote : "127.0.0.1")  ;
-			if(block!=null && block.getRegion() != null){
-				String[] region = block.getRegion().split("[\\|]") ;
-				if(region.length == 5){
-					ip.setCountry(region[0]);
-					if(StringUtils.hasText(region[1]) && !region[1].equalsIgnoreCase("null")){
-						ip.setRegion(region[1]);
+			String region = _searcher.search(StringUtils.hasText(remote) ? remote : "127.0.0.1");
+			if(StringUtils.hasText(region)){
+				String[] regions = region.split("[\\|]");
+				if(regions.length == 5){
+					ip = new IP();
+					ip.setCountry(regions[0]);
+					if(StringUtils.hasText(regions[1]) && !regions[1].equalsIgnoreCase("null")){
+						ip.setRegion(regions[1]);
 					}else{
 						ip.setRegion("");
 					}
-					if(StringUtils.hasText(region[2]) && !region[2].equalsIgnoreCase("null")){
-						ip.setProvince(region[2]);
+					if(StringUtils.hasText(regions[2]) && !regions[2].equalsIgnoreCase("null")){
+						ip.setProvince(regions[2]);
 					}else{
 						ip.setProvince("");
 					}
-					if(StringUtils.hasText(region[3]) && !region[3].equalsIgnoreCase("null")){
-						ip.setCity(region[3]);
+					if(StringUtils.hasText(regions[3]) && !regions[3].equalsIgnoreCase("null")){
+						ip.setCity(regions[3]);
 					}else{
 						ip.setCity("");
 					}
-					if(StringUtils.hasText(region[4]) && !region[4].equalsIgnoreCase("null")){
-						ip.setIsp(region[4]);
+					if(StringUtils.hasText(regions[4]) && !regions[4].equalsIgnoreCase("null")){
+						ip.setIsp(regions[4]);
 					}else{
 						ip.setIsp("");
 					}
@@ -92,6 +102,9 @@ public class IPTools {
 			}
 		}
 		catch(Exception ignored){}
+
+		// 缓存并返回
+		caches.put(remote, ip);
 		return ip;
 	}
 }

@@ -22,11 +22,11 @@ public class IP implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -421278423658892060L;
-	private String country ;
-	private String province ;
-	private String city ;
-	private String isp ;
-	private String region ;
+	private String country;
+	private String province;
+	private String city;
+	private String isp;
+	private String region;
 	public String getCountry() {
 		return country;
 	}
