@@ -22,11 +22,9 @@
 
         <java.version>11</java.version>
 
-        <spring-boot.version>2.6.11</spring-boot.version>
+        <spring-boot.version>2.7.3</spring-boot.version>
 
-        <joda-time.version>2.10.13</joda-time.version>
-
-        <fastjson.version>2.0.12</fastjson.version>
+        <fastjson.version>2.0.13</fastjson.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
@@ -102,24 +100,17 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>${joda-time.version}</version>
-            </dependency>
-
             <!-- SQL -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.29</version>
+                <version>8.0.30</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.2.11</version>
+                <version>1.2.12</version>
             </dependency>
 
             <!-- Websocket -->
@@ -219,11 +210,6 @@
             </dependency>
 
             <!-- Other dependencies -->
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna</artifactId>
-                <version>5.5.0</version>
-            </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>

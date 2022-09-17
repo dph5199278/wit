@@ -69,6 +69,7 @@ services:
       - ARTEMIS_PASSWORD=artemis
       - ANONYMOUS_LOGIN=false
       - EXTRA_ARGS=--http-host 0.0.0.0 --relax-jolokia
+      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     volumes:
       - "./database/artemis/data:/var/lib/artemis-instance"
     ports:
@@ -101,7 +102,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/docs/4.4.2/reference/html/#preface.versions
-    image: elasticsearch:7.16.1
+    image: elasticsearch:7.17.4
     restart: always
     ports:
       - "9200:9200"
@@ -111,7 +112,6 @@ services:
       - cluster.name=elasticsearch
       # disable bootstrap check for development environment
       - discovery.type=single-node
-      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     volumes:
       - ./database/elasticsearch/data:/usr/share/elasticsearch/data
       - ./database/elasticsearch/config:/usr/share/elasticsearch/config
