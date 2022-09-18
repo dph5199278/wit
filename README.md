@@ -11,12 +11,11 @@
 
 # 智文客服: 多渠道智能客服
 ## 目标
-1. - [ ] Spring Boot升级到2.7最新版（不会直接升级，而是会每一中版本号升级，方便认识到每一个版本的差异）
+1. - [x] Spring Boot升级到2.7最新版（不会直接升级，而是会每一中版本号升级，方便认识到每一个版本的差异）
 2. - [ ] ES升级到7最新版（升级到Spring Boo2.7所能支持的7的最新版）
-3. - [ ] 将mondrian升级（由于mondrian还在维护，考虑将此升级）
+3. - [x] 将mondrian升级（由于mondrian还在维护，考虑将此升级）
 4. - [ ] 重构优化代码
 5. - [ ] 修复bug与升级部分依赖（可以提ISSUE，但无法保证解决，新功能不做）
-
 
 ## 声明
 1. 本项目只要遵守协议，可随意使用
@@ -34,9 +33,17 @@
 5. mysql
 
 ## 鸣谢
+* [JetBrains](https://jb.gg/OpenSourceSupport)
 * [FreeSWITCH 中国社区](http://www.freeswitch.org.cn/)
 * [Chatopera cskefu](https://www.chatopera.com/)
 * [UCKeFu youkefu](http://www.youkefu.cn/)
+
+## 赞助
+<a href="https://jb.gg/OpenSourceSupport" >
+  <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo." width="120" />
+</a>
+
+感谢```JetBrains```的赞助。
 
 ## 开源许可协议
 Copyright (2021) <a href="https://github.com/dph5199278/" target="_blank">Dely</a>
