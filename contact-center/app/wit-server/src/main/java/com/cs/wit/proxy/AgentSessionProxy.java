@@ -15,8 +15,8 @@
  */
 package com.cs.wit.proxy;
 
-import com.cs.wit.activemq.AgentSessionSubscription;
 import com.cs.wit.cache.Cache;
+import com.cs.wit.mq.AgentSessionSubscription;
 import com.google.gson.JsonObject;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

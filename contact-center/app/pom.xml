@@ -7,10 +7,11 @@
     <modules>
         <module>wit-core</module>
         <module>wit-database</module>
-        <module>wit-server</module>
-        <module>wit-mobile</module>
         <module>wit-ip2region</module>
+        <module>wit-mobile</module>
         <module>wit-media</module>
+        <module>wit-mq</module>
+        <module>wit-server</module>
     </modules>
     <packaging>pom</packaging>
     <name>dely-contact-center</name>
@@ -322,7 +323,7 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>wit-server</artifactId>
+                <artifactId>wit-mq</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

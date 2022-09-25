@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.cs.wit.activemq;
+package com.cs.wit.mq;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.exception.CSKefuException;
 import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.AgentUserAudit;
+import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.persistence.repository.AgentUserRepository;
 import com.cs.wit.proxy.AgentAuditProxy;
 import com.cs.wit.socketio.client.NettyClients;
@@ -28,6 +29,7 @@ import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.Optional;
+import javax.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -53,15 +55,15 @@ public class AgentAuditSubscription {
     @NonNull
     private final AgentUserRepository agentUserRes;
 
-    @NonNull
-    private final BrokerPublisher brokerPublisher;
+    @Resource(name = "topicBrokerPublisher")
+    private BrokerPublisher brokerPublisher;
 
     /**
      * 发送坐席会话监控消息
      * @param payload
      */
     public void publish(JsonObject payload) {
-        brokerPublisher.send(Constants.AUDIT_AGENT_MESSAGE, payload.toString(), true);
+        brokerPublisher.send(Constants.AUDIT_AGENT_MESSAGE, payload.toString());
     }
 
     /**

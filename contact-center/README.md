@@ -6,6 +6,7 @@
 * wit-ip2region      ip搜索
 * wit-media          媒体处理（无用模块）
 * wit-mobile         手机号搜索
+* wit-mq             消息队列
 * wit-server         主服务
 
 ## 说明

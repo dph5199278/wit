@@ -14,12 +14,7 @@ src/main/resources/templates/apps/chatbot
 
 # Modules
 /target/
-/wit-core/target/
-/wit-database/target/
-/wit-ip2region/target/
-/wit-media/target/
-/wit-mobile/target/
-/wit-server/target/
+/wit-*/target/
 .classpath
 .project
 .settings/

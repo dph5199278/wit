@@ -8,7 +8,7 @@
  * publish, or display any part, in any form, or by any means. Reverse engineering, disassembly,
  * or decompilation of this software, unless required by law for interoperability, is prohibited.
  */
-package com.cs.wit.activemq;
+package com.cs.wit.mq;
 
 import com.cs.wit.acd.ACDAgentDispatcher;
 import com.cs.wit.acd.ACDWorkMonitor;
@@ -17,14 +17,15 @@ import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.model.AgentStatus;
+import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.persistence.repository.AgentStatusRepository;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.Date;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -36,19 +37,19 @@ public class SocketioConnEventSubscription {
 
     private final static Logger logger = LoggerFactory.getLogger(SocketioConnEventSubscription.class);
 
-    @Autowired
+    @Resource
     private ACDAgentDispatcher acdAgentDispatcher;
 
-    @Autowired
+    @Resource
     private ACDWorkMonitor acdWorkMonitor;
 
-    @Autowired
+    @Resource
     private AgentStatusRepository agentStatusRes;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
-    @Autowired
+    @Resource(name = "queueBrokerPublisher")
     private BrokerPublisher brokerPublisher;
 
     @PostConstruct
@@ -62,7 +63,7 @@ public class SocketioConnEventSubscription {
      * @param payload
      */
     public void publish(final JsonObject payload) {
-        brokerPublisher.send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toString(), false, Constants.WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD);
+        brokerPublisher.send(Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, payload.toString(), Constants.WEBIM_SOCKETIO_AGENT_OFFLINE_THRESHOLD);
     }
 
     @JmsListener(destination = Constants.WEBIM_SOCKETIO_AGENT_DISCONNECT, containerFactory = "jmsListenerContainerQueue")
@@ -76,9 +77,7 @@ public class SocketioConnEventSubscription {
                         j.get("userId").getAsString(),
                         j.get("orgi").getAsString());
                 if (agentStatus != null && (!cache.existConnectAlive(j.get("orgi").getAsString(), j.get("userId").getAsString()))) {
-                    /**
-                     * 处理该坐席为离线
-                     */
+                    // 处理该坐席为离线
                     // 重分配坐席
                     ACDComposeContext ctx = new ACDComposeContext();
                     ctx.setAgentno(agentStatus.getAgentno());

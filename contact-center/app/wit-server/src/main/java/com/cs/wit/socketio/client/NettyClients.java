@@ -17,10 +17,10 @@
 package com.cs.wit.socketio.client;
 
 import com.corundumstudio.socketio.SocketIOClient;
-import com.cs.wit.activemq.AgentSubscription;
-import com.cs.wit.activemq.OnlineUserSubscription;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
+import com.cs.wit.mq.AgentSubscription;
+import com.cs.wit.mq.OnlineUserSubscription;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import java.io.Serializable;

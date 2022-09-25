@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cs.wit.activemq;
+package com.cs.wit.mq;
 
 import com.cs.wit.basic.Constants;
+import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.socketio.client.NettyClients;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ import org.springframework.stereotype.Component;
 public class AgentSessionSubscription {
     private final static Logger logger = LoggerFactory.getLogger(AgentSessionSubscription.class);
 
-    @Autowired
+    @Resource(name = "topicBrokerPublisher")
     private BrokerPublisher brokerPublisher;
 
     /**
@@ -37,7 +38,7 @@ public class AgentSessionSubscription {
      * @param payload
      */
     public void publish(JsonObject payload) {
-        brokerPublisher.send(Constants.MQ_TOPIC_WEB_SESSION_SSO, payload.toString(), true);
+        brokerPublisher.send(Constants.MQ_TOPIC_WEB_SESSION_SSO, payload.toString());
     }
 
     /**

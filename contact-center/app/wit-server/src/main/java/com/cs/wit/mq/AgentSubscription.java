@@ -8,52 +8,53 @@
  * publish, or display any part, in any form, or by any means. Reverse engineering, disassembly,
  * or decompilation of this software, unless required by law for interoperability, is prohibited.
  */
-package com.cs.wit.activemq;
+package com.cs.wit.mq;
 
 import com.cs.wit.basic.Constants;
+import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.socketio.client.NettyClients;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 /**
- * IM OnlineUser
+ * WebIM Agent
  */
 @Component
-public class OnlineUserSubscription {
+public class AgentSubscription {
 
-    private final static Logger logger = LoggerFactory.getLogger(OnlineUserSubscription.class);
+    private final static Logger logger = LoggerFactory.getLogger(AgentSubscription.class);
 
-    @Autowired
+    @Resource(name = "topicBrokerPublisher")
     private BrokerPublisher brokerPublisher;
-
-    @PostConstruct
-    public void setup() {
-        logger.info("Subscription is setup successfully.");
-    }
 
     /**
      * Publish Message
      *
      * @param j
      */
-    public void publish(final JsonObject j) {
-        brokerPublisher.send(Constants.INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER, j.toString(), true);
+    public void publish(JsonObject j) {
+        brokerPublisher.send(Constants.INSTANT_MESSAGING_MQ_TOPIC_AGENT, j.toString());
     }
 
-    @JmsListener(destination = Constants.INSTANT_MESSAGING_MQ_TOPIC_ONLINEUSER, containerFactory = "jmsListenerContainerTopic")
-    public void onMessage(final String payload){
+    @JmsListener(destination = Constants.INSTANT_MESSAGING_MQ_TOPIC_AGENT, containerFactory = "jmsListenerContainerTopic")
+    public void onMessage(final String payload) {
         logger.info("[onMessage] payload {}", payload);
         JsonObject j = JsonParser.parseString(payload).getAsJsonObject();
-        logger.debug("[instant messaging] message body {}", j.toString());
+        logger.debug("[onMessage] message body {}", j.toString());
         try {
-            NettyClients.getInstance().publishIMEventMessage(j.get("id").getAsString(),
+            if (!j.has("id")) {
+                logger.warn("[onMessage] Invalid payload, id is null");
+                return;
+            }
+
+            NettyClients.getInstance().sendAgentEventMessage(
+                    j.get("id").getAsString(),
                     j.get("event").getAsString(),
                     SerializeUtil.deserialize(j.get("data").getAsString()));
         } catch (Exception e) {

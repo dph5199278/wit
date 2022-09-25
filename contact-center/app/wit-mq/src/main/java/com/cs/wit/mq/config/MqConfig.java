@@ -8,7 +8,7 @@
  * publish, or display any part, in any form, or by any means. Reverse engineering, disassembly,
  * or decompilation of this software, unless required by law for interoperability, is prohibited.
  */
-package com.cs.wit.config;
+package com.cs.wit.mq.config;
 
 import javax.jms.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,13 +18,21 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 
+/**
+ * The type Mq config.
+ */
 @EnableJms
 @Configuration
-public class ActiveMQConfigure {
+public class MqConfig {
 
-    // topic模式的ListenerContainer
+
+    /**
+     * topic模式的ListenerContainer
+     *
+     * @param connectionFactory the connection factory
+     * @return the jms listener container factory
+     */
     @Bean
-    @SuppressWarnings("SpringJavaAutowiringInspection")
     public JmsListenerContainerFactory<?> jmsListenerContainerTopic(@Qualifier("jmsConnectionFactory") ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         factory.setConnectionFactory(connectionFactory);
@@ -32,7 +40,12 @@ public class ActiveMQConfigure {
         return factory;
     }
 
-    // queue模式的ListenerContainer
+    /**
+     * queue模式的ListenerContainer
+     *
+     * @param connectionFactory the connection factory
+     * @return the jms listener container factory
+     */
     @Bean
     public JmsListenerContainerFactory<?> jmsListenerContainerQueue(@Qualifier("jmsConnectionFactory") ConnectionFactory connectionFactory) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();

@@ -13,14 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cs.wit.activemq;
+package com.cs.wit.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.cache.Cache;
+import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.persistence.repository.BlackListRepository;
 import com.google.gson.JsonObject;
+import javax.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -43,15 +45,15 @@ public class BlackListEventSubscription {
     @NonNull
     private final BlackListRepository blackListRes;
 
-    @NonNull
-    private final BrokerPublisher brokerPublisher;
+    @Resource(name = "queueBrokerPublisher")
+    private BrokerPublisher brokerPublisher;
 
     /**
      * 发送移除黑名单的消息
      * @param payload
      */
     public void publish(JsonObject payload, int timeSeconds) {
-        brokerPublisher.send(Constants.WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST, payload.toString(), false, timeSeconds);
+        brokerPublisher.send(Constants.WEBIM_SOCKETIO_ONLINE_USER_BLACKLIST, payload.toString(), timeSeconds);
     }
 
     /**

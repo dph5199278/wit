@@ -16,12 +16,12 @@
 
 package com.cs.wit.proxy;
 
-import com.cs.wit.activemq.AgentAuditSubscription;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.exception.CSKefuCacheException;
 import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.AgentUserAudit;
+import com.cs.wit.mq.AgentAuditSubscription;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import java.io.Serializable;

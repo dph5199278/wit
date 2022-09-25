@@ -19,7 +19,6 @@
  import com.cs.wit.acd.ACDAgentService;
  import com.cs.wit.acd.ACDPolicyService;
  import com.cs.wit.acd.ACDWorkMonitor;
- import com.cs.wit.activemq.BlackListEventSubscription;
  import com.cs.wit.basic.Constants;
  import com.cs.wit.basic.MainContext;
  import com.cs.wit.basic.MainUtils;
@@ -46,6 +45,7 @@
  import com.cs.wit.model.UploadStatus;
  import com.cs.wit.model.User;
  import com.cs.wit.model.WeiXinUser;
+ import com.cs.wit.mq.BlackListEventSubscription;
  import com.cs.wit.peer.PeerSyncIM;
  import com.cs.wit.persistence.blob.JpaBlobHelper;
  import com.cs.wit.persistence.es.ChatMessageEsRepository;
