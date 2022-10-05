@@ -39,7 +39,7 @@
                         <#if user?? && (user.roleAuthMap["A03_A01_A02_B06"]?? || user.admin) >
                         <div class="layui-btn-group ukefu-btn-group">
                             <a href="/apps/customer/add.html<#if ekind??>?ekind=${ekind}</#if>" title="新建客户"
-                               data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-small">
+                               data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-sm">
                                 <i class="layui-icon">&#xe608;</i>
                                 新建客户
                             </a>
@@ -47,7 +47,7 @@
                     </#if>
                     <#if user?? && (user.roleAuthMap["A03_A01_A02_B09"]?? || user.admin) >
                     <div class="layui-btn-group ukefu-btn-group">
-                        <button class="layui-btn layui-btn-small"
+                        <button class="layui-btn layui-btn-sm"
                                 href="/apps/customer/imp.html<#if ekind??>?ekind=${ekind}</#if>" title="导入客户"
                                 data-toggle="ajax" data-width="950" data-height="600">
                             <i class="kfont">&#xe641;</i> 导入
@@ -58,7 +58,7 @@
 
                 <#if user?? && (user.roleAuthMap["A03_A01_A02_B010"]?? || user.admin) >
                 <div class="layui-btn-group ukefu-btn-group">
-                    <button class="layui-btn layui-btn-small dropdown-menu">
+                    <button class="layui-btn layui-btn-sm dropdown-menu">
                         <i class="kfont">&#xe672;</i> 导出
                         <i class="layui-icon">&#xe625;</i>
                     </button>

@@ -119,15 +119,15 @@
 							<td id="rt-${onlineuser.id!''}">${onlineuser.refusetimes!0}</td>
 							<td style="white-space: nowrap">
 								<#if onlineuser.invitestatus?? && onlineuser.invitestatus == 'invite'>
-									<small title="访客已邀请" class="layui-btn layui-btn-mini layui-btn-warm">已邀请</small>
+									<small title="访客已邀请" class="layui-btn layui-btn-xs layui-btn-warm">已邀请</small>
 								<#elseif onlineuser.invitestatus?? && onlineuser.invitestatus == 'inserv'>
-									<small title="对话中" class="layui-btn layui-btn-mini">对话中</small>
+									<small title="对话中" class="layui-btn layui-btn-xs">对话中</small>
 								<#elseif onlineuser.invitestatus?? && onlineuser.invitestatus == 'refuse'>
-									<a href="javascript:;" name="${onlineuser.id!''}" title="访客已拒绝邀请" class="layui-btn layui-btn-mini  layui-btn-danger" onclick="sendInvitationToOnlineUser('${onlineuser.id}', false)">再次邀请</a>
+									<a href="javascript:;" name="${onlineuser.id!''}" title="访客已拒绝邀请" class="layui-btn layui-btn-xs  layui-btn-danger" onclick="sendInvitationToOnlineUser('${onlineuser.id}', false)">再次邀请</a>
 								<#else> 	
-									<a href="javascript:;" name="${onlineuser.id!''}"  title="邀请访客" class="layui-btn layui-btn-mini  layui-btn-normal" onclick="sendInvitationToOnlineUser('${onlineuser.id}', true)">邀请</a>
+									<a href="javascript:;" name="${onlineuser.id!''}"  title="邀请访客" class="layui-btn layui-btn-xs  layui-btn-normal" onclick="sendInvitationToOnlineUser('${onlineuser.id}', true)">邀请</a>
 								</#if>
-                <a href="/service/trace.html?sessionid=${onlineuser.sessionid!''}&userid=${onlineuser.id}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn layui-btn-mini layui-btn-normal">轨迹</a>
+                <a href="/service/trace.html?sessionid=${onlineuser.sessionid!''}&userid=${onlineuser.id}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn layui-btn-xs layui-btn-normal">轨迹</a>
 							</td>
 						</tr>
 						</#list>

@@ -3,10 +3,10 @@
 		<h5>${element.name!'组件'}</h5>
 		<#if true>
 		<div class="ukefu-design-btn">
-			<span class="layui-btn layui-btn-danger layui-btn-small ukefu-btn-small" style="margin-left:5px;">
+			<span class="layui-btn layui-btn-danger layui-btn-sm ukefu-btn-small" style="margin-left:5px;">
 				<a href="javascript:void(0)" data-toggle="tip" data-title="请确认是否从页面中删除组件？" data-callback="deletemodel('${element.id!''}')"  target="_blank" class="ukefu-report-design">删除</a>
 			</span>
-			<span class="layui-btn layui-btn-normal layui-btn-small ukefu-btn-small" style="">
+			<span class="layui-btn layui-btn-normal layui-btn-sm ukefu-btn-small" style="">
 				<a  data-id="${element.id!''}" href="/apps/report/design/modeldesign.html?tabid=data&id=${element.id!''}" target="_blank"  class="ukefu-report-design">设计</a>
 			</span>
 		</div>

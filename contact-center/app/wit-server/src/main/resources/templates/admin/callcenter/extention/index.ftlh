@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			分机列表<#if extentionList??>（${extentionList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/extention/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="添加新分机">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/extention/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="添加新分机">
 					添加分机（支持批量添加）
 				</button>
 				

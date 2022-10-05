@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						${advType.name!''} 广告位<#if adTypeList??>（${adTypeList?size}）</#if> ${advType.description!''}
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-small green" href="/setting/adv/add.html?adpos=${advType.id!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="添加广告 ${advType.description!''}">
+							<button class="layui-btn layui-btn-sm green" href="/setting/adv/add.html?adpos=${advType.id!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="添加广告 ${advType.description!''}">
 								添加广告
 							</button>
 						</span>

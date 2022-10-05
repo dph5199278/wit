@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			媒体资源列表<#if mediaList??>（${mediaList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/media/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="添加新媒体资源">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/media/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="添加新媒体资源">
 					添加新媒体资源
 				</button>
 			</span>

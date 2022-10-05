@@ -74,7 +74,7 @@
 								<div class="layui-inline" style="margin-right:0px;">
 									<div class="layui-input-inline" style="width: auto;margin-right:0px;">
 										<div class="layui-input-inline" style="width: auto;margin-right:0px;">
-											<button class="layui-btn layui-btn-small layui-btn-primary" style="color:#ffffff;">
+											<button class="layui-btn layui-btn-sm layui-btn-primary" style="color:#ffffff;">
 												<i class="layui-icon"></i>
 											</button>
 										</div>
@@ -84,7 +84,7 @@
 						</form>
 						<div class="layui-btn-group ukefu-btn-group" style="margin-top:2px;">
 							<a href="/service/stats/coment/exp.html?t=${.now?long}<#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if><#if begin??>&begin=${begin!''}</#if><#if end??>&end=${end!''}</#if>">
-								<button class="layui-btn layui-btn-small dropdown-menu">
+								<button class="layui-btn layui-btn-sm dropdown-menu">
 									<i class="kfont">&#xe672;</i> 导出
 								</button>
 							</a>

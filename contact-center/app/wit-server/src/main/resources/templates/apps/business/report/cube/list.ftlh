@@ -11,23 +11,23 @@
 					</span>
 					<div class="ukefu-bt-text-content" style="position: absolute;right: 5px;top: 0px;">
 						<#if cubeType??>
-						<button class="layui-btn layui-btn-small" href="/apps/report/cube/type/edit.html?id=${cubeType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
+						<button class="layui-btn layui-btn-sm" href="/apps/report/cube/type/edit.html?id=${cubeType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
 							编辑分类
 						</button>
-						<button class="layui-btn layui-btn-small layui-btn-danger" href="/apps/report/cube/type/delete.html?id=${cubeType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有模板，请确认是否删除？">
+						<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/report/cube/type/delete.html?id=${cubeType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有模板，请确认是否删除？">
 							删除分类
 						</button>
 						</#if>
 						<div class="layui-btn-group">
-						  <a href="/apps/report/cube/add.html<#if typeid??>?typeid=${typeid}</#if>" title="新建模型" data-toggle="ajax" data-width="600" data-height="400" class="layui-btn layui-btn-small" ><i class="layui-icon">&#xe608;</i>新建模型</a>
+						  <a href="/apps/report/cube/add.html<#if typeid??>?typeid=${typeid}</#if>" title="新建模型" data-toggle="ajax" data-width="600" data-height="400" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe608;</i>新建模型</a>
 						</div>
 						<!-- <div class="layui-btn-group ukefu-btn-group">
-							<button class="layui-btn layui-btn-small" href="/apps/contacts/imp.html<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
+							<button class="layui-btn layui-btn-sm" href="/apps/contacts/imp.html<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
 								<i class="kfont">&#xe641;</i> 导入 
 							</button>
 						</div>
 						<div class="layui-btn-group ukefu-btn-group">
-							<button class="layui-btn layui-btn-small dropdown-menu">
+							<button class="layui-btn layui-btn-sm dropdown-menu">
 								<i class="kfont">&#xe672;</i> 导出 
 								<i class="layui-icon">&#xe625;</i>
 							</button>

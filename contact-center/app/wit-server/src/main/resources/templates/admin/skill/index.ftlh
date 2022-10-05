@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			坐席组
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/skill/add.html" data-toggle="ajax" data-height="200" data-width="550" data-title="创建新用户">
+				<button class="layui-btn layui-btn-sm green" href="/admin/skill/add.html" data-toggle="ajax" data-height="200" data-width="550" data-title="创建新用户">
 					创建组
 				</button>
 			</span>
@@ -30,13 +30,13 @@
 			<#if skillData??>${skillData.name!''}<#else>坐席组</#if><#if userList??>（${userList?size!''}）</#if>
 			<span style="float:right;">
 				<#if skillData??>
-				<button class="layui-btn layui-btn-small green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
+				<button class="layui-btn layui-btn-sm green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
 					添加坐席到当前组
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-small" href="/admin/skill/edit.html?id=${skillData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改坐席组">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/edit.html?id=${skillData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改坐席组">
 					修改坐席组
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-small" href="/admin/skill/delete.html?id=${skillData.id!''}" data-toggle="tip" data-title="请确认是否删除坐席组？">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/delete.html?id=${skillData.id!''}" data-toggle="tip" data-title="请确认是否删除坐席组？">
 					删除坐席组
 				</button>
 				</#if>

@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			短信网关列表<#if smsList??>（${smsList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/sms/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
+				<button class="layui-btn layui-btn-sm green" href="/admin/sms/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
 					创建新短信网关
 				</button>
 			</span>

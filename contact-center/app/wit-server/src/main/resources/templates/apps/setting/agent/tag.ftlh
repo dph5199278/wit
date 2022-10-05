@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						${tagType.name!''}标签<#if userList??>（${userList.totalElements!''}）</#if>
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-small green" href="/setting/tag/add.html?tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="添加标签">
+							<button class="layui-btn layui-btn-sm green" href="/setting/tag/add.html?tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="添加标签">
 								添加标签
 							</button>
 						</span>

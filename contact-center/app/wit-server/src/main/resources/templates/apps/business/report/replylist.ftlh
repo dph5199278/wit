@@ -9,25 +9,25 @@
 			<#if quickReplyList??>（${quickReplyList.totalElements}）</#if>
 			<div style="float:right;" class="ukefu-bt-text-content">
 				<#if quickType??>
-				<button class="layui-btn layui-btn-small" href="/setting/quickreply/edittype.html?id=${quickType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
+				<button class="layui-btn layui-btn-sm" href="/setting/quickreply/edittype.html?id=${quickType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
 					编辑分类
 				</button>
-				<button class="layui-btn layui-btn-small layui-btn-danger" href="/setting/quickreply/deletetype.html?id=${quickType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有问答，请确认是否删除？">
+				<button class="layui-btn layui-btn-sm layui-btn-danger" href="/setting/quickreply/deletetype.html?id=${quickType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有问答，请确认是否删除？">
 					删除分类
 				</button>
 				</#if>
-				<button class="layui-btn layui-btn-small green" href="/setting/quickreply/add.html<#if quickType??>?parentid=${quickType.id!''}</#if>" data-toggle="ajax" data-width="750" data-title="创建新问答">
+				<button class="layui-btn layui-btn-sm green" href="/setting/quickreply/add.html<#if quickType??>?parentid=${quickType.id!''}</#if>" data-toggle="ajax" data-width="750" data-title="创建新问答">
 					添加问答
 				</button>
 				<#if quickType??>
 					<div class="layui-btn-group ukefu-btn-group">
-						<button class="layui-btn layui-btn-small" href="/setting/quickreply/imp.html?<#if quickType??>type=${quickType.id}</#if>" title="导入快捷回复" data-toggle="ajax" data-width="950" data-height="600">
+						<button class="layui-btn layui-btn-sm" href="/setting/quickreply/imp.html?<#if quickType??>type=${quickType.id}</#if>" title="导入快捷回复" data-toggle="ajax" data-width="950" data-height="600">
 							<i class="kfont">&#xe641;</i> 导入 
 						</button>
 					</div>
 				</#if>
 				<div class="layui-btn-group ukefu-btn-group">
-					<button class="layui-btn layui-btn-small dropdown-menu">
+					<button class="layui-btn layui-btn-sm dropdown-menu">
 						<i class="kfont">&#xe672;</i> 导出 
 						<i class="layui-icon">&#xe625;</i>
 					</button>

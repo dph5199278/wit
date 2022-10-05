@@ -25,7 +25,7 @@
 						</div>
 					</form>
 					<div class="layui-btn-group">
-					  <a href="/apps/contacts/embed/add.html" title="新建联系人"  data-toggle="load" data-target="#mainajaxwin" class="layui-btn layui-btn-small" ><i class="layui-icon">&#xe608;</i>新建联系人</a>
+					  <a href="/apps/contacts/embed/add.html" title="新建联系人"  data-toggle="load" data-target="#mainajaxwin" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe608;</i>新建联系人</a>
 					</div>
 				</div>
 			</h1>

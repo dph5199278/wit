@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			邮件服务器列表<#if emailList??>（${emailList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/email/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
+				<button class="layui-btn layui-btn-sm green" href="/admin/email/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
 					创建新邮件服务器
 				</button>
 			</span>

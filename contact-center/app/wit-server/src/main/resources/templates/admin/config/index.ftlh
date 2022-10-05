@@ -146,7 +146,7 @@
 											</div>
 											<div class="col-lg-4">
 												<#if imServerStatus?? && imServerStatus == true>
-												<a href="/admin/config/stopimserver.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止对话服务后不能从Web界面再次启动，请确认是否退出？" class="layui-btn layui-btn-small layui-btn-danger">停止对话服务</a>
+												<a href="/admin/config/stopimserver.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止对话服务后不能从Web界面再次启动，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止对话服务</a>
 												</#if>
 											</div>
 										</div>
@@ -163,9 +163,9 @@
 											</div>
 											<div class="col-lg-4">
 												<#if entim?? && entim == true>
-													<a href="/admin/config/stopentim.html" data-toggle="tip" title="请确认是否关闭企业聊天功能？" class="layui-btn layui-btn-small layui-btn-danger">关闭企业聊天功能</a>
+													<a href="/admin/config/stopentim.html" data-toggle="tip" title="请确认是否关闭企业聊天功能？" class="layui-btn layui-btn-sm layui-btn-danger">关闭企业聊天功能</a>
 												<#else>
-													<a href="/admin/config/startentim.html" data-toggle="tip" title="启用企业聊天功能" class="layui-btn layui-btn-small">启用企业聊天功能</a>
+													<a href="/admin/config/startentim.html" data-toggle="tip" title="启用企业聊天功能" class="layui-btn layui-btn-sm">启用企业聊天功能</a>
 												</#if>
 											</div>
 										</div>
@@ -182,9 +182,9 @@
 											</div>
 											<div class="col-lg-4">
 												<#if infoace?? && infoace == true>
-													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-small layui-btn-danger">退出数据采集功能</a>
+													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-sm layui-btn-danger">退出数据采集功能</a>
 												<#else>
-													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-small">进入数据采集功能</a>
+													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-sm">进入数据采集功能</a>
 												</#if>		
 											</div>
 										</div>
@@ -200,7 +200,7 @@
 												<p style="color:#888888;font-size:13px;margin-top:10px;">适用于Tomcat、Jetty等系统，WebLogic/WebSphere等中间件严禁使用</p>
 											</div>
 											<div class="col-lg-4">
-												<a href="/admin/config/stop.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止服务将会调用JVM退出指令，请确认是否退出？" class="layui-btn layui-btn-small layui-btn-danger">停止服务</a>
+												<a href="/admin/config/stop.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止服务将会调用JVM退出指令，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止服务</a>
 											</div>
 										</div>
 									</div>

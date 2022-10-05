@@ -6,7 +6,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			IVR菜单设置，接入号码：${extention.extention!''}
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/acl/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加ACL策略">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/acl/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加ACL策略">
 					添加IVR菜单
 				</button>
 			</span>

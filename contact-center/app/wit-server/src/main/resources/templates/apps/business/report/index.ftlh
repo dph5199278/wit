@@ -7,7 +7,7 @@
 			<h1 class="site-h1">
 				报表分类
 				<span style="float:right;">
-					<button class="layui-btn layui-btn-small green" href="/apps/report/addtype.html<#if dataDic??>?dicid=${dataDic.parentid}</#if>" data-toggle="ajax" data-height="450" data-width="400" data-title="创建分类">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/addtype.html<#if dataDic??>?dicid=${dataDic.parentid}</#if>" data-toggle="ajax" data-height="450" data-width="400" data-title="创建分类">
 						<i class="layui-icon">&#xe608;</i>
 						创建分类
 					</button>
@@ -31,25 +31,25 @@
 				<#if reportList??>（${reportList.totalElements}）</#if>
 				<div style="float:right;" class="ukefu-bt-text-content">
 					<#if dataDic??>
-					<button class="layui-btn layui-btn-small" href="/apps/report/edittype.html?id=${dataDic.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑分类">
+					<button class="layui-btn layui-btn-sm" href="/apps/report/edittype.html?id=${dataDic.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑分类">
 						编辑分类
 					</button>
-					<button class="layui-btn layui-btn-small layui-btn-danger" href="/apps/report/deletetype.html?id=${dataDic.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有报表，请确认是否删除？">
+					<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/report/deletetype.html?id=${dataDic.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有报表，请确认是否删除？">
 						删除分类
 					</button>
 					</#if>
-					<button class="layui-btn layui-btn-small green" href="/apps/report/add.html<#if dataDic??>?dicid=${dataDic.id!''}</#if>" data-toggle="ajax" data-width="400" data-height="450"  data-title="创建新报表">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/add.html<#if dataDic??>?dicid=${dataDic.id!''}</#if>" data-toggle="ajax" data-width="400" data-height="450"  data-title="创建新报表">
 						添加报表
 					</button>
 					<#if dataDic??>
 						<div class="layui-btn-group ukefu-btn-group">
-							<button class="layui-btn layui-btn-small" href="/apps/report/imp.html?<#if dataDic??>type=${dataDic.id}</#if>" title="导入报表" data-toggle="ajax" data-width="950" data-height="600">
+							<button class="layui-btn layui-btn-sm" href="/apps/report/imp.html?<#if dataDic??>type=${dataDic.id}</#if>" title="导入报表" data-toggle="ajax" data-width="950" data-height="600">
 								<i class="kfont">&#xe641;</i> 导入 
 							</button>
 						</div>
 					</#if>
 					<div class="layui-btn-group ukefu-btn-group">
-						<button class="layui-btn layui-btn-small dropdown-menu">
+						<button class="layui-btn layui-btn-sm dropdown-menu">
 							<i class="kfont">&#xe672;</i> 导出 
 							<i class="layui-icon">&#xe625;</i>
 						</button>

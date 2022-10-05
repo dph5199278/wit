@@ -386,7 +386,7 @@ var Proxy = {
 										'                  <div class="nowrap" title="'+result.data[i].post+'">问题：'+result.data[i].post+'</div>\n' +
 										'                    <div style="color: #333">\n' +
 										'                       <p class="nowrap" title="'+result.data[i].reply_plain_text+'"  style="float: left ">答案：'+result.data[i].reply_plain_text+'</p>\n' +
-										'                       <button style="float: right" class="layui-btn layui-btn-mini" onclick="chooseAnswer(\''+result.data[i].reply_plain_text+'\')">选择</button>\n' +
+										'                       <button style="float: right" class="layui-btn layui-btn-xs" onclick="chooseAnswer(\''+result.data[i].reply_plain_text+'\')">选择</button>\n' +
 										'                   </div>\n' +
 										'      </li>'
 									type == "agent" ? $("#quickReplyBox").append(li) : $("#ccaQuickReplyBox").append(li) ;

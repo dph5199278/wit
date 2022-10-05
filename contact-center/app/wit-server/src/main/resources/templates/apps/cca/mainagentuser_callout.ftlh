@@ -8,10 +8,10 @@
 		<h1 class="site-h1">
 			<#if curagentuser??>${curagentuser.username!''}（${curagentuser.region!''}）
 			<div style="float:right;" class="ukefu-service-btn">
-				<a href="/agent/summary.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="450" title="记录服务小结"><button class="layui-btn layui-btn-small"><i class="kfont">&#xe65c;</i> 服务小结</button></a>
-				<a href="/agent/calloutcontact/add.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-small"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>
-				<!--<a href="/agent/transfer.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-small"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>-->
-				<a href="/agent/end.html?id=${curagentuser.id!''}" data-toggle="tip" data-title="请确认是否关闭和用户“${curagentuser.username!''}”的对话？"><button class="layui-btn layui-btn-small layui-btn-danger"><i class="kfont">&#xe621;</i> 结束对话</button></a>
+				<a href="/agent/summary.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="450" title="记录服务小结"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe65c;</i> 服务小结</button></a>
+				<a href="/agent/calloutcontact/add.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>
+				<!--<a href="/agent/transfer.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="950" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>-->
+				<a href="/agent/end.html?id=${curagentuser.id!''}" data-toggle="tip" data-title="请确认是否关闭和用户“${curagentuser.username!''}”的对话？"><button class="layui-btn layui-btn-sm layui-btn-danger"><i class="kfont">&#xe621;</i> 结束对话</button></a>
 			</div>
 			<#else>
 				&nbsp;
@@ -265,7 +265,7 @@
 							<h1 class="site-h1" style="background-color:#EEEEEE;">
 								访问信息
 								<div style="float:right;">
-									<button class="layui-btn layui-btn-small layui-btn-radius layui-btn-danger" href="/agent/blacklist/add.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" data-title="拉黑访客" data-width="900">拉黑访客</button>
+									<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/agent/blacklist/add.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" data-title="拉黑访客" data-width="900">拉黑访客</button>
 								</div>
 							</h1>
 						</div>

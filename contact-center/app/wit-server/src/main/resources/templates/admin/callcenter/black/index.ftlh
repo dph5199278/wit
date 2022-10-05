@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			黑名单列表<#if blackList??>（${blackList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/black/add.html" data-toggle="ajax" data-width="700" data-height="300" data-title="添加黑名单">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/black/add.html" data-toggle="ajax" data-width="700" data-height="300" data-title="添加黑名单">
 					添加黑名单
 				</button>
 			</span>

@@ -105,7 +105,7 @@
 								<div class="layui-inline" style="margin-right:0px;">
 									<div class="layui-input-inline" style="width: auto;margin-right:0px;">
 										<div class="layui-input-inline" style="width: auto;margin-right:0px;">
-									      <button class="layui-btn layui-btn-small layui-btn-primary" style="color:#ffffff;">
+									      <button class="layui-btn layui-btn-sm layui-btn-primary" style="color:#ffffff;">
 											  <i class="layui-icon"></i>
 											</button>
 									    </div>

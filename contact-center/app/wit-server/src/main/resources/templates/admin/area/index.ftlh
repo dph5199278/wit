@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			区域列表<#if areaList??>（${areaList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/area/add.html" data-toggle="ajax" data-width="750" data-height="450" data-title="创建新区域">
+				<button class="layui-btn layui-btn-sm green" href="/admin/area/add.html" data-toggle="ajax" data-width="750" data-height="450" data-title="创建新区域">
 					创建新区域
 				</button>
 			</span>

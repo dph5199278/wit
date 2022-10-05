@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			服务器列表<#if pbxHostList??>（${pbxHostList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/pbxhost/add.html" data-toggle="ajax" data-width="750" data-title="添加新服务器">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/pbxhost/add.html" data-toggle="ajax" data-width="750" data-title="添加新服务器">
 					添加新服务器
 				</button>
 			</span>

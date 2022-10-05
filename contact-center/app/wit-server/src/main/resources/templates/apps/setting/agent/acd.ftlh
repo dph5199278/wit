@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						ACD策略（坐席分配策略）<#if userList??>（${userList.totalElements!''}）</#if>
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-small green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
+							<button class="layui-btn layui-btn-sm green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
 								添加策略
 							</button>
 						</span>

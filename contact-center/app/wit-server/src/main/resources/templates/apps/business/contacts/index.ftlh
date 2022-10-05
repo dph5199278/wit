@@ -33,19 +33,19 @@
                         </form>
                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B05"]?? || user.admin)>
                             <div class="layui-btn-group">
-                                <a href="/apps/contacts/add.html<#if ckind??>?ckind=${ckind}</#if>" title="新建联系人" data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-small"><i class="layui-icon">&#xe608;</i>新建联系人</a>
+                                <a href="/apps/contacts/add.html<#if ckind??>?ckind=${ckind}</#if>" title="新建联系人" data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe608;</i>新建联系人</a>
                             </div>
                         </#if>
                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B08"]?? || user.admin)>
                             <div class="layui-btn-group ukefu-btn-group">
-                                <button class="layui-btn layui-btn-small" href="/apps/contacts/imp.html<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
+                                <button class="layui-btn layui-btn-sm" href="/apps/contacts/imp.html<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
 								    <i class="kfont">&#xe641;</i> 导入
 							    </button>
                             </div>
                         </#if>
                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B09"]?? || user.admin)>
                             <div class="layui-btn-group ukefu-btn-group">
-                                <button class="layui-btn layui-btn-small dropdown-menu">
+                                <button class="layui-btn layui-btn-sm dropdown-menu">
                                     <i class="kfont">&#xe672;</i> 导出
                                     <i class="layui-icon">&#xe625;</i>
 							    </button>

@@ -5,22 +5,22 @@
 			<div style="clefloat:right;">
 				<div class="layui-btn-group">
 					<a href="/agent/index.html?sort=lastmessage" style="<#if sort?? && sort == "lastmessage">color:#ffffff !important;</#if>">
-					  <button class="layui-btn layui-btn-primary layui-btn-small" style="<#if sort?? && sort == "lastmessage">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
+					  <button class="layui-btn layui-btn-primary layui-btn-sm" style="<#if sort?? && sort == "lastmessage">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
 					    	消息
 					  </button>
 				  </a>
 				  <a href="/agent/index.html?sort=logintime" style="<#if sort?? && sort == "logintime">color:#ffffff !important;</#if>">
-					  <button class="layui-btn layui-btn-primary layui-btn-small" style="<#if sort?? && sort == "logintime">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
+					  <button class="layui-btn layui-btn-primary layui-btn-sm" style="<#if sort?? && sort == "logintime">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
 					 	接入
 					  </button>
 				  </a>
 				  <a href="/agent/index.html?sort=default" style="<#if !sort?? || sort == "default">color:#ffffff !important;</#if>">
-				  <button class="layui-btn layui-btn-primary layui-btn-small" style="<#if !sort?? || sort == "default">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
+				  <button class="layui-btn layui-btn-primary layui-btn-sm" style="<#if !sort?? || sort == "default">color:#ffffff !important;<#else>background-color:#ffffff !important;color:#32c24d  !important;</#if>">
 				  	默认
 				  </button>
 				  </a>
 				  <a href="/agent/clean.html" data-toggle="tip" data-title="清理对话列表将会删除已结束对话，请确认是否清理？">
-					  <button class="layui-btn layui-btn-primary layui-btn-small" style="background-color:#ffffff !important;color:#32c24d  !important;">
+					  <button class="layui-btn layui-btn-primary layui-btn-sm" style="background-color:#ffffff !important;color:#32c24d  !important;">
 					  	<i class="layui-icon" style="font-size:22px;color:red;">&#xe640;</i>
 					  </button>
 				  </a>	

@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			SIP网关<#if sipTrunkListList??>（${sipTrunkListList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/siptrunk/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加SIP网关">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/siptrunk/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加SIP网关">
 					添加SIP网关
 				</button>
 			</span>

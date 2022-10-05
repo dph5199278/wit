@@ -40,6 +40,11 @@
       <groupId>${project.groupId}</groupId>
       <artifactId>wit-database</artifactId>
     </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>wit-mq</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

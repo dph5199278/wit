@@ -66,7 +66,7 @@
 							访问信息
 							<!-- 
 							<div style="float:right;">
-								<button class="layui-btn layui-btn-small layui-btn-radius layui-btn-danger" data-href="/agent/blacklist.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="tip" data-title="拉黑访客后，此访客不会再接入人工坐席，当前对话会立即结束，可以在“客服设置->黑名单”中取消拉黑，请确认是否拉黑该访客？" data-callback="Proxy.tipMsgForm">拉黑访客</button>	
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" data-href="/agent/blacklist.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="tip" data-title="拉黑访客后，此访客不会再接入人工坐席，当前对话会立即结束，可以在“客服设置->黑名单”中取消拉黑，请确认是否拉黑该访客？" data-callback="Proxy.tipMsgForm">拉黑访客</button>
 							</div>
 							 -->
 						</h1>

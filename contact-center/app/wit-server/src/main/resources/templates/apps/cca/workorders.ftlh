@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#EEEEEE;">
 			工单
 			<div style="float:right;">
-				<button class="layui-btn layui-btn-small layui-btn-normal" href="/apps/workorders/embed/add.html?contactsid=${contactsid!''}" data-toggle="ajax" title="新建工单" data-width="950" data-height="500">新建工单</button>	
+				<button class="layui-btn layui-btn-sm layui-btn-normal" href="/apps/workorders/embed/add.html?contactsid=${contactsid!''}" data-toggle="ajax" title="新建工单" data-width="950" data-height="500">新建工单</button>
 			</div>
 		</h1>
 	</div>

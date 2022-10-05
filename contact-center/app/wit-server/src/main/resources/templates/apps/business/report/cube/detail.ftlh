@@ -6,18 +6,18 @@
 			<h1 class="site-h1">
 				元数据
 				<span style="float:right;">
-					<button class="layui-btn layui-btn-small green" href="/apps/report/cube/imptb.html?cubeid=${cubeid!''}" data-toggle="ajax" data-height="300" data-width="600" data-title="导入元数据">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/cube/imptb.html?cubeid=${cubeid!''}" data-toggle="ajax" data-height="300" data-width="600" data-title="导入元数据">
 						<i class="layui-icon">&#xe608;</i>
 						导入元数据
 					</button>
 				</span>
 				<span style="float:right;margin-right:5px;" >
-					<button class="layui-btn layui-btn-small green" style="display:none;" id="metadataeditbtn"  data-toggle="ajax" data-height="500" data-width="950" data-title="编辑元数据">
+					<button class="layui-btn layui-btn-sm green" style="display:none;" id="metadataeditbtn"  data-toggle="ajax" data-height="500" data-width="950" data-title="编辑元数据">
 						编辑
 					</button>
 				</span>
 				<span style="float:right;margin-right:5px;">
-				<button class="layui-btn layui-btn-small layui-btn-danger"  id="metadatadelbtn" data-toggle="tip" data-title="请确认是否删除？">
+				<button class="layui-btn layui-btn-sm layui-btn-danger"  id="metadatadelbtn" data-toggle="tip" data-title="请确认是否删除？">
 					删除
 				</button>
 				</span>
@@ -34,7 +34,7 @@
 			<h1 class="site-h1">
 				维度
 				<span style="float:right;">
-					<button class="layui-btn layui-btn-small green" href="/apps/report/dimension/add.html?cubeid=${cubeid!''}" data-toggle="ajax" data-height="550" data-width="950" data-title="新建维度">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/dimension/add.html?cubeid=${cubeid!''}" data-toggle="ajax" data-height="550" data-width="950" data-title="新建维度">
 						<i class="layui-icon">&#xe608;</i>
 						新建维度
 					</button>
@@ -83,20 +83,20 @@
 			维度成员
 			<#if cubeLevelList??>（${cubeLevelList?size}）</#if>
 			<div style="float:right;" class="ukefu-bt-text-content">
-				<button class="layui-btn layui-btn-small" href="/apps/report/cube/cubepublish.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
+				<button class="layui-btn layui-btn-sm" href="/apps/report/cube/cubepublish.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
 					<i class="layui-icon">&#xe609;</i> 
 					发布
 				</button>
-				<a class="layui-btn layui-btn-small" href="/apps/report/cube/index.html">
+				<a class="layui-btn layui-btn-sm" href="/apps/report/cube/index.html">
 					返回
 				</a>
-				<button class="layui-btn layui-btn-small" href="/apps/report/dimension/edit.html?id=${dimensionId!''}" data-toggle="ajax" data-width="950" data-height="550" data-title="编辑维度">
+				<button class="layui-btn layui-btn-sm" href="/apps/report/dimension/edit.html?id=${dimensionId!''}" data-toggle="ajax" data-width="950" data-height="550" data-title="编辑维度">
 					编辑维度
 				</button>
-				<button class="layui-btn layui-btn-small layui-btn-danger" href="/apps/report/dimension/delete.html?id=${dimensionId!''}" data-toggle="tip" data-title="删除维度将会同时删除维度下的所有维度成员，请确认是否删除？">
+				<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/report/dimension/delete.html?id=${dimensionId!''}" data-toggle="tip" data-title="删除维度将会同时删除维度下的所有维度成员，请确认是否删除？">
 					删除维度
 				</button>
-				<button class="layui-btn layui-btn-small green" href="/apps/report/cubelevel/add.html?dimid=${dimensionId!''}&cubeid=${cubeid!''}" data-toggle="ajax" data-height="450" data-width="750"  data-title="新建维度成员">
+				<button class="layui-btn layui-btn-sm green" href="/apps/report/cubelevel/add.html?dimid=${dimensionId!''}&cubeid=${cubeid!''}" data-toggle="ajax" data-height="450" data-width="750"  data-title="新建维度成员">
 					添加维度成员
 				</button>
 			</div>
@@ -169,14 +169,14 @@
 			指标
 			<#if cubeMeasureList??>（${cubeMeasureList?size}）</#if>
 			<div style="float:right;" class="ukefu-bt-text-content">
-				<button class="layui-btn layui-btn-small" href="/apps/report/cube/cubepublish.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
+				<button class="layui-btn layui-btn-sm" href="/apps/report/cube/cubepublish.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
 					<i class="layui-icon">&#xe609;</i> 
 					发布
 				</button>
-				<a class="layui-btn layui-btn-small" href="/apps/report/cube/index.html">
+				<a class="layui-btn layui-btn-sm" href="/apps/report/cube/index.html">
 					返回
 				</a>
-				<button class="layui-btn layui-btn-small green" href="/apps/report/cubemeasure/add.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="新建指标">
+				<button class="layui-btn layui-btn-sm green" href="/apps/report/cubemeasure/add.html?cubeid=${cubeid!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="新建指标">
 					添加指标
 				</button>
 			</div>

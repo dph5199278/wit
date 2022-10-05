@@ -7,9 +7,9 @@
 			${imGroup.name!''}
 		</div>
 		<div class="group-btn">
-			<a class="layui-btn layui-btn-normal layui-btn-small" href="/ent/im/group.html?id=${imGroup.id!''}">发消息</a>
+			<a class="layui-btn layui-btn-normal layui-btn-sm" href="/ent/im/group.html?id=${imGroup.id!''}">发消息</a>
 			<#if user.id = imGroup.creater>
-			<a class="layui-btn layui-btn-danger layui-btn-small" data-toggle="tip" data-title="解散动作无法恢复，请确认是否解散该群？" href="/ent/im/rmgroup.html?id=${imGroup.id!''}">解散群</a>
+			<a class="layui-btn layui-btn-danger layui-btn-sm" data-toggle="tip" data-title="解散动作无法恢复，请确认是否解散该群？" href="/ent/im/rmgroup.html?id=${imGroup.id!''}">解散群</a>
 			</#if>
 		</div>	 
 	</div>

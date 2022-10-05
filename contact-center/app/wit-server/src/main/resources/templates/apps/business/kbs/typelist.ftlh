@@ -3,14 +3,14 @@
 		<h1 class="site-h1">
 			知识地图
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/apps/kbs/add.html" data-toggle="load" data-target="#ukefu-kbs-content">
+				<button class="layui-btn layui-btn-sm green" href="/apps/kbs/add.html" data-toggle="load" data-target="#ukefu-kbs-content">
 					创建新知识
 				</button>
 				<#if kbsType??>
-				<button class="layui-btn layui-btn-small green" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
+				<button class="layui-btn layui-btn-sm green" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
 					编辑分类
 				</button>
-				<button class="layui-btn layui-btn-small layui-btn-danger" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
+				<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
 					删除分类
 				</button>
 				</#if>

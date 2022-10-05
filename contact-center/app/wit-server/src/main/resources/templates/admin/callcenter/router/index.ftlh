@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			路由规则列表<#if routerRulesList??>（${routerRulesList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-small green" href="/admin/callcenter/router/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加路由规则">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/router/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加路由规则">
 					添加规则
 				</button>
 			</span>
