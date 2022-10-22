@@ -8,8 +8,10 @@ services:
       - "443:443"
     volumes:
       - ./nginx/logs:/var/log/nginx
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/certs:/certs
+      - ./nginx/templates:/etc/nginx/templates:ro
+      - ./nginx/certs:/certs:ro
+    environment:
+      - SERVER_NAME=${SERVER_NAME:-localhost}
     depends_on:
       - contact-center
 
