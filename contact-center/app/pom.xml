@@ -23,14 +23,14 @@
 
         <java.version>11</java.version>
 
-        <spring-boot.version>2.7.3</spring-boot.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
 
-        <fastjson.version>2.0.13</fastjson.version>
+        <fastjson.version>2.0.16</fastjson.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
+        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-        <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
 
         <!-- 主类地址，一定要配置，否则打包时运行会出错 -->
@@ -105,13 +105,13 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>8.0.30</version>
+                <version>8.0.31</version>
             </dependency>
             <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>1.2.12</version>
+                <version>1.2.14</version>
             </dependency>
 
             <!-- Websocket -->
@@ -125,7 +125,7 @@
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi-ooxml</artifactId>
-                <version>5.2.2</version>
+                <version>5.2.3</version>
             </dependency>
 
             <!-- Jasypt -->
