@@ -21,6 +21,7 @@ import com.cs.wit.interceptor.LogInterceptorHandler;
 import com.cs.wit.interceptor.UserInterceptorHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -51,6 +52,12 @@ public class CSKeFuWebAppConfigurer implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
                 .addResourceLocations("classpath:/static/");
+    }
+
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+        // 增加字符串转日期的功能
+        registry.addConverter(new StringToDateConverter());
     }
 
     @Override
