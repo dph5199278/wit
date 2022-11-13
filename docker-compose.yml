@@ -64,7 +64,7 @@ services:
       - artemis
 
   artemis:
-    image: dph5199278/activemq-artemis:2.19.1
+    image: dph5199278/activemq-artemis:2.26.0
     restart: always
     environment:
       - ARTEMIS_USER=artemis
