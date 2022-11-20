@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -310,17 +310,16 @@ public class RedisCommand {
     }
 
     public int getSetSize(final String key) {
-        return Math.toIntExact(redisSetOps.size(key));
+        return Math.toIntExact(Optional
+            .ofNullable(redisSetOps.size(key))
+            .orElse(0L));
     }
 
     public List<String> getSet(final String key) {
-        Set<String> s = redisSetOps.members(key);
-
-        if (s != null & s.size() > 0) {
-            return new ArrayList<>(s);
-        } else {
-            return new ArrayList<>();
-        }
+        return Optional
+            .ofNullable(redisSetOps.members(key))
+            .map(ArrayList::new)
+            .orElse(new ArrayList<>());
     }
 
 }
