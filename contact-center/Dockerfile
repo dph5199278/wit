@@ -18,10 +18,10 @@ ENV APPLICATION_CUSTOMER_ENTITY=$APPLICATION_CUSTOMER_ENTITY \
    LC_ALL=C.UTF-8
 
 # create dirs
-RUN /bin/bash -c "mkdir -p /{data,logs}" && \
-   /bin/bash -c "mkdir -p /{opt/wit,opt/wit/upgrade}" \
+RUN set -eux; \
+   mkdir -p /{data,logs} && \
+   mkdir -p /{opt/wit,opt/wit/upgrade} \
    # install other lib and configure timezone
-   set -eux; \
    apt-get update && \
    apt-get install --no-install-recommends -y tzdata iputils-ping default-mysql-client && \
    ln -sf /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime && \
@@ -29,18 +29,14 @@ RUN /bin/bash -c "mkdir -p /{data,logs}" && \
    rm -rf /var/lib/apt/lists/*
 
 # copy shell
-COPY ./assets/mysql.setup.db.sh /opt/wit
-COPY ./assets/mysql.upgrade.db.sh /opt/wit
-COPY ./assets/utils.sh /opt/wit
-COPY ./assets/docker-entrypoint.sh /opt/wit
+COPY ./assets/ /opt/wit/
 RUN chmod +x /opt/wit/*.sh
 
 # build JAR
 COPY ./app/target/contact-center.jar /opt/wit/contact-center.jar
 
 # copy sql script
-COPY ./app/target/sql/cosinee-MySQL-slim.sql /tmp/ROOT/cosinee-MySQL-slim.sql
-COPY ./app/target/sql/upgrade/* /tmp/ROOT/upgrade/
+COPY ./app/target/sql/ /tmp/ROOT/
 
 WORKDIR /opt/wit
 EXPOSE 8000-10000
