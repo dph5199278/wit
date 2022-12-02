@@ -17,3 +17,9 @@ sftp-config.json
 ~$*.doc*
 admin/localrc
 logPath_IS_UNDEFINED/
+
+/logs/*
+/docs/database/docs/index.html
+
+/data/mdx/*
+/data/upload/*

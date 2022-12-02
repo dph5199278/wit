@@ -20,3 +20,10 @@ backups/
 build.gradle
 .vscode/
 private
+
+/database/artemis/*
+/database/elasticsearch/data/*
+/database/mysql/*
+/database/redis/data/*
+
+/nginx/logs/*

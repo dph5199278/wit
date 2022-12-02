@@ -9,5 +9,10 @@ baseDir=$(cd `dirname "$0"`;pwd)
 
 # main 
 [ -z "${BASH_SOURCE[0]}" -o "${BASH_SOURCE[0]}" = "$0" ] || return
-cd $baseDir/../app
-mvn clean compile
+cd $baseDir/../..
+if [ -f docker-compose.yml ]; then
+    docker-compose down redis
+else
+    echo "Invalid docker compose."
+    exit 1
+fi
