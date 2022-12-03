@@ -266,8 +266,6 @@ management:
 ##############################################
 # server
 server:
-  connection:
-    max: 2000
   port: 8035
   servlet:
     context-path: /
@@ -277,10 +275,9 @@ server:
         http-only: true
       timeout: *timeout
   session-timeout: 86400
-  threads:
-    # The maximum number of request processing threads to be created by this Connector
-    max: 2000
   tomcat:
+    connection-timeout: 30s
+    max-connections: 8192
     # Setting max size of post requests to 100MB
     max-http-form-post-size: 100MB
     max-swallow-size: 100MB
