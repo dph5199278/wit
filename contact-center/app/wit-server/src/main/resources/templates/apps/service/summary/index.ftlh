@@ -211,7 +211,7 @@
 		if (strDate >= 0 && strDate <= 9) {
 			strDate = "0" + strDate;
 		}
-		var currentdate = year + seperator + month + seperator + strDate;
+		var currentdate = year + seperator + month + seperator + strDate;
 		return currentdate;
 	}
 	var start = {

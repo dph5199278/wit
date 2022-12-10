@@ -82,9 +82,9 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
             <script language="javascript">
                 var  editor , layer;
 
-                KindEditor.plugin('evaluation', function(K) {
-			        var editor = this, name = 'evaluation';
-			        editor.clickToolbar(name, function() {
+                KindEditor.plugin('evaluation', function(K) {
+			        var editor = this, name = 'evaluation';
+			        editor.clickToolbar(name, function() {
                         $.post('/agent/evaluation',{agentuserid:agentuserid}).success(function(){
                             top.layer.msg('发送满意度调研成功！',{icon: 1, time: 3000})
                         });

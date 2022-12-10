@@ -151,17 +151,17 @@
 			}
 		};
 
-		KindEditor.plugin('evaluation', function(K) {
-			var editor = this, name = 'evaluation';
-			editor.clickToolbar(name, function() {
+		KindEditor.plugin('evaluation', function(K) {
+			var editor = this, name = 'evaluation';
+			editor.clickToolbar(name, function() {
 				$("#diaShade").css("display","block");
 				$("#dialogWrap").css("display","block");
 			});
 		});
 
-		KindEditor.plugin('html2canvas', function(K) {
-			var editor = this, name = 'html2canvas';
-			editor.clickToolbar(name, function() {
+		KindEditor.plugin('html2canvas', function(K) {
+			var editor = this, name = 'html2canvas';
+			editor.clickToolbar(name, function() {
 				if(window.opener != null){
 					window.opener.postMessage('screenshots', "*");
 				}else {
