@@ -273,7 +273,7 @@ function loadURLWithTip(url , panel , callback , append  , tip){
 function formatDate(value) {
 	var gtoMs = new Date().getTimezoneOffset() * 60000
 	if (parent.timeDifference) {
-		var date = new Date(value + gtoMs + parent.timeDifference)
+		var date = new Date(new Date(value).getTime() + (gtoMs + parent.timeDifference))
 	} else {
 		var date = new Date(value)
 	}
