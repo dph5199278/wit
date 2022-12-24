@@ -492,7 +492,7 @@
     <repositories>
         <repository>
             <id>central</id>
-            <url>https://maven.aliyun.com/repository/central</url>
+            <url>https://maven.aliyun.com/repository/public</url>
         </repository>
 
         <repository>
@@ -511,7 +511,7 @@
     <pluginRepositories>
         <pluginRepository>
             <id>central</id>
-            <url>https://maven.aliyun.com/repository/central</url>
+            <url>https://maven.aliyun.com/repository/public</url>
         </pluginRepository>
     </pluginRepositories>
 
