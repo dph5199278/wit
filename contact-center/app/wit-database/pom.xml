@@ -75,7 +75,7 @@
   <repositories>
     <repository>
       <id>pentaho.omni</id>
-      <url>https://nexus.pentaho.org/repository/omni/</url>
+      <url>https://repo.orl.eng.hitachivantara.com/artifactory/pnt-mvn/</url>
     </repository>
   </repositories>
 
