@@ -38,7 +38,7 @@ public class PluginsLoader {
         Class<?> clazz;
         try {
             clazz = Class.forName(pluginEntry);
-            IPluginDescriptor clazzInst = (IPluginDescriptor) clazz.newInstance();
+            IPluginDescriptor clazzInst = (IPluginDescriptor) clazz.getDeclaredConstructor().newInstance();
             Method method = clazz.getMethod("getPluginName");
             return (String) method.invoke(clazzInst);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
@@ -59,7 +59,7 @@ public class PluginsLoader {
         Class<?> clazz;
         try {
             clazz = Class.forName(pluginEntry);
-            IPluginDescriptor clazzInst = (IPluginDescriptor) clazz.newInstance();
+            IPluginDescriptor clazzInst = (IPluginDescriptor) clazz.getDeclaredConstructor().newInstance();
             Method method = clazz.getMethod("getIOEventHandler");
             return (String) method.invoke(clazzInst);
         } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
