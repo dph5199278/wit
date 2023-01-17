@@ -390,6 +390,11 @@
                 <artifactId>weixin-java-mp</artifactId>
                 <version>3.8.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.thoughtworks.xstream</groupId>
+                <artifactId>xstream</artifactId>
+                <version>1.4.20</version>
+            </dependency>
 
             <!-- SMS -->
             <dependency>
