@@ -111,6 +111,11 @@
       <classifier>linux-x86_64</classifier>
     </dependency>
 
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-crypto</artifactId>
+    </dependency>
+
     <!-- Quartz -->
     <dependency>
       <groupId>org.quartz-scheduler</groupId>

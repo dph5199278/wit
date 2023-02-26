@@ -103,6 +103,15 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-bom</artifactId>
+                <version>5.8.12</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- SQL -->
             <dependency>
                 <groupId>com.mysql</groupId>
