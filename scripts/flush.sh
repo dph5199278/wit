@@ -16,9 +16,9 @@ sleep 5
 cd $baseDir/..
 docker-compose down
 sudo rm -rf database/mysql/data/*
-sudo rm -rf database/elasticsearch/data/elasticsearch
+sudo rm -rf database/elasticsearch/data/*
 sudo rm -rf database/redis/data/*
-sudo rm -rf database/activemq/data/*
+sudo rm -rf database/artemis/data/*
 
 docker-compose pull
 docker-compose up -d contact-center
