@@ -15,8 +15,8 @@
  */
 package com.cs.wit.mq;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.mq.broker.BrokerPublisher;
