@@ -30,6 +30,7 @@ import com.cs.wit.persistence.repository.SecretRepository;
 import com.cs.wit.persistence.repository.SystemConfigRepository;
 import com.cs.wit.persistence.repository.SystemMessageRepository;
 import com.cs.wit.persistence.repository.TemplateRepository;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -254,8 +255,8 @@ public class SystemConfigController extends Handler {
                 if (secretConfig != null && secretConfig.size() > 0) {
                     Secret tempSecret = secretConfig.get(0);
                     String oldpass = request.getParameter("oldpass");
-                    if (StringUtils.isNotBlank(oldpass) && MainUtils.md5(oldpass).equals(tempSecret.getPassword())) {
-                        tempSecret.setPassword(MainUtils.md5(secret.getPassword()));
+                    if (StringUtils.isNotBlank(oldpass) && Md5Utils.md5(oldpass).equals(tempSecret.getPassword())) {
+                        tempSecret.setPassword(Md5Utils.md5(secret.getPassword()));
                         msg = "1";
                         tempSecret.setEnable(true);
                         secRes.save(tempSecret);
@@ -266,7 +267,7 @@ public class SystemConfigController extends Handler {
                     secret.setOrgi(super.getOrgi(request));
                     secret.setCreater(super.getUser(request).getId());
                     secret.setCreatetime(new Date());
-                    secret.setPassword(MainUtils.md5(secret.getPassword()));
+                    secret.setPassword(Md5Utils.md5(secret.getPassword()));
                     secret.setEnable(true);
                     msg = "1";
                     secRes.save(secret);

@@ -26,6 +26,7 @@ import com.cs.wit.model.TableProperties;
 import com.cs.wit.persistence.interfaces.DataExchangeInterface;
 import com.cs.wit.persistence.repository.JobDetailRepository;
 import com.cs.wit.persistence.repository.ReporterRepository;
+import com.cs.wit.util.Md5Utils;
 import com.google.common.collect.ArrayListMultimap;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -177,9 +178,9 @@ public class ExcelImportProecess extends DataProcess {
                     values.put("orgi", event.getOrgi());
                     if (values.get("id") == null) {
                         if (pkStr.length() > 0) {
-                            values.put("id", MainUtils.md5(pkStr.append(event.getDSData().getTask().getTablename()).toString()));
+                            values.put("id", Md5Utils.md5(pkStr.append(event.getDSData().getTask().getTablename()).toString()));
                         } else {
-                            values.put("id", MainUtils.md5(allStr.append(event.getDSData().getTask().getTablename()).toString()));
+                            values.put("id", Md5Utils.md5(allStr.append(event.getDSData().getTask().getTablename()).toString()));
                         }
                     }
                     if (event.getValues() != null && event.getValues().size() > 0) {

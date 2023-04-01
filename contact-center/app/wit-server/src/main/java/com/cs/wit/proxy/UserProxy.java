@@ -23,6 +23,7 @@ import com.cs.wit.persistence.repository.OrganRepository;
 import com.cs.wit.persistence.repository.OrganUserRepository;
 import com.cs.wit.persistence.repository.RoleAuthRepository;
 import com.cs.wit.persistence.repository.UserRepository;
+import com.cs.wit.util.Md5Utils;
 import com.google.gson.JsonObject;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class UserProxy {
             user.setSuperadmin(false); // 不支持创建第二个系统管理员
 
             if (StringUtils.isNotBlank(user.getPassword())) {
-                user.setPassword(MainUtils.md5(user.getPassword()));
+                user.setPassword(Md5Utils.md5(user.getPassword()));
             }
 
             user.setOrgi(orgiByTenantshare);

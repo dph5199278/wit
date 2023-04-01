@@ -16,7 +16,7 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.Md5Utils;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -220,6 +220,6 @@ public class Cube implements java.io.Serializable{
 	}
 	@Transient
 	public String getTable(){
-		return "c_d_"+ MainUtils.md5(this.getId());
+		return "c_d_"+ Md5Utils.md5(this.getId());
 	}
 }

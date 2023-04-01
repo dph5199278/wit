@@ -32,6 +32,7 @@ import com.cs.wit.persistence.repository.OrgiSkillRelRepository;
 import com.cs.wit.persistence.repository.UserEventRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.proxy.UserProxy;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import java.util.ArrayList;
 import java.util.Date;
@@ -263,7 +264,7 @@ public class AppsController extends Handler {
             tempUser.setOrgi(super.getOrgiByTenantshare(request));
             final Date now = new Date();
             if (StringUtils.isNotBlank(user.getPassword())) {
-                tempUser.setPassword(MainUtils.md5(user.getPassword()));
+                tempUser.setPassword(Md5Utils.md5(user.getPassword()));
             }
             if (tempUser.getCreatetime() == null) {
                 tempUser.setCreatetime(now);

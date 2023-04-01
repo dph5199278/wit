@@ -23,6 +23,7 @@ import com.cs.wit.model.User;
 import com.cs.wit.model.UserRole;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.persistence.repository.UserRoleRepository;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import java.util.Date;
 import java.util.List;
@@ -66,7 +67,7 @@ public class ApiLoginController extends Handler {
     @RequestMapping(method = RequestMethod.POST)
     @Menu(type = "apps", subtype = "token", access = true)
     public ResponseEntity login(HttpServletResponse response, @Valid String username, @Valid String password) {
-        User loginUser = userRepository.findByUsernameAndPassword(username, MainUtils.md5(password));
+        User loginUser = userRepository.findByUsernameAndPassword(username, Md5Utils.md5(password));
         ResponseEntity entity;
         if (loginUser != null && !StringUtils.isBlank(loginUser.getId())) {
             loginUser.setLogin(true);

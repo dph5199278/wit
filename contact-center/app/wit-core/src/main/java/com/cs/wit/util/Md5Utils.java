@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2017 优客服-多渠道客服系统
- * Modifications copyright (C) 2018-2019 Chatopera Inc, <https://www.chatopera.com>
+ * Copyright (C) 2023 Dely<https://github.com/dph5199278>, All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.cs.wit.util;
 
 import cn.hutool.crypto.SecureUtil;
 
-public class MD5 {
+/**
+ * Md5Utils
+ *
+ * @author Dely
+ * @version 1.0
+ * @date 2022 -12 add
+ */
+public class Md5Utils {
 
-	public String getMD5ofStr(String inbuf) {
-		return SecureUtil.md5(inbuf);
+	/**
+	 * Md5 and Md5 string.
+	 *
+	 * @param str the str
+	 * @return the string
+	 */
+	public static String md5(String str) {
+		return SecureUtil.md5(SecureUtil.md5(str));
 	}
-	
-	public String getMD5ofByte(byte[] inbuf) {
-		return SecureUtil.md5().digestHex(inbuf);
+
+	/**
+	 * Md5 string.
+	 *
+	 * @param bytes the bytes
+	 * @return the string
+	 */
+	public static String md5(byte[] bytes) {
+		return SecureUtil.md5().digestHex(bytes);
 	}
+
 }

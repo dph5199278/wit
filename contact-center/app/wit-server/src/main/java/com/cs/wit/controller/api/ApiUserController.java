@@ -17,7 +17,6 @@
 package com.cs.wit.controller.api;
 
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.controller.api.request.RestUtils;
@@ -28,6 +27,7 @@ import com.cs.wit.persistence.repository.OrganUserRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.proxy.UserProxy;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
@@ -108,7 +108,7 @@ public class ApiUserController extends Handler {
     public ResponseEntity<RestResult> put(HttpServletRequest request, @Valid User user) {
         if (user != null && !StringUtils.isBlank(user.getUsername())) {
             if (!StringUtils.isBlank(user.getPassword())) {
-                user.setPassword(MainUtils.md5(user.getPassword()));
+                user.setPassword(Md5Utils.md5(user.getPassword()));
                 userRes.save(user);
             } else if (!StringUtils.isBlank(user.getId())) {
                 User old = userRes.findByIdAndOrgi(user.getId(), super.getOrgi(request));
@@ -251,7 +251,7 @@ public class ApiUserController extends Handler {
 
                 previous.setCallcenter(updated.isCallcenter());
                 if (StringUtils.isNotBlank(updated.getPassword())) {
-                    previous.setPassword(MainUtils.md5(updated.getPassword()));
+                    previous.setPassword(Md5Utils.md5(updated.getPassword()));
                 }
 
                 final Date now = new Date();

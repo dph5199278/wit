@@ -18,6 +18,7 @@
 package com.cs.wit.util.bi.model;
 
 import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.Md5Utils;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang.StringUtils;
@@ -315,7 +316,7 @@ public class Level implements java.io.Serializable{
 	 * @return
 	 */
 	public String getDataid(){
-		return MainUtils.md5(this.name!=null ? this.name : "") ;
+		return Md5Utils.md5(this.name!=null ? this.name : "") ;
 	}
 	public String getFormatName() {
 		return formatName!=null ? formatName : this.name;

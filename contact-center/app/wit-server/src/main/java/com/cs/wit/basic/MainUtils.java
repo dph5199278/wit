@@ -44,7 +44,7 @@ import com.cs.wit.persistence.repository.TemplateRepository;
 import com.cs.wit.util.Base62;
 import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.CronTools;
-import com.cs.wit.util.MD5;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.TempletLoader;
 import com.cs.wit.util.WebIMReport;
 import com.cs.wit.util.WeiXinReport;
@@ -88,7 +88,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConversionException;
@@ -106,11 +105,8 @@ import org.springframework.beans.FatalBeanException;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 
-@SuppressWarnings("unused")
-@Slf4j
 public class MainUtils {
     private static final ObjectMapper JSON = new ObjectMapper();
-    private static final MD5 md5 = new MD5();
     public static Supplier<SimpleDateFormat> dateFormate = () -> new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static Supplier<SimpleDateFormat> simpleDateFormat = () -> new SimpleDateFormat("yyyy-MM-dd");
     public static Supplier<SimpleDateFormat> timeRangeDateFormat = () -> new SimpleDateFormat("HH:mm");
@@ -137,14 +133,6 @@ public class MainUtils {
 
     public static String getContextID(String session) {
         return session.replaceAll("-", "");
-    }
-
-    public static String md5(String str) {
-        return md5.getMD5ofStr(md5.getMD5ofStr(str));
-    }
-
-    public static String md5(byte[] bytes) {
-        return md5.getMD5ofByte(bytes);
     }
 
     public static void copyProperties(Object source, Object target, String... ignoreProperties)
@@ -785,7 +773,7 @@ public class MainUtils {
         if (StringUtils.isNotBlank(confirm)) {
             if (secretConfig != null && secretConfig.size() > 0) {
                 Secret secret = secretConfig.get(0);
-                if (MainUtils.md5(confirm).equals(secret.getPassword())) {
+                if (Md5Utils.md5(confirm).equals(secret.getPassword())) {
                     execute = true;
                 }
             }

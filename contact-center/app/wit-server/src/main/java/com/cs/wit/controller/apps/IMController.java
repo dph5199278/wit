@@ -62,6 +62,7 @@ import com.cs.wit.persistence.repository.UserHistoryRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.socketio.util.RichMediaUtils;
 import com.cs.wit.util.BrowserClient;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.MobileDevice;
 import com.cs.wit.util.PinYinTools;
@@ -220,7 +221,7 @@ public class IMController extends Handler {
             view.addObject("appid", id);
             view.addObject("client", MainUtils.getUUID());
             view.addObject("sessionid", sessionid);
-            view.addObject("ip", MainUtils.md5(request.getRemoteAddr()));
+            view.addObject("ip", Md5Utils.md5(request.getRemoteAddr()));
             view.addObject("mobile", MobileDevice.isMobile(request.getHeader("User-Agent")));
 
             CousultInvite invite = OnlineUserProxy.consult(id, MainContext.SYSTEM_ORGI);
@@ -600,7 +601,7 @@ public class IMController extends Handler {
             view.addObject("pid", pid);
             view.addObject("purl", purl);
 
-            map.addAttribute("ip", MainUtils.md5(request.getRemoteAddr()));
+            map.addAttribute("ip", Md5Utils.md5(request.getRemoteAddr()));
 
             if (StringUtils.isNotBlank(traceid)) {
                 map.addAttribute("traceid", traceid);
@@ -924,7 +925,7 @@ public class IMController extends Handler {
         view.addObject("schema", request.getScheme());
         view.addObject("appid", appid);
         view.addObject("channelVisitorSeparate", channelWebIMVisitorSeparate);
-        view.addObject("ip", MainUtils.md5(request.getRemoteAddr()));
+        view.addObject("ip", Md5Utils.md5(request.getRemoteAddr()));
 
         if (invite.isSkill() && invite.isConsult_skill_fixed()) { // 添加技能组ID
             // 忽略前端传入的技能组ID

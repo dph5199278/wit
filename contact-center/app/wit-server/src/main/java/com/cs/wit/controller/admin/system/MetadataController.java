@@ -29,6 +29,7 @@ import com.cs.wit.persistence.repository.MetadataRepository;
 import com.cs.wit.persistence.repository.SysDicRepository;
 import com.cs.wit.persistence.repository.TablePropertiesRepository;
 import com.cs.wit.util.CskefuList;
+import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.metadata.DatabaseMetaDataHandler;
 import com.cs.wit.util.metadata.UKColumnMetadata;
@@ -215,7 +216,7 @@ public class MetadataController extends Handler {
                                     //当前记录没有被添加过，进行正常添加
                                     metaDataTable.setTablename(table);
                                     metaDataTable.setOrgi(user.getOrgi());
-                                    metaDataTable.setId(MainUtils.md5(metaDataTable.getTablename()));
+                                    metaDataTable.setId(Md5Utils.md5(metaDataTable.getTablename()));
                                     metaDataTable.setTabledirid("0");
                                     metaDataTable.setCreater(user.getId());
                                     metaDataTable.setCreatername(user.getUsername());

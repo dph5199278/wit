@@ -20,6 +20,7 @@ import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.model.MetadataTable;
 import com.cs.wit.model.TableProperties;
+import com.cs.wit.util.Md5Utils;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -53,7 +54,7 @@ public class ExcelImportUtils {
         try {
             metaDataTable.setTablename(event.getTablename());
             metaDataTable.setOrgi(this.event.getOrgi());
-            metaDataTable.setId(MainUtils.md5(event.getTablename()));
+            metaDataTable.setId(Md5Utils.md5(event.getTablename()));
             metaDataTable.setTabledirid("0");
             metaDataTable.setCreater(event.getDSData().getUser().getId());
             metaDataTable.setCreatername(event.getDSData().getUser().getUsername());
