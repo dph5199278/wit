@@ -25,7 +25,6 @@ import com.cs.wit.peer.PeerSyncIM;
 import com.cs.wit.util.DateConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -42,8 +41,6 @@ public class MainContext {
 
     public static String SYSTEM_ORGI = "cskefu";
 
-    private static final Set<String> modules = new HashSet<>();
-
     public static Map<String, Class<?>> csKeFuResourceMap = new HashMap<>();
 
     private static ApplicationContext applicationContext;
@@ -56,7 +53,6 @@ public class MainContext {
 
     static {
         ConvertUtils.register(new DateConverter(), java.util.Date.class);
-        enableModule("report");
 
         csKeFuResourceMap.put(TaskType.ACTIVE.toString(), ActivityResource.class);
         csKeFuResourceMap.put(TaskType.BATCH.toString(), BatchResource.class);
@@ -1043,17 +1039,19 @@ public class MainContext {
      *
      * @param moduleName
      */
+    @Deprecated
     public static void enableModule(final String moduleName) {
-        logger.info("[module] enable module {}", moduleName);
-        modules.add(StringUtils.lowerCase(moduleName));
+        ModuleContext.enableModule(moduleName);
     }
 
+    @Deprecated
     public static boolean hasModule(final String moduleName) {
-        return modules.contains(StringUtils.lowerCase(moduleName));
+        return ModuleContext.hasModule(moduleName);
     }
 
+    @Deprecated
     public static void removeModule(final String moduleName) {
-        modules.remove(moduleName);
+        ModuleContext.removeModule(moduleName);
     }
 
     /**
@@ -1061,7 +1059,8 @@ public class MainContext {
      *
      * @return
      */
+    @Deprecated
     public static Set<String> getModules() {
-        return modules;
+        return ModuleContext.getModules();
     }
 }
