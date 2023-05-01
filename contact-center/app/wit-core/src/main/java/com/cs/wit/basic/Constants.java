@@ -147,14 +147,14 @@ public class Constants {
     public final static String FS_LEG_INCALL_ZH = "通话";
     public final static String FS_CALL_TYPE_CALLOUT = "callout";
     public final static Set<String> CALL_DIRECTION_TYPES = new HashSet<>(Arrays.asList(
-            MainContext.CallType.OUT.toString(), MainContext.CallType.IN.toString()));
-    public final static Set<String> CALL_SERVICE_STAUTS = new HashSet<>(Arrays.asList(MainContext.CallServiceStatus.INQUENE.toString(),
-            MainContext.CallServiceStatus.RING.toString(),
-            MainContext.CallServiceStatus.INCALL.toString(),
-            MainContext.CallServiceStatus.BRIDGE.toString(),
-            MainContext.CallServiceStatus.HOLD.toString(),
-            MainContext.CallServiceStatus.HANGUP.toString(),
-            MainContext.CallServiceStatus.OFFLINE.toString()));
+        ServiceEnumTypeContext.CallType.OUT.toString(), ServiceEnumTypeContext.CallType.IN.toString()));
+    public final static Set<String> CALL_SERVICE_STAUTS = new HashSet<>(Arrays.asList(ServiceEnumTypeContext.CallServiceStatus.INQUENE.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.RING.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.INCALL.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.BRIDGE.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.HOLD.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.HANGUP.toString(),
+        ServiceEnumTypeContext.CallServiceStatus.OFFLINE.toString()));
 
     /**
      * 缓存管理策略

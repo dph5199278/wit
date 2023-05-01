@@ -324,35 +324,6 @@ public class MainContext {
         }
     }
 
-
-    public enum CallServiceStatus {
-        INQUENE("就绪", 1),
-        RING("振铃", 2),            //振铃
-        INCALL("应答", 3),            //应答
-        BRIDGE("桥接", 4),            //桥接
-        HOLD("已挂起", 5),            //已挂起
-        HANGUP("已挂机", 6),           //已挂机
-        OFFLINE("离线", 7);            //离线
-
-        private final String name;
-        private final int index;
-
-        CallServiceStatus(final String name, final int index) {
-            this.name = name;
-            this.index = index;
-        }
-
-
-        public String toLetters() {
-            return super.toString().toLowerCase();
-        }
-
-        @Override
-        public String toString() {
-            return this.name;
-        }
-    }
-
     public enum CallChannelStatus {
         EARLY,
         DOWN;
