@@ -41,9 +41,9 @@ import com.cs.wit.persistence.repository.SystemConfigRepository;
 import com.cs.wit.persistence.repository.SystemMessageRepository;
 import com.cs.wit.persistence.repository.TablePropertiesRepository;
 import com.cs.wit.persistence.repository.TemplateRepository;
-import com.cs.wit.util.Base62;
 import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.CronTools;
+import com.cs.wit.util.IdUtils;
 import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.TempletLoader;
 import com.cs.wit.util.WebIMReport;
@@ -80,8 +80,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 import java.util.regex.Matcher;
@@ -119,20 +117,24 @@ public class MainUtils {
     /**
      * 当前时间+已过随机生成的 长整形数字
      */
+    @Deprecated
     public static String genID() {
-        return Objects.requireNonNull(Base62.encode(getUUID())).toLowerCase();
+        return IdUtils.genID();
     }
 
+    @Deprecated
     public static String genIDByKey(String key) {
-        return Objects.requireNonNull(Base62.encode(key)).toLowerCase();
+        return IdUtils.genIDByKey(key);
     }
 
+    @Deprecated
     public static String getUUID() {
-        return UUID.randomUUID().toString().replace("-", "");
+        return IdUtils.getUUID();
     }
 
+    @Deprecated
     public static String getContextID(String session) {
-        return session.replaceAll("-", "");
+        return IdUtils.getContextID(session);
     }
 
     public static void copyProperties(Object source, Object target, String... ignoreProperties)
