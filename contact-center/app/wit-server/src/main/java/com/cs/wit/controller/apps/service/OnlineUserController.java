@@ -174,7 +174,7 @@ public class OnlineUserController extends Handler {
     @RequestMapping("/online/chatmsg")
     @Menu(type = "service", subtype = "chatmsg", admin = true)
     public ModelAndView onlinechat(ModelMap map, HttpServletRequest request, String id, String title) {
-        AgentService agentService = agentServiceRes.getOne(id);
+        AgentService agentService = agentServiceRes.getReferenceById(id);
         map.put("curAgentService", agentService);
         cache.findOneAgentUserByUserIdAndOrgi(agentService.getUserid(), super.getOrgi(request))
                 .ifPresent(p -> map.put("curragentuser", p));
