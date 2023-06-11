@@ -17,7 +17,6 @@
 package com.cs.wit.acd.middleware.visitor;
 
 import com.cs.compose4j.Functional;
-import com.cs.compose4j.Middleware;
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.model.Organ;
 import com.cs.wit.model.User;
@@ -28,12 +27,14 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+@Order(2000)
 @Component
 @RequiredArgsConstructor
-public class ACDVisBindingMw implements Middleware<ACDComposeContext> {
+public class ACDVisBindingMw extends BaseACDComposeContextMw {
 
     private final static Logger logger = LoggerFactory.getLogger(ACDVisBindingMw.class);
 

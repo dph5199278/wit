@@ -1,19 +1,20 @@
 package com.cs.wit.peer.im;
 
 import com.cs.compose4j.Functional;
-import com.cs.compose4j.Middleware;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.peer.PeerContext;
 import com.cs.wit.socketio.client.NettyClients;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
  * 向访客发送WebIM消息
  */
+@Order(2000)
 @Component
-public class ComposeMw2 implements Middleware<PeerContext> {
+public class ComposeMw2 extends BasePeerContextMw {
 
     private final static Logger logger = LoggerFactory.getLogger(
             ComposeMw2.class);

@@ -1,7 +1,6 @@
 package com.cs.wit.peer.im;
 
 import com.cs.compose4j.Functional;
-import com.cs.compose4j.Middleware;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.peer.PeerContext;
 import com.cs.wit.peer.PeerUtils;
@@ -10,14 +9,16 @@ import com.cs.wit.socketio.message.ChatMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 
 /**
  * 发送后的工作
  */
+@Order(3000)
 @Component
-public class ComposeMw3 implements Middleware<PeerContext> {
+public class ComposeMw3 extends BasePeerContextMw {
 
     private final static Logger logger = LoggerFactory.getLogger(
             ComposeMw3.class);

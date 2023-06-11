@@ -1,7 +1,6 @@
 package com.cs.wit.peer.im;
 
 import com.cs.compose4j.Functional;
-import com.cs.compose4j.Middleware;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.peer.PeerContext;
 import com.cs.wit.peer.PeerUtils;
@@ -13,15 +12,17 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
  * 做发送前的准备工作
  */
+@Order(1000)
 @Component
 @RequiredArgsConstructor
-public class ComposeMw1 implements Middleware<PeerContext> {
+public class ComposeMw1 extends BasePeerContextMw {
 
     private final static Logger logger = LoggerFactory.getLogger(ComposeMw1.class);
 

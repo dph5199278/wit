@@ -28,7 +28,7 @@ public class Composer<T extends AbstractContext> {
      * @return the composer
      */
     @SafeVarargs
-    public final Composer<T> use(Middleware<T>... mwArr) {
+    public final <K extends Middleware<T>> Composer<T> use(K... mwArr) {
         if(null == mwArr || 0 == mwArr.length) {
             return this;
         }
@@ -46,7 +46,7 @@ public class Composer<T extends AbstractContext> {
      * @param mwCollection 中间件集合
      * @return the composer
      */
-    public Composer<T> use(Collection<Middleware<T>> mwCollection) {
+    public <K extends Middleware<T>> Composer<T> use(Collection<K> mwCollection) {
         if(null == mwCollection || mwCollection.isEmpty()) {
             return this;
         }

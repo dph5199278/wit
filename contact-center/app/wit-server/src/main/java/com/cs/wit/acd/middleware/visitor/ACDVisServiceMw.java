@@ -17,7 +17,6 @@
 package com.cs.wit.acd.middleware.visitor;
 
 import com.cs.compose4j.Functional;
-import com.cs.compose4j.Middleware;
 import com.cs.wit.acd.ACDQueueService;
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.acd.basic.ACDMessageHelper;
@@ -26,13 +25,15 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
  * 寻找或为绑定服务访客的坐席，建立双方通话
  */
+@Order(4000)
 @Component
-public class ACDVisServiceMw implements Middleware<ACDComposeContext> {
+public class ACDVisServiceMw extends BaseACDComposeContextMw {
     private final static Logger logger = LoggerFactory.getLogger(ACDVisServiceMw.class);
 
     @Autowired
