@@ -27,17 +27,14 @@ import com.cs.wit.basic.MainContext.MessageType;
 import com.cs.wit.basic.MainContext.ReceiverType;
 import com.cs.wit.basic.plugins.PluginRegistry;
 import com.cs.wit.basic.plugins.PluginsLoader;
-import com.cs.wit.peer.im.ComposeMw1;
-import com.cs.wit.peer.im.ComposeMw2;
-import com.cs.wit.peer.im.ComposeMw3;
+import com.cs.wit.peer.im.BasePeerContextMw;
 import com.cs.wit.socketio.message.Message;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 /**
@@ -46,47 +43,33 @@ import org.springframework.stereotype.Component;
  * 2. 保存并业务处理
  */
 @Component
-public class PeerSyncIM implements ApplicationContextAware {
+public class PeerSyncIM {
 
     private final static Logger logger = LoggerFactory.getLogger(
             PeerSyncIM.class);
 
     private Composer<PeerContext> composer;
 
-    private static ApplicationContext applicationContext;
-
-    @Autowired
-    private ComposeMw1 imMw1;
-
-    @Autowired
-    private ComposeMw2 imMw2;
-
-    @Autowired
-    private ComposeMw3 imMw3;
+    @Resource
+    private List<BasePeerContextMw> peerContextMwList;
 
     @PostConstruct
-    public void postConstruct() {
-        composer = new Composer<PeerContext>()
+    public void postConstruct(ApplicationContext applicationContext) {
+        composer = new Composer<>();
 
-        /**
-         * 加载中间件
-         */
-        .use(
-            // 发布消息的准备工作
-            imMw1,
-            // 通过webim发送消息
-            imMw2
-        );
+        // 加载中间件
+        // 1000) 做发送前的准备工作
+        // 2000) 向访客发送WebIM消息
+        // 3000) 发送后的工作
+        composer.use(peerContextMwList);
 
         // 通过Skype发送消息
         if (MainContext.hasModule(Constants.CSKEFU_MODULE_SKYPE)) {
-            composer.use((Middleware) applicationContext.getBean(
-                    PluginsLoader.getPluginName(
-                            PluginRegistry.PLUGIN_ENTRY_SKYPE) + PluginRegistry.PLUGIN_CHANNEL_MESSAGER_SUFFIX));
+            composer.useToIndex(2, (Middleware) applicationContext.getBean(
+                PluginsLoader.getPluginName(
+                    PluginRegistry.PLUGIN_ENTRY_SKYPE)
+                    + PluginRegistry.PLUGIN_CHANNEL_MESSAGER_SUFFIX));
         }
-
-        composer.use(imMw3);
-
     }
 
     /**
@@ -128,10 +111,5 @@ public class PeerSyncIM implements ApplicationContextAware {
         } catch (Compose4jRuntimeException e) {
             logger.info("[send] error", e);
         }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext ac) throws BeansException {
-        applicationContext = ac;
     }
 }

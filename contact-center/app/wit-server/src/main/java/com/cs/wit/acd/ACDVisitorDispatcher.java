@@ -19,15 +19,12 @@ import com.cs.compose4j.Composer;
 import com.cs.compose4j.exception.Compose4jRuntimeException;
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.acd.basic.IACDDispatcher;
-import com.cs.wit.acd.middleware.visitor.ACDVisAllocatorMw;
-import com.cs.wit.acd.middleware.visitor.ACDVisBindingMw;
-import com.cs.wit.acd.middleware.visitor.ACDVisBodyParserMw;
-import com.cs.wit.acd.middleware.visitor.ACDVisServiceMw;
-import com.cs.wit.acd.middleware.visitor.ACDVisSessionCfgMw;
+import com.cs.wit.acd.middleware.visitor.BaseACDComposeContextMw;
+import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -40,63 +37,30 @@ public class ACDVisitorDispatcher implements IACDDispatcher {
     /**
      * 为访客安排坐席
      */
-    private Composer<ACDComposeContext> pipleline;
+    private Composer<ACDComposeContext> pipeline;
 
-    @Autowired
-    private ACDVisBodyParserMw acdVisBodyParserMw;
-
-    @Autowired
-    private ACDVisBindingMw acdVisBindingMw;
-
-    @Autowired
-    private ACDVisSessionCfgMw acdVisSessionCfgMw;
-
-    @Autowired
-    private ACDVisServiceMw acdVisServiceMw;
-
-    @Autowired
-    private ACDVisAllocatorMw acdVisAllocatorMw;
+    @Resource
+    private List<BaseACDComposeContextMw> acdComposeContextMwList;
 
     @PostConstruct
     private void setup() {
         logger.info("[setup] setup ACD Visitor Dispatch Service ...");
-        buildPipeline();
-    }
 
-    /**
-     * 建立访客处理管道
-     */
-    private void buildPipeline() {
-        pipleline = new Composer<ACDComposeContext>()
-        .use(
-            /**
-             * 1) 设置基本信息
-             */
-            acdVisBodyParserMw,
-            /**
-             * 1) 绑定技能组或坐席(包括邀请时的坐席)
-             */
-            acdVisBindingMw,
-            /**
-             * 1) 坐席配置:工作时间段，有无就绪在线坐席
-             *
-             */
-            acdVisSessionCfgMw,
-            /**
-             * 1）选择坐席，确定AgentService
-             */
-            acdVisServiceMw,
-            /**
-             * 1）根据策略筛选坐席
-             */
-            acdVisAllocatorMw
-        );
+        // 建立访客处理管道
+        pipeline = new Composer<>();
+
+        // 1000) 设置基本信息
+        // 2000) 绑定技能组或坐席(包括邀请时的坐席)
+        // 3000) 坐席配置:工作时间段，有无就绪在线坐席
+        // 4000) 选择坐席，确定AgentService
+        // 5000) 根据策略筛选坐席
+        pipeline.use(acdComposeContextMwList);
     }
 
     @Override
     public void enqueue(final ACDComposeContext ctx) {
         try {
-            pipleline.handle(ctx);
+            pipeline.handle(ctx);
         } catch (Compose4jRuntimeException e) {
             logger.error("[enqueueVisitor] error", e);
         }
