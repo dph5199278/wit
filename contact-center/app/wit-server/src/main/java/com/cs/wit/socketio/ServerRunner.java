@@ -21,11 +21,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.cs.wit.acd.ACDVisitorDispatcher;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.plugins.PluginRegistry;
-import com.cs.wit.basic.plugins.PluginsLoader;
 import com.cs.wit.cache.Cache;
-import com.cs.wit.config.plugins.CalloutPluginPresentCondition;
-import com.cs.wit.config.plugins.ChatbotPluginPresentCondition;
 import com.cs.wit.mq.SocketioConnEventSubscription;
 import com.cs.wit.peer.PeerSyncEntIM;
 import com.cs.wit.persistence.repository.AgentServiceRepository;
@@ -41,17 +37,13 @@ import com.cs.wit.util.ip.IPTools;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import javax.annotation.PreDestroy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ServerRunner implements CommandLineRunner {
-    private final static Logger logger = LoggerFactory.getLogger(ServerRunner.class);
 
     private final SocketIOServer server;
 
@@ -93,27 +85,6 @@ public class ServerRunner implements CommandLineRunner {
         return entIMSocketIONameSpace;
     }
 
-    @Bean(name = "chatbotNamespace")
-    @Conditional(ChatbotPluginPresentCondition.class)
-    public SocketIONamespace getChatbotSocketIONameSpace(SocketIOServer server) {
-        SocketIONamespace chatbotSocketIONameSpace = null;
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_CHATBOT)) {
-            Constructor<?> constructor;
-            try {
-                constructor = Class.forName(
-                        PluginsLoader.getIOEventHandler(PluginRegistry.PLUGIN_ENTRY_CHATBOT)).getConstructor(
-                        SocketIOServer.class);
-                chatbotSocketIONameSpace = server.addNamespace(MainContext.NameSpaceEnum.CHATBOT.getNamespace());
-                chatbotSocketIONameSpace.addListeners(constructor.newInstance(server));
-            } catch (NoSuchMethodException | SecurityException
-                    | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                e.printStackTrace();
-            }
-        }
-        return chatbotSocketIONameSpace;
-
-    }
-
     @Bean(name = "callCenterNamespace")
     public SocketIONamespace getCallCenterIMSocketIONameSpace(SocketIOServer server) {
         SocketIONamespace callCenterSocketIONameSpace = null;
@@ -131,26 +102,6 @@ public class ServerRunner implements CommandLineRunner {
             }
         }
         return callCenterSocketIONameSpace;
-    }
-
-    @Conditional(CalloutPluginPresentCondition.class)
-    @Bean(name = "calloutNamespace")
-    public SocketIONamespace getCalloutIMSocketIONameSpace(SocketIOServer server) {
-        SocketIONamespace calloutSocketIONameSpace = null;
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLOUT)) {
-            Constructor<?> constructor;
-            try {
-                constructor = Class.forName(
-                        PluginsLoader.getIOEventHandler(PluginRegistry.PLUGIN_ENTRY_CALLOUT)).getConstructor(
-                        SocketIOServer.class);
-                calloutSocketIONameSpace = server.addNamespace(MainContext.NameSpaceEnum.CALLOUT.getNamespace());
-                calloutSocketIONameSpace.addListeners(constructor.newInstance(server));
-            } catch (NoSuchMethodException | SecurityException
-                    | ClassNotFoundException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                logger.error("[calloutNamespace] error", e);
-            }
-        }
-        return calloutSocketIONameSpace;
     }
 
     @Override

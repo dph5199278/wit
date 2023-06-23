@@ -12,6 +12,7 @@
         <module>wit-media</module>
         <module>wit-mq</module>
         <module>wit-server</module>
+        <module>wit-plugin</module>
     </modules>
     <packaging>pom</packaging>
     <name>dely-contact-center</name>
@@ -365,13 +366,6 @@
                 </exclusions>
             </dependency>
 
-            <!-- bot -->
-            <dependency>
-                <groupId>com.chatopera.bot</groupId>
-                <artifactId>sdk</artifactId>
-                <version>2.1.0</version>
-            </dependency>
-
             <!-- Main Service Modules -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -524,18 +518,6 @@
         <repository>
             <id>central</id>
             <url>https://maven.aliyun.com/repository/public</url>
-        </repository>
-
-        <repository>
-            <id>chatopera</id>
-            <name>Chatopera Inc.</name>
-            <url>https://nexus.chatopera.com/repository/maven-public</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
         </repository>
     </repositories>
 

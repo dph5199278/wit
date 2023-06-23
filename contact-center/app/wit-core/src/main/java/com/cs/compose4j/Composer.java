@@ -41,19 +41,6 @@ public class Composer<T extends AbstractContext> {
     }
 
     /**
-     * Use to index composer.
-     *
-     * @param <K>   the type parameter
-     * @param index the index
-     * @param mw    the mw
-     * @return the composer
-     */
-    public final <K extends Middleware<T>> Composer<T> useToIndex(int index, K mw) {
-        this.middlewares.add(index, mw);
-        return this;
-    }
-
-    /**
      * 使用中间件
      *
      * @param mwCollection 中间件集合

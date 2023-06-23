@@ -18,15 +18,10 @@
 package com.cs.wit.peer;
 
 import com.cs.compose4j.Composer;
-import com.cs.compose4j.Middleware;
 import com.cs.compose4j.exception.Compose4jRuntimeException;
-import com.cs.wit.basic.Constants;
-import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainContext.ChannelType;
 import com.cs.wit.basic.MainContext.MessageType;
 import com.cs.wit.basic.MainContext.ReceiverType;
-import com.cs.wit.basic.plugins.PluginRegistry;
-import com.cs.wit.basic.plugins.PluginsLoader;
 import com.cs.wit.peer.im.BasePeerContextMw;
 import com.cs.wit.socketio.message.Message;
 import java.util.List;
@@ -34,7 +29,6 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 /**
@@ -54,7 +48,7 @@ public class PeerSyncIM {
     private List<BasePeerContextMw> peerContextMwList;
 
     @PostConstruct
-    public void postConstruct(ApplicationContext applicationContext) {
+    public void postConstruct() {
         composer = new Composer<>();
 
         // 加载中间件
@@ -62,14 +56,6 @@ public class PeerSyncIM {
         // 2000) 向访客发送WebIM消息
         // 3000) 发送后的工作
         composer.use(peerContextMwList);
-
-        // 通过Skype发送消息
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_SKYPE)) {
-            composer.useToIndex(2, (Middleware) applicationContext.getBean(
-                PluginsLoader.getPluginName(
-                    PluginRegistry.PLUGIN_ENTRY_SKYPE)
-                    + PluginRegistry.PLUGIN_CHANNEL_MESSAGER_SUFFIX));
-        }
     }
 
     /**

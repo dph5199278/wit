@@ -18,12 +18,8 @@ package com.cs.wit;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.plugins.PluginRegistry;
 import com.cs.wit.config.AppCtxRefreshEventListener;
-import com.cs.wit.util.ClassHelper;
 import javax.servlet.MultipartConfigElement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -43,8 +39,6 @@ import org.springframework.util.unit.DataSize;
 @EnableTransactionManagement
 public class Application {
 
-    private static final Logger logger = LoggerFactory.getLogger(Application.class);
-
     /*
      * 加载模块
      */
@@ -57,27 +51,6 @@ public class Application {
 
         // 企业聊天模块
         MainContext.enableModule(Constants.CSKEFU_MODULE_ENTIM);
-
-        /*
-         * 插件组
-         */
-        // 外呼模块
-
-        if (ClassHelper.isClassExistByFullName(
-                PluginRegistry.PLUGIN_ENTRY_CALLOUT)) {
-            MainContext.enableModule(Constants.CSKEFU_MODULE_CALLOUT);
-        }
-
-        // skype模块
-        if (ClassHelper.isClassExistByFullName(
-                PluginRegistry.PLUGIN_ENTRY_SKYPE)) {
-            MainContext.enableModule(Constants.CSKEFU_MODULE_SKYPE);
-        }
-
-        // 聊天机器人模块
-        if (ClassHelper.isClassExistByFullName(PluginRegistry.PLUGIN_ENTRY_CHATBOT)) {
-            MainContext.enableModule(Constants.CSKEFU_MODULE_CHATBOT);
-        }
     }
 
     @Value("${web.upload-path}")

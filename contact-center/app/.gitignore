@@ -15,6 +15,7 @@ src/main/resources/templates/apps/chatbot
 # Modules
 /target/
 /wit-*/target/
+/wit-*/**/target/
 .classpath
 .project
 .settings/

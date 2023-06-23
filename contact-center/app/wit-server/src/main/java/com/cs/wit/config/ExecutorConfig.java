@@ -16,9 +16,7 @@
  */
 package com.cs.wit.config;
 
-import com.cs.wit.config.plugins.CalloutPluginPresentCondition;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
@@ -53,29 +51,6 @@ public class ExecutorConfig {
 		poolTaskExecutor.setKeepAliveSeconds(30000);
 		poolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
 		poolTaskExecutor.setThreadNamePrefix("cs-webim-task-");
-
-		return poolTaskExecutor;
-	}
-
-
-	/**
-	 * 外呼线程池
-	 * @return
-	 */
-	@Conditional(CalloutPluginPresentCondition.class)
-	@Bean(name = "callOutTaskExecutor")
-	public ThreadPoolTaskExecutor callout() {
-		ThreadPoolTaskExecutor poolTaskExecutor = new ThreadPoolTaskExecutor();
-		// 线程池维护线程的最少数量
-		poolTaskExecutor.setCorePoolSize(CORE_POOL_SIZE);
-		// 线程池维护线程的最大数量
-		poolTaskExecutor.setMaxPoolSize(MAX_POOL_SIZE);
-		// 线程池所使用的缓冲队列
-		poolTaskExecutor.setQueueCapacity(200);
-		// 线程池维护线程所允许的空闲时间
-		poolTaskExecutor.setKeepAliveSeconds(30000);
-		poolTaskExecutor.setWaitForTasksToCompleteOnShutdown(true);
-		poolTaskExecutor.setThreadNamePrefix("cs-callout-");
 
 		return poolTaskExecutor;
 	}

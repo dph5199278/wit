@@ -188,12 +188,6 @@
       <groupId>commons-beanutils</groupId>
       <artifactId>commons-beanutils</artifactId>
     </dependency>
-
-    <!-- bot -->
-    <dependency>
-      <groupId>com.chatopera.bot</groupId>
-      <artifactId>sdk</artifactId>
-    </dependency>
   </dependencies>
 
 </project>
