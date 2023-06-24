@@ -17,7 +17,6 @@
 package com.cs.wit.util;
 
 import java.util.Objects;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * The type Base 62.
@@ -53,7 +52,7 @@ public class Base62 {
 	 */
 	public static String encode(String str){
 		// get md5 hex string
-		String md5Hex = DigestUtils.md5Hex(str);
+		String md5Hex = Md5Utils.md5(str);
 		// get md5 first 4 byte string
 		String md5HexFirst4Byte = md5Hex.substring(0, 8);
 		// parse to long

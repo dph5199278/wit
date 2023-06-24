@@ -67,7 +67,7 @@ public class ApiLoginController extends Handler {
     @RequestMapping(method = RequestMethod.POST)
     @Menu(type = "apps", subtype = "token", access = true)
     public ResponseEntity login(HttpServletResponse response, @Valid String username, @Valid String password) {
-        User loginUser = userRepository.findByUsernameAndPassword(username, Md5Utils.md5(password));
+        User loginUser = userRepository.findByUsernameAndPassword(username, Md5Utils.doubleMd5(password));
         ResponseEntity entity;
         if (loginUser != null && !StringUtils.isBlank(loginUser.getId())) {
             loginUser.setLogin(true);

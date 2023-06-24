@@ -108,7 +108,7 @@ public class ApiUserController extends Handler {
     public ResponseEntity<RestResult> put(HttpServletRequest request, @Valid User user) {
         if (user != null && !StringUtils.isBlank(user.getUsername())) {
             if (!StringUtils.isBlank(user.getPassword())) {
-                user.setPassword(Md5Utils.md5(user.getPassword()));
+                user.setPassword(Md5Utils.doubleMd5(user.getPassword()));
                 userRes.save(user);
             } else if (!StringUtils.isBlank(user.getId())) {
                 User old = userRes.findByIdAndOrgi(user.getId(), super.getOrgi(request));
@@ -251,7 +251,7 @@ public class ApiUserController extends Handler {
 
                 previous.setCallcenter(updated.isCallcenter());
                 if (StringUtils.isNotBlank(updated.getPassword())) {
-                    previous.setPassword(Md5Utils.md5(updated.getPassword()));
+                    previous.setPassword(Md5Utils.doubleMd5(updated.getPassword()));
                 }
 
                 final Date now = new Date();

@@ -17,7 +17,6 @@
 
 package com.cs.wit.util.bi.model;
 
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.model.ColumnProperties;
 import com.cs.wit.util.Md5Utils;
 import java.util.List;
@@ -217,7 +216,7 @@ public class ValueData implements java.io.Serializable,Cloneable{
 	 * @return
 	 */
 	public String getDataid(){
-		return Md5Utils.md5(this.name!=null ? this.name : "") ;
+		return Md5Utils.doubleMd5(this.name!=null ? this.name : "") ;
 	}
 	public String getValueStyle() {
 		return valueStyle;

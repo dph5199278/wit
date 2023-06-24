@@ -220,6 +220,6 @@ public class Cube implements java.io.Serializable{
 	}
 	@Transient
 	public String getTable(){
-		return "c_d_"+ Md5Utils.md5(this.getId());
+		return "c_d_"+ Md5Utils.doubleMd5(this.getId());
 	}
 }

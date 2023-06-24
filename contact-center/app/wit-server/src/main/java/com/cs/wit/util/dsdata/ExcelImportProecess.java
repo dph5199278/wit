@@ -178,9 +178,9 @@ public class ExcelImportProecess extends DataProcess {
                     values.put("orgi", event.getOrgi());
                     if (values.get("id") == null) {
                         if (pkStr.length() > 0) {
-                            values.put("id", Md5Utils.md5(pkStr.append(event.getDSData().getTask().getTablename()).toString()));
+                            values.put("id", Md5Utils.doubleMd5(pkStr.append(event.getDSData().getTask().getTablename()).toString()));
                         } else {
-                            values.put("id", Md5Utils.md5(allStr.append(event.getDSData().getTask().getTablename()).toString()));
+                            values.put("id", Md5Utils.doubleMd5(allStr.append(event.getDSData().getTask().getTablename()).toString()));
                         }
                     }
                     if (event.getValues() != null && event.getValues().size() > 0) {

@@ -264,7 +264,7 @@ public class AppsController extends Handler {
             tempUser.setOrgi(super.getOrgiByTenantshare(request));
             final Date now = new Date();
             if (StringUtils.isNotBlank(user.getPassword())) {
-                tempUser.setPassword(Md5Utils.md5(user.getPassword()));
+                tempUser.setPassword(Md5Utils.doubleMd5(user.getPassword()));
             }
             if (tempUser.getCreatetime() == null) {
                 tempUser.setCreatetime(now);

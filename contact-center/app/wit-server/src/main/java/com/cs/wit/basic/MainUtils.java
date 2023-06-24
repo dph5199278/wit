@@ -775,7 +775,7 @@ public class MainUtils {
         if (StringUtils.isNotBlank(confirm)) {
             if (secretConfig != null && secretConfig.size() > 0) {
                 Secret secret = secretConfig.get(0);
-                if (Md5Utils.md5(confirm).equals(secret.getPassword())) {
+                if (Md5Utils.doubleMd5(confirm).equals(secret.getPassword())) {
                     execute = true;
                 }
             }

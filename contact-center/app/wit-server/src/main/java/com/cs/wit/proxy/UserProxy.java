@@ -13,7 +13,6 @@ package com.cs.wit.proxy;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.model.Organ;
 import com.cs.wit.model.OrganUser;
 import com.cs.wit.model.Role;
@@ -78,7 +77,7 @@ public class UserProxy {
             user.setSuperadmin(false); // 不支持创建第二个系统管理员
 
             if (StringUtils.isNotBlank(user.getPassword())) {
-                user.setPassword(Md5Utils.md5(user.getPassword()));
+                user.setPassword(Md5Utils.doubleMd5(user.getPassword()));
             }
 
             user.setOrgi(orgiByTenantshare);

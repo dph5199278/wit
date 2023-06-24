@@ -28,20 +28,30 @@ import cn.hutool.crypto.SecureUtil;
 public class Md5Utils {
 
 	/**
-	 * Md5 and Md5 string.
+	 * Double md5 string.
 	 *
 	 * @param str the str
-	 * @return the string
+	 * @return the double md5 string
+	 */
+	public static String doubleMd5(String str) {
+		return md5(md5(str));
+	}
+
+	/**
+	 * Md5 string.
+	 *
+	 * @param str the str
+	 * @return the md5 string
 	 */
 	public static String md5(String str) {
-		return SecureUtil.md5(SecureUtil.md5(str));
+		return SecureUtil.md5(str);
 	}
 
 	/**
 	 * Md5 string.
 	 *
 	 * @param bytes the bytes
-	 * @return the string
+	 * @return the md5 string
 	 */
 	public static String md5(byte[] bytes) {
 		return SecureUtil.md5().digestHex(bytes);

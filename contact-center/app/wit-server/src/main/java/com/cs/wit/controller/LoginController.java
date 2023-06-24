@@ -155,7 +155,7 @@ public class LoginController extends Handler {
         if (request.getSession(true).getAttribute(Constants.USER_SESSION_NAME) == null) {
             if (user != null && user.getUsername() != null) {
                 final User loginUser = userRepository.findByUsernameAndPasswordAndDatastatus(
-                        user.getUsername(), Md5Utils.md5(user.getPassword()), false);
+                        user.getUsername(), Md5Utils.doubleMd5(user.getPassword()), false);
                 if (loginUser != null && StringUtils.isNotBlank(loginUser.getId())) {
                     view = this.processLogin(request, loginUser, referer);
 
@@ -330,7 +330,7 @@ public class LoginController extends Handler {
             user.setUname(user.getUsername());
             user.setAdmin(true);
             if (StringUtils.isNotBlank(user.getPassword())) {
-                user.setPassword(Md5Utils.md5(user.getPassword()));
+                user.setPassword(Md5Utils.doubleMd5(user.getPassword()));
             }
             user.setOrgi(super.getOrgiByTenantshare(request));
     		/*if(StringUtils.isNotBlank(super.getUser(request).getOrgid())) {

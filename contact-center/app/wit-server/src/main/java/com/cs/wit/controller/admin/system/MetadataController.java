@@ -17,7 +17,6 @@
 package com.cs.wit.controller.admin.system;
 
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.model.Dict;
 import com.cs.wit.model.MetadataTable;
@@ -216,7 +215,7 @@ public class MetadataController extends Handler {
                                     //当前记录没有被添加过，进行正常添加
                                     metaDataTable.setTablename(table);
                                     metaDataTable.setOrgi(user.getOrgi());
-                                    metaDataTable.setId(Md5Utils.md5(metaDataTable.getTablename()));
+                                    metaDataTable.setId(Md5Utils.doubleMd5(metaDataTable.getTablename()));
                                     metaDataTable.setTabledirid("0");
                                     metaDataTable.setCreater(user.getId());
                                     metaDataTable.setCreatername(user.getUsername());
