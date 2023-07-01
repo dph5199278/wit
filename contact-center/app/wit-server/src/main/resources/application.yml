@@ -121,6 +121,7 @@ spring:
     suffix: .ftlh
     template-loader-path:
       - classpath:/templates/
+      - classpath*:/plugins/templates/
   jpa:
     properties:
       hibernate:
