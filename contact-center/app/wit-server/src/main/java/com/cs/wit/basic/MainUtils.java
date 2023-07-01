@@ -45,7 +45,7 @@ import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.CronTools;
 import com.cs.wit.util.IdUtils;
 import com.cs.wit.util.Md5Utils;
-import com.cs.wit.util.TempletLoader;
+import com.cs.wit.util.template.FreemarkerUtils;
 import com.cs.wit.util.WebIMReport;
 import com.cs.wit.util.WeiXinReport;
 import com.cs.wit.util.asr.AsrResult;
@@ -54,7 +54,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.googlecode.aviator.AviatorEvaluator;
-import freemarker.template.Configuration;
 import freemarker.template.TemplateException;
 import io.netty.handler.codec.http.HttpHeaders;
 import java.beans.BeanInfo;
@@ -66,7 +65,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.charset.StandardCharsets;
@@ -907,22 +905,9 @@ public class MainUtils {
         return hexString.toString();
     }
 
-    @SuppressWarnings("deprecation")
+    @Deprecated
     public static String getTemplet(String templet, Map<String, Object> values) throws IOException, TemplateException {
-        StringWriter writer = new StringWriter();
-        Configuration cfg;
-        freemarker.template.Template template;
-        String retValue = templet;
-        if (templet != null && templet.length() > 0 && templet.contains("$")) {
-            cfg = new Configuration();
-            TempletLoader loader = new TempletLoader(templet);
-            cfg.setTemplateLoader(loader);
-            cfg.setDefaultEncoding("UTF-8");
-            template = cfg.getTemplate("");
-            template.process(values, writer);
-            retValue = writer.toString();
-        }
-        return retValue;
+        return FreemarkerUtils.getTemplate(templet, values);
     }
 
     public static String encode(Object obj) {
@@ -1078,7 +1063,7 @@ public class MainUtils {
             if (tp == null) {
                 return false;
             }
-            String params = MainUtils.getTemplet(tp.getTemplettext(), tplValuesMap);
+            String params = FreemarkerUtils.getTemplate(tp.getTemplettext(), tplValuesMap);
 
             SysDic sysDic = Dict.getInstance().getDicItem(systemMessage.getSmstype());
             //阿里大于

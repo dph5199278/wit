@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.cs.wit.util;
+package com.cs.wit.util.template;
 
 import freemarker.cache.TemplateLoader;
 import java.io.IOException;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class TempletLoader implements TemplateLoader {
 	private static final String DEFAULT_TEMPLATE_KEY = "_default_template_key";
-	private Map<String, String> templates = new HashMap<String, String>();
+	private Map<String, String> templates = new HashMap<>();
 
 	public TempletLoader(String defaultTemplate) {
 		if (defaultTemplate != null && !defaultTemplate.equals("")) {
