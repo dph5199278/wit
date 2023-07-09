@@ -45,18 +45,17 @@ public class MathHelper {
     }
 
     public static String formatSeconds(Long timeInLong){
-        Long l = new Long(timeInLong);
-        return MathHelper.formatSeconds(l.intValue());
+        return MathHelper.formatSeconds(timeInLong.longValue());
     }
 
-    public static String formatSeconds(int timeInSeconds)
+    public static String formatSeconds(long timeInSeconds)
     {
-        int hours = timeInSeconds / 3600;
-        int secondsLeft = timeInSeconds - hours * 3600;
+        long hours = timeInSeconds / 3600;
+        int secondsLeft = (int)(timeInSeconds % 3600);
         int minutes = secondsLeft / 60;
-        int seconds = secondsLeft - minutes * 60;
+        int seconds = secondsLeft % 60;
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         if (hours < 10)
             sb.append(0);
         sb.append(hours);
