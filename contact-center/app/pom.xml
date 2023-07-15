@@ -13,6 +13,7 @@
         <module>wit-mq</module>
         <module>wit-server</module>
         <module>wit-plugin</module>
+        <module>wit-redis</module>
     </modules>
     <packaging>pom</packaging>
     <name>dely-contact-center</name>
@@ -395,6 +396,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>wit-mq</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>wit-redis</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

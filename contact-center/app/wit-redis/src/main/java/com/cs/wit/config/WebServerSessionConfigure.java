@@ -16,9 +16,8 @@
 package com.cs.wit.config;
 
 import com.cs.wit.basic.auth.AuthRedisTemplate;
-import com.cs.wit.cache.RedisKey;
+import com.cs.wit.cache.RedisSsoKey;
 import java.time.Duration;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -36,6 +35,7 @@ import org.springframework.session.FlushMode;
 import org.springframework.session.config.SessionRepositoryCustomizer;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+import org.springframework.util.StringUtils;
 
 
 /**
@@ -82,7 +82,7 @@ public class WebServerSessionConfigure {
         RedisIndexedSessionRepository repository = new RedisIndexedSessionRepository(sessionRedisTemplate);
         repository.setDefaultMaxInactiveInterval(maxInactiveIntervalInSeconds);
         repository.setFlushMode(FlushMode.IMMEDIATE);
-        repository.setRedisKeyNamespace(RedisKey.CACHE_SESSIONS);
+        repository.setRedisKeyNamespace(RedisSsoKey.CACHE_SESSIONS);
         //  应用事件分发，设置后才能使session监听生效
         repository.setApplicationEventPublisher(applicationEventPublisher);
         repository.setDatabase(sessionDb);
@@ -125,7 +125,7 @@ public class WebServerSessionConfigure {
         standaloneConfiguration.setHostName(host);
         standaloneConfiguration.setDatabase(tokenDb);
         standaloneConfiguration.setPort(port);
-        if (StringUtils.isNotBlank(pass)) {
+        if (StringUtils.hasText(pass)) {
             standaloneConfiguration.setPassword(pass);
         }
 

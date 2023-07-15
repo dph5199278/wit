@@ -19,8 +19,6 @@ import com.cs.wit.basic.MainContext;
 
 public class RedisKey {
 
-    public static final String CACHE_SESSIONS = "sso";
-
     /*********************
      *
      * 以下为Redis的常用KEY管理
