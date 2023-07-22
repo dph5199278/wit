@@ -287,6 +287,9 @@ server:
     remoteip:
       protocol-header: x-forwarded-proto
       remote-ip-header: x-forwarded-for
+  error:
+    include-exception: true
+    include-message: always
 
 ##############################################
 # 百度统计 Key

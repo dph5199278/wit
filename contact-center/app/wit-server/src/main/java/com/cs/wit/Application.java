@@ -23,9 +23,6 @@ import javax.servlet.MultipartConfigElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.server.ErrorPage;
-import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
@@ -78,13 +75,5 @@ public class Application {
         factory.setMaxRequestSize(multipartMaxRequest);
         factory.setLocation(uploadDir);
         return factory.createMultipartConfig();
-    }
-
-    @Bean
-    public WebServerFactoryCustomizer<TomcatServletWebServerFactory> containerCustomizer() {
-        return container -> {
-            ErrorPage error = new ErrorPage("/error.html");
-            container.addErrorPages(error);
-        };
     }
 }
