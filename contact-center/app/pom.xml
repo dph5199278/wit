@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.build.targetEncoding>${encoding}</project.build.targetEncoding>
 
-        <java.version>11</java.version>
+        <java.version>17</java.version>
 
         <spring-boot.version>2.7.13</spring-boot.version>
 
