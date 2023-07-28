@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
->
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,7 +47,7 @@
 	</#if>
 	
 	<script src="/js/echarts.common.min.js"></script>
-	<script language="javascript" src="/js/theme/wonderland.js"></script>	
+	<script language="javascript" src="/js/theme/wonderland.js"></script>
 </head>
 
 <body>
