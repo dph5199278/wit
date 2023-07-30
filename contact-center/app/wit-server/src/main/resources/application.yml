@@ -132,7 +132,7 @@ spring:
   ##############################################
   redis:
     # Redis数据库索引（默认为0）
-    database: 2
+    database: 0
     # Redis服务器地址
     host: localhost
     lettuce:
@@ -149,13 +149,9 @@ spring:
     password: ''
     # Redis服务器连接端口
     port: 6379
-    session:
-      db: 1
       # 连接超时时间（毫秒），因为客服启动时
       # 占用比较大的时间，此处timeout值必须设置为0才能正常启动
     timeout: 100s
-    token:
-      db: 3
   session:
     store-type: redis
   servlet:
@@ -272,10 +268,9 @@ server:
     context-path: /
     session:
       cookie:
-        max-age: &timeout 30m
+        max-age: &timeout 1d
         http-only: true
       timeout: *timeout
-  session-timeout: 86400
   tomcat:
     connection-timeout: 30s
     max-connections: 8192

@@ -17,25 +17,29 @@ package com.cs.wit.config;
 
 import com.cs.wit.basic.auth.AuthRedisTemplate;
 import com.cs.wit.cache.RedisSsoKey;
-import java.time.Duration;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
+import org.springframework.boot.autoconfigure.session.SessionProperties;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
-import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.lang.NonNull;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.session.FlushMode;
 import org.springframework.session.config.SessionRepositoryCustomizer;
 import org.springframework.session.data.redis.RedisIndexedSessionRepository;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
-import org.springframework.util.StringUtils;
 
 
 /**
@@ -50,90 +54,52 @@ import org.springframework.util.StringUtils;
 @EnableRedisHttpSession
 public class WebServerSessionConfigure {
 
-    /**
-     * spring在多长时间后强制使redis中的session失效,默认是1800.(单位/秒)
-     */
-    @Value("${server.session-timeout}")
-    private int maxInactiveIntervalInSeconds;
-
-    @Value("${spring.redis.host}")
-    private String host;
-
-    @Value("${spring.redis.port}")
-    private int port;
-
-    @Value("${spring.redis.password}")
-    private String pass;
-
-    @Value("${spring.redis.session.db}")
-    private int sessionDb;
-
-    @Value("${spring.redis.token.db}")
-    private int tokenDb;
-
-    @Value("${spring.redis.timeout}")
-    private Duration timeout;
-
     @Primary
     @Bean
     public RedisIndexedSessionRepository redisIndexedSessionRepository(@NonNull RedisTemplate<Object, Object> sessionRedisTemplate,
-                                                                       @NonNull ApplicationEventPublisher applicationEventPublisher,
-                                                                       @NonNull ObjectProvider<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers) {
+        @NonNull ApplicationEventPublisher applicationEventPublisher, @NonNull ObjectProvider<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers,
+        @NonNull RedisProperties redisProperties, @NonNull SessionProperties sessionProperties) {
         RedisIndexedSessionRepository repository = new RedisIndexedSessionRepository(sessionRedisTemplate);
-        repository.setDefaultMaxInactiveInterval(maxInactiveIntervalInSeconds);
+        repository.setDefaultMaxInactiveInterval((int)sessionProperties.getTimeout().toMillis());
         repository.setFlushMode(FlushMode.IMMEDIATE);
         repository.setRedisKeyNamespace(RedisSsoKey.CACHE_SESSIONS);
         //  应用事件分发，设置后才能使session监听生效
         repository.setApplicationEventPublisher(applicationEventPublisher);
-        repository.setDatabase(sessionDb);
+        repository.setDatabase(redisProperties.getDatabase());
         sessionRepositoryCustomizers.orderedStream()
                 .forEach((sessionRepositoryCustomizer) -> sessionRepositoryCustomizer.customize(repository));
         return repository;
     }
 
     @Bean
-    public RedisTemplate<Object, Object> sessionRedisTemplate() {
-        LettuceConnectionFactory factory = createJedisConnectionFactory(sessionDb);
-        factory.afterPropertiesSet();
-
+    public RedisTemplate<Object, Object> sessionRedisTemplate(
+        @NonNull final RedisConnectionFactory factory) {
         RedisTemplate<Object, Object> template = new RedisTemplate<>();
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setDefaultSerializer(RedisSerializer.string());
+        template.setEnableDefaultSerializer(true);
+
+        final ObjectMapper mapper = new ObjectMapper()
+            .registerModule(new Jdk8Module())
+            .registerModule(new JavaTimeModule())
+            .registerModule(new ParameterNamesModule());
+        GenericJackson2JsonRedisSerializer.registerNullValueSerializer(mapper, null);
+        mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(), DefaultTyping.NON_FINAL,
+            As.PROPERTY);
+        final RedisSerializer<Object> serializer = new GenericJackson2JsonRedisSerializer(mapper);
+
+        template.setValueSerializer(serializer);
+        template.setHashValueSerializer(serializer);
         template.setConnectionFactory(factory);
+        template.afterPropertiesSet();
         return template;
     }
-
 
     /**
      * 存储AuthToken
      */
     @Bean
-    public AuthRedisTemplate authRedisTemplate() {
-        LettuceConnectionFactory factory = createJedisConnectionFactory(tokenDb);
-        factory.afterPropertiesSet();
-
-        AuthRedisTemplate template = new AuthRedisTemplate();
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setHashKeySerializer(new StringRedisSerializer());
-        template.setConnectionFactory(factory);
-        return template;
-    }
-
-    @NonNull
-    private LettuceConnectionFactory createJedisConnectionFactory(int tokenDb) {
-        RedisStandaloneConfiguration standaloneConfiguration = new RedisStandaloneConfiguration();
-        standaloneConfiguration.setHostName(host);
-        standaloneConfiguration.setDatabase(tokenDb);
-        standaloneConfiguration.setPort(port);
-        if (StringUtils.hasText(pass)) {
-            standaloneConfiguration.setPassword(pass);
-        }
-
-        LettuceClientConfiguration clientConfiguration = LettuceClientConfiguration.builder()
-                .commandTimeout(timeout)
-                .shutdownTimeout(timeout)
-                .build();
-        return new LettuceConnectionFactory(standaloneConfiguration, clientConfiguration);
+    public AuthRedisTemplate authRedisTemplate(@NonNull final RedisConnectionFactory factory) {
+        return new AuthRedisTemplate(factory);
     }
 
     @Bean

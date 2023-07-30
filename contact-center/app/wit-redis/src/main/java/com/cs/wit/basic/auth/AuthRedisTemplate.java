@@ -26,16 +26,12 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * 存储Auth Token的Redis连接
  */
 public class AuthRedisTemplate extends RedisTemplate<String, String> {
-    public AuthRedisTemplate() {
-        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-        this.setKeySerializer(stringSerializer);
-        this.setValueSerializer(stringSerializer);
-        this.setHashKeySerializer(stringSerializer);
-        this.setHashValueSerializer(stringSerializer);
-    }
-
     public AuthRedisTemplate(RedisConnectionFactory connectionFactory) {
-        this();
+        this.setEnableDefaultSerializer(true);
+        this.setDefaultSerializer(RedisSerializer.string());
+        //final RedisSerializer<Object> serializer = RedisSerializer.json();
+        //this.setValueSerializer(serializer);
+        //this.setHashValueSerializer(serializer);
         this.setConnectionFactory(connectionFactory);
         this.afterPropertiesSet();
     }
