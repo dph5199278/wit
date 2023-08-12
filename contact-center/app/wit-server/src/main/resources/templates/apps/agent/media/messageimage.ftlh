@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="/js/scrawl/css/scrawl.css">
 <script type="text/javascript" src="/js/scrawl/scrawl.js"></script>
-<script language="javascript">
+<script type="text/javascript">
 	var msgid = "${chatMessage.id!''}" , fileid = "${chatMessage.attachmentid!''}" ;
 	var height;
 	var width;

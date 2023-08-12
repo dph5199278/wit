@@ -65,7 +65,7 @@
 		<!-- /.login-box-body -->
 	</div>
 </body>
-<script language="javascript">
+<script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
 		top.location.href = "/register.html" ;
 	}

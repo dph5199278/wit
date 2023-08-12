@@ -18,7 +18,7 @@
 		</div>
 	</div>	
 </div>
-<script language="javascript">
+<script type="text/javascript">
 	var datascource = {
 	    'name': '分机号：${extention.extention!''}',
 	    'title': '${extention.description!''}',

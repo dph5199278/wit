@@ -416,7 +416,7 @@
 </div>
 </div>
 
-<script language="javascript">
+<script type="text/javascript">
 
 	function clearWebimlogs() {
 		webimlogo.outerHTML = webimlogo.outerHTML;

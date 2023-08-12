@@ -1,4 +1,4 @@
-<script language="javascript">
+<script type="text/javascript">
     cursession = "<#if curagentuser??>${curagentuser.userid!''}</#if>" ;
     var massMassageToAgent = null;
     massMassageToAgent = "<#if massMassageToAgent??>${massMassageToAgent!''}</#if>";
@@ -75,7 +75,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                     border: 0px solid #E0E0E0 !important;
                 }
             </style>
-            <script language="javascript">
+            <script type="text/javascript">
                 var editor , layer;
                 $(document).ready(function(){
                     // KindEditor.ready(function(K) {

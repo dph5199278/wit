@@ -732,7 +732,7 @@
 	</div>
 </form>
 
-<script language="javascript"> 	
+<script type="text/javascript">
 	<#if execute?? && execute == "false">
 	top.layer.alert('二次 验证密码设置失败，输入的密码错误，请重新操作！', {icon: 2});
 	</#if>

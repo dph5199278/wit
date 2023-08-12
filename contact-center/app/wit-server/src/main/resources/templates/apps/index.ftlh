@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
->
+<html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<meta name="viewport"
-				content="width=device-width, maximum-scale=1.0, initial-scale=1.0,initial-scale=1.0,user-scalable=no" />
+				content="width=device-width, maximum-scale=1.0, user-scalable=0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
 	<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico?t=${.now?long}</#if>"/>
@@ -62,7 +61,7 @@
 <script type="text/javascript" src="/js/kindeditor/lang/zh-CN.js"></script>
 
 <script type="text/javascript" src="/js/jquery.darktooltip.js"></script>
-<script language="javascript">
+<script type="text/javascript">
 	var hostname = "${hostname!''}" , adminuser = "<#if user.admin?? && user.admin>true<#else>false</#if>" , schema = "${schema!'http'}", port = "${webimport!''}" , userid = "${user.id!''}" , session = "${sessionid!''}" , orgi = "${orgi!''}";
 	var layinx , layerhelper ;
 	var isImIndex = false;

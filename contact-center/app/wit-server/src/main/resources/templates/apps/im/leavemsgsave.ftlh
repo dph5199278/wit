@@ -14,7 +14,7 @@
 	    <link rel="stylesheet" id="skin" type="text/css" href="/im/css/default/ukefu.css">
 	</head>
 	<body style="overflow:hidden;" class="<#if type?? && type='text'>ukefu-point-text</#if>">
-		<script language="javascript">
+		<script type="text/javascript">
 			alert("留言已记录，感谢！");
 			window.close();
 		</script>

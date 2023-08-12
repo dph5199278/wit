@@ -47,7 +47,7 @@
 	</#if>
 	
 	<script src="/js/echarts.common.min.js"></script>
-	<script language="javascript" src="/js/theme/wonderland.js"></script>
+	<script type="text/javascript" src="/js/theme/wonderland.js"></script>
 </head>
 
 <body>

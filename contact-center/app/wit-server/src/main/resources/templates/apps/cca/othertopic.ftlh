@@ -16,7 +16,7 @@
 	</li>
 	</#if>
 </ul>
-<script language="javascript">
+<script type="text/javascript">
 $('.othertopicdetail').on("dblclick",function(){
 	loadURLWithTip($(this).data("href") , null , function(data){
 		if(editor.count("text") == 0 ){

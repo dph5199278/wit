@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/css/login.css">
 <link rel="stylesheet" href="/css/flexboxgrid.min.css">
 <script src="/layui/layui.js"></script>
-<script language="javascript">
+<script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
 		top.location.href = "/login.html" ;
 	}

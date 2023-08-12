@@ -15,7 +15,7 @@
 <script src="/layui/layui.js"></script>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="/js/cskefu.js"></script>
-<script language="javascript">
+<script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
 		top.location.href = "/apps/tenant/index.html" ;
 	} 

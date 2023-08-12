@@ -362,7 +362,7 @@
 </div>	
 </script>
 
-<script language="javascript"> 	
+<script type="text/javascript">
 	function newMetrics(){
 		$('#mertics').append($('#tpl').text());
 		form.render('checkbox'); //刷新select选择框渲染

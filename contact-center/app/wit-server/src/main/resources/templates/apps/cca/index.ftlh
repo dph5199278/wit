@@ -121,7 +121,7 @@
 </div>
 
 <#if agentUserList?? && agentUserList?size gt 0>
-<script language="javascript">
+<script type="text/javascript">
     $(document).ready(function(){
         $(document).bind("keydown", "Ctrl+return", function (ev) {
             sendMessage() ;

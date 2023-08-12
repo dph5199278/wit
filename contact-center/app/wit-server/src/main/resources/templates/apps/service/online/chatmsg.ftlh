@@ -77,7 +77,7 @@
 	</div>
 	</#if>	
 </div>
-<script language="javascript">
+<script type="text/javascript">
 	$('#chat_his').click(function(){
 		$('#summary_content').hide();
 		$('#chat_msg_list').show();

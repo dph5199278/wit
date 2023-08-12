@@ -29,7 +29,7 @@
 <div id="callCenterContent" style="height:calc(100% - 105px);overflow-y:auto;">
 	<#include "/admin/callcenter/pbxhost/index.ftlh">
 </div>
-<script language="javascript"> 		
+<script type="text/javascript">
 	$('#pbxHostTab li').on("click" , function(){
 		$('#pbxHostTab li').removeClass("layui-this");
 		$(this).addClass("layui-this");

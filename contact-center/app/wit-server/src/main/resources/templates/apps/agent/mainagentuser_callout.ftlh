@@ -1,4 +1,4 @@
-<script language="javascript">
+<script type="text/javascript">
 	cursession = "<#if curagentuser??>${curagentuser.userid!''}</#if>" ;
 	var userid = "${curagentuser.userid!''}" , agentserviceid = "${curagentuser.agentserviceid!''}" , agentuserid = "${curagentuser.id}";
 </script>

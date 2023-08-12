@@ -37,7 +37,7 @@
 		</div>
 	</div>
 </div>
-<script language="javascript">
+<script type="text/javascript">
 	layui.use('element', function(){
 	  var element = layui.element;
 	  element.init();

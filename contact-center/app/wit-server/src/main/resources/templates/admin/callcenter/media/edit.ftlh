@@ -37,7 +37,7 @@
     </form>
 </div>
 
-<script language="javascript"> 		
+<script type="text/javascript">
 	layui.use('upload', function(){});
 </script>
 

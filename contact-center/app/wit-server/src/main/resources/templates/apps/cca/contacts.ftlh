@@ -39,7 +39,7 @@
 	</li>
 </ul>
 <#if models?seq_contains("workorders")>
-<script language="javascript">
+<script type="text/javascript">
 	$(document).ready(function(){
 		loadURL("/agent/workorders/list.html?contactsid=${contacts.id!''}", "#workorders");
 	});		

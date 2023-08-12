@@ -226,7 +226,7 @@
 </div>
 </div>
 
-<script language="javascript">
+<script type="text/javascript">
 
 	function clearInvoteupdata(){
 		invoteupdata.outerHTML = invoteupdata.outerHTML;

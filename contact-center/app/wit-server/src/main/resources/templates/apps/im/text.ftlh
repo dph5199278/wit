@@ -1,4 +1,4 @@
-<script language="javascript">
+<script type="text/javascript">
 var data ;
 var config = {} ;
 <#if inviteData??>

@@ -297,7 +297,7 @@
 		</div>
 	</div>
 </form>	
-<script language="javascript"> 		
+<script type="text/javascript">
 	layui.use('form', function(){
 		var form = layui.form;
 		form.render("select"); //刷新select选择框渲染

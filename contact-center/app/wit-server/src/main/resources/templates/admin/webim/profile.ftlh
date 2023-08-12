@@ -609,7 +609,7 @@
 </div>
 </div>
 
-<script language="javascript">
+<script type="text/javascript">
 
 	function clearAgentheadimg() {
 		dialogad.outerHTML = dialogad.outerHTML;
