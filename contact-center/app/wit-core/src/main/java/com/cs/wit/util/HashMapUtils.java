@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Chatopera Inc, <https://www.chatopera.com>
+ * Copyright (C) 2023 Dely<https://github.com/dph5199278>, All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,34 @@
  */
 package com.cs.wit.util;
 
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import java.util.Map;
 
+/**
+ * The type Hash map utils.
+ */
 public class HashMapUtils {
 
 
-    public static <T> String concatKeys(final HashMap<String, T> map) {
+    /**
+     * Concat keys string.
+     *
+     * @param <T> the type parameter
+     * @param map the map
+     * @return the string
+     */
+    public static <T> String concatKeys(final Map<String, T> map) {
         return concatKeys(map, ",");
     }
 
     /**
-     * 将String Key连接起来
+     * Concat keys string.
      *
-     * @param map
-     * @param <T>
-     * @return
+     * @param <T>       the type parameter
+     * @param map       the map
+     * @param separator the separator
+     * @return string
      */
-    public static <T> String concatKeys(final HashMap<String, T> map, String separator) {
-        String result = map.entrySet().stream()
-                .map(x -> x.getKey())
-                .collect(Collectors.joining(separator));
-        return result;
+    public static <T> String concatKeys(final Map<String, T> map, String separator) {
+        return String.join(separator, map.keySet());
     }
 }
