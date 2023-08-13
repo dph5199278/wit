@@ -154,6 +154,7 @@ spring:
     timeout: 100s
   session:
     store-type: redis
+    timeout: &timeout 1d
   servlet:
     multipart:
       # 文件上传限制
@@ -268,7 +269,7 @@ server:
     context-path: /
     session:
       cookie:
-        max-age: &timeout 1d
+        max-age: *timeout
         http-only: true
       timeout: *timeout
   tomcat:

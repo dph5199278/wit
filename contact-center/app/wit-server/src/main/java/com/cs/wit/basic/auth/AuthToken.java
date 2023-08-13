@@ -18,7 +18,7 @@ package com.cs.wit.basic.auth;
 import com.cs.wit.cache.RedisKey;
 import com.cs.wit.model.User;
 import com.cs.wit.util.SerializeUtil;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 import javax.annotation.PostConstruct;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -36,8 +36,8 @@ public class AuthToken {
 
     private final static Logger logger = LoggerFactory.getLogger(AuthToken.class);
 
-    @Value("${server.session-timeout}")
-    private int timeout;
+    @Value("${spring.session.timeout}")
+    private Duration timeout;
 
     @Autowired
     private AuthRedisTemplate authRedisTemplate;
@@ -55,8 +55,8 @@ public class AuthToken {
      * @param key
      * @param seconds
      */
-    private boolean expire(final String key, final long seconds) {
-        return Boolean.TRUE.equals(authRedisTemplate.expire(key, seconds, TimeUnit.SECONDS));
+    private boolean expire(final String key, final Duration seconds) {
+        return Boolean.TRUE.equals(authRedisTemplate.expire(key, seconds));
     }
 
 
@@ -75,7 +75,7 @@ public class AuthToken {
      */
     public void putUserByAuth(final String auth, final User loginUser) {
         if (StringUtils.isNotBlank(auth) && loginUser != null) {
-            redisValOps.set(authKey(auth), SerializeUtil.serialize(loginUser), timeout, TimeUnit.SECONDS);
+            redisValOps.set(authKey(auth), SerializeUtil.serialize(loginUser), timeout);
         } else {
             logger.warn("[putLoginUserByAuth] error Invalid params.");
         }
