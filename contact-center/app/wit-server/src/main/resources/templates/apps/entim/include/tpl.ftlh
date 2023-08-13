@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 	<head>
 	    <meta charset="UTF-8">
 	    <title>在线咨询</title>
