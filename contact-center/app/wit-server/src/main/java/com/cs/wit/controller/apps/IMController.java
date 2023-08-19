@@ -17,6 +17,8 @@
 
 package com.cs.wit.controller.apps;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.cs.wit.acd.ACDPolicyService;
 import com.cs.wit.acd.ACDWorkMonitor;
 import com.cs.wit.basic.Constants;
@@ -61,10 +63,8 @@ import com.cs.wit.persistence.repository.StreamingFileRepository;
 import com.cs.wit.persistence.repository.UserHistoryRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.socketio.util.RichMediaUtils;
-import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.Md5Utils;
 import com.cs.wit.util.Menu;
-import com.cs.wit.util.MobileDevice;
 import com.cs.wit.util.PinYinTools;
 import com.cs.wit.util.StreamingFileUtil;
 import com.cs.wit.util.WebIMClient;
@@ -218,11 +218,13 @@ public class IMController extends Handler {
                 view.addObject("port", request.getServerPort());
             }
 
+            final UserAgent client = UserAgentUtil.parse(request.getHeader("User-Agent"));
+
             view.addObject("appid", id);
             view.addObject("client", MainUtils.getUUID());
             view.addObject("sessionid", sessionid);
             view.addObject("ip", Md5Utils.doubleMd5(request.getRemoteAddr()));
-            view.addObject("mobile", MobileDevice.isMobile(request.getHeader("User-Agent")));
+            view.addObject("mobile", client.isMobile());
 
             CousultInvite invite = OnlineUserProxy.consult(id, MainContext.SYSTEM_ORGI);
             if (invite != null) {
@@ -285,10 +287,9 @@ public class IMController extends Handler {
                 userHistory.setCity(ipdata.getCity());
                 userHistory.setIsp(ipdata.getIsp());
 
-                BrowserClient client = MainUtils.parseClient(request);
-                userHistory.setOstype(client.getOs());
-                userHistory.setBrowser(client.getBrowser());
-                userHistory.setMobile(MobileDevice.isMobile(request.getHeader("User-Agent")) ? "1" : "0");
+                userHistory.setOstype(client.getOs().getName());
+                userHistory.setBrowser(client.getBrowser().getName());
+                userHistory.setMobile(client.isMobile() ? "1" : "0");
 
                 if (invite.isSkill() && !invite.isConsult_skill_fixed()) { // 展示所有技能组
                     /*
@@ -822,8 +823,9 @@ public class IMController extends Handler {
                         }
                     }
 
-                    map.addAttribute(
-                            "exchange", isEnableExchangeAgentType);
+                    final UserAgent ua = UserAgentUtil.parse(request.getHeader("User-Agent"));
+
+                    map.addAttribute("exchange", isEnableExchangeAgentType);
 
                     if (isChatbotAgentFirst) {
                         // 机器人坐席
@@ -836,15 +838,15 @@ public class IMController extends Handler {
 
                         map.addAttribute("chatbotConfig", chatbotConfig);
                         view = request(super.createRequestPageTempletResponse("/apps/im/chatbot/index"));
-                        if (MobileDevice.isMobile(request.getHeader("User-Agent")) || StringUtils.isNotBlank(
-                                mobile)) {
+                        if (ua.isMobile()
+                            || StringUtils.isNotBlank(mobile)) {
                             view = request(super.createRequestPageTempletResponse(
                                     "/apps/im/chatbot/mobile"));        // 智能机器人 移动端
                         }
                     } else {
                         // 维持人工坐席的设定，检查是否进入留言
-                        if (!isLeavemsg && (MobileDevice.isMobile(
-                                request.getHeader("User-Agent")) || StringUtils.isNotBlank(mobile))) {
+                        if (!isLeavemsg && (ua.isMobile()
+                            || StringUtils.isNotBlank(mobile))) {
                             view = request(
                                     super.createRequestPageTempletResponse("/apps/im/mobile"));    // WebIM移动端。再次点选技能组？
                         }

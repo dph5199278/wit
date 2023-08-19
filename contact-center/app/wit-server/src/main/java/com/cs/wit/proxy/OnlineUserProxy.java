@@ -16,6 +16,8 @@
  */
 package com.cs.wit.proxy;
 
+import cn.hutool.http.useragent.UserAgent;
+import cn.hutool.http.useragent.UserAgentUtil;
 import com.cs.wit.acd.ACDServiceRouter;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
@@ -48,9 +50,7 @@ import com.cs.wit.persistence.repository.TenantRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.persistence.repository.UserTraceRepository;
 import com.cs.wit.socketio.message.OtherMessageItem;
-import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.HttpClientUtil;
-import com.cs.wit.util.MobileDevice;
 import com.cs.wit.util.OnlineUserUtils;
 import com.cs.wit.util.WebIMClient;
 import com.cs.wit.util.WebSseEmitterClient;
@@ -351,7 +351,11 @@ public class OnlineUserProxy {
             onlineUser = onlineuser(user.getId(), orgi);
 
             if (onlineUser == null) {
-//                logger.info("[online] create new online user.");
+                logger.info("[online] create new online user.");
+
+                final String userAgentString = request.getHeader("User-Agent");
+                final UserAgent client = UserAgentUtil.parse(userAgentString);
+
                 onlineUser = new OnlineUser();
                 onlineUser.setId(user.getId());
                 onlineUser.setCreater(user.getId());
@@ -377,8 +381,7 @@ public class OnlineUserProxy {
                     // 之前有session的访客
                     onlineUser.setOlduser("1");
                 }
-                onlineUser.setMobile(MobileDevice.isMobile(request
-                        .getHeader("User-Agent")) ? "1" : "0");
+                onlineUser.setMobile(client.isMobile() ? "1" : "0");
 
                 // onlineUser.setSource(user.getId());
 
@@ -425,12 +428,11 @@ public class OnlineUserProxy {
                 onlineUser.setSessionid(sessionid);
                 onlineUser.setOptype(optype);
                 onlineUser.setStatus(MainContext.OnlineUserStatusEnum.ONLINE.toString());
-                final BrowserClient client = MainUtils.parseClient(request);
 
                 // 浏览器信息
-                onlineUser.setOpersystem(client.getOs());
-                onlineUser.setBrowser(client.getBrowser());
-                onlineUser.setUseragent(client.getUseragent());
+                onlineUser.setOpersystem(client.getOs().getName());
+                onlineUser.setBrowser(client.getBrowser().getName());
+                onlineUser.setUseragent(userAgentString);
 
                 logger.info("[online] new online user is created but not persisted.");
             } else {

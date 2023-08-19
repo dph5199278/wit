@@ -41,7 +41,6 @@ import com.cs.wit.persistence.repository.SystemConfigRepository;
 import com.cs.wit.persistence.repository.SystemMessageRepository;
 import com.cs.wit.persistence.repository.TablePropertiesRepository;
 import com.cs.wit.persistence.repository.TemplateRepository;
-import com.cs.wit.util.BrowserClient;
 import com.cs.wit.util.CronTools;
 import com.cs.wit.util.IdUtils;
 import com.cs.wit.util.Md5Utils;
@@ -331,85 +330,6 @@ public class MainUtils {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Date", String.valueOf(new Date()));
         response.setHeader("Last-Modified", String.valueOf(new Date()));
-    }
-
-    public static BrowserClient parseClient(HttpServletRequest request) {
-        BrowserClient client = new BrowserClient();
-        String browserDetails = request.getHeader("User-Agent");
-        String user = browserDetails.toLowerCase();
-        String os;
-        String browser = "", version = "";
-
-
-        //=================OS=======================
-        if (user.contains("windows")) {
-            os = "windows";
-        } else if (user.contains("mac")) {
-            os = "mac";
-        } else if (user.contains("x11")) {
-            os = "unix";
-        } else if (user.contains("android")) {
-            os = "android";
-        } else if (user.contains("iphone")) {
-            os = "iphone";
-        } else {
-            os = "UnKnown";
-        }
-
-
-        //===============Browser===========================
-        if (user.contains("qqbrowser")) {
-            browser = "QQBrowser";
-        } else if (user.contains("msie") || user.contains("rv:11")) {
-            if (user.contains("rv:11")) {
-                browser = "IE11";
-            } else {
-                String substring = browserDetails.substring(browserDetails.indexOf("MSIE")).split(";")[0];
-                browser = substring.split(" ")[0].replace("MSIE", "IE") + substring.split(" ")[1];
-            }
-        } else if (user.contains("trident")) {
-            browser = "IE 11";
-        } else if (user.contains("edge")) {
-            browser = "Edge";
-        } else if (user.contains("safari") && user.contains("version")) {
-            browser = (browserDetails.substring(browserDetails.indexOf("Safari")).split(" ")[0]).split("/")[0];
-            version = (browserDetails.substring(browserDetails.indexOf("Version")).split(" ")[0]).split("/")[1];
-        } else if (user.contains("opr") || user.contains("opera")) {
-            if (user.contains("opera")) {
-                browser = (browserDetails.substring(browserDetails.indexOf("Opera")).split(" ")[0]).split(
-                        "/")[0] + "-" + (browserDetails.substring(browserDetails.indexOf("Version")).split(" ")[0]).split("/")[1];
-            } else if (user.contains("opr")) {
-                browser = ((browserDetails.substring(browserDetails.indexOf("OPR")).split(" ")[0]).replace("/", "-")).replace(
-                        "OPR", "Opera");
-            }
-        } else if (user.contains("chrome")) {
-            browser = "Chrome";
-        } else if (user.contains("mozilla/7.0") || user.contains("netscape6") || user.contains("mozilla/4.7") ||
-                user.contains("mozilla/4.78") || user.contains("mozilla/4.08") || user.contains("mozilla/3")) {
-            //browser=(userAgent.substring(userAgent.indexOf("MSIE")).split(" ")[0]).replace("/", "-");
-            browser = "Netscape-?";
-
-        } else if (user.contains("mozilla")) {
-            //browser=(userAgent.substring(userAgent.indexOf("MSIE")).split(" ")[0]).replace("/", "-");
-            if (browserDetails.indexOf(" ") > 0) {
-                browser = browserDetails.substring(0, browserDetails.indexOf(" "));
-            } else {
-                browser = "Mozilla";
-            }
-
-        } else if (user.contains("firefox")) {
-            browser = (browserDetails.substring(browserDetails.indexOf("Firefox")).split(" ")[0]).replace("/", "-");
-        } else if (user.contains("rv")) {
-            browser = "ie";
-        } else {
-            browser = "UnKnown";
-        }
-        client.setUseragent(browserDetails);
-        client.setOs(os);
-        client.setBrowser(browser);
-        client.setVersion(version);
-
-        return client;
     }
 
     /**
