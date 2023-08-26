@@ -27,7 +27,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BaseService<T> {
 
-    private SessionFactory hibernateFactory;
+    private final SessionFactory hibernateFactory;
 
     @Autowired
     public BaseService(EntityManagerFactory factory) {
@@ -41,94 +41,74 @@ public class BaseService<T> {
     /**
      * 批量更新
      *
-     * @param ts
+     * @param ts 需更新的列表
      */
     public void saveOrUpdateAll(final List<Object> ts) {
         Session session = hibernateFactory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             for (final Object t : ts) {
                 session.saveOrUpdate(t);
             }
             tx.commit();
         } catch (Exception ex) {
-            if (ex != null) {
-                tx.rollback();
-            }
+            tx.rollback();
             throw ex;
-        } finally {
-            session.close();
         }
     }
 
     public void saveOrUpdate(final Object t) {
         Session session = hibernateFactory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             session.saveOrUpdate(t);
             tx.commit();
         } catch (Exception ex) {
-            if (ex != null) {
-                tx.rollback();
-            }
+            tx.rollback();
             throw ex;
-        } finally {
-            session.close();
         }
     }
 
     public void save(final Object t) {
         Session session = hibernateFactory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             session.save(t);
             tx.commit();
         } catch (Exception ex) {
-            if (ex != null) {
-                tx.rollback();
-            }
+            tx.rollback();
             throw ex;
-        } finally {
-            session.close();
         }
     }
 
     /**
      * 批量删除
      *
-     * @param objects
+     * @param objects 需删除的列表
      */
     public void deleteAll(final List<Object> objects) {
         Session session = hibernateFactory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             for (final Object t : objects) {
                 session.delete(session.merge(t));
             }
             tx.commit();
         } catch (Exception ex) {
-            if (ex != null) {
-                tx.rollback();
-            }
+            tx.rollback();
             throw ex;
-        } finally {
-            session.close();
         }
     }
 
     public void delete(final Object object) {
         Session session = hibernateFactory.openSession();
         Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             session.delete(session.merge(object));
             tx.commit();
         } catch (Exception ex) {
-            if (ex != null) {
-                tx.rollback();
-            }
+            tx.rollback();
             throw ex;
-        } finally {
-            session.close();
         }
     }
 
@@ -136,14 +116,10 @@ public class BaseService<T> {
     public List<T> list(final String bean) {
         List<T> dataList = null;
         Session session = hibernateFactory.openSession();
-        Transaction tx = session.beginTransaction();
-        try {
+        try (session) {
             dataList = session.createCriteria(Class.forName(bean)).list();
-            tx.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
-        } finally {
-            session.close();
         }
         return dataList;
     }
