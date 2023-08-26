@@ -18,6 +18,7 @@ package com.cs.wit.persistence.hibernate;
 
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -117,7 +118,9 @@ public class BaseService<T> {
         List<T> dataList = null;
         Session session = hibernateFactory.openSession();
         try (session) {
-            dataList = session.createCriteria(Class.forName(bean)).list();
+            CriteriaQuery<T> query = session.getCriteriaBuilder()
+                .createQuery((Class<T>) Class.forName(bean));
+            dataList = session.createQuery(query).getResultList();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
