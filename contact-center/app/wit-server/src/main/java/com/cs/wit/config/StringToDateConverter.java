@@ -51,11 +51,10 @@ public class StringToDateConverter implements Converter<String, Date> {
                         .parse(source);
             }
             else if (source.matches("^\\d+$")) {
-                Long lDate = new Long(source);
-                return new Date(lDate);
+                return new Date(Long.parseLong(source));
             }
         } catch (Exception e) {
-            throw new RuntimeException(String.format("parser %s to Date callOutFail", source));
+            throw new RuntimeException(String.format("parser %s to Date callOutFail", source), e);
         }
         throw new RuntimeException(String.format("parser %s to Date callOutFail", source));
     }
