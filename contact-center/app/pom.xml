@@ -31,7 +31,7 @@
         <fastjson2.version>2.0.39</fastjson2.version>
 
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
-        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
+        <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
