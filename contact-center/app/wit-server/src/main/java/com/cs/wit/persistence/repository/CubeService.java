@@ -17,27 +17,31 @@
 package com.cs.wit.persistence.repository;
 
 import com.cs.wit.basic.Constants;
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.model.ColumnProperties;
+import com.cs.wit.util.IdUtils;
 import com.cs.wit.util.bi.CubeReportData;
 import com.cs.wit.util.bi.model.FirstTitle;
 import com.cs.wit.util.bi.model.Level;
 import com.cs.wit.util.bi.model.ValueData;
+import com.cs.wit.util.template.FreemarkerUtils;
 import freemarker.template.TemplateException;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import mondrian.olap.Axis;
 import mondrian.olap.Cell;
 import mondrian.olap.Connection;
 import mondrian.olap.Member;
 import mondrian.olap.Position;
-import mondrian.olap.Query;
 import mondrian.olap.Result;
 import mondrian.rolap.RolapCubeLevel;
 import mondrian.rolap.RolapLevel;
@@ -47,50 +51,51 @@ import org.apache.commons.io.IOUtils;
 public class CubeService {
 	private DataSourceService dataSource ;
 	
-	private String SCHEMA_DATA_PATH = "WEB-INF/data/mdx/";
-	private File schemaFile = null ;
+	private static final String SCHEMA_DATA_PATH = "WEB-INF/data/mdx/";
+	private File schemaFile = null;
 	
 	
 	public CubeService(String xml , String path , DataSourceService dataSource , Map<String,Object> requestValues) throws IOException, TemplateException {
-		this.dataSource = dataSource ;
-		File mdxFileDir = new File(path , "mdx") ;
-		if(!mdxFileDir.exists()){
-			mdxFileDir.mkdirs() ;
-		}
-		schemaFile = new File(mdxFileDir , MainUtils.getUUID()+".xml") ;
-		StringWriter writer = new StringWriter();
-		IOUtils.copy(CubeService.class.getClassLoader().getResourceAsStream(SCHEMA_DATA_PATH+xml), writer, "UTF-8"); 
-		FileUtils.write(schemaFile, MainUtils.getTemplet(writer.toString(), requestValues) , "UTF-8");	//使用系统默认编码
+		this(xml, path, dataSource, requestValues, false);
 	}
 	
 	public CubeService(String xml , String path , DataSourceService dataSource , Map<String,Object> requestValues,boolean isContentStr) throws IOException, TemplateException {
 		this.dataSource = dataSource ;
-		File mdxFileDir = new File(path , "mdx") ;
-		if(!mdxFileDir.exists()){
-			mdxFileDir.mkdirs() ;
-		}
-		schemaFile = new File(mdxFileDir , MainUtils.getUUID()+".xml") ;
+
+		this.schemaFile = new File(Optional
+				.of(new File(path , "mdx"))
+				.stream().peek(File::mkdirs)
+				.findAny()
+				.get(),
+				IdUtils.getUUID() + ".xml");
+
+		String template = "";
 		if(isContentStr) {
-			FileUtils.write(schemaFile, MainUtils.getTemplet(xml, requestValues) , "UTF-8");	//使用系统默认编码
+			// 为模板内容直接解析为字符串
+			template = FreemarkerUtils.getTemplate(xml, requestValues);
 		}else {
+			// 为模板路径，先加载内容再解析为字符串
 			StringWriter writer = new StringWriter();
-			IOUtils.copy(CubeService.class.getClassLoader().getResourceAsStream(SCHEMA_DATA_PATH+xml), writer, "UTF-8"); 
-			FileUtils.write(schemaFile, MainUtils.getTemplet(writer.toString(), requestValues) , "UTF-8");	//使用系统默认编码
+			IOUtils.copy(Objects.requireNonNull(
+					CubeService.class.getClassLoader().getResourceAsStream(SCHEMA_DATA_PATH + xml)), writer, StandardCharsets.UTF_8);
+			template = FreemarkerUtils.getTemplate(writer.toString(), requestValues);
 		}
+
+		// 输出到临时文件
+		FileUtils.write(schemaFile, template, StandardCharsets.UTF_8);	//使用系统默认编码
 	}
 	
-	public CubeReportData execute(String mdx) throws Exception{
+	public CubeReportData execute(String mdx) throws Exception {
 		return execute(mdx , null) ;
 	}
-	
-	@SuppressWarnings("deprecation")
-	public CubeReportData execute(String mdx,List<ColumnProperties> cols) throws Exception{
+
+	public CubeReportData execute(String mdx,List<ColumnProperties> cols) throws Exception {
 		Connection connection = null ;
 		CubeReportData cubeReportData = new CubeReportData();
 		try{
-			connection = dataSource.service(schemaFile.getAbsolutePath()) ;
-			Query query = connection.parseQuery(mdx);
-			Result result = connection.execute(query) ;
+			connection = dataSource.service(schemaFile.getAbsolutePath());
+			Result result = connection
+					.execute(connection.parseQuery(mdx));
 			Axis[] axises = result.getAxes();
 			cubeReportData.setData(new ArrayList<>());
 			for (int i = 0; i < axises.length; i++) {
@@ -100,24 +105,42 @@ public class CubeService {
 					cubeReportData.setRow(createTitle(axises[i], i , cols));
 				}
 			}
-			if(cubeReportData.getRow()==null){
-				cubeReportData.setRow(new Level("root","row", null , 0)) ;
-				cubeReportData.getRow().setTitle(new ArrayList<List<Level>>());
-				if(cubeReportData.getRow().getTitle().size()==0){
-					List<Level> rowList = new ArrayList<Level>() ;
-					rowList.add(new Level("合计","row", null , 0)) ;
-					cubeReportData.getRow().getTitle().add(rowList) ;
-				}
+
+			if(Optional.of(cubeReportData)
+					.map(CubeReportData::getRow)
+					.isEmpty()) {
+				Level rowLevel = Optional.of(
+					Optional.of(new Level("合计","row", null , 0))
+						.stream()
+						.collect(Collectors.toList())
+				)
+				.map(title -> {
+					List<List<Level>> list = new ArrayList<>();
+					list.add(title);
+					return list;
+				})
+				.map(title -> {
+					Level level = new Level("root","row", null , 0);
+					level.setTitle(title);
+					return level;
+				})
+				.get();
+
+				cubeReportData.setRow(rowLevel);
 			}
-			getRowData(result.getAxes(), result.getAxes().length - 1, new int[result.getAxes().length], result, cubeReportData.getData(), 0 , null , cubeReportData , cols);
-			processSum(cubeReportData.getRow(), cubeReportData.getData() , cubeReportData.getRow()) ;
-			processSum(cubeReportData.getCol(), cubeReportData.getData() , cubeReportData.getCol()) ;
-			cubeReportData.getRow().setTitle(new ArrayList<List<Level>>()) ;
+			// 获取行数据
+			getRowData(axises, axises.length - 1, new int[axises.length], result, cubeReportData.getData(), 0 , null , cubeReportData , cols);
+			// 处理合计行
+			processSum(cubeReportData.getRow(), cubeReportData.getData() , cubeReportData.getRow());
+			// 处理合计列
+			processSum(cubeReportData.getCol(), cubeReportData.getData() , cubeReportData.getCol());
+			// 清除行标题
+			cubeReportData.getRow().setTitle(new ArrayList<>()) ;
+			// 处理标题
 			processTitle(cubeReportData.getRow() , cubeReportData.getRow());
 			
-		}catch(Exception ex){ 
-			throw ex;
-		}finally{
+		}
+		finally{
 			if(connection!=null){
 				connection.close();
 			}
@@ -136,19 +159,20 @@ public class CubeService {
 		List<String> valueStr = new ArrayList<String>();
 		List<FirstTitle> firstTitle = new ArrayList<FirstTitle>();
 		for (Position pos : posList) {
-			StringBuffer strb = new StringBuffer();
+			StringBuilder strb = new StringBuilder();
 			for (int i = 0; i < pos.size(); i++) {
 				Member member = pos.get(i);
 				RolapLevel cubeLevel = (RolapLevel) member.getLevel();
 				int n = 0;
-				if(member.getLevel() instanceof RolapCubeLevel && cubeLevel.getName().indexOf("All")<0){
+				if(member.getLevel() instanceof RolapCubeLevel && !cubeLevel.getName().contains("All")){
 					if(level.getFirstTitle()==null){
 						level.setFirstTitle(firstTitle);
 						FirstTitle first = new FirstTitle();
 						first.setName(cubeLevel.getName());
 						first.setLevel(cubeLevel.getUniqueName()) ;
 						addFirstTitle(level.getFirstTitle(), -1 , first) ;
-						while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null && cubeLevel.getName().indexOf("All")<0){
+						while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null
+								&& !cubeLevel.getName().contains("All")){
 							n++;
 							FirstTitle first2 = new FirstTitle();
 							first2.setName(cubeLevel.getName());
@@ -172,7 +196,8 @@ public class CubeService {
 							first.setName(cubeLevel.getName());
 							first.setLevel(cubeLevel.getUniqueName()) ;
 							addFirstTitle(level.getFirstTitle(), -1 , first ) ;
-							while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null && cubeLevel.getName().indexOf("All")<0){
+							while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null &&
+									!cubeLevel.getName().contains("All")){
 								n++;
 								FirstTitle first2 = new FirstTitle();
 								first2.setName(cubeLevel.getName());
@@ -193,7 +218,8 @@ public class CubeService {
 						first.setName(Constants.CUBE_TITLE_MEASURE);
 						first.setLevel(cubeLevel.getUniqueName()) ;
 						addFirstTitle(level.getFirstTitle(), -1 , first) ;
-						while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null && cubeLevel.getName().indexOf("All")<0){
+						while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null &&
+								!cubeLevel.getName().contains("All")){
 							n++;
 							FirstTitle first2 = new FirstTitle();
 							first2.setName(cubeLevel.getName());
@@ -217,7 +243,8 @@ public class CubeService {
 							first.setName(Constants.CUBE_TITLE_MEASURE);
 							first.setLevel(cubeLevel.getUniqueName()) ;
 							addFirstTitle(level.getFirstTitle(), -1 , first ) ;
-							while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null && cubeLevel.getName().indexOf("All")<0){
+							while((cubeLevel = (RolapLevel) cubeLevel.getParentLevel())!=null &&
+									!cubeLevel.getName().contains("All")){
 								n++;
 								FirstTitle first2 = new FirstTitle();
 								first2.setName(cubeLevel.getName());
@@ -242,7 +269,7 @@ public class CubeService {
 			if(cols!=null) {
 				for(ColumnProperties col : cols) {
 					if(strb.toString().equals(col.getDataname())) {
-						strb = new StringBuffer() ;
+						strb = new StringBuilder() ;
 						strb.append(col.getTitle()) ;
 					}
 				}
@@ -323,14 +350,9 @@ public class CubeService {
 	 * @param title
 	 */
 	private void addFirstTitle(List<FirstTitle> firstTitleList , int index , FirstTitle title){
-		boolean found = false ;
-		for(FirstTitle firstTitle : firstTitleList){
-			if(firstTitle.getLevel().equals(title.getLevel())){
-				found = true; 
-				break ;
-			}
-		}
-		if(!found){
+		if(firstTitleList
+				.stream()
+				.noneMatch(firstTitle -> firstTitle.getLevel().equals(title.getLevel()))) {
 			if(index<0){
 				firstTitleList.add(title) ;
 			}else{
@@ -351,22 +373,20 @@ public class CubeService {
 	private void getRowData(Axis[] axes, int axis, int[] pos, Result result, List<List<ValueData>> dataList, int rowno , Position position , CubeReportData cubeData , List<ColumnProperties> cols) {
 		if (axis < 0) {
 			if (dataList.size() <= rowno || dataList.get(rowno) == null) {
-				dataList.add(new ArrayList<ValueData>());
+				dataList.add(new ArrayList<>());
 			}
-			Cell cell = result.getCell(pos) ;
+			Cell cell = result.getCell(pos);
 			ValueData valueData  = new ValueData(cell.getValue(), cell.getFormattedValue(), null  , cell.canDrillThrough(), cell.getDrillThroughSQL(true) , position!=null && position.size()>0 ? position.get(position.size()-1).getName():"" , cell.getCachedFormatString() , cols) ;
-			int rows = 0 ;
-			valueData.setRow(getParentLevel(cubeData.getRow() , rowno, rows)) ;
+			int rows = 0;
+			valueData.setRow(getParentLevel(cubeData.getRow(), rowno, rows));
 			dataList.get(rowno).add(valueData);
 		} else {
-			Axis _axis = axes[axis];
-			List<Position> positions = _axis.getPositions();
-			for (int i = 0; i < positions.size(); i++) {
-				Position posit = positions.get(i) ;
+			List<Position> positions = axes[axis].getPositions();
+			for (int i = 0, size = positions.size(); i < size; i++) {
+				Position posit = positions.get(i);
 				pos[axis] = i;
 				if (axis == 0) {
-					int row = axis + 1 < pos.length ? pos[axis + 1] : 0;
-					rowno = row;
+					rowno = axis + 1 < pos.length ? pos[axis + 1] : 0;
 				}
 				getRowData(axes, axis - 1, pos, result, dataList, rowno , posit , cubeData , cols);
 			}
@@ -374,8 +394,11 @@ public class CubeService {
 	}
 	
 	private Level getParentLevel(Level level , int rowno , int rows){
-		if(level!=null && level.getChilderen()!=null){
-			for(Level lv : level.getChilderen()){
+		Optional<List<Level>> childOpt = Optional.ofNullable(level)
+				.map(Level::getChilderen);
+		if(childOpt.isPresent()) {
+			List<Level> child = childOpt.get();
+			for(Level lv : child){
 				rows = rows + lv.getRowspan() ;
 				if(rows==rowno){
 					while(level.getChilderen()!=null && level.getChilderen().size()>0){
@@ -390,6 +413,7 @@ public class CubeService {
 		}
 		return level ;
 	}
+
 	/**
 	 * 处理 合计字段
 	 * @param level
@@ -445,14 +469,14 @@ public class CubeService {
 			int depth = getDepth(child) ;
 			if(depth>=0){
 				if(root.getTitle().size()<=depth){
-					root.getTitle().add(new ArrayList<Level>()) ;
+					root.getTitle().add(new ArrayList<>()) ;
 				}
 				Level tempLevel = new Level(child.getName() , child.getNameValue() , child.getLeveltype() , child.getRowspan() , child.getColspan() , child.getValueData() , child.isTotal() , child.isFirst()) ;
 				tempLevel.setParent(child) ;
 				root.getTitle().get(depth).add(tempLevel)  ;
 			}
 			if((child.getNameValue().equals("R3_TOTAL") && root.getFirstTitle()!=null && (depth+1) < root.getFirstTitle().size()) || (child.getChilderen()==null && root.getFirstTitle()!=null && (depth+1) < root.getFirstTitle().size())){
-				child.setChilderen(new ArrayList<Level>()) ;
+				child.setChilderen(new ArrayList<>()) ;
 				child.setColspan(root.getFirstTitle().size() - depth);
 				if(root.getTitle()!=null && root.getTitle().size()>depth){
 					for(Level title : root.getTitle().get(depth)){
@@ -498,10 +522,10 @@ public class CubeService {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void iterator(Map<String, Map> value, Level level, String leveltype) {
 		Iterator<String> iterator = value.keySet().iterator();
-		if (level.getChilderen() == null) {
-			level.setChilderen(new ArrayList<Level>());
+		if(level.getChilderen() == null) {
+			level.setChilderen(new ArrayList<>());
 		}
-		while (iterator.hasNext()) {
+		while(iterator.hasNext()) {
 			String name = iterator.next();
 			Level sublevel = new Level(name, leveltype , level , level.getDepth()-1);
 			level.getChilderen().add(sublevel);
