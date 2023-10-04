@@ -362,7 +362,7 @@ public class ReportDesignController extends Handler {
         reportModelRes.save(model);
         map.put("reportModel", model);
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + model.getId()));
+                "redirect:/apps/report/design/modeldesign?id=" + model.getId()));
     }
 
     @RequestMapping("/adddata")
@@ -448,7 +448,7 @@ public class ReportDesignController extends Handler {
             reportFilterRepository.save(f);
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + modelId + "&tabid=filter"));
+                "redirect:/apps/report/design/modeldesign?id=" + modelId + "&tabid=filter"));
     }
 
     @RequestMapping("/gettableid")
@@ -609,7 +609,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + model.getId() + "&tabid=" + tabid));
+                "redirect:/apps/report/design/modeldesign?id=" + model.getId() + "&tabid=" + tabid));
     }
 
     /**
@@ -743,7 +743,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/index.html?id=" + reportId));
+                "redirect:/apps/report/design/index?id=" + reportId));
     }
 
     /**
@@ -839,7 +839,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + modelId + "&tabid=filter"));
+                "redirect:/apps/report/design/modeldesign?id=" + modelId + "&tabid=filter"));
     }
 
     @RequestMapping("/fktableid")
@@ -875,7 +875,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + modelId + "&tabid=filter"));
+                "redirect:/apps/report/design/modeldesign?id=" + modelId + "&tabid=filter"));
     }
 
     /**
@@ -893,7 +893,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/index.html?id=" + reportId));
+                "redirect:/apps/report/design/index?id=" + reportId));
     }
 
     /**
@@ -956,7 +956,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + modelId + "&tabid=" + tabid));
+                "redirect:/apps/report/design/modeldesign?id=" + modelId + "&tabid=" + tabid));
     }
 
     /**
@@ -974,7 +974,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + modelId + "&tabid=data"));
+                "redirect:/apps/report/design/modeldesign?id=" + modelId + "&tabid=data"));
     }
 
     /**
@@ -1006,7 +1006,7 @@ public class ReportDesignController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + mid + "&tabid=data"));
+                "redirect:/apps/report/design/modeldesign?id=" + mid + "&tabid=data"));
     }
 
     @RequestMapping("/changetpl")
@@ -1023,7 +1023,7 @@ public class ReportDesignController extends Handler {
             reportModelRes.save(model);
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + model.getId() + "&tabid=data"));
+                "redirect:/apps/report/design/modeldesign?id=" + model.getId() + "&tabid=data"));
     }
 
     @RequestMapping("/changechartppy")
@@ -1149,7 +1149,7 @@ public class ReportDesignController extends Handler {
             reportModelRes.save(model);
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/report/design/modeldesign.html?id=" + model.getId() + "&tabid=data"));
+                "redirect:/apps/report/design/modeldesign?id=" + model.getId() + "&tabid=data"));
     }
 
     /**
@@ -1206,8 +1206,8 @@ public class ReportDesignController extends Handler {
                 publishedReport.setDataversion(1);
                 publishedReportRes.save(publishedReport);
             }
-            return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + publishedReport.getDicid()));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + publishedReport.getDicid()));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index"));
     }
 }

@@ -13,7 +13,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			组织机构
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/organ/add.html<#if organData>?parent=${organData.id!''}</#if>" id="areaadd" data-toggle="ajax" data-height="400" data-width="650" data-title="创建部门">
+				<button class="layui-btn layui-btn-sm green" href="/admin/organ/add<#if organData>?parent=${organData.id!''}</#if>" id="areaadd" data-toggle="ajax" data-height="400" data-width="650" data-title="创建部门">
 					创建部门
 				</button>
 			</span>
@@ -29,16 +29,16 @@
 			<span style="width:150px;display:inline-block;;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><#if organData??>${organData.name!''}<#else>默认机构</#if><#if userList??>（${userList?size!''}）</#if></span>
 			<span style="float:right;">
 				<#if organData??>
-				<button class="layui-btn layui-btn-sm green" href="/admin/organ/seluser.html?organ=${organData.id!''}" data-toggle="ajax" data-width="750" data-title="添加用户到当前部门">
+				<button class="layui-btn layui-btn-sm green" href="/admin/organ/seluser?organ=${organData.id!''}" data-toggle="ajax" data-width="750" data-title="添加用户到当前部门">
 					添加用户到当前部门
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/organ/area.html?id=${organData.id}" data-toggle="ajax" data-width="450" data-height="400" data-title="地区设置">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/organ/area?id=${organData.id}" data-toggle="ajax" data-width="450" data-height="400" data-title="地区设置">
 					地区设置
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/organ/edit.html?id=${organData.id}" data-toggle="ajax" data-width="650" data-height="400" data-title="修改部门">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/organ/edit?id=${organData.id}" data-toggle="ajax" data-width="650" data-height="400" data-title="修改部门">
 					修改部门
 				</button>
-				<button class="layui-btn layui-btn-danger layui-btn-sm" href="/admin/organ/delete.html?id=${organData.id!''}" data-toggle="tip" data-title="请确认是否删除该部门？">
+				<button class="layui-btn layui-btn-danger layui-btn-sm" href="/admin/organ/delete?id=${organData.id!''}" data-toggle="tip" data-title="请确认是否删除该部门？">
 					删除部门
 				</button>
 				</#if>
@@ -77,7 +77,7 @@
 					  <td>${organUser.email!''}</td>
 					  <td>${organUser.mobile!''}</td>
 					  <td style="white-space: nowrap;">
-					  		<a href="/admin/organ/user/delete.html?id=${organUser.id!''}&organ=${organData.id!''}"  data-toggle="tip" data-title="请确认是否从坐席组中移除坐席？">
+					  		<a href="/admin/organ/user/delete?id=${organUser.id!''}&organ=${organData.id!''}"  data-toggle="tip" data-title="请确认是否从坐席组中移除坐席？">
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			移除
 					  		</a>
@@ -108,11 +108,11 @@
 	
 	function onClick(e, treeId, treeNode) {
 		if(treeNode.topic){
-			location.href = "/admin/organ/index.html?organ="+treeNode.id;
+			location.href = "/admin/organ/index?organ="+treeNode.id;
 		}else if(treeNode.id == "0"){
-			location.href = "/admin/organ/index.html";
+			location.href = "/admin/organ/index";
 		}else if(treeNode.area){
-			$('#areaadd').attr("href" , "/admin/organ/add.html?area="+treeNode.id);
+			$('#areaadd').attr("href" , "/admin/organ/add?area="+treeNode.id);
 		}
 	}
 

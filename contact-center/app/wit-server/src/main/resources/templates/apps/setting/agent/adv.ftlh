@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						${advType.name!''} 广告位<#if adTypeList??>（${adTypeList?size}）</#if> ${advType.description!''}
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-sm green" href="/setting/adv/add.html?adpos=${advType.id!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="添加广告 ${advType.description!''}">
+							<button class="layui-btn layui-btn-sm green" href="/setting/adv/add?adpos=${advType.id!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="添加广告 ${advType.description!''}">
 								添加广告
 							</button>
 						</span>
@@ -56,11 +56,11 @@
 								  </td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">${ad.createtime?string('yyyy-MM-dd HH:mm:ss')}</td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/setting/adv/edit.html?id=${ad.id!''}&adpos=${ad.adpos!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="编辑广告">
+								  		<a href="/setting/adv/edit?id=${ad.id!''}&adpos=${ad.adpos!''}" data-toggle="ajax" data-width="950" data-height="500" data-title="编辑广告">
 								  			<i class="layui-icon">&#xe642;</i>
 								  			编辑
 								  		</a>
-								  		<a href="/setting/adv/delete.html?id=${ad.id!''}&adpos=${ad.adpos!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除广告？">
+								  		<a href="/setting/adv/delete?id=${ad.id!''}&adpos=${ad.adpos!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除广告？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>

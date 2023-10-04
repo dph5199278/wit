@@ -30,7 +30,7 @@
 	};
 	
 	function onClick(e, treeId, treeNode) {
-		location.href = "/apps/report/pbreportindex.html?dicid="+treeNode.id ;
+		location.href = "/apps/report/pbreportindex?dicid="+treeNode.id ;
 	}
 
 	var zNodes =[

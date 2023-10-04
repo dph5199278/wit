@@ -3,8 +3,8 @@
         <h1 class="site-h1" style="background-color:#FFFFFF;">技能组列表
             <#if skillGroups??>（${skillGroups?size}）</#if>
             <span style="float:right;">
-                <button class="layui-btn layui-btn-sm green" href="/admin/callcenter/skill/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="550" data-height="260" data-title="添加技能组">添加技能组</button>
-                <button class="layui-btn layui-btn-sm green" href="/admin/callcenter/skill/imp.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="550" data-height="400" data-title="导入坐席">导入坐席</button></span>
+                <button class="layui-btn layui-btn-sm green" href="/admin/callcenter/skill/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="550" data-height="260" data-title="添加技能组">添加技能组</button>
+                <button class="layui-btn layui-btn-sm green" href="/admin/callcenter/skill/imp?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="550" data-height="400" data-title="导入坐席">导入坐席</button></span>
         </h1>
         <div class="row">
             <div class="col-lg-12" style="padding-left:5px;">
@@ -29,7 +29,7 @@
                                                 <td>${skillExtention.extention!''}</td>
                                                 <td>${skillExtention.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
                                                 <td style="white-space:nowrap;" nowrap="nowrap">
-                                                    <a href="/admin/callcenter/skill/extention/delete.html?id=${skillExtention.id!''}&hostid=${pbxHost.id!''}" data-target="#callCenterContent" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否将分机移除？">
+                                                    <a href="/admin/callcenter/skill/extention/delete?id=${skillExtention.id!''}&hostid=${pbxHost.id!''}" data-target="#callCenterContent" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否将分机移除？">
                                                         <i class="layui-icon" style="color:red;">&#x1006;</i>移除</a>
                                                 </td>
                                             </tr>

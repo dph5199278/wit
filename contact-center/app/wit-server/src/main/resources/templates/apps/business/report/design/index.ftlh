@@ -10,7 +10,7 @@
 		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?t=1528167497497"/>
 		<title>${report.name!''}-智文客服-全渠道智能客服</title>
 		<link rel="stylesheet" href="/layui/css/layui.css">
-		<link rel="stylesheet" href="/res/css/system.html">
+		<link rel="stylesheet" href="/res/css/system">
 		<link rel="stylesheet" href="/css/ukefu-design.css">
 
 		<script src="/js/jquery-1.10.2.min.js"></script>
@@ -80,7 +80,7 @@
 								    	</div>
 								    	<#if layoutList??>
 								    	<#list layoutList as layout>
-										<div class="uckefu-design-chartitem comp-item" data-type="layout" <#if layout.layoutcols gt 0>data-colspan="${layout.layoutcols}"</#if> data-title="${layout.name!''}" data-id="${layout.id!''}" data-templet="/apps/report/design/ltpl.html?template=${layout.id!''}&id=${report.id!''}">
+										<div class="uckefu-design-chartitem comp-item" data-type="layout" <#if layout.layoutcols gt 0>data-colspan="${layout.layoutcols}"</#if> data-title="${layout.name!''}" data-id="${layout.id!''}" data-templet="/apps/report/design/ltpl?template=${layout.id!''}&id=${report.id!''}">
 											<div class="ukefu-design-img">
 												<img src="${layout.iconstr!''}" />
 											</div>
@@ -98,7 +98,7 @@
 								    	</div>
 								    	<#if reportList??>
 										<#list reportList as rtpl>
-										<div class="uckefu-design-chartitem model-item" data-type="chart" data-title="${rtpl.name!''}" data-id="${rtpl.id!''}" data-templet="/apps/report/design/rtpl.html?tplname=${rtpl.name!''}&template=${rtpl.id!''}&id=${report.id!''}">
+										<div class="uckefu-design-chartitem model-item" data-type="chart" data-title="${rtpl.name!''}" data-id="${rtpl.id!''}" data-templet="/apps/report/design/rtpl?tplname=${rtpl.name!''}&template=${rtpl.id!''}&id=${report.id!''}">
 											<div class="ukefu-design-img">
 												<img src="${rtpl.iconstr!''}" />
 											</div>
@@ -117,7 +117,7 @@
 								    	</div>
 								    	<#if filterList??>
 										<#list filterList as ftpl>
-										<div class="uckefu-design-chartitem filter-item" data-type="filter" data-title="${ftpl.name!''}" data-id="${ftpl.id!''}" data-templet="/apps/report/design/ftpl.html?template=${ftpl.id!''}&id=${report.id!''}">
+										<div class="uckefu-design-chartitem filter-item" data-type="filter" data-title="${ftpl.name!''}" data-id="${ftpl.id!''}" data-templet="/apps/report/design/ftpl?template=${ftpl.id!''}&id=${report.id!''}">
 											<div class="ukefu-design-img">
 												<img src="${ftpl.iconstr!''}" />
 											</div>
@@ -135,7 +135,7 @@
 			</div>
 			<div class="layui-body" style="left:260px;border-left:2px solid #f0f2f5;">
 				<div class="ukefu-filters-content layui-form">
-					<form  action="/apps/report/design/index.html?id=${report.id!''}" method="post">
+					<form  action="/apps/report/design/index?id=${report.id!''}" method="post">
 					<div  class="ui-sortable layui-row" >
 						<div class="layui-col-md11" id="ukefu-filter-list">
 							<#if reportFilters??>

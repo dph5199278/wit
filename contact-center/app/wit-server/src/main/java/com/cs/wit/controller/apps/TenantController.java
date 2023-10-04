@@ -135,7 +135,7 @@ public class TenantController extends Handler {
     public ModelAndView save(HttpServletRequest request, @Valid Tenant tenant, @RequestParam(value = "tenantpic", required = false) MultipartFile tenantpic, @Valid String skills) throws IOException {
         Tenant tenanttemp = tenantRes.findByOrgidAndTenantname(super.getOrgid(request), tenant.getTenantname());
         if (tenanttemp != null) {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html?msg=tenantexist"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index?msg=tenantexist"));
         }
         tenantRes.save(tenant);
         if (tenantpic != null && tenantpic.getOriginalFilename() != null && tenantpic.getOriginalFilename().lastIndexOf(".") > 0) {
@@ -194,7 +194,7 @@ public class TenantController extends Handler {
         Tenant temp = optionalById(tenant.getId());
         Tenant tenanttemp = tenantRes.findByOrgidAndTenantname(super.getOrgid(request), tenant.getTenantname());
         if (temp != null && tenanttemp != null && !temp.getId().equals(tenanttemp.getId())) {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html?msg=tenantexist"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index?msg=tenantexist"));
         }
         if (temp != null) {
             tenant.setCreatetime(temp.getCreatetime());
@@ -270,7 +270,7 @@ public class TenantController extends Handler {
             } else {
                 Tenant temp = optionalById(agentStatus.getOrgi());
                 return request(super.createRequestPageTempletResponse(
-                        "redirect:/apps/tenant/index.html?msg=t0" + "&currentorgi=" + agentStatus.getOrgi() + "&currentname=" + URLEncoder.encode(
+                        "redirect:/apps/tenant/index?msg=t0" + "&currentorgi=" + agentStatus.getOrgi() + "&currentname=" + URLEncoder.encode(
                                 temp != null ? temp.getTenantname() : "", "UTF-8")));
             }
         }
@@ -287,12 +287,12 @@ public class TenantController extends Handler {
             } else {
                 Tenant temp = optionalById(agentUser.getOrgi());
                 return request(super.createRequestPageTempletResponse(
-                        "redirect:/apps/tenant/index.html?msg=t0" + "&currentorgi=" + agentUser.getOrgi() + "&currentname=" + URLEncoder.encode(
+                        "redirect:/apps/tenant/index?msg=t0" + "&currentorgi=" + agentUser.getOrgi() + "&currentname=" + URLEncoder.encode(
                                 temp != null ? temp.getTenantname() : "", "UTF-8")));
             }
 
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html?msg=t0"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index?msg=t0"));
     }
 
     @Nullable

@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/customer/impsave.html" enctype="multipart/form-data"  method="post">
+	<form class="layui-form" action="/apps/customer/impsave" enctype="multipart/form-data"  method="post">
 		<#if ekind??><input type="hidden" name="ekind" value="${ekind}"></#if>
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -18,7 +18,7 @@
 						</div>
 						<div class="layui-inline">
 							<font color="red">*（必填项）</font> (需要导入的客户数据Excel文件，可以是多个Sheet页)
-							<a href="/res/template.html?filename=customer_template.xls"  target="_blank" style="margin-left:20px;">
+							<a href="/res/template?filename=customer_template.xls"  target="_blank" style="margin-left:20px;">
 										<i class="layui-icon">&#xe601;</i>
 										下载模板
 									</a>

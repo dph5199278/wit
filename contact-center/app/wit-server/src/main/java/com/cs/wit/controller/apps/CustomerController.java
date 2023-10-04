@@ -269,7 +269,7 @@ public class CustomerController extends Handler {
             }
             contactsRes.save(customerGroupForm.getContacts());
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index.html?ekind=" + customerGroupForm.getEntcustomer().getEkind() + "&msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index?ekind=" + customerGroupForm.getEntcustomer().getEkind() + "&msg=" + msg));
     }
 
     @RequestMapping("/delete")
@@ -282,7 +282,7 @@ public class CustomerController extends Handler {
             entCustomer.setDatastatus(true);                            //客户和联系人都是 逻辑删除
             entCustomerRes.save(entCustomer);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index.html?p=" + p + "&ekind=" + ekind));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index?p=" + p + "&ekind=" + ekind));
     }
 
     @RequestMapping("/edit")
@@ -323,7 +323,7 @@ public class CustomerController extends Handler {
         customerGroupForm.getEntcustomer().setPinyin(PinYinTools.getInstance().getFirstPinYin(customerGroupForm.getEntcustomer().getName()));
         entCustomerRes.save(customerGroupForm.getEntcustomer());
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index.html?ekind=" + ekindId + "&msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index?ekind=" + ekindId + "&msg=" + msg));
     }
 
     @RequestMapping("/imp")
@@ -359,7 +359,7 @@ public class CustomerController extends Handler {
             new ExcelImportProecess(event).process();        //启动导入任务
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index"));
     }
 
     @RequestMapping("/expids")

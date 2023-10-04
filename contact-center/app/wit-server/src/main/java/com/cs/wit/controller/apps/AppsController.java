@@ -246,9 +246,9 @@ public class AppsController extends Handler {
             if (StringUtils.isNotBlank(msg) && (!StringUtils.equals(msg, "edit_user_success"))) {
                 // 处理异常返回
                 if (StringUtils.isBlank(index)) {
-                    return request(super.createRequestPageTempletResponse("redirect:/apps/content.html?msg=" + msg));
+                    return request(super.createRequestPageTempletResponse("redirect:/apps/content?msg=" + msg));
                 }
-                return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html?msg=" + msg));
+                return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index?msg=" + msg));
             }
 
             // 执行更新
@@ -285,17 +285,17 @@ public class AppsController extends Handler {
                 if (!(agentStatus == null && cache.getInservAgentUsersSizeByAgentnoAndOrgi(
                         super.getUser(request).getId(), super.getOrgi(request)) == 0)) {
                     if (StringUtils.isBlank(index)) {
-                        return request(super.createRequestPageTempletResponse("redirect:/apps/content.html?msg=t1"));
+                        return request(super.createRequestPageTempletResponse("redirect:/apps/content?msg=t1"));
                     }
-                    return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html?msg=t1"));
+                    return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index?msg=t1"));
                 }
             }
 
         }
         if (StringUtils.isBlank(index)) {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/content.html"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/content"));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index"));
     }
 
     /**

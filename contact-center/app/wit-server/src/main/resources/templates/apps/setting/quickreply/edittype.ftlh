@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/setting/quickreply/type/update.html" method="post">
+	<form class="layui-form" action="/setting/quickreply/type/update" method="post">
 		<input type="hidden" name="id" value="${quickType.id!''}">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">

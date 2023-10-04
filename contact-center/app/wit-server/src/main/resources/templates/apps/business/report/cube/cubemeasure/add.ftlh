@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/cubemeasure/save.html" name="mainform" method="post">
+	<form class="layui-form" action="/apps/report/cubemeasure/save" name="mainform" method="post">
 		<input type="hidden" name="cubeid" value="${cubeid!''}">
 		<input type="hidden" name="tablename" value="${table.tablename!''}">
 		<div class="layui-collapse">
@@ -101,7 +101,7 @@
 		}
 	})
 	/* $('#fktable').change(function(){
-		loadURL('/apps/report/cubemeasure/fktableid.html?tableid='+$('#fktable option:selected').attr("idval"), '#fktableiddiv');
+		loadURL('/apps/report/cubemeasure/fktableid?tableid='+$('#fktable option:selected').attr("idval"), '#fktableiddiv');
 	}) */
 	layui.use('form', function() {
 		var form = layui.form;

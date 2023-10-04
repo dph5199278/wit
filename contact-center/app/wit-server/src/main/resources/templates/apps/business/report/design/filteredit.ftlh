@@ -1,5 +1,5 @@
 <#include "/public/macro.ftlh">
-<form class="layui-form uk-layui-form" action="/apps/report/design/rfilterupdate.html" >
+<form class="layui-form uk-layui-form" action="/apps/report/design/rfilterupdate" >
 	<div class="layui-row">
 		<div class="layui-col-md6">
 			<div class="layui-form-item">
@@ -171,7 +171,7 @@
 layui.use('form', function(){
   var form = layui.form;
   form.on('select(fktableid)', function(data){
-	  loadURL('/apps/report/design/gettableid.html?tableid='+data.value, '.ukefu-field');
+	  loadURL('/apps/report/design/gettableid?tableid='+data.value, '.ukefu-field');
 	  setTimeout(function(){
 		  form.render();
 	  },500)
@@ -213,7 +213,7 @@ layui.use('form', function(){
 	  }
 	});
   form.on('select(cascadeid)', function(data){
-	  loadURL('/apps/report/design/fktableid.html?fid=${reportFilter.id!''}&fkId='+data.value, '#tb_select');
+	  loadURL('/apps/report/design/fktableid?fid=${reportFilter.id!''}&fkId='+data.value, '#tb_select');
 	  form.render();
   });
   form.render();

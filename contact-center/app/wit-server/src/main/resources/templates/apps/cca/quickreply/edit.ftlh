@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" method="post" action="/agent/quickreply/update.html" id="mainQuickFrom" data-toggle="ajax-form" method="post" data-inner="#quick_reply">
+	<form class="layui-form uk-form" method="post" action="/agent/quickreply/update" id="mainQuickFrom" data-toggle="ajax-form" method="post" data-inner="#quick_reply">
 	  <input type="hidden" name="id" value="${quickReply.id!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">标题：</label>
@@ -29,7 +29,7 @@
 	  <div class="layui-form-button">
 	    <div class="layui-button-block">
 	      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-	      <button class="layui-btn layui-btn-danger" lay-submit lay-filter="formDemo" onclick="$('#mainQuickFrom').attr('action' , '/agent/quickreply/delete.html')">删除</button>
+	      <button class="layui-btn layui-btn-danger" lay-submit lay-filter="formDemo" onclick="$('#mainQuickFrom').attr('action' , '/agent/quickreply/delete')">删除</button>
 	    </div>
 	  </div>
 	</form>

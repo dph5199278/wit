@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" method="post" action="/setting/tag/save.html">
+	<form class="layui-form uk-form" method="post" action="/setting/tag/save">
 		<input type="hidden" name="tagtype" value="${tagtype!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">标签：</label>

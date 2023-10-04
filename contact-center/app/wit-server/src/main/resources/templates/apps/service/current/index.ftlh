@@ -28,7 +28,7 @@
 						<#list agentServiceList.content as agentService>
 						<tr class="tdHasContorllor design-dropable-td" title="${agentService.username!''}">
 							<td class=" first_td_head" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
-								<a href="/service/online/index.html?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
+								<a href="/service/online/index?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
 								${agentService.username!''}
 								</a>
 							</td>
@@ -51,22 +51,22 @@
 							</td>
 							<td class=" ">${agentService.region!''}</td>
 							<td style="white-space:nowrap">
-								<a href="/service/current/trans.html?id=${agentService.id!''}" data-toggle="ajax" data-title="转接坐席" data-width="750" data-height="550">
+								<a href="/service/current/trans?id=${agentService.id!''}" data-toggle="ajax" data-title="转接坐席" data-width="750" data-height="550">
 									<i class="kfont">&#xe62c;</i>
 									转接
 								</a>
 
 								<#if agentService.channel?? && agentService.channel != 'skype'  && !(agentService.agent??) >
-								<a href="/service/current/invite.html?id=${agentService.id!''}" style="margin-left:10px;" class="isInvite">
+								<a href="/service/current/invite?id=${agentService.id!''}" style="margin-left:10px;" class="isInvite">
 									<i class="kfont">&#xe62c;</i>
 									邀请
 								</a>
 								</#if>
-								<a href="/service/current/end.html?id=${agentService.id!''}" data-toggle="tip" data-title="关闭对话将会强制中断坐席和访客的对话，请确认是否关闭？" style="margin-left:10px;">
+								<a href="/service/current/end?id=${agentService.id!''}" data-toggle="tip" data-title="关闭对话将会强制中断坐席和访客的对话，请确认是否关闭？" style="margin-left:10px;">
 									<i class="kfont">&#xe609;</i>
 									关闭
 								</a>
-								<a href="/service/trace.html?sessionid=${agentService.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
+								<a href="/service/trace?sessionid=${agentService.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
 									<i class="kfont">&#xe638;</i>轨迹
 								</a>
 							</td>
@@ -104,7 +104,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/service/current/index.html?p="+data.curr ;
+						location.href = "/service/current/index?p="+data.curr ;
 					}
 				}
 		   });

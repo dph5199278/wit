@@ -8,7 +8,7 @@
 					<#list reportList.content as rpt>
 					<#if rpt.dicid == dataDic.id>
 					<dd <#if rpt?? && report?? && rpt.id == publishedReport.id>class="layui-this"</#if>>
-						<a href="/apps/view/index.html?dicid=${dataDic.id!''}&id=${rpt.id!''}">${rpt.name!''}</a>
+						<a href="/apps/view/index?dicid=${dataDic.id!''}&id=${rpt.id!''}">${rpt.name!''}</a>
 					</dd>
 					</#if>
 					</#list>

@@ -65,7 +65,7 @@
             $(this).attr('name', 'nolabe')
         }
         $.ajax({
-            url: '/agent/agentuserLabel.html',
+            url: '/agent/agentuserLabel',
             data: {'iconid': $(this).attr('id')},
             type: "get",
             success: function () {

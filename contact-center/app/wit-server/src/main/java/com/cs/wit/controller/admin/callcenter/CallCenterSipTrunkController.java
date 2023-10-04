@@ -76,7 +76,7 @@ public class CallCenterSipTrunkController extends Handler {
                 cache.putSystemByIdAndOrgi(siptrunk.getId(), siptrunk.getOrgi(), siptrunk);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk.html?hostid=" + siptrunk.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk?hostid=" + siptrunk.getHostid()));
     }
 
     @RequestMapping(value = "/siptrunk/edit")
@@ -117,7 +117,7 @@ public class CallCenterSipTrunkController extends Handler {
                 cache.putSystemByIdAndOrgi(oldSipTrunk.getId(), oldSipTrunk.getOrgi(), oldSipTrunk);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk.html?hostid=" + siptrunk.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk?hostid=" + siptrunk.getHostid()));
     }
 
     @RequestMapping(value = "/siptrunk/code")
@@ -139,7 +139,7 @@ public class CallCenterSipTrunkController extends Handler {
                 cache.putSystemByIdAndOrgi(oldSipTrunk.getId(), oldSipTrunk.getOrgi(), oldSipTrunk);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk.html?hostid=" + siptrunk.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk?hostid=" + siptrunk.getHostid()));
     }
 
     @RequestMapping(value = "/siptrunk/delete")
@@ -148,6 +148,6 @@ public class CallCenterSipTrunkController extends Handler {
         if (!StringUtils.isBlank(id)) {
             sipTrunkRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/siptrunk?hostid=" + hostid));
     }
 }

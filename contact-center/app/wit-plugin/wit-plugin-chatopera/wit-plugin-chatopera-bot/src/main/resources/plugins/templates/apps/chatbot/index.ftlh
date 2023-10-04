@@ -1,6 +1,6 @@
 <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
-        <#include "/apps/chatbot/include/left.html">
+        <#include "/apps/chatbot/include/left">
     </div>
 </div>
 
@@ -44,7 +44,7 @@
     <div class="row" style="padding-left:5px;">
         <div class="row">
             <blockquote class="layui-elem-quote">
-                <p>智能机器人用于在访客端实现机器人客服，具体使用参考文档中心<a href="https://docs.chatopera.com/products/cskefu/work-chatbot.html" target="_blank">《智文客服机器人客服》</a>。
+                <p>智能机器人用于在访客端实现机器人客服，具体使用参考文档中心<a href="https://docs.chatopera.com/products/cskefu/work-chatbot" target="_blank">《智文客服机器人客服》</a>。
                 </p>
             </blockquote>
         </div>
@@ -215,7 +215,7 @@
 
     // 打开文档中心
     function openChatbotIntegrationInfoCenter(){
-        window.open("https://docs.chatopera.com/products/cskefu/work-chatbot.html", "_blank");
+        window.open("https://docs.chatopera.com/products/cskefu/work-chatbot", "_blank");
     }
 
     // 展示编辑机器人的窗口
@@ -225,7 +225,7 @@
             title: '编辑智能机器人',
             type: 2,
             area: ['800px', '450px'],
-            content: 'edit.html?id=' + chatbotid
+            content: 'edit?id=' + chatbotid
         })
     }
     
@@ -235,7 +235,7 @@
             title: '集成智能机器人',
             type: 2,
             area: ['800px', '450px'],
-            content: 'edit.html'
+            content: 'edit'
         })
     }
 
@@ -254,7 +254,7 @@
                 // 刷新页面
                 layer.close(lindex);
                 setTimeout(function () {
-                    location.href = "/apps/chatbot/index.html";
+                    location.href = "/apps/chatbot/index";
                 }, 300);
             }, function (reason) {
                 // TODO 提示错误

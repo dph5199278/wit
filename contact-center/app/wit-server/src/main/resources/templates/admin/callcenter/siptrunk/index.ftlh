@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			SIP网关<#if sipTrunkListList??>（${sipTrunkListList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/siptrunk/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加SIP网关">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/siptrunk/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加SIP网关">
 					添加SIP网关
 				</button>
 			</span>
@@ -43,7 +43,7 @@
 							<#list sipTrunkListList as siptrunk>
 							<tr>
 								<td>
-									<a href="/admin/callcenter/siptrunk/code.html?hostid=${pbxHost.id!''}&id=${siptrunk.id!''}" data-toggle="ajax" data-width="650" data-height="350">${siptrunk.name!''}</a>
+									<a href="/admin/callcenter/siptrunk/code?hostid=${pbxHost.id!''}&id=${siptrunk.id!''}" data-toggle="ajax" data-width="650" data-height="350">${siptrunk.name!''}</a>
 								 </td>
 								<td>${siptrunk.sipserver!''}</td>
 								<td>${siptrunk.port!''}</td>
@@ -67,11 +67,11 @@
 									</#if>
 								</td>
 								<td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/admin/callcenter/siptrunk/edit.html?id=${siptrunk.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑SIP网关信息">
+								  		<a href="/admin/callcenter/siptrunk/edit?id=${siptrunk.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑SIP网关信息">
 								  			<i class="layui-icon">&#xe642;</i>
 								  			编辑
 								  		</a>
-								  		<a href="/admin/callcenter/siptrunk/delete.html?id=${siptrunk.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-target="#callCenterContent" data-title="请确认是否删除SIP网关？">
+								  		<a href="/admin/callcenter/siptrunk/delete?id=${siptrunk.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-target="#callCenterContent" data-title="请确认是否删除SIP网关？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>

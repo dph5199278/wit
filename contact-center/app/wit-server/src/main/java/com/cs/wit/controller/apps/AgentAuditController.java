@@ -572,7 +572,7 @@ public class AgentAuditController extends Handler {
                 agentServiceRes.save(agentService);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/cca/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/cca/index"));
 
     }
 
@@ -604,7 +604,7 @@ public class AgentAuditController extends Handler {
             }
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/cca/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/cca/index"));
     }
 
     @RequestMapping({"/blacklist/add"})

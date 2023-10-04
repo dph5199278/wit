@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/type/save.html" method="post">
+	<form class="layui-form" action="/apps/report/type/save" method="post">
 		<div class="layui-form-item" style="margin-top:20px;">
 			<div class="layui-inline">
 				<label class="layui-form-label" id="cusname">分类名称：</label>

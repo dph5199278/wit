@@ -10,7 +10,7 @@
 		<title>${report.name!''}-<#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
 		<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?t=1487250759056"/>
 		<link rel="stylesheet" href="/layui/css/layui.css">
-		<link rel="stylesheet" href="/res/css/system.html">
+		<link rel="stylesheet" href="/res/css/system">
 		<link rel="stylesheet" href="/css/ukefu-view.css">
 		<script src="/js/jquery-1.10.2.min.js"></script>
 		<script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -54,7 +54,7 @@
 			</h1>
 			<#if reportFilters?? && reportFilters?size gt 0>
 			<div class="ukefu-filters-content layui-form">
-				<form  action="/apps/report/view.html?id=${report.id!''}" method="post">
+				<form  action="/apps/report/view?id=${report.id!''}" method="post">
 				<div  class="ui-sortable layui-row" >
 					<div class="layui-col-md11" id="ukefu-filter-list">
 						<#if reportFilters??>

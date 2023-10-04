@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form" method="post" action="/apps/report/save.html">
+    <form class="layui-form" method="post" action="/apps/report/save">
         <div class="layui-form-item" style="margin-top:20px;">
             <div class="layui-inline">
                 <label class="layui-form-label">标题：</label>

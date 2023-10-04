@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/design/reportpublished.html" method="post">
+	<form class="layui-form uk-form" action="/apps/report/design/reportpublished" method="post">
 		<input type="hidden" name="reportid" value="${reportid!''}">
 			<div class="layui-form-item">
 				<div class="layui-inline">

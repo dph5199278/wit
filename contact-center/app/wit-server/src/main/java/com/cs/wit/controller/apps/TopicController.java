@@ -154,7 +154,7 @@ public class TopicController extends Handler {
             DataExchangeInterface dataExchangeInterface = (DataExchangeInterface) MainContext.getContext().getBean("topic");
             OnlineUserProxy.resetHotTopic(dataExchangeInterface, super.getOrgi(request), aiid);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
     }
 
     @RequestMapping("/topic/edit")
@@ -207,7 +207,7 @@ public class TopicController extends Handler {
             DataExchangeInterface dataExchangeInterface = (DataExchangeInterface) MainContext.getContext().getBean("topic");
             OnlineUserProxy.resetHotTopic(dataExchangeInterface, super.getOrgi(request), aiid);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
     }
 
     @RequestMapping("/topic/delete")
@@ -223,7 +223,7 @@ public class TopicController extends Handler {
             DataExchangeInterface dataExchangeInterface = (DataExchangeInterface) MainContext.getContext().getBean("topic");
             OnlineUserProxy.resetHotTopic(dataExchangeInterface, super.getOrgi(request), aiid);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
     }
 
     @RequestMapping("/topic/type/add")
@@ -262,9 +262,9 @@ public class TopicController extends Handler {
             DataExchangeInterface dataExchangeInterface = (DataExchangeInterface) MainContext.getContext().getBean("topictype");
             OnlineUserProxy.resetHotTopicType(dataExchangeInterface, super.getOrgi(request), aiid);
         } else {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?aiid=" + aiid + "&msg=k_type_exist"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/topic?aiid=" + aiid + "&msg=k_type_exist"));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?aiid=" + aiid));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic?aiid=" + aiid));
     }
 
     @RequestMapping("/topic/type/edit")
@@ -300,9 +300,9 @@ public class TopicController extends Handler {
             DataExchangeInterface dataExchangeInterface = (DataExchangeInterface) MainContext.getContext().getBean("topictype");
             OnlineUserProxy.resetHotTopicType(dataExchangeInterface, super.getOrgi(request), aiid);
         } else {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?aiid=" + aiid + "&msg=k_type_exist&type=" + type.getId()));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/topic?aiid=" + aiid + "&msg=k_type_exist&type=" + type.getId()));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?aiid=" + aiid + "type=" + type.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic?aiid=" + aiid + "type=" + type.getId()));
     }
 
     @RequestMapping("/topic/type/delete")
@@ -318,7 +318,7 @@ public class TopicController extends Handler {
         } else {
             msg = "notempty";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html" + (msg != null ? "?msg=notempty" : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic" + (msg != null ? "?msg=notempty" : "")));
     }
 
     @RequestMapping("/topic/area")
@@ -346,7 +346,7 @@ public class TopicController extends Handler {
             knowledgeTypeRes.save(temp);
             OnlineUserProxy.resetHotTopicType((DataExchangeInterface) MainContext.getContext().getBean("topictype"), super.getOrgi(request), aiid);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?type=" + type.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic?type=" + type.getId()));
     }
 
 
@@ -385,7 +385,7 @@ public class TopicController extends Handler {
             new ExcelImportProecess(event).process();        //启动导入任务
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html?type=" + type));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic?type=" + type));
     }
 
     @RequestMapping("/topic/batdelete")
@@ -399,7 +399,7 @@ public class TopicController extends Handler {
             }
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/topic.html" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/topic" + (!StringUtils.isBlank(type) ? "?type=" + type : "")));
     }
 
     @RequestMapping("/topic/expids")

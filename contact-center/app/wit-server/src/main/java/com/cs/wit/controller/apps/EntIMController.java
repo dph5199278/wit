@@ -431,7 +431,7 @@ public class EntIMController extends Handler {
                     sf.setData(jpaBlobHelper.createBlob(multipart.getInputStream(), multipart.getSize()));
                     sf.setThumbnail(jpaBlobHelper.createBlobWithFile(thumbnail));
                     streamingFileRepository.save(sf);
-                    String fileUrl = "/res/image.html?id=" + fileid;
+                    String fileUrl = "/res/image?id=" + fileid;
                     upload = new UploadStatus("0", fileUrl);
 
                     if (paste == null) {
@@ -451,8 +451,8 @@ public class EntIMController extends Handler {
                     String id = attachmentProxy.processAttachmentFile(multipart,
                             fileid, logined.getOrgi(), logined.getId()
                     );
-                    upload = new UploadStatus("0", "/res/file.html?id=" + id);
-                    String file = "/res/file.html?id=" + id;
+                    upload = new UploadStatus("0", "/res/file?id=" + id);
+                    String file = "/res/file?id=" + id;
 
                     ChatMessage fileMessage = createFileMessage(file, (int) multipart.getSize(), multipart.getOriginalFilename(), MainContext.MediaType.FILE.toString(), userid, fileid, super.getOrgi(request));
                     fileMessage.setUsername(logined.getUname());

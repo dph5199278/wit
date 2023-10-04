@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/design/dataset.html">
+	<form class="layui-form uk-form" action="/apps/report/design/dataset">
 		<input type="hidden" name="mid" value="${mid!''}">
 		<div  style="height:calc(100% - 60px);">
 			<div class="layui-side-scroll">
@@ -25,7 +25,7 @@ layui.use('form', function(){
 			  layer.alert('请选择一个模型', {icon: 2});
 			  return false;
 		  }
-		 loadURL("/apps/report/design/dataset.html?mid="+$("input[name='mid']").val()+"&cubeid="+$("input[name='publishedcubeid']:checked").val(),"#dataset");
+		 loadURL("/apps/report/design/dataset?mid="+$("input[name='mid']").val()+"&cubeid="+$("input[name='publishedcubeid']:checked").val(),"#dataset");
 		 layer.closeAll();
 		 return false;
 	  }); */

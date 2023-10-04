@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" method="post" action="/setting/quickreply/save.html">
+    <form class="layui-form uk-form" method="post" action="/setting/quickreply/save">
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">标题：</label>

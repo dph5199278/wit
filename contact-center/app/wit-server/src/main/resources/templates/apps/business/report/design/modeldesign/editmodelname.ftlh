@@ -1,4 +1,4 @@
-<form class="layui-form" action="/apps/report/design/updatemodelname.html" >
+<form class="layui-form" action="/apps/report/design/updatemodelname" >
 	<input type="hidden" name="id" value="${id!''}">
   	<div class="layui-form-item">
 	    <label class="layui-form-label">名称</label>

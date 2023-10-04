@@ -127,6 +127,6 @@ public class AgentQualityController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/quality/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/quality/index"));
     }
 }

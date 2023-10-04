@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/role/update.html">
+	<form class="layui-form uk-form" action="/admin/role/update">
 	  <input type="hidden" name="id" value="${roleData.id!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">坐席组：</label>

@@ -1,9 +1,9 @@
 <#if chatmessage.msgtype?? && chatmessage.msgtype == "image">
-	<a href="/agent/message/image.html?id=${chatmessage.id!''}" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
+	<a href="/agent/message/image?id=${chatmessage.id!''}" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
 	<img src="${(chatmessage.message!'')?no_esc}" class="ukefu-media-image" id="${chatmessage.id!''}">
 	</a>
 <#elseif chatmessage.msgtype?? && chatmessage.msgtype == "cooperation">
-	<a href="/agent/message/image.html?t=review&id=${chatmessage.message!''}" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
+	<a href="/agent/message/image?t=review&id=${chatmessage.message!''}" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
 	系统发送了一个协作邀请
 	</a>
 <#elseif chatmessage.msgtype?? && chatmessage.msgtype == "file">

@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/area/update.html">
+	<form class="layui-form uk-form" action="/admin/area/update">
 		<input type="hidden" name="area" id="area" value="${area.area!''}">
 		<input type="hidden" name="id" id="id" value="${area.id!''}">
 		<div class="layui-form-item">

@@ -32,7 +32,7 @@
 							<#list ivrList as ivr>
 							<tr>
 							  <td>
-							  		<a href="/admin/callcenter/ivr/design.html?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">
+							  		<a href="/admin/callcenter/ivr/design?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">
 									${ivr.extention!''}
 							  </td>
 							  <td>
@@ -54,11 +54,11 @@
 									${ivr.description!''}
 							  </td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/ivr/edit.html?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="编辑分机信息">
+							  		<a href="/admin/callcenter/ivr/edit?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="编辑分机信息">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
-							  		<a href="/admin/callcenter/ivr/delete.html?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-callback="loadURL" data-target="#callCenterContent" data-title="删除IVR分机，会同时删除IVR菜单，请确认是否删除分机号？">
+							  		<a href="/admin/callcenter/ivr/delete?id=${ivr.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-callback="loadURL" data-target="#callCenterContent" data-title="删除IVR分机，会同时删除IVR菜单，请确认是否删除分机号？">
 							  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 							  			删除
 							  		</a>

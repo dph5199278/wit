@@ -129,7 +129,7 @@ public class AgentSettingsController extends Handler {
         acdPolicyService.initSessionConfigList();
         map.put("sessionConfig", tempSessionConfig);
 
-        return request(super.createRequestPageTempletResponse("redirect:/setting/agent/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/agent/index"));
     }
 
     @RequestMapping("/blacklist")
@@ -150,7 +150,7 @@ public class AgentSettingsController extends Handler {
                 cache.deleteSystembyIdAndOrgi(tempBlackEntity.getUserid(), MainContext.SYSTEM_ORGI);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/blacklist.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/blacklist"));
     }
 
     @RequestMapping("/tag")
@@ -202,7 +202,7 @@ public class AgentSettingsController extends Handler {
             tag.setCreater(super.getUser(request).getId());
             tagRes.save(tag);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/tag.html?code=" + tagtype));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/tag?code=" + tagtype));
     }
 
     @RequestMapping("/tag/save")
@@ -213,14 +213,14 @@ public class AgentSettingsController extends Handler {
             tag.setCreater(super.getUser(request).getId());
             tagRes.save(tag);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/tag.html?code=" + tagtype));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/tag?code=" + tagtype));
     }
 
     @RequestMapping("/tag/delete")
     @Menu(type = "setting", subtype = "tag", admin = false)
     public ModelAndView tagdelete(@Valid String id, @Valid String tagtype) {
         tagRes.deleteById(id);
-        return request(super.createRequestPageTempletResponse("redirect:/setting/tag.html?code=" + tagtype));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/tag?code=" + tagtype));
     }
 
 
@@ -277,13 +277,13 @@ public class AgentSettingsController extends Handler {
         }
         adv.setCreatetime(new Date());
         if (imgfile != null && imgfile.getSize() > 0) {
-            adv.setImgurl("/res/image.html?id=" + super.saveImageFileWithMultipart(imgfile));
+            adv.setImgurl("/res/image?id=" + super.saveImageFileWithMultipart(imgfile));
         }
         adTypeRes.save(adv);
 
         MainUtils.initAdv(super.getOrgi(request));
 
-        return request(super.createRequestPageTempletResponse("redirect:/setting/adv.html?adpos=" + adv.getAdpos()));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/adv?adpos=" + adv.getAdpos()));
     }
 
     @RequestMapping("/adv/edit")
@@ -306,14 +306,14 @@ public class AgentSettingsController extends Handler {
                 ad.setContent(ad.getContent().replaceAll("\"", "'"));
             }
             if (imgfile != null && imgfile.getSize() > 0) {
-                ad.setImgurl("/res/image.html?id=" + super.saveImageFileWithMultipart(imgfile));
+                ad.setImgurl("/res/image?id=" + super.saveImageFileWithMultipart(imgfile));
             } else {
                 ad.setImgurl(tempad.getImgurl());
             }
             adTypeRes.save(ad);
             MainUtils.initAdv(super.getOrgi(request));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/adv.html?adpos=" + adpos));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/adv?adpos=" + adpos));
     }
 
     @RequestMapping("/adv/delete")
@@ -321,6 +321,6 @@ public class AgentSettingsController extends Handler {
     public ModelAndView advdelete(HttpServletRequest request, @Valid String id, @Valid String adpos) {
         adTypeRes.deleteById(id);
         MainUtils.initAdv(super.getOrgi(request));
-        return request(super.createRequestPageTempletResponse("redirect:/setting/adv.html?adpos=" + adpos));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/adv?adpos=" + adpos));
     }
 }

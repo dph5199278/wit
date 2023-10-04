@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form" action="/admin/email/save.html" method="post">
+	<form class="layui-form" action="/admin/email/save" method="post">
 		<div class="layui-form-item" style="margin-top:10px;">
 			<div class="layui-inline">
 				<label class="layui-form-label" style="width:150px;">邮件服务器名称：</label>

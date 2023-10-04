@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/contacts/update.html" method="post">
+	<form class="layui-form" action="/apps/contacts/update" method="post">
 		<input type="hidden" name="id" value="${contacts.id!''}">
 		<input type="hidden" name="ckindId" value="${ckindId!''}">
 		<input type="hidden" name="wluid" value="${contacts.wluid!''}">
@@ -166,7 +166,7 @@
 <script>
 	//Demo
 	$('#province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
 	})
 	layui.use('form', function() {
 		var form = layui.form;

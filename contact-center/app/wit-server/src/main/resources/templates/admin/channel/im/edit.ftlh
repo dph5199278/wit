@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form" action="/admin/im/update.html" method="post">
+	<form class="layui-form" action="/admin/im/update" method="post">
 		<input type="hidden" name="id" value="${snsAccount.id!''}">
 		<div class="layui-form-item">
 			<div class="layui-inline">

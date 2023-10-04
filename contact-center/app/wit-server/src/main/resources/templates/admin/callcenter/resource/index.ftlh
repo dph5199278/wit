@@ -18,15 +18,15 @@
 <h1 class="site-h1 ukefu-tab" style="height:26px;">
 	<div class="ukefu-tab-title" style="margin-left:0px;">
 		<ul class="tab-title" id="pbxHostTab">
-			<li class="layui-this"><a href="/admin/callcenter/resource/config.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
-			<li><a href="/admin/callcenter/extention.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">分机配置</a></li>
-			<li><a href="/admin/callcenter/skill.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">技能分组</a></li>
-			<li><a href="/admin/callcenter/router.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">路由规则</a></li>
-			<li><a href="/admin/callcenter/ivr.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">IVR配置</a></li>
-			<li><a href="/admin/callcenter/acl.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">访问列表</a></li>
-			<li><a href="/admin/callcenter/media.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">媒体资源</a></li>
-			<li><a href="/admin/callcenter/siptrunk.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">SIP网关</a></li>
-			<li><a href="/admin/callcenter/online/extention.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">已注册分机</a></li>
+			<li class="layui-this"><a href="/admin/callcenter/resource/config?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
+			<li><a href="/admin/callcenter/extention?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">分机配置</a></li>
+			<li><a href="/admin/callcenter/skill?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">技能分组</a></li>
+			<li><a href="/admin/callcenter/router?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">路由规则</a></li>
+			<li><a href="/admin/callcenter/ivr?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">IVR配置</a></li>
+			<li><a href="/admin/callcenter/acl?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">访问列表</a></li>
+			<li><a href="/admin/callcenter/media?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">媒体资源</a></li>
+			<li><a href="/admin/callcenter/siptrunk?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">SIP网关</a></li>
+			<li><a href="/admin/callcenter/online/extention?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">已注册分机</a></li>
 		</ul>					
 	</div>
 </h1>

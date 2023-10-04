@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/metadata/update.html">
+	<form class="layui-form uk-form" action="/admin/metadata/update">
 		<input type="hidden" name="id" value="${metadata.id!''}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">标题：</label>

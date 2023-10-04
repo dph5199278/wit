@@ -69,7 +69,7 @@
 				,limit:20
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/apps/report/cube/selpbcubelist.html?p="+data.curr+"&typeid=<#if typeid??>${typeid!''}</#if>","#ukefu-cube-content");
+						loadURL("/apps/report/cube/selpbcubelist?p="+data.curr+"&typeid=<#if typeid??>${typeid!''}</#if>","#ukefu-cube-content");
 					}
 				}
 		   });

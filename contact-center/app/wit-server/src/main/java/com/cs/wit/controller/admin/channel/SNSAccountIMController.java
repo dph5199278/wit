@@ -117,7 +117,7 @@ public class SNSAccountIMController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index.html?status=" + status));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index?status=" + status));
     }
 
     @RequestMapping("/delete")
@@ -135,7 +135,7 @@ public class SNSAccountIMController extends Handler {
             }
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index.html?execute=" + execute));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index?execute=" + execute));
     }
 
     @RequestMapping("/edit")
@@ -174,6 +174,6 @@ public class SNSAccountIMController extends Handler {
             oldSnsAccount.setSnstype(MainContext.ChannelType.WEBIM.toString());
             snsAccountRes.save(oldSnsAccount);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/im/index"));
     }
 }

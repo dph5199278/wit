@@ -9,19 +9,19 @@
 			<#if quickReplyList??>（${quickReplyList.totalElements}）</#if>
 			<div style="float:right;" class="ukefu-bt-text-content">
 				<#if quickType??>
-				<button class="layui-btn layui-btn-sm" href="/setting/quickreply/edittype.html?id=${quickType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
+				<button class="layui-btn layui-btn-sm" href="/setting/quickreply/edittype?id=${quickType.id!''}" data-toggle="ajax" data-width="950" data-height="450" data-title="编辑分类">
 					编辑分类
 				</button>
-				<button class="layui-btn layui-btn-sm layui-btn-danger" href="/setting/quickreply/deletetype.html?id=${quickType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有问答，请确认是否删除？">
+				<button class="layui-btn layui-btn-sm layui-btn-danger" href="/setting/quickreply/deletetype?id=${quickType.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有问答，请确认是否删除？">
 					删除分类
 				</button>
 				</#if>
-				<button class="layui-btn layui-btn-sm green" href="/setting/quickreply/add.html<#if quickType??>?parentid=${quickType.id!''}</#if>" data-toggle="ajax" data-width="750" data-title="创建新问答">
+				<button class="layui-btn layui-btn-sm green" href="/setting/quickreply/add<#if quickType??>?parentid=${quickType.id!''}</#if>" data-toggle="ajax" data-width="750" data-title="创建新问答">
 					添加问答
 				</button>
 				<#if quickType??>
 					<div class="layui-btn-group ukefu-btn-group">
-						<button class="layui-btn layui-btn-sm" href="/setting/quickreply/imp.html?<#if quickType??>type=${quickType.id}</#if>" title="导入快捷回复" data-toggle="ajax" data-width="950" data-height="600">
+						<button class="layui-btn layui-btn-sm" href="/setting/quickreply/imp?<#if quickType??>type=${quickType.id}</#if>" title="导入快捷回复" data-toggle="ajax" data-width="950" data-height="600">
 							<i class="kfont">&#xe641;</i> 导入 
 						</button>
 					</div>
@@ -39,7 +39,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="/setting/quickreply/expall.html?<#if quickType??>type=${quickType.id}</#if>" title="导出全部快捷回复数据" target="_blank">
+							<a href="/setting/quickreply/expall?<#if quickType??>type=${quickType.id}</#if>" title="导出全部快捷回复数据" target="_blank">
 								<i class="kfont">&#xe672;</i>
 								导出全部数据
 							</a>
@@ -89,11 +89,11 @@
 					  <td><#if quickReply.content?? && quickReply.content?length gt 100>${quickReply.content[0..100]}...<#else>${quickReply.content!''}</#if></td>
 					  <td>${quickReply.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-							<a href="/setting/quickreply/edit.html?id=${quickReply.id!''}" data-toggle="ajax" data-width="750" data-title="编辑用户信息">
+							<a href="/setting/quickreply/edit?id=${quickReply.id!''}" data-toggle="ajax" data-width="750" data-title="编辑用户信息">
 								<i class="layui-icon">&#xe642;</i>
 								编辑
 							</a>
-							<a href="/setting/quickreply/delete.html?id=${quickReply.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
+							<a href="/setting/quickreply/delete?id=${quickReply.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
 								<i class="layui-icon" style="color:red;">&#x1006;</i>
 								删除
 							</a>
@@ -180,7 +180,7 @@ $(document).ready(function(){
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/setting/quickreply/replylist.html?p="+data.curr+"&typeid=<#if quickType??>${quickType.id!''}<#else>0</#if>","#ukefu-quickreply-content");
+						loadURL("/setting/quickreply/replylist?p="+data.curr+"&typeid=<#if quickType??>${quickType.id!''}<#else>0</#if>","#ukefu-quickreply-content");
 					}
 				}
 		   });
@@ -198,7 +198,7 @@ $(document).ready(function(){
 				}
 			});
 			if(num>0){
-				$('#batexp').attr('href' , '/setting/quickreply/expids.html?'+ids)	;
+				$('#batexp').attr('href' , '/setting/quickreply/expids?'+ids)	;
 			}else{
 				top.layer.alert("请先选择需要导出的快捷回复");
 				$('#batexp').attr("href" , "javascript:void(0)");
@@ -222,7 +222,7 @@ $(document).ready(function(){
 				top.layer.confirm("请确认是否删除快捷回复？", {icon: 3, title:'提示'}, function(index){
 					top.layer.close(index);
 					if(confirm){
-						location.href = '/setting/quickreply/batdelete.html?<#if quickType??>type=${quickType.id!''}&</#if>'+ids ;
+						location.href = '/setting/quickreply/batdelete?<#if quickType??>type=${quickType.id!''}&</#if>'+ids ;
 					}
 				});
 			}else{

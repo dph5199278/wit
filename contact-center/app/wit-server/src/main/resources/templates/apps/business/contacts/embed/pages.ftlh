@@ -22,7 +22,7 @@
 		${uKeFuDic[contacts.ckind!''].name!''} 
 	</td>
 	<td style="white-space:nowrap;width:1%;" nowrap="nowrap">
-		<a href="/apps/contacts/embed/edit.html?id=${contacts.id!''}" data-toggle="load" data-target="#mainajaxwin">
+		<a href="/apps/contacts/embed/edit?id=${contacts.id!''}" data-toggle="load" data-target="#mainajaxwin">
 			<i class="layui-icon">&#xe642;</i>
 			编辑
 		</a>

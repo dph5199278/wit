@@ -173,7 +173,7 @@ public class OrganController extends Handler {
             OnlineUserProxy.clean(super.getOrgi(request));
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/admin/organ/index.html?msg=" + msg + "&organ=" + firstId));
+                "redirect:/admin/organ/index?msg=" + msg + "&organ=" + firstId));
     }
 
     /**
@@ -257,7 +257,7 @@ public class OrganController extends Handler {
             OnlineUserProxy.clean(super.getOrgi(request));
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index.html?organ=" + organ));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index?organ=" + organ));
     }
 
     @RequestMapping("/user/delete")
@@ -272,7 +272,7 @@ public class OrganController extends Handler {
             organUserRes.deleteOrganUserByUseridAndOrgan(id, organ);
             OnlineUserProxy.clean(super.getOrgi(request));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index.html?organ=" + organ));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index?organ=" + organ));
     }
 
     @RequestMapping("/edit")
@@ -294,7 +294,7 @@ public class OrganController extends Handler {
     public ModelAndView update(HttpServletRequest request, @Valid Organ organ) {
         String msg = organProxy.updateOrgan(organ, super.getOrgi(request));
         return request(super.createRequestPageTempletResponse(
-                "redirect:/admin/organ/index.html?msg=" + msg + "&organ=" + organ.getId()));
+                "redirect:/admin/organ/index?msg=" + msg + "&organ=" + organ.getId()));
     }
 
     @RequestMapping("/area")
@@ -326,7 +326,7 @@ public class OrganController extends Handler {
             msg = "admin_organ_update_not_exist";
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/admin/organ/index.html?msg=" + msg + "&organ=" + organ.getId()));
+                "redirect:/admin/organ/index?msg=" + msg + "&organ=" + organ.getId()));
     }
 
     @RequestMapping("/delete")
@@ -346,7 +346,7 @@ public class OrganController extends Handler {
                 OnlineUserProxy.clean(super.getOrgi(request));
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/organ/index?msg=" + msg));
     }
 
     @RequestMapping("/auth/save")
@@ -374,6 +374,6 @@ public class OrganController extends Handler {
             }
         }
         return request(
-                super.createRequestPageTempletResponse("redirect:/admin/organ/index.html?organ=" + organData.getId()));
+                super.createRequestPageTempletResponse("redirect:/admin/organ/index?organ=" + organData.getId()));
     }
 }

@@ -82,7 +82,7 @@ public class AgentSkillController extends Handler{
     	}else{
     		skillRepository.save(skill) ;
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index.html?msg="+msg));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index?msg="+msg));
     }
     
     @RequestMapping("/edit")
@@ -105,7 +105,7 @@ public class AgentSkillController extends Handler{
     	}else{
     		msg =  "admin_skill_update_not_exist";
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index.html?msg="+msg));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index?msg="+msg));
     }
     
     @RequestMapping("/delete")
@@ -117,6 +117,6 @@ public class AgentSkillController extends Handler{
     	}else{
     		msg = "admin_skill_not_exist" ;
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index.html?msg="+msg));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/skill/index?msg="+msg));
     }
 }

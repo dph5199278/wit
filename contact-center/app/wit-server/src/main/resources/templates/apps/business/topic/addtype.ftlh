@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/topic/type/save.html">
+	<form class="layui-form uk-form" action="/apps/topic/type/save">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">分类名称：</label>
 	    <div class="layui-input-inline">

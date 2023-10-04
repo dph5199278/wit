@@ -13,7 +13,7 @@
 	<link rel="stylesheet" type="text/css" href="/js/kindeditor/themes/default/default.css">
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
 	<link rel="stylesheet" href="/layui/css/layui.css">
-	<link rel="stylesheet" href="/res/css.html">
+	<link rel="stylesheet" href="/res/css">
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
 	
 	<script src="/js/jquery-1.10.2.min.js"></script>

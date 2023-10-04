@@ -87,7 +87,7 @@ public class CallCenterController extends Handler {
     @RequestMapping(value = "/pbxhost/save")
     @Menu(type = "callcenter", subtype = "pbxhost", admin = true)
     public ModelAndView pbxhostsave(HttpServletRequest request, @Valid PbxHost pbxHost) {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost.html"));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost"));
         String msg = null;
         if (!StringUtils.isBlank(pbxHost.getName())) {
             int count = pbxHostRes.countByHostnameAndOrgi(pbxHost.getHostname(), super.getOrgi(request));
@@ -112,7 +112,7 @@ public class CallCenterController extends Handler {
         }
         if (!StringUtils.isBlank(msg)) {
             view = request(
-                    super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost.html?msg=" + msg));
+                    super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost?msg=" + msg));
         }
         return view;
     }
@@ -127,7 +127,7 @@ public class CallCenterController extends Handler {
     @RequestMapping(value = "/pbxhost/update")
     @Menu(type = "callcenter", subtype = "pbxhost", admin = true)
     public ModelAndView pbxhostupdate(HttpServletRequest request, @Valid PbxHost pbxHost) {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost.html"));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost"));
         String msg = null;
         if (!StringUtils.isBlank(pbxHost.getId())) {
             PbxHost destHost = pbxHostRes.findByIdAndOrgi(pbxHost.getId(), super.getOrgi(request));
@@ -155,7 +155,7 @@ public class CallCenterController extends Handler {
         }
         if (!StringUtils.isBlank(msg)) {
             view = request(
-                    super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost.html?msg=" + msg));
+                    super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost?msg=" + msg));
         }
         return view;
     }
@@ -174,6 +174,6 @@ public class CallCenterController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/pbxhost"));
     }
 }

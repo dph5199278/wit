@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form" action="/admin/template/impsave.html" enctype="multipart/form-data"  method="post">
+	<form class="layui-form" action="/admin/template/impsave" enctype="multipart/form-data"  method="post">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label">数据文件：</label>

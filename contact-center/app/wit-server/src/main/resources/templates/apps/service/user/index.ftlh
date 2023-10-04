@@ -85,7 +85,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/service/user/index.html?p="+data.curr ;
+						location.href = "/service/user/index?p="+data.curr ;
 					}
 				}
 		   });

@@ -8,10 +8,10 @@
 			content="width=device-width, maximum-scale=1.0, initial-scale=1.0,initial-scale=1.0,user-scalable=no" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
-		<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
+		<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
 		
 		<link rel="stylesheet" href="/layui/css/layui.css">
-		<link rel="stylesheet" href="/res/css/system.html">
+		<link rel="stylesheet" href="/res/css/system">
 		<link rel="stylesheet" href="/css/ukefu-design.css">
 		<script src="/js/jquery-1.10.2.min.js"></script>
 		<script src="/js/jquery-ui-1.10.2.custom.min.js"></script>
@@ -41,7 +41,7 @@
 			<div class="layui-header header header-ukefu">
 				<div class="layui-main">
 					<span style="color:#ffffff;padding-left:10px;font-size:20px;line-height:47.5px;">${reportModel.name!''}
-						<a href="/apps/report/design/editmodelname.html?id=${reportModel.id!''}&name=${reportModel.name!''}"  data-toggle="ajax" data-width="450" data-height="350" data-title="修改名称" ><i class="layui-icon" 
+						<a href="/apps/report/design/editmodelname?id=${reportModel.id!''}&name=${reportModel.name!''}"  data-toggle="ajax" data-width="450" data-height="350" data-title="修改名称" ><i class="layui-icon"
 											style="font-size: 24px;margin-left:5px;color:#fff">&#xe642;</i>
 							</a>
 					</span>

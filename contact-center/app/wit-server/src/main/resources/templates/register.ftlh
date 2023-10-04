@@ -9,7 +9,7 @@
 	content="width=device-width, maximum-scale=1.0, initial-scale=1.0,initial-scale=1.0,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
-<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
+<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
 <link rel="stylesheet" href="/layui/css/layui.css">
 <link rel="stylesheet" href="/css/login.css">
 <script src="/layui/layui.js"></script>
@@ -19,14 +19,14 @@
 <body class="login">
 	<div class="login-box">
 		<div class="login-logo">
-			<a> <img src="<#if systemConfig?? && systemConfig.loginlogo?? && systemConfig.loginlogo != ''>/res/image.html?id=${systemConfig.loginlogo?url}<#else>images/logo2.png</#if>" style="height:60px;width:220px;">
+			<a> <img src="<#if systemConfig?? && systemConfig.loginlogo?? && systemConfig.loginlogo != ''>/res/image?id=${systemConfig.loginlogo?url}<#else>images/logo2.png</#if>" style="height:60px;width:220px;">
 			</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 
 			<p class="login-box-msg">注册账号</p>
-			<form id="loginForm" action="/addAdmin.html" class="layui-form" method="post">
+			<form id="loginForm" action="/addAdmin" class="layui-form" method="post">
 				<div class="form-group has-feedback" style="margin-bottom:10px;">
 					<span class="kfont form-control-feedback">&#xe618;</span>
 					<input name="username" id="username" autofocus required lay-verify="required"  
@@ -57,7 +57,7 @@
 					</div>
 					<!-- /.col -->
 					<div class="col-xs-12">
-						 <p class="btm-text"><a href="/login.html">已有账号请登录</a></p>
+						 <p class="btm-text"><a href="/login">已有账号请登录</a></p>
 					</div>
 				</div>
 			</form>
@@ -67,7 +67,7 @@
 </body>
 <script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
-		top.location.href = "/register.html" ;
+		top.location.href = "/register" ;
 	}
 	layui.use('layer', function(){
 		  var layer = layui.layer;

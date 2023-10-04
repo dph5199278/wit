@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/role/saveuser.html">
+	<form class="layui-form uk-form" action="/admin/role/saveuser">
 		<input type="hidden" name="role" value="${role.id!''}">
 		<div class="layui-form-item">
 			<div class="layui-input-inline">

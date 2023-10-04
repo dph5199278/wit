@@ -99,7 +99,7 @@ public class MetadataController extends Handler {
             table.setPreviewtemplet(metadata.getPreviewtemplet());
             metadataRes.save(table);
         });
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     @RequestMapping("/properties/edit")
@@ -135,14 +135,14 @@ public class MetadataController extends Handler {
         tableProperties.setImpfield(tp.isImpfield());
 
         tablePropertiesRes.save(tableProperties);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table.html?id=" + tableProperties.getDbtableid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table?id=" + tableProperties.getDbtableid()));
     }
 
     @RequestMapping("/delete")
     @Menu(type = "admin", subtype = "metadata", admin = true)
     public ModelAndView delete(@Valid String id) {
         metadataRes.deleteById(id);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     @RequestMapping("/batdelete")
@@ -151,7 +151,7 @@ public class MetadataController extends Handler {
         if (ids != null && ids.length > 0) {
             metadataRes.deleteAll(metadataRes.findAllById(Arrays.asList(ids)));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     @RequestMapping("/properties/delete")
@@ -160,7 +160,7 @@ public class MetadataController extends Handler {
         TableProperties prop = tablePropertiesRes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Table properties %s not found", id)));
         tablePropertiesRes.delete(prop);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table.html?id=" + (!StringUtils.isBlank(tbid) ? tbid : prop.getDbtableid())));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table?id=" + (!StringUtils.isBlank(tbid) ? tbid : prop.getDbtableid())));
     }
 
     @RequestMapping("/properties/batdelete")
@@ -169,7 +169,7 @@ public class MetadataController extends Handler {
         if (ids != null && ids.length > 0) {
             tablePropertiesRes.deleteAll(tablePropertiesRes.findAllById(Arrays.asList(ids)));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table.html?id=" + tbid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/table?id=" + tbid));
     }
 
     @RequestMapping("/table")
@@ -233,7 +233,7 @@ public class MetadataController extends Handler {
 
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     private MetadataTable processMetadataTable(UKTableMetaData metaData, MetadataTable table) {
@@ -293,7 +293,7 @@ public class MetadataController extends Handler {
                 }
             });
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
@@ -328,7 +328,7 @@ public class MetadataController extends Handler {
                 }
             });
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
     @SuppressWarnings({"rawtypes"})
@@ -361,7 +361,7 @@ public class MetadataController extends Handler {
                 }
             });
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/metadata/index"));
     }
 
 }

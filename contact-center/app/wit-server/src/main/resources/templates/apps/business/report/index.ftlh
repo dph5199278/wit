@@ -7,7 +7,7 @@
 			<h1 class="site-h1">
 				报表分类
 				<span style="float:right;">
-					<button class="layui-btn layui-btn-sm green" href="/apps/report/addtype.html<#if dataDic??>?dicid=${dataDic.parentid}</#if>" data-toggle="ajax" data-height="450" data-width="400" data-title="创建分类">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/addtype<#if dataDic??>?dicid=${dataDic.parentid}</#if>" data-toggle="ajax" data-height="450" data-width="400" data-title="创建分类">
 						<i class="layui-icon">&#xe608;</i>
 						创建分类
 					</button>
@@ -31,19 +31,19 @@
 				<#if reportList??>（${reportList.totalElements}）</#if>
 				<div style="float:right;" class="ukefu-bt-text-content">
 					<#if dataDic??>
-					<button class="layui-btn layui-btn-sm" href="/apps/report/edittype.html?id=${dataDic.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑分类">
+					<button class="layui-btn layui-btn-sm" href="/apps/report/edittype?id=${dataDic.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑分类">
 						编辑分类
 					</button>
-					<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/report/deletetype.html?id=${dataDic.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有报表，请确认是否删除？">
+					<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/report/deletetype?id=${dataDic.id!''}" data-toggle="tip" data-title="删除分类将会同时删除分类下的所有报表，请确认是否删除？">
 						删除分类
 					</button>
 					</#if>
-					<button class="layui-btn layui-btn-sm green" href="/apps/report/add.html<#if dataDic??>?dicid=${dataDic.id!''}</#if>" data-toggle="ajax" data-width="400" data-height="450"  data-title="创建新报表">
+					<button class="layui-btn layui-btn-sm green" href="/apps/report/add<#if dataDic??>?dicid=${dataDic.id!''}</#if>" data-toggle="ajax" data-width="400" data-height="450"  data-title="创建新报表">
 						添加报表
 					</button>
 					<#if dataDic??>
 						<div class="layui-btn-group ukefu-btn-group">
-							<button class="layui-btn layui-btn-sm" href="/apps/report/imp.html?<#if dataDic??>type=${dataDic.id}</#if>" title="导入报表" data-toggle="ajax" data-width="950" data-height="600">
+							<button class="layui-btn layui-btn-sm" href="/apps/report/imp?<#if dataDic??>type=${dataDic.id}</#if>" title="导入报表" data-toggle="ajax" data-width="950" data-height="600">
 								<i class="kfont">&#xe641;</i> 导入 
 							</button>
 						</div>
@@ -61,7 +61,7 @@
 								</a>
 							</li>
 							<li>
-								<a href="/apps/report/expall.html?<#if dataDic??>type=${dataDic.id}</#if>" title="导出全部报表数据" target="_blank">
+								<a href="/apps/report/expall?<#if dataDic??>type=${dataDic.id}</#if>" title="导出全部报表数据" target="_blank">
 									<i class="kfont">&#xe672;</i>
 									导出全部数据
 								</a>
@@ -109,19 +109,19 @@
 						  </td>
 						  <td>${report.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 						  <td style="white-space:nowrap;" nowrap="nowrap">
-								<a href="/apps/report/edit.html?id=${report.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑报表信息">
+								<a href="/apps/report/edit?id=${report.id!''}" data-toggle="ajax" data-width="400" data-height="450" data-title="编辑报表信息">
 									<i class="layui-icon">&#xe642;</i>
 									编辑
 								</a>
-								<a href="/apps/report/design/index.html?id=${report.id!''}" target="_blank" style="margin-left:10px;">
+								<a href="/apps/report/design/index?id=${report.id!''}" target="_blank" style="margin-left:10px;">
 									<i class="layui-icon">&#xe63c;</i>
 									设计
 								</a>
-								<a href="/apps/report/design/reportpublish.html?reportid=${report.id!''}" style="margin-left:10px;"  data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
+								<a href="/apps/report/design/reportpublish?reportid=${report.id!''}" style="margin-left:10px;"  data-toggle="ajax" data-width="600" data-height="300" data-title="发布模型">
 						  			<i class="layui-icon">&#xe609;</i>
 						  			发布
 						  		</a>
-								<a href="/apps/report/delete.html?id=${report.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除报表？">
+								<a href="/apps/report/delete?id=${report.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除报表？">
 									<i class="layui-icon" style="color:red;">&#x1006;</i>
 									删除
 								</a>
@@ -162,7 +162,7 @@
 	};
 	
 	function onClick(e, treeId, treeNode) {
-		location.href = "/apps/report/index.html?dicid="+treeNode.id ;
+		location.href = "/apps/report/index?dicid="+treeNode.id ;
 	}
 
 	var zNodes =[
@@ -255,7 +255,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/apps/report/replylist.html?p="+data.curr+"&typeid=<#if dataDic??>${dataDic.id!''}<#else>0</#if>","#ukefu-quickreply-content");
+						loadURL("/apps/report/replylist?p="+data.curr+"&typeid=<#if dataDic??>${dataDic.id!''}<#else>0</#if>","#ukefu-quickreply-content");
 					}
 				}
 		   });
@@ -273,7 +273,7 @@
 			}
 		});
 		if(num>0){
-			$('#batexp').attr('href' , '/apps/report/expids.html?'+ids)	;
+			$('#batexp').attr('href' , '/apps/report/expids?'+ids)	;
 		}else{
 			top.layer.alert("请先选择需要导出的报表");
 			$('#batexp').attr("href" , "javascript:void(0)");
@@ -297,7 +297,7 @@
 			top.layer.confirm("请确认是否删除报表？", {icon: 3, title:'提示'}, function(index){
 				top.layer.close(index);
 				if(confirm){
-					location.href = '/apps/report/batdelete.html?<#if dataDic??>type=${dataDic.id!''}&</#if>'+ids ;
+					location.href = '/apps/report/batdelete?<#if dataDic??>type=${dataDic.id!''}&</#if>'+ids ;
 				}
 			});
 		}else{

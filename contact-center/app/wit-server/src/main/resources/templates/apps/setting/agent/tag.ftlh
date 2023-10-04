@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						${tagType.name!''}标签<#if userList??>（${userList.totalElements!''}）</#if>
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-sm green" href="/setting/tag/add.html?tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="添加标签">
+							<button class="layui-btn layui-btn-sm green" href="/setting/tag/add?tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="添加标签">
 								添加标签
 							</button>
 						</span>
@@ -46,11 +46,11 @@
 								  <td>${tag.times!'0'}</td>
 								  <td><#if tag.color??><div class="ukefu-im-theme"><div class="ukefu-tag theme${tag.color}" style="color:#ffffff;">${tag.tag!''}</div></div></#if></td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/setting/tag/edit.html?id=${tag.id!''}&tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="编辑标签">
+								  		<a href="/setting/tag/edit?id=${tag.id!''}&tagtype=${tagType.code!''}" data-toggle="ajax" data-width="650" data-height="270" data-title="编辑标签">
 								  			<i class="layui-icon">&#xe642;</i>
 								  			编辑
 								  		</a>
-								  		<a href="/setting/tag/delete.html?id=${tag.id!''}&tagtype=${tagType.code!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除标签？">
+								  		<a href="/setting/tag/delete?id=${tag.id!''}&tagtype=${tagType.code!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除标签？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>
@@ -92,7 +92,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/setting/tag.html?p="+data.curr ;
+						location.href = "/setting/tag?p="+data.curr ;
 					}
 				}
 		   });

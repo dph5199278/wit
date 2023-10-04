@@ -100,7 +100,7 @@ public class CallCenterMediaController extends Handler {
                 mediaRes.save(media);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media.html?hostid=" + media.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media?hostid=" + media.getHostid()));
     }
 
     @RequestMapping(value = "/media/edit")
@@ -144,7 +144,7 @@ public class CallCenterMediaController extends Handler {
                 mediaRes.save(oldMedia);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media.html?hostid=" + media.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media?hostid=" + media.getHostid()));
     }
 
     @RequestMapping(value = "/media/delete")
@@ -153,7 +153,7 @@ public class CallCenterMediaController extends Handler {
         if (!StringUtils.isBlank(id)) {
             mediaRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/media?hostid=" + hostid));
     }
 
     @RequestMapping(value = "/play")

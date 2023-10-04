@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/topic/update.html" method="post">
+	<form class="layui-form" action="/apps/topic/update" method="post">
 		<input type="hidden" name="id" value="${topic.id!''}">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -145,7 +145,7 @@
 		themeType : 'simple',
 		width:"100%",
 		resizeType:0,
-		uploadJson : "/res/image/upload.html",
+		uploadJson : "/res/image/upload",
 		items : ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 				 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
 				 'insertunorderedlist', '|', 'emoticons', 'image', 'link'],

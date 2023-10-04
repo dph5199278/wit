@@ -97,7 +97,7 @@ public class CubeLevelController extends Handler {
             }
             cubeLevelRes.save(cubeLevel);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
     }
 
     @RequestMapping("/delete")
@@ -106,7 +106,7 @@ public class CubeLevelController extends Handler {
         CubeLevel cubeLevel = cubeLevelRes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cube level %s not found", id)));
         cubeLevelRes.delete(cubeLevel);
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
     }
 
     @RequestMapping("/edit")
@@ -152,7 +152,7 @@ public class CubeLevelController extends Handler {
             }
             cubeLevelRes.save(cubeLevel);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeLevel.getCubeid() + "&dimensionId=" + cubeLevel.getDimid()));
     }
 
     @RequestMapping("/fktableid")

@@ -63,7 +63,7 @@ function invitationInBusyStatus(status) {
         // 设置为就绪，置闲
         $("#agentstatus_busy", parent.document).removeClass("layui-form-onswitch-busy");
         $("#agentstatus_busy", parent.document).addClass("layui-form-onswitch-notbusy");
-        loadURL("/agent/notbusy.html");
+        loadURL("/agent/notbusy");
         layer.close(index);
     }, function (index) {
         layer.close(index);
@@ -80,7 +80,7 @@ function invitationInNotReady(){
         // 设置为就绪，置闲
         $("#agentstatus", parent.document).addClass("layui-form-onswitch");
         sessionStorage.setItem('agentstatus',"ready")
-        loadURL("/agent/ready.html",null, function(){
+        loadURL("/agent/ready",null, function(){
             $("#agentstatus_busy", parent.document).show();
         });
 

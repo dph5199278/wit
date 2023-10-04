@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/callcenter/siptrunk/update.html" data-toggle="ajax-form" data-inner="#callCenterContent">
+    <form class="layui-form uk-form" action="/admin/callcenter/siptrunk/update" data-toggle="ajax-form" data-inner="#callCenterContent">
     	<input type="hidden" name="hostid" value="${pbxHost.id!''}">
     	<input type="hidden" name="id" value="${siptrunk.id!''}">
         <div class="layui-form-item">
@@ -132,7 +132,7 @@
 <script>
 //Demo
 $('#province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=city&attr=lay-ignore&style=display:inline-block;" , '#contacts_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=city&attr=lay-ignore&style=display:inline-block;" , '#contacts_city');
 	})
 layui.use('form', function(){
   var form = layui.form;

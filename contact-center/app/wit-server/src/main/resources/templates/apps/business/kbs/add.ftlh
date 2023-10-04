@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/kbs/type/save.html" method="post">
+	<form class="layui-form" action="/apps/kbs/type/save" method="post">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
 				<h2 class="layui-colla-title">知识基本信息</h2>
@@ -92,7 +92,7 @@
 								<select lay-ignore name="keyword" class="ukefu-select-input" placeh style="width: 100%" multiple="multiple">
 								</select>
 							</div>
-							<button class="layui-btn layui-btn-sm green" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="提取关键词">
+							<button class="layui-btn layui-btn-sm green" href="/apps/kbs/addtype" data-toggle="ajax" data-height="450" data-width="950" data-title="提取关键词">
 								提取关键词
 							</button>
 						</div>
@@ -103,7 +103,7 @@
 							<div class="layui-input-inline" style="width: 664px;">
 								<textarea name="summary" id="summary" placeholder="请输入摘要内容" class="layui-textarea" style="height:100px;resize:none;"></textarea>
 							</div>
-							<button class="layui-btn layui-btn-sm green" href="/apps/kbs/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="提取摘要">
+							<button class="layui-btn layui-btn-sm green" href="/apps/kbs/addtype" data-toggle="ajax" data-height="450" data-width="950" data-title="提取摘要">
 								提取摘要
 							</button>
 						</div>
@@ -214,7 +214,7 @@
 		themeType : 'simple',
 		width:"100%",
 		resizeType:0,
-		uploadJson : "/res/image/upload.html",
+		uploadJson : "/res/image/upload",
 		items : ['fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
 				 'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
 				 'insertunorderedlist', '|', 'emoticons', 'image', 'link'],

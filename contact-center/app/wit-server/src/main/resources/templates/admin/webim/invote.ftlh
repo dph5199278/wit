@@ -18,15 +18,15 @@
 
 <div class="ukefu-tab-title" style="margin-left: 0px;">
 	<ul class="tab-title">
-		<li <#if subtype == 'webim'>class="layui-this"</#if>><a href="/admin/webim/index.html?snsid=${snsAccount.snsid!''}">基本设置</a></li>
-		<li <#if subtype == 'invote'>class="layui-this"</#if>><a href="/admin/webim/invote.html?snsid=${snsAccount.snsid!''}">邀请设置</a></li>
-		<li <#if subtype == 'profile'>class="layui-this"</#if>><a href="/admin/webim/profile.html?snsid=${snsAccount.snsid!''}">客服信息</a></li>
+		<li <#if subtype == 'webim'>class="layui-this"</#if>><a href="/admin/webim/index?snsid=${snsAccount.snsid!''}">基本设置</a></li>
+		<li <#if subtype == 'invote'>class="layui-this"</#if>><a href="/admin/webim/invote?snsid=${snsAccount.snsid!''}">邀请设置</a></li>
+		<li <#if subtype == 'profile'>class="layui-this"</#if>><a href="/admin/webim/profile?snsid=${snsAccount.snsid!''}">客服信息</a></li>
 	</ul>
 </div>
 <div class="layui-tab">
   <div class="layui-tab-content">
     <div class="layui-tab-item layui-show">
-		<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/webim/invote/save.html" class="layui-form">
+		<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/webim/invote/save" class="layui-form">
 			<#if inviteData??>
 				<input type="hidden" name="id" value="${inviteData.id!''}">
 				<input type="hidden" name="snsaccountid" value="${inviteData.snsaccountid!''}">
@@ -169,7 +169,7 @@
 											<div class="ukefu-webim-tl">7、自定义访客邀请框背景图片 （建议尺寸：273*230）</div>
 											<div class="box-item" style="position: relative;">
 												<span class="ukefu-logo">
-													<img id="invite_show" src="<#if inviteData?? && inviteData.consult_invite_bg??>/res/image.html?id=${inviteData.consult_invite_bg?url}<#else>/im/img/webwxgetmsgimg.jpg</#if>" style="height:175px;">
+													<img id="invite_show" src="<#if inviteData?? && inviteData.consult_invite_bg??>/res/image?id=${inviteData.consult_invite_bg?url}<#else>/im/img/webwxgetmsgimg.jpg</#if>" style="height:175px;">
 												</span>
 												<div class="layui-box layui-upload-button" style="position:absolute;left: 290px;">
 													<input type="file" id="invoteupdata" name=invotebg accept="image/gif, image/jpeg, image/png" lay-ext="jpg|png|gif"  class="layui-upload-file" onchange="$('#invotebg').html($(this).val());$('.invite_close').show()">
@@ -178,7 +178,7 @@
 
 												<div style="display: inline-block;margin-left: 70px">
 													<span id="invotebg" style="float: left"></span>
-													<i class="layui-icon invite_close" style="display: none;float: left;margin-top: -5px;cursor:pointer;" onclick="  $('#invotebg').html('');$('#invite_show').attr('src','<#if inviteData?? && inviteData.consult_invite_bg??>/res/image.html?id=${inviteData.consult_invite_bg?url}<#else>/im/img/webwxgetmsgimg.jpg</#if>'); $('.invite_close').hide(); clearInvoteupdata()">&#x1006;</i>
+													<i class="layui-icon invite_close" style="display: none;float: left;margin-top: -5px;cursor:pointer;" onclick="  $('#invotebg').html('');$('#invite_show').attr('src','<#if inviteData?? && inviteData.consult_invite_bg??>/res/image?id=${inviteData.consult_invite_bg?url}<#else>/im/img/webwxgetmsgimg.jpg</#if>'); $('.invite_close').hide(); clearInvoteupdata()">&#x1006;</i>
 												</div>
 
 											</div>
@@ -188,7 +188,7 @@
 									</div>
 									<div class="col-md-5">
 										<div class="ukefu-im-preview" id="ukefu-point" style="height:183px;position: absolute;">
-											<div id="ukefu-cousult-invite-dialog" class="ukefu-im-preview-bar ukefu-cousult-invite-dialog ukefu-theme-color theme<#if inviteData??>${inviteData.consult_invite_color!'1'}<#else>1</#if>" style="padding:5px;height:160px;width:400px;background:url('<#if inviteData?? && inviteData.consult_invite_bg??>/res/image.html?id=${inviteData.consult_invite_bg}<#else>'/im/img/webwxgetmsgimg.jpg'</#if>') no-repeat">
+											<div id="ukefu-cousult-invite-dialog" class="ukefu-im-preview-bar ukefu-cousult-invite-dialog ukefu-theme-color theme<#if inviteData??>${inviteData.consult_invite_color!'1'}<#else>1</#if>" style="padding:5px;height:160px;width:400px;background:url('<#if inviteData?? && inviteData.consult_invite_bg??>/res/image?id=${inviteData.consult_invite_bg}<#else>'/im/img/webwxgetmsgimg.jpg'</#if>') no-repeat">
 												<span style="float:right;">	
 													<i class="layui-icon" style="font:size:12px;color:#ffffff;">&#x1006;</i>
 												</span>

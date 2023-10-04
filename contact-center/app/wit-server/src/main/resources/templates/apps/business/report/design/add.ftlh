@@ -1,5 +1,5 @@
 <#include "/public/macro.ftlh">
-<form class="layui-form" action="/apps/report/design/values.html" id="selcubelevel">
+<form class="layui-form" action="/apps/report/design/values" id="selcubelevel">
 	<input type="hidden" name="t" value="${t!''}" id="t">	
 	<#if dtype??><input type="hidden" name="dtype" value="${dtype!''}"></#if>
 	<input type="hidden" name="tabid" value="${tabid!''}">
@@ -95,7 +95,7 @@ layui.use('form', function(){
   form.render();
   <#if t?? && (t=='dim'|| t=='filter') >
   form.on('select(dimensionselect)', function(data){
-	  loadURL('/apps/report/design/adddata.html?<#if dtype??>dtype=${dtype!''}&</#if>tabid=${tabid!''}&t=${t!''}&cubeid=<#if cube??>${cube.id!''}</#if>&mid=<#if reportModel??>${reportModel.id!''}</#if>&dim='+data.value, '#selcubelevel');
+	  loadURL('/apps/report/design/adddata?<#if dtype??>dtype=${dtype!''}&</#if>tabid=${tabid!''}&t=${t!''}&cubeid=<#if cube??>${cube.id!''}</#if>&mid=<#if reportModel??>${reportModel.id!''}</#if>&dim='+data.value, '#selcubelevel');
 	}); 
   </#if>
 });

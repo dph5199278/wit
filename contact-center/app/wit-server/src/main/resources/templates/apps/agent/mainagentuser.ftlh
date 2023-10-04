@@ -9,8 +9,8 @@
             <div style="width:250px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;word-wrap: break-word;
 word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if curagentuser.region??>  （ ${curagentuser.region!''} </#if></div>
     <div style="float:right;" class="ukefu-service-btn">
-        <a href="/agent/summary.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&channel=${curagentuser.channel}" data-toggle="ajax" data-width="950" data-height="450" title="记录服务小结"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe65c;</i> 服务小结</button></a>
-        <a href="/agent/transfer.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="750" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>
+        <a href="/agent/summary?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&channel=${curagentuser.channel}" data-toggle="ajax" data-width="950" data-height="450" title="记录服务小结"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe65c;</i> 服务小结</button></a>
+        <a href="/agent/transfer?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}" data-toggle="ajax" data-width="750" data-height="550" title="选择转接对象"><button class="layui-btn layui-btn-sm"><i class="kfont">&#xe7be;</i> 转接坐席</button></a>
         <a href="javascript:void(0)" onclick="submitEndAgentUser('${curagentuser.id}','${curagentuser.username}')"><button class="layui-btn layui-btn-sm layui-btn-danger"><i class="kfont">&#xe621;</i> 结束对话</button></a>
     </div>
     <#else>
@@ -102,7 +102,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                         width:"100%",
                         items:['emoticons', 'image','insertfile','evaluation'],
                         resizeType:0,
-                        uploadJson : "/agent/image/upload.html?id=${curagentuser.id!''}",
+                        uploadJson : "/agent/image/upload?id=${curagentuser.id!''}",
                         allowFileManager : false,
                         newlineTag : "br" ,
                         fontsize:16,
@@ -147,7 +147,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                             <#if sessionConfig?? && sessionConfig.enablequick>
                             /**
                              var _self = this;
-                             loadURL("/res/quickreply.html" , null , function(data){
+                             loadURL("/res/quickreply" , null , function(data){
 							            	$(_self).suggest('@', {
 												data : eval(data),
 												mapkey : ['title','id'],
@@ -247,7 +247,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                             <h1 class="site-h1" style="background-color:#EEEEEE;">
                                 访问信息
                                 <div style="float:right;">
-                                    <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/agent/blacklist/add.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" data-title="拉黑访客" data-width="900">拉黑访客</button>
+                                    <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" href="/agent/blacklist/add?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" data-title="拉黑访客" data-width="900">拉黑访客</button>
                                 </div>
                             </h1>
                         </div>
@@ -323,7 +323,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
         <h1 class="site-h1" style="background-color:#EEEEEE;">
             联系人
             <div style="float:right;">
-                <button class="layui-btn layui-btn-sm layui-btn-normal" href="/apps/contacts/embed/index.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" title="请选择联系人" data-width="950" data-height="500">关联联系人</button>
+                <button class="layui-btn layui-btn-sm layui-btn-normal" href="/apps/contacts/embed/index?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="ajax" title="请选择联系人" data-width="950" data-height="500">关联联系人</button>
             </div>
         </h1>
     </div>
@@ -367,7 +367,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                 <#if agentServiceList?? && agentServiceList?size gt 0>
                 <#list agentServiceList as agentService>
                 <li class="ukefu-agentservice-list">
-                    <a href="/service/online/chatmsg.html?id=${agentService.id!''}&title=false" data-toggle="ajax" data-width="950" data-height="500" data-title="服务记录">
+                    <a href="/service/online/chatmsg?id=${agentService.id!''}&title=false" data-toggle="ajax" data-width="950" data-height="500" data-title="服务记录">
                         <span style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;max-width:48%;display: inline-block;" class="quick-reply" data-id="content_${agentService.id!''}" title="${agentService.username!''}">${agentService.username!''}</span>
                         <div class="ukefu-agentservice-his" style="overflow: hidden;text-overflow: ellipsis;white-space:nowrap;max-width:48%;" title="${agentService.agentusername!''}">坐席：${agentService.agentusername!''}</div>
                         <div style="color:#333;position: relative;">
@@ -689,7 +689,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
 
     function search (conditionalParameter){
         $.ajax({
-            url:'/agent/agentusersearch.html',
+            url:'/agent/agentusersearch',
             data:{'search':$('#searchconter').val(),'id':'${curagentuser.id}','condition':conditionalParameter},
             type:"post",
             success:function(data){
@@ -700,7 +700,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                     $('#nothing').css('display','none')
                     $('.chatblock').click(function () {
                         $.ajax({
-                            url:'/agent/agentusersearchdetails.html',
+                            url:'/agent/agentusersearchdetails',
                             data:{'createtime':$(this).attr('name'),'id':'${curagentuser.id}','thisid':$(this).attr('id')},
                             type:"post",
                             success:function(data){
@@ -771,7 +771,7 @@ word-break: break-all;"><#if curagentuser??>${curagentuser.username!''}<#if cura
                     var lis = [];
                     var pages = 0;
                     $.ajax({
-                        url:'/agent/agentuserpage.html',
+                        url:'/agent/agentuserpage',
                         data:{'current':current,'id':'${curagentuser.id}'},
                         type:"post",
                         success:function(data){

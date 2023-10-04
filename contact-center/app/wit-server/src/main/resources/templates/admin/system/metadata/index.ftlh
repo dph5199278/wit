@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			元数据列表<#if sysDicList??>（${metadataList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/metadata/imptb.html" data-toggle="ajax" data-width="550" data-title="创建新字典项">
+				<button class="layui-btn layui-btn-sm green" href="/admin/metadata/imptb" data-toggle="ajax" data-width="550" data-title="创建新字典项">
 					导入元数据
 				</button>
 				<a class="layui-btn layui-btn-sm layui-btn-danger" href="javascript:void(0)" id="batdel" data-toggle="tip" data-title="删除数据表项同时会删除数据表元数据下的所有内容，请确认是否继续操作”？" title="删除数据表">
@@ -44,7 +44,7 @@
 							<input type="checkbox" class="ids" name="ids" value="${table.id!''}"/>
 						</td>
 					  <td>
-					  	<a href="/admin/metadata/table.html?id=${table.id!''}">
+					  	<a href="/admin/metadata/table?id=${table.id!''}">
 						 ${table.name!''}
 						 </a>	
 					  </td>
@@ -59,11 +59,11 @@
 					  </td>
 					  <td><#if table.createtime??>${table.createtime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
 					  <td style="white-space:nowrap;width:1%;" nowrap="nowrap">
-							<a href="/admin/metadata/edit.html?id=${table.id!''}&p=${metadataList.number+1}" data-width="550" data-height="320" data-toggle="ajax" title="编辑${table.name!''}">
+							<a href="/admin/metadata/edit?id=${table.id!''}&p=${metadataList.number+1}" data-width="550" data-height="320" data-toggle="ajax" title="编辑${table.name!''}">
 								<i class="layui-icon">&#xe642;</i>
 								编辑
 							</a>
-							<a href="/admin/metadata/delete.html?id=${table.id!''}&p=${metadataList.number+1}" data-toggle="tip" data-title="删除数据表项同时会删除数据表元数据下的所有内容，请确认是否删除数据表“${table.name!''}”？" title="删除${table.name!''}">
+							<a href="/admin/metadata/delete?id=${table.id!''}&p=${metadataList.number+1}" data-toggle="tip" data-title="删除数据表项同时会删除数据表元数据下的所有内容，请确认是否删除数据表“${table.name!''}”？" title="删除${table.name!''}">
 								<i class="layui-icon" style="color:red;">&#x1006;</i>
 								删除
 							</a>
@@ -92,7 +92,7 @@
 					ids += "ids=" + $(this).val();
 				}
 			});
-			$('#batdel').attr('href' , '/admin/metadata/batdelete.html?'+ids)	;
+			$('#batdel').attr('href' , '/admin/metadata/batdelete?'+ids)	;
 			
 		});
 		
@@ -110,7 +110,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/metadata/index.html?p="+data.curr ;
+						location.href = "/admin/metadata/index?p="+data.curr ;
 					}
 				}
 		   });

@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/dimension/update.html" method="post">
+	<form class="layui-form" action="/apps/report/dimension/update" method="post">
 		<input type="hidden" name="cubeid" value="${cubeid!''}">
 		<input type="hidden" name="id" value="${dimension.id!''}">
 		<div class="layui-collapse">
@@ -101,7 +101,7 @@
 
 <script>
 	$('#fktable').change(function(){
-		loadURL('/apps/report/dimension/fktableid.html?tableid='+$(this).val(), '#fktableiddiv');
+		loadURL('/apps/report/dimension/fktableid?tableid='+$(this).val(), '#fktableiddiv');
 	})
 	layui.use('form', function() {
 		var form = layui.form;

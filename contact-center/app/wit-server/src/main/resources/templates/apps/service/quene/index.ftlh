@@ -27,7 +27,7 @@
 						<#list agentUserList.content as agentUser>
 						<tr class="tdHasContorllor design-dropable-td">
 							<td class=" first_td_head">
-								<a href="/service/online/index.html?userid=${agentUser.userid!''}&channel=${agentUser.channel!''}">
+								<a href="/service/online/index?userid=${agentUser.userid!''}&channel=${agentUser.channel!''}">
 								${agentUser.username!''}
 								</a>
 							</td>
@@ -41,15 +41,15 @@
 								${(agentUser.waittingtime/(1000*60*60))?string('00')}:${((agentUser.waittingtime%(1000*60*60))/(1000*60))?string('00')}:${((agentUser.waittingtime%(1000*60))/(1000))?string('00')}
 							</td>
 							<td style="width:1%" nowrap="nowrap">
-								<a href="/service/quene/clean.html?id=${agentUser.id!''}" data-toggle="tip" data-title="转队列后会随机分配坐席，请确认是否转队列或技能组？">
+								<a href="/service/quene/clean?id=${agentUser.id!''}" data-toggle="tip" data-title="转队列后会随机分配坐席，请确认是否转队列或技能组？">
 									<i class="kfont">&#xe62c;</i>
 									转队列
 								</a>
-								<a href="/service/quene/invite.html?id=${agentUser.id!''}" data-toggle="tip" data-title="邀请对话会加入到您的对话列表中，请确认是否开始对话？" style="margin-left:10px;">
+								<a href="/service/quene/invite?id=${agentUser.id!''}" data-toggle="tip" data-title="邀请对话会加入到您的对话列表中，请确认是否开始对话？" style="margin-left:10px;">
 									<i class="kfont">&#xe609;</i>
 									邀请对话
 								</a>
-								<a href="/service/trace.html?sessionid=${agentUser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
+								<a href="/service/trace?sessionid=${agentUser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
 									<i class="kfont">&#xe638;</i>轨迹
 								</a>
 							</td>
@@ -89,7 +89,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/service/quene/index.html?p="+data.curr ;
+						location.href = "/service/quene/index?p="+data.curr ;
 					}
 				}
 		   });

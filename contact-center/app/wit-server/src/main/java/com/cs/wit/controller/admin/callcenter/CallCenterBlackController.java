@@ -71,7 +71,7 @@ public class CallCenterBlackController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black"));
     }
 
     @RequestMapping(value = "/black/edit")
@@ -93,7 +93,7 @@ public class CallCenterBlackController extends Handler {
                 blackRes.save(oldBlack);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black"));
     }
 
     @RequestMapping(value = "/black/delete")
@@ -102,6 +102,6 @@ public class CallCenterBlackController extends Handler {
         if (!StringUtils.isBlank(id)) {
             blackRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/black"));
     }
 }

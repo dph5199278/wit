@@ -125,7 +125,7 @@ public class QuickReplyController extends Handler {
             quickReply.setType(MainContext.QuickType.PUB.toString());
             quickReplyRes.save(quickReply);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?typeid=" + quickReply.getCate()));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?typeid=" + quickReply.getCate()));
     }
 
     @RequestMapping("/delete")
@@ -134,7 +134,7 @@ public class QuickReplyController extends Handler {
         QuickReply quickReply = quickReplyRes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Quick reply %s not found", id)));
         quickReplyRes.delete(quickReply);
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?typeid=" + quickReply.getCate()));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?typeid=" + quickReply.getCate()));
     }
 
     @RequestMapping("/edit")
@@ -164,7 +164,7 @@ public class QuickReplyController extends Handler {
             quickReply.setType(MainContext.QuickType.PUB.toString());
             quickReplyRes.save(quickReply);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?typeid=" + quickReply.getCate()));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?typeid=" + quickReply.getCate()));
     }
 
     @RequestMapping({"/addtype"})
@@ -188,9 +188,9 @@ public class QuickReplyController extends Handler {
             quickType.setQuicktype(MainContext.QuickType.PUB.toString());
             quickTypeRes.save(quickType);
         } else {
-            return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?msg=qr_type_exist"));
+            return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?msg=qr_type_exist"));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index"));
     }
 
     @RequestMapping({"/edittype"})
@@ -209,7 +209,7 @@ public class QuickReplyController extends Handler {
             //判断名称是否重复
             com.cs.wit.model.QuickType qr = quickTypeRes.findByOrgiAndName(super.getOrgi(request), quickType.getName());
             if (qr != null && !qr.getId().equals(quickType.getId())) {
-                return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?msg=qr_type_exist&typeid=" + quickType.getId()));
+                return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?msg=qr_type_exist&typeid=" + quickType.getId()));
             }
             tempQuickType.setName(quickType.getName());
             tempQuickType.setDescription(quickType.getDescription());
@@ -217,7 +217,7 @@ public class QuickReplyController extends Handler {
             tempQuickType.setParentid(quickType.getParentid());
             quickTypeRes.save(tempQuickType);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html?typeid=" + quickType.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index?typeid=" + quickType.getId()));
     }
 
     @RequestMapping({"/deletetype"})
@@ -231,7 +231,7 @@ public class QuickReplyController extends Handler {
 
             quickReplyRes.deleteAll(quickReplyList.getContent());
         }
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index"));
     }
 
     @RequestMapping("/imp")
@@ -270,7 +270,7 @@ public class QuickReplyController extends Handler {
             new ExcelImportProecess(event).process();        //启动导入任务
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html" + (!StringUtils.isBlank(type) ? "?typeid=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index" + (!StringUtils.isBlank(type) ? "?typeid=" + type : "")));
     }
 
     @RequestMapping("/batdelete")
@@ -281,7 +281,7 @@ public class QuickReplyController extends Handler {
             quickReplyRes.deleteAll(topicList);
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index.html" + (!StringUtils.isBlank(type) ? "?typeid=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index" + (!StringUtils.isBlank(type) ? "?typeid=" + type : "")));
     }
 
     @RequestMapping("/expids")

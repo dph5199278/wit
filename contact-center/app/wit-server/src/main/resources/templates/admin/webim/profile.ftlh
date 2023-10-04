@@ -18,15 +18,15 @@
 
 <div class="ukefu-tab-title" style="margin-left: 0px;">
 	<ul class="tab-title">
-		<li <#if subtype == 'webim'>class="layui-this"</#if>><a href="/admin/webim/index.html?snsid=${snsAccount.snsid!''}">基本设置</a></li>
-		<li <#if subtype == 'invote'>class="layui-this"</#if>><a href="/admin/webim/invote.html?snsid=${snsAccount.snsid!''}">邀请设置</a></li>
-		<li <#if subtype == 'profile'>class="layui-this"</#if>><a href="/admin/webim/profile.html?snsid=${snsAccount.snsid!''}">客服信息</a></li>
+		<li <#if subtype == 'webim'>class="layui-this"</#if>><a href="/admin/webim/index?snsid=${snsAccount.snsid!''}">基本设置</a></li>
+		<li <#if subtype == 'invote'>class="layui-this"</#if>><a href="/admin/webim/invote?snsid=${snsAccount.snsid!''}">邀请设置</a></li>
+		<li <#if subtype == 'profile'>class="layui-this"</#if>><a href="/admin/webim/profile?snsid=${snsAccount.snsid!''}">客服信息</a></li>
 	</ul>
 </div>
 <div class="layui-tab">
   <div class="layui-tab-content">
     <div class="layui-tab-item layui-show">
-		<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/webim/profile/save.html" class="layui-form">
+		<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/webim/profile/save" class="layui-form">
 			<#if inviteData??>
 				<input type="hidden" name="id" value="${inviteData.id!''}">
 				<input type="hidden" name="snsaccountid" value="${inviteData.snsaccountid!''}">
@@ -143,7 +143,7 @@
 											<div class="ukefu-webim-tl">7、自定义形象图片 （建议尺寸：276*236）</div>
 											<div class="box-item" style="position: relative;">
 												<span class="ukefu-logo">
-													<img id="agent_show" src="<#if inviteData?? && inviteData.dialog_ad??>/res/image.html?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>" style="height:130px;">
+													<img id="agent_show" src="<#if inviteData?? && inviteData.dialog_ad??>/res/image?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>" style="height:130px;">
 												</span>
 												<div class="layui-box layui-upload-button" style="position:absolute;left: 290px;">
 													<input type="file" id="dialogad" name="dialogad" accept="image/gif, image/jpeg, image/png" lay-ext="jpg|png|gif"  class="layui-upload-file" onchange="$('#dialog_ad').html($(this).val());$('.agent_close').show()">
@@ -152,7 +152,7 @@
 
 												<div style="margin-top: 20px;position: relative;">
 													<span id="dialog_ad" style="float: left"></span>
-													<i class="layui-icon agent_close" style="display: none;float: left;margin-top: -5px;cursor:pointer;" onclick=" $('#dialog_ad').html('');$('#agent_show').attr('src','<#if inviteData?? && inviteData.dialog_ad??>/res/image.html?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>');clearAgentheadimg(); $('.agent_close').hide()">&#x1006;</i>
+													<i class="layui-icon agent_close" style="display: none;float: left;margin-top: -5px;cursor:pointer;" onclick=" $('#dialog_ad').html('');$('#agent_show').attr('src','<#if inviteData?? && inviteData.dialog_ad??>/res/image?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>');clearAgentheadimg(); $('.agent_close').hide()">&#x1006;</i>
 												</div>
 												 
 											</div>
@@ -522,7 +522,7 @@
 									<div class="col-md-5">
 										<div class="ukefu-im-preview ukefu-im-preview-dialog" id="pv" style="width:380px;position: fixed;">
 											<div class="ukefu-im-preview-bar ukefu-theme-color theme<#if inviteData??>${inviteData.consult_dialog_color!'1'}<#else>1</#if>" style="padding:5px;">
-													<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:22px;float:left;">
+													<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:22px;float:left;">
 													<span style="float:right;">	
 														<i class="layui-icon" style="font:size:12px;color:#ffffff;">&#x1006;</i>
 													</span>
@@ -541,14 +541,14 @@
 													</div>
 												</div>
 												<div class="ukefu-im-preview-user">
-													<img src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" style="height:20px;float:right;">
+													<img src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" style="height:20px;float:right;">
 													<div
 														class="ukefu-im-preview-user-message ukefu-im-preview-user-arrow ukefu-theme-color theme<#if inviteData??>${inviteData.consult_dialog_color!'1'}<#else>1</#if>"
 														style="width:150px;"></div>
 												</div>
 			
 												<div class="ukefu-im-preview-user" style="height:60px;">
-													<img src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" style="height:20px;float:right;">
+													<img src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" style="height:20px;float:right;">
 													<div
 														class="ukefu-im-preview-user-message ukefu-im-preview-user-arrow ukefu-theme-color theme<#if inviteData??>${inviteData.consult_dialog_color!'1'}<#else>1</#if>"
 														style="width:100px;height:50px;"></div>
@@ -581,7 +581,7 @@
 													<label id="dialog_introduction">${inviteData.dialog_introduction!'客服公告信息，内容在控制台设置。'}</label>
 												</div>
 												<div class="box-item" style="padding:5px;white-space: nowrap;text-overflow: ellipsis;text-align:center;border-top:1px solid #dedede;">
-													<img src="<#if inviteData?? && inviteData.dialog_ad??>/res/image.html?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>" style="height:100px;">
+													<img src="<#if inviteData?? && inviteData.dialog_ad??>/res/image?id=${inviteData.dialog_ad?url}<#else>/im/img/pic01.jpg</#if>" style="height:100px;">
 												</div>
 											</div>
 										</div>

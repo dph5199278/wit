@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			坐席组
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/skill/add.html" data-toggle="ajax" data-height="200" data-width="550" data-title="创建新用户">
+				<button class="layui-btn layui-btn-sm green" href="/admin/skill/add" data-toggle="ajax" data-height="200" data-width="550" data-title="创建新用户">
 					创建组
 				</button>
 			</span>
@@ -14,7 +14,7 @@
 					<#if skillGroups??>
 					<#list skillGroups as skill>
 					<li class="uk_skill <#if skillData?? && skillData.id == skill.id>this</#if>">
-						<a href="/admin/skill/index.html?skill=${skill.id!''}">
+						<a href="/admin/skill/index?skill=${skill.id!''}">
 							<i class="kfont icon-iconfontagent" style="position: relative;"></i>
 							${skill.name!''}
 						</a>
@@ -30,13 +30,13 @@
 			<#if skillData??>${skillData.name!''}<#else>坐席组</#if><#if userList??>（${userList?size!''}）</#if>
 			<span style="float:right;">
 				<#if skillData??>
-				<button class="layui-btn layui-btn-sm green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
+				<button class="layui-btn layui-btn-sm green" href="/admin/user/add" data-toggle="ajax" data-width="750" data-title="创建新用户">
 					添加坐席到当前组
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/edit.html?id=${skillData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改坐席组">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/edit?id=${skillData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改坐席组">
 					修改坐席组
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/delete.html?id=${skillData.id!''}" data-toggle="tip" data-title="请确认是否删除坐席组？">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/skill/delete?id=${skillData.id!''}" data-toggle="tip" data-title="请确认是否删除坐席组？">
 					删除坐席组
 				</button>
 				</#if>
@@ -82,7 +82,7 @@
 					  <td>${user.email!''}</td>
 					  <td>${user.mobile!''}</td>
 					  <td style="white-space: nowrap;">
-					  		<a href="/admin/user/delete.html?id=${user.id!''}"  data-toggle="tip" data-title="请确认是否从坐席组中移除坐席？">
+					  		<a href="/admin/user/delete?id=${user.id!''}"  data-toggle="tip" data-title="请确认是否从坐席组中移除坐席？">
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			移除
 					  		</a>

@@ -25,7 +25,6 @@ import org.springframework.format.FormatterRegistry;
 import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -43,7 +42,7 @@ public class CSKeFuWebAppConfigurer implements WebMvcConfigurer {
         // excludePathPatterns 用户排除拦截
         registry.addInterceptor(new UserInterceptorHandler())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/login.html", "/im/**", "/res/image*", "/res/file*", "/cs/**");
+                .excludePathPatterns("/login", "/im/**", "/res/image*", "/res/file*", "/cs/**");
         registry.addInterceptor(new CrossInterceptorHandler()).addPathPatterns("/**");
         registry.addInterceptor(logInterceptorHandler).addPathPatterns("/**");
     }
@@ -58,10 +57,5 @@ public class CSKeFuWebAppConfigurer implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         // 增加字符串转日期的功能
         registry.addConverter(new StringToDateConverter());
-    }
-
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-        configurer.setUseSuffixPatternMatch(true);
     }
 }

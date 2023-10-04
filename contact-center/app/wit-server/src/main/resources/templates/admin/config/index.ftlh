@@ -1,4 +1,4 @@
-<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/config/save.html" class="layui-form">
+<form method="post" key="set-mine" enctype="multipart/form-data" action="/admin/config/save" class="layui-form">
 	<#if systemConfig??><input type="hidden" name="id" value="${systemConfig.id!''}"></#if>
 	<div class="row">
 		<div class="col-lg-12">
@@ -69,7 +69,7 @@
 												<p>登录页显示的Logo图片，建议尺寸220*60。</p>
 												<p style="color:#888888;font-size:13px;margin-top:10px;">
 													<span class="ukefu-logo">
-														<img src="<#if systemConfig?? && systemConfig.loginlogo?? && systemConfig.loginlogo != ''>/res/image.html?id=${systemConfig.loginlogo?url}<#else>/images/logo2.png</#if>" style="height:60px;">
+														<img src="<#if systemConfig?? && systemConfig.loginlogo?? && systemConfig.loginlogo != ''>/res/image?id=${systemConfig.loginlogo?url}<#else>/images/logo2.png</#if>" style="height:60px;">
 													</span>
 												</p>
 											</div>
@@ -94,7 +94,7 @@
 												<p>登录页显示的Logo图片，建议尺寸280*80。</p>
 												<p style="color:#888888;font-size:13px;margin-top:10px;">
 													<div class="ukefu-console-logo <#if systemConfig?? && systemConfig.theme?? && systemConfig.theme == '01'>ukefu-system-theme1</#if><#if systemConfig?? && systemConfig.theme?? && systemConfig.theme == '02'>ukefu-system-theme2</#if><#if systemConfig?? && systemConfig.theme?? && systemConfig.theme == '03'>ukefu-system-theme3</#if>" style="width:140px;height:40px;padding:5px;">
-														<img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image.html?id=${systemConfig.consolelogo?url}<#else>/images/logo.png</#if>" style="height:40px;">
+														<img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image?id=${systemConfig.consolelogo?url}<#else>/images/logo.png</#if>" style="height:40px;">
 													</div>
 												</p>
 											</div>
@@ -119,7 +119,7 @@
 												<p>产品登录页和后台管理页面的标题栏小缩略图，文件扩展名是ico格式</p>
 												<p style="color:#888888;font-size:13px;margin-top:10px;">
 													<div class="ukefu-console-logo" style="width:140px;height:40px;padding:5px;">
-														<img src="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>" style="height:40px;">
+														<img src="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>" style="height:40px;">
 													</div>
 												</p>
 											</div>
@@ -146,7 +146,7 @@
 											</div>
 											<div class="col-lg-4">
 												<#if imServerStatus?? && imServerStatus == true>
-												<a href="/admin/config/stopimserver.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止对话服务后不能从Web界面再次启动，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止对话服务</a>
+												<a href="/admin/config/stopimserver" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止对话服务后不能从Web界面再次启动，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止对话服务</a>
 												</#if>
 											</div>
 										</div>
@@ -163,9 +163,9 @@
 											</div>
 											<div class="col-lg-4">
 												<#if entim?? && entim == true>
-													<a href="/admin/config/stopentim.html" data-toggle="tip" title="请确认是否关闭企业聊天功能？" class="layui-btn layui-btn-sm layui-btn-danger">关闭企业聊天功能</a>
+													<a href="/admin/config/stopentim" data-toggle="tip" title="请确认是否关闭企业聊天功能？" class="layui-btn layui-btn-sm layui-btn-danger">关闭企业聊天功能</a>
 												<#else>
-													<a href="/admin/config/startentim.html" data-toggle="tip" title="启用企业聊天功能" class="layui-btn layui-btn-sm">启用企业聊天功能</a>
+													<a href="/admin/config/startentim" data-toggle="tip" title="启用企业聊天功能" class="layui-btn layui-btn-sm">启用企业聊天功能</a>
 												</#if>
 											</div>
 										</div>
@@ -182,9 +182,9 @@
 											</div>
 											<div class="col-lg-4">
 												<#if infoace?? && infoace == true>
-													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-sm layui-btn-danger">退出数据采集功能</a>
+													<a href="/admin/auth/infoacq" target="parent" class="layui-btn layui-btn-sm layui-btn-danger">退出数据采集功能</a>
 												<#else>
-													<a href="/admin/auth/infoacq.html" target="parent" class="layui-btn layui-btn-sm">进入数据采集功能</a>
+													<a href="/admin/auth/infoacq" target="parent" class="layui-btn layui-btn-sm">进入数据采集功能</a>
 												</#if>		
 											</div>
 										</div>
@@ -200,7 +200,7 @@
 												<p style="color:#888888;font-size:13px;margin-top:10px;">适用于Tomcat、Jetty等系统，WebLogic/WebSphere等中间件严禁使用</p>
 											</div>
 											<div class="col-lg-4">
-												<a href="/admin/config/stop.html" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止服务将会调用JVM退出指令，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止服务</a>
+												<a href="/admin/config/stop" data-toggle="tip" <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="停止服务将会调用JVM退出指令，请确认是否退出？" class="layui-btn layui-btn-sm layui-btn-danger">停止服务</a>
 											</div>
 										</div>
 									</div>

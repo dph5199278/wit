@@ -8,13 +8,13 @@
 				content="width=device-width, maximum-scale=1.0, user-scalable=0" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
-	<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico?t=${.now?long}</#if>"/>
+	<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico?t=${.now?long}</#if>"/>
 	<link rel="stylesheet" href="/css/flexboxgrid.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/darktooltip.css" />
 	<link rel="stylesheet" href="/layui/css/layui.css">
 	<link rel="stylesheet" href="/js/ztree/zTreeStyle/zTreeStyle.css">
 	<link rel="stylesheet" href="/js/select/css/select2.min.css"/>
-	<link rel="stylesheet" href="/res/css.html">
+	<link rel="stylesheet" href="/res/css">
 	<link rel="stylesheet" type="text/css" href="/js/kindeditor/themes/default/default.css">
 
 	<script src="/js/jquery-1.10.2.min.js"></script>
@@ -88,7 +88,7 @@
 							offset: "rb", //右下角弹出
 							anim: 2,
 							shade: 0,
-							content: "/ent/im/point.html",
+							content: "/ent/im/point",
 							end:function(){
 								if(isImIndex == true){
 									layinx = layer.open({
@@ -100,7 +100,7 @@
 										offset: "rb", //右下角弹出
 										anim: 2,
 										shade: 0,
-										content: "/ent/im/expand.html",
+										content: "/ent/im/expand",
 										end: function(){ //此处用于演示
 											imDialogHelper.open();
 											isImIndex = false;
@@ -117,7 +117,7 @@
 										offset: "rb", //右下角弹出
 										anim: 2,
 										shade: 0,
-										content: ["/ent/im/index.html", "no"], //iframe的url，no代表不显示滚动条
+										content: ["/ent/im/index", "no"], //iframe的url，no代表不显示滚动条
 										end: function(){ //此处用于演示
 											imDialogHelper.open();
 										}
@@ -150,20 +150,20 @@
 <div class="layui-layout layui-layout-admin">
 	<div class="layui-header header header-ukefu">
 		<div class="layui-main">
-			<a class="logo" href="/"><img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image.html?id=${systemConfig.consolelogo?url}<#else>images/logo.png</#if>"></a>
+			<a class="logo" href="/"><img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image?id=${systemConfig.consolelogo?url}<#else>images/logo.png</#if>"></a>
 			<#if models?seq_contains("callcenter") && user.callcenter == true>
 			<#include "/apps/include/softphone.ftlh">
 		</#if>
 		<ul class="layui-nav">
 			<li class="layui-nav-item layui-this">
-				<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+				<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 					<i class="kfont" style="position: relative;">&#xe717;</i>
 					首页
 				</a>
 			</li>
 			<#if istenantshare?? && istenantshare==true>
 			<li class="layui-nav-item">
-				<a href="javascript:void(0)" onclick="return false;" data-title="${systemConfig.namealias!''}" data-href="/apps/tenant/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+				<a href="javascript:void(0)" onclick="return false;" data-title="${systemConfig.namealias!''}" data-href="/apps/tenant/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 					<i class="layui-icon" style="position: relative;">&#xe620;</i>
 					${systemConfig.namealias!''}
 				</a>
@@ -175,7 +175,7 @@
 			<div class="ukefu-last-msg" data-num="0" id="ukefu-last-msg">
 				<small class="ukefu-msg-tip bg-red" id="msgnum">0</small>
 			</div>
-			<a href="javascript:void(0)" id="agentdesktop" onclick="return false;"  data-title="坐席工作台" data-href="/agent/index.html" class="iframe_btn" data-id="multiMediaDialogWin" data-type="tabAdd">
+			<a href="javascript:void(0)" id="agentdesktop" onclick="return false;"  data-title="坐席工作台" data-href="/agent/index" class="iframe_btn" data-id="multiMediaDialogWin" data-type="tabAdd">
 				<i class="kfont icon-iconfontagent"	style="position: relative;"></i>
 				坐席
 			</a>
@@ -184,7 +184,7 @@
 </#if>
 <#if (user?? && user.roleAuthMap["B02"]??) || user.admin>
 <li class="layui-nav-item ">
-	<a href="javascript:void(0)" onclick="return false;"  data-title="系统管理" data-href="/admin/content.html" class="iframe_btn" data-id="admin" data-type="tabAdd">
+	<a href="javascript:void(0)" onclick="return false;"  data-title="系统管理" data-href="/admin/content" class="iframe_btn" data-id="admin" data-type="tabAdd">
 		<i class="layui-icon" style="position: relative;">&#xe631;</i>
 		系统
 	</a>
@@ -195,7 +195,7 @@
 	<span style="display: inline-block;max-width: 90px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;float: left">
 							<#if user??>${user.uname!''}<#if tenant??&&tenant.tenantname??>（${tenant.tenantname!''}）</#if></#if></span></a>
 	<dl class="layui-nav-child">
-		<dd><a href="/apps/profile.html" data-toggle="ajax" data-width="750" data-title="修改资料">个人资料</a></dd>
+		<dd><a href="/apps/profile" data-toggle="ajax" data-width="750" data-title="修改资料">个人资料</a></dd>
 		<dd><a href="javascript:void(0)" onclick="quitSystem()" >退出系统</a></dd>
 		<dd><a href="javascript:void(0)" onclick="showSystemBuildInfo()">关于产品</a></dd>
 	</dl>
@@ -211,14 +211,14 @@
 				<dl class="layui-nav-child">
 
 					<dd class="ukefu-left-menu">
-						<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+						<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 							<i class="kfont" style="top: 1px;">&#xe717;</i>
 						</a>
 					</dd>
 					<#if user?? && user.agent == true>
 					<#if user?? && (user.roleAuthMap["A01"]?? || user.admin) >
 					<dd class="ukefu-left-menu" data-tooltip="坐席工作台" >
-						<a href="javascript:void(0)" href="javascript:void(0)" id="agentdeskleft" onclick="return false;" data-title="坐席对话" data-href="/agent/index.html" class="iframe_btn" data-id="multiMediaDialogWin" data-type="tabAdd"> <i class="layui-icon"
+						<a href="javascript:void(0)" href="javascript:void(0)" id="agentdeskleft" onclick="return false;" data-title="坐席对话" data-href="/agent/index" class="iframe_btn" data-id="multiMediaDialogWin" data-type="tabAdd"> <i class="layui-icon"
 																																																																																																																			style="top: 3px;">&#xe63a;</i>
 						</a>
 					</dd>
@@ -228,14 +228,14 @@
 			<#if models?seq_contains("contacts")>
 			<#if user?? && (user.roleAuthMap["A02"]??  || user.admin)>
 			<dd class="ukefu-left-menu" data-tooltip="全部联系人">
-				<a href="javascript:void(0)" data-title="全部联系人" onclick="return false;" data-href="/apps/contacts/index.html" class="iframe_btn" data-id="contactsMainContentWin" data-type="tabAdd">
+				<a href="javascript:void(0)" data-title="全部联系人" onclick="return false;" data-href="/apps/contacts/index" class="iframe_btn" data-id="contactsMainContentWin" data-type="tabAdd">
 					<i class="layui-icon"	style="position: relative;">&#xe612;</i>
 				</a>
 			</dd>
 		</#if>
 		<#if user?? && (user.roleAuthMap["A03"]?? || user.admin)>
 		<dd class="ukefu-left-menu" data-tooltip="全部客户">
-			<a href="javascript:void(0)" data-title="全部客户" onclick="return false;" data-href="/apps/customer/index.html" class="iframe_btn" data-id="customersMainContentWin" data-type="tabAdd">
+			<a href="javascript:void(0)" data-title="全部客户" onclick="return false;" data-href="/apps/customer/index" class="iframe_btn" data-id="customersMainContentWin" data-type="tabAdd">
 				<i class="kfont" style="position: relative;">&#xe650;</i>
 			</a>
 		</dd>
@@ -245,14 +245,14 @@
 <#if models?seq_contains("workorders")>
 <#if user?? && (user.roleAuthMap["A04"]??  || user.admin)>
 <dd class="ukefu-left-menu" data-tooltip="工单管理">
-	<a href="javascript:void(0)" data-title="工单管理" data-href="<#if systemConfig?? && systemConfig.workorders>/apps/workordersthree/index.html<#else>/apps/workorders/index.html</#if>" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+	<a href="javascript:void(0)" data-title="工单管理" data-href="<#if systemConfig?? && systemConfig.workorders>/apps/workordersthree/index<#else>/apps/workorders/index</#if>" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 		<i class="kfont" style="position: relative;">&#xe607;</i>
 	</a>
 </dd>
 </#if>
 <!-- <#if user?? && (user.roleAuthMap["A05"]?? || user.admin) >
   <dd class="ukefu-left-menu" data-tooltip="业务流程">
-    <a href="javascript:void(0)" data-title="业务流程" data-href="/apps/bpm/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+    <a href="javascript:void(0)" data-title="业务流程" data-href="/apps/bpm/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
     <i class="kfont" style="position: relative;">&#xe636;</i>
     </a>
   </dd>
@@ -263,7 +263,7 @@
 <#if models?seq_contains("cca")>
 <#if user?? && (user.roleAuthMap["A13_A01"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="会话监控">
-	<a href="javascript:void(0)" href="javascript:void(0)" id="customerchatsaudit"  onclick="return false;" data-title="会话监控" data-href="/apps/cca/index.html" class="iframe_btn" data-id="customerChatAudit" data-type="tabAdd">
+	<a href="javascript:void(0)" href="javascript:void(0)" id="customerchatsaudit"  onclick="return false;" data-title="会话监控" data-href="/apps/cca/index" class="iframe_btn" data-id="customerChatAudit" data-type="tabAdd">
 		<i class="csfont" style="position: relative;">&#58906;</i>
 	</a>
 </dd>
@@ -274,7 +274,7 @@
 <#if user?? && (user.roleAuthMap["A09_A02_A01"]?? || user.admin) >
 
 <dd class="ukefu-left-menu" data-tooltip="知识库">
-  <a href="javascript:void(0)" data-title="知识库" data-href="/apps/kbs/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+  <a href="javascript:void(0)" data-title="知识库" data-href="/apps/kbs/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
     <i class="kfont" style="position: relative;">&#xe62a;</i>
   </a>
 </dd>
@@ -282,21 +282,21 @@
 -->
 <#if models?seq_contains("xiaoe")>
 <#if user?? && (user.roleAuthMap["A09_A02_A01"]?? || user.admin) >
-<a href="javascript:void(0)" data-title="知识库" data-href="/apps/topic.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+<a href="javascript:void(0)" data-title="知识库" data-href="/apps/topic" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 	<i class="kfont" style="position: relative;">&#xe62a;</i>
 </a>
 </#if>
 </#if>
 <#if user?? &&( user.roleAuthMap["A06"]?? || user.admin)>
 <dd class="ukefu-left-menu" data-tooltip="客服设置">
-	<a href="javascript:void(0)" data-title="客服设置" data-href="/setting/agent/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange"> <i class="layui-icon"
+	<a href="javascript:void(0)" data-title="客服设置" data-href="/setting/agent/index" class="iframe_btn" data-id="maincontent" data-type="tabChange"> <i class="layui-icon"
 																																																																													style="position: relative;">&#xe614;</i>
 	</a>
 </dd>
 </#if>
 <#if user?? &&( user.roleAuthMap["A08"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="会话历史">
-	<a href="javascript:void(0)" data-title="会话历史" data-href="/service/history/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange"> <i class="kfont"
+	<a href="javascript:void(0)" data-title="会话历史" data-href="/service/history/index" class="iframe_btn" data-id="maincontent" data-type="tabChange"> <i class="kfont"
 																																																																														style="position: relative;">&#xe7eb;</i>
 	</a>
 </dd>
@@ -304,7 +304,7 @@
 
 <!--
 <dd class="ukefu-left-menu" data-tooltip="会话质检">
-  <a href="javascript:void(0)" data-title="会话质检" data-href="/apps/quality/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+  <a href="javascript:void(0)" data-title="会话质检" data-href="/apps/quality/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
     <i class="kfont" style="position: relative;">&#xe644;</i>
   </a>
 </dd>
@@ -313,7 +313,7 @@
 <!--<#if  models?seq_contains("xiaoe")>-->
 <!--<#if user?? &&( user.roleAuthMap["A09"]?? || user.admin) >-->
 <!--<dd class="ukefu-left-menu" data-tooltip="智能机器人">-->
-<!--<a href="javascript:void(0)" data-title="智能机器人" data-href="/apps/xiaoe/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">-->
+<!--<a href="javascript:void(0)" data-title="智能机器人" data-href="/apps/xiaoe/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">-->
 <!--<i class="kfont"	style="position: relative;">&#xe63a;</i>-->
 <!--</a>-->
 <!--</dd>-->
@@ -322,7 +322,7 @@
 <#if models?seq_contains("callout")>
 <#if user?? &&( user.roleAuthMap["A11"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="外呼系统">
-	<a href="javascript:void(0)" data-title="外呼系统" data-href="/apps/callout/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+	<a href="javascript:void(0)" data-title="外呼系统" data-href="/apps/callout/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 		<i class="kfont"	style="position: relative;">&#xe629;</i>
 	</a>
 </dd>
@@ -331,7 +331,7 @@
 <#if models?seq_contains("chatbot")>
 <#if user?? &&( user.roleAuthMap["A09"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="智能机器人">
-	<a href="javascript:void(0)" data-title="智能机器人" onclick="return false;" data-href="/apps/chatbot/index.html" class="iframe_btn" data-id="chatbotIntegrationWin" data-type="tabAdd">
+	<a href="javascript:void(0)" data-title="智能机器人" onclick="return false;" data-href="/apps/chatbot/index" class="iframe_btn" data-id="chatbotIntegrationWin" data-type="tabAdd">
 		<i class="csfont" style="position: relative;">&#58939;</i>
 	</a>
 </dd>
@@ -340,14 +340,14 @@
 <#if models?seq_contains("callcenter")>
 <#if user?? && (user.roleAuthMap["A10"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="语音渠道">
-	<a href="javascript:void(0)" data-title="语音渠道" data-href="/apps/callcenter/service/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+	<a href="javascript:void(0)" data-title="语音渠道" data-href="/apps/callcenter/service/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 		<i class="kfont" style="position: relative;">&#xe625;</i>
 	</a>
 </dd>
 <!--
 <#if user?? &&( user.roleAuthMap["A12"]?? || user.admin) >
 <dd class="ukefu-left-menu" data-tooltip="坐席监控">
-  <a href="javascript:void(0)" data-title="坐席监控" data-href="/apps/callcenter/service/monitor/allcall.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+  <a href="javascript:void(0)" data-title="坐席监控" data-href="/apps/callcenter/service/monitor/allcall" class="iframe_btn" data-id="maincontent" data-type="tabChange">
   <i class="layui-icon" style="position: relative;">&#xe629;</i>
   </a>
 </dd>
@@ -358,7 +358,7 @@
 <!--暂时隐藏https://github.com/chatopera/cosin/issues/52-->
 <!--<#if user?? && (user.roleAuthMap["A13"]?? || user.admin) >-->
 <!--<dd class="ukefu-left-menu" data-tooltip="数据报表">-->
-<!--<a href="javascript:void(0)" data-title="数据报表" data-href="/apps/view/index.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">-->
+<!--<a href="javascript:void(0)" data-title="数据报表" data-href="/apps/view/index" class="iframe_btn" data-id="maincontent" data-type="tabChange">-->
 <!--<i class="kfont"	style="position: relative;">&#xe6d6;</i>-->
 <!--</a>-->
 <!--</dd>-->
@@ -382,7 +382,7 @@
 	</div>
 	<div class="layui-tab-content product-content ukefu-tab">
 		<div class="layui-tab-item layui-show" style="height:100%;">
-			<iframe frameborder="0" src="<#if vt?? && vt==true>/apps/tenant/index.html<#else>/apps/content.html</#if>" id="maincontent" name="maincontent" width="100%" height="100%"></iframe>
+			<iframe frameborder="0" src="<#if vt?? && vt==true>/apps/tenant/index<#else>/apps/content</#if>" id="maincontent" name="maincontent" width="100%" height="100%"></iframe>
 		</div>
 	</div>
 </div>
@@ -410,14 +410,14 @@
 		.then(function (data) {
 			if(data.length == 0){
 				// 执行登出
-				window.location.href = "/logout.html";
+				window.location.href = "/logout";
 			} else {
 				// 弹出对话框提示
 				layer.alert("您有正在服务中的访客" + data.length + "人！结束全部会话，或转接后可登出。", {title: "提示", icon: 2});
 			}
 		}, function(error){
 			// 执行登出
-			window.location.href = "/logout.html";
+			window.location.href = "/logout";
 		});
 	}
 

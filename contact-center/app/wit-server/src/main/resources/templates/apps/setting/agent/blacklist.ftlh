@@ -40,7 +40,7 @@
 								  </td>
 								  <td>${black.description!''}</td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/setting/blacklist/delete.html?id=${black.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
+								  		<a href="/setting/blacklist/delete?id=${black.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>
@@ -82,7 +82,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/blacklist.html?p="+data.curr ;
+						location.href = "/admin/blacklist?p="+data.curr ;
 					}
 				}
 		   });

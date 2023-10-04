@@ -1,4 +1,4 @@
-<form class="layui-form" action="/apps/report/design/columnupdate.html" id="selcubelevel">
+<form class="layui-form" action="/apps/report/design/columnupdate" id="selcubelevel">
 	<input type="hidden" name="id" value="${col.id!''}">
 	<input type="hidden" name="mid" value="${col.modelid!''}">
 	<div class="layui-form-item">

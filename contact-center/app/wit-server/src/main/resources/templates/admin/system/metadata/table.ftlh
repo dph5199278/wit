@@ -7,13 +7,13 @@
 					批量删除
 				</a>
 				<#if table?? && table.fromdb && table.listblocktemplet??>
-				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/clean.html?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="清空${table.name!''}存储在ES数据表里的所有数据，请确认是否继续操作”？">
+				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/clean?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="清空${table.name!''}存储在ES数据表里的所有数据，请确认是否继续操作”？">
 					清空ES数据
 				</a>
-				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/synctoes.html?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="同步${table.name!''}数据库表到ES表，请确认是否继续操作”？">
+				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/synctoes?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="同步${table.name!''}数据库表到ES表，请确认是否继续操作”？">
 					同步数据库表到ES表
 				</a>
-				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/synctodb.html?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="同步${table.name!''}的ES表到数据库表，请确认是否继续操作”？">
+				<a class="layui-btn layui-btn-sm layui-btn-danger" href="/admin/metadata/synctodb?id=${table.id!''}" id="batdel" data-toggle="tip" data-title="同步${table.name!''}的ES表到数据库表，请确认是否继续操作”？">
 					同步ES表到数据库表
 				</a>
 				</#if>
@@ -61,11 +61,11 @@
 					  <td align="center"><#if prop.impfield == true><i class="layui-icon">&#xe618;</#if></td>
 					  <td align="center"><#if prop.systemfield == true><i class="layui-icon">&#xe618;</#if></td>
 					  <td style="white-space:nowrap;width:1%;" nowrap="nowrap">
-							<a href="/admin/metadata/properties/edit.html?id=${prop.id!''}&p=${metadataList.number+1}" data-width="650" data-height="460" data-toggle="ajax" title="编辑${table.name!''}">
+							<a href="/admin/metadata/properties/edit?id=${prop.id!''}&p=${metadataList.number+1}" data-width="650" data-height="460" data-toggle="ajax" title="编辑${table.name!''}">
 								<i class="layui-icon">&#xe642;</i>
 								编辑
 							</a>
-							<a href="/admin/metadata/properties/delete.html?id=${prop.id!''}&tbid=${prop.dbtableid!''}" data-toggle="tip" data-title="删除数据表项同时会删除数据表元数据下的所有内容，请确认是否删除数据表“${prop.name!''}”？" title="删除${prop.name!''}">
+							<a href="/admin/metadata/properties/delete?id=${prop.id!''}&tbid=${prop.dbtableid!''}" data-toggle="tip" data-title="删除数据表项同时会删除数据表元数据下的所有内容，请确认是否删除数据表“${prop.name!''}”？" title="删除${prop.name!''}">
 								<i class="layui-icon" style="color:red;">&#x1006;</i>
 								删除
 							</a>
@@ -91,7 +91,7 @@
 					ids += "ids=" + $(this).val();
 				}
 			});
-			$('#batdel').attr('href' , '/admin/metadata/properties/batdelete.html?tbid=${tbid!''}&'+ids)	;
+			$('#batdel').attr('href' , '/admin/metadata/properties/batdelete?tbid=${tbid!''}&'+ids)	;
 			
 		});
 		

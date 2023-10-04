@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/callcenter/black/save.html" data-toggle="ajax-form" data-inner="#callCenterContent">
+    <form class="layui-form uk-form" action="/admin/callcenter/black/save" data-toggle="ajax-form" data-inner="#callCenterContent">
     	<input type="hidden" name="id" value="${black.id!''}">
         <div class="layui-form-item">
             <label class="layui-form-label">号码：</label>

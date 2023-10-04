@@ -6,7 +6,7 @@
 				<a href="javascript:void(0)" data-toggle="tip" data-title="请确认是否从页面中删除组件？" data-callback="deletefilter('${filter.id!''}')"  	 class="ukefu-report-design">删除</a>
 			</span>
 			<span class="layui-btn layui-btn-normal layui-btn-xs" style="">
-				<a  href="/apps/report/design/rfilteredit.html?fid=${filter.id!''}" data-toggle="ajax" data-height="550" data-width="700" data-title="编辑过滤器"  class="ukefu-report-design">编辑</a>
+				<a  href="/apps/report/design/rfilteredit?fid=${filter.id!''}" data-toggle="ajax" data-height="550" data-width="700" data-title="编辑过滤器"  class="ukefu-report-design">编辑</a>
 			</span>
 		</div>
 	</div>

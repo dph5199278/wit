@@ -9,22 +9,22 @@
 	content="width=device-width, maximum-scale=1.0, initial-scale=1.0,initial-scale=1.0,user-scalable=no" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <title><#if systemConfig?? && systemConfig.title?? && systemConfig.title != ''>${systemConfig.title}<#else>智文客服-全渠道智能客服</#if></title>
-<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image.html?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
+<link rel="shortcut icon" type="image/x-icon" href="<#if systemConfig?? && systemConfig.favlogo?? && systemConfig.favlogo != ''>/res/image?id=${systemConfig.favlogo?url}<#else>/images/favicon.ico</#if>?t=${.now?long}"/>
 <link rel="stylesheet" href="/layui/css/layui.css">
-<link rel="stylesheet" href="/res/css.html">
+<link rel="stylesheet" href="/res/css">
 <script src="/layui/layui.js"></script>
 <script src="/js/jquery-1.10.2.min.js"></script>
 <script src="/js/cskefu.js"></script>
 <script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
-		top.location.href = "/apps/tenant/index.html" ;
+		top.location.href = "/apps/tenant/index" ;
 	} 
 	layui.use('layer', function(){
 	  var layer = layui.layer;
 	  <#if msg?? && msg == 't0'>
 			layer.confirm("当前用户在（${currentname!''}）坐席就绪或对话未结束，不能切换${systemConfig.namealias!''},点击确定进入${systemConfig.namealias!''}（${currentname!''}）修改为未就绪或结束对话", {icon: 3, title:'提示'}, function(index){
 				layer.close(index);
-				location.href = "/apps/tenant/canswitch.html?id=${currentorgi!''}" ;
+				location.href = "/apps/tenant/canswitch?id=${currentorgi!''}" ;
 				});
 			<#elseif msg?? && msg== 'max_illegal'>
 			layer.alert('修改${systemConfig.namealias!''}失败，名称不能超过50个字', {icon:2});
@@ -49,17 +49,17 @@
 	<div class="layui-layout layui-layout-admin create-product-div">
 		<div class="layui-header header header-ukefu">
 			<div class="layui-main">
-				<a class="logo" href="/"><img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image.html?id=${systemConfig.consolelogo?url}<#else>images/logo.png</#if>"></a>
+				<a class="logo" href="/"><img src="<#if systemConfig?? && systemConfig.consolelogo?? && systemConfig.consolelogo != ''>/res/image?id=${systemConfig.consolelogo?url}<#else>images/logo.png</#if>"></a>
 				<ul class="layui-nav">
 					<!-- <li class="layui-nav-item layui-this">
-						<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content.html" class="iframe_btn" data-id="maincontent" data-type="tabChange">
+						<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content" class="iframe_btn" data-id="maincontent" data-type="tabChange">
 							<i class="kfont" style="position: relative;">&#xe717;</i>
 							首页
 						</a>
 					</li>										
 					<#if (user?? && user.roleAuthMap["B02"]??   || user.admin)>
 					<li class="layui-nav-item ">
-						<a href="javascript:void(0)" onclick="return false;"  data-title="系统管理" data-href="/admin/content.html" class="iframe_btn" data-id="admin" data-type="tabAdd">
+						<a href="javascript:void(0)" onclick="return false;"  data-title="系统管理" data-href="/admin/content" class="iframe_btn" data-id="admin" data-type="tabAdd">
 							<i class="layui-icon" style="position: relative;">&#xe631;</i>
 							系统
 						</a>
@@ -70,8 +70,8 @@
 						<i class="layui-icon" style="position: relative;">&#xe612;</i>
 						<#if user??>${user.uname!''}<#if tenant??&&tenant.tenantname??>（${tenant.tenantname!''}）</#if></#if></a>
 						<dl class="layui-nav-child">
-					      <dd><a href="/apps/profile.html?index=1" data-toggle="ajax" data-width="750" data-title="修改资料">个人资料</a></dd>
-					      <dd><a href="/logout.html">退出系统</a></dd>
+					      <dd><a href="/apps/profile?index=1" data-toggle="ajax" data-width="750" data-title="修改资料">个人资料</a></dd>
+					      <dd><a href="/logout">退出系统</a></dd>
 					    </dl>
 					</li>
 				</ul>
@@ -83,7 +83,7 @@
 		            <#if organization??>
 		                <#if user?? && user.admin>
 		                	<span id="company-name">${organization.name!''}</span>
-		                	<a href="/apps/organization/edit.html?id=${organization.id!''}"  data-toggle="ajax" data-width="450" data-height="350" data-title="编辑" ><i class="layui-icon" 
+		                	<a href="/apps/organization/edit?id=${organization.id!''}"  data-toggle="ajax" data-width="450" data-height="350" data-title="编辑" ><i class="layui-icon"
 											style="font-size: 24px;float:left;margin-left:5px;color:#2bd99e">&#xe642;</i>
 							</a>
 						</#if>
@@ -93,14 +93,14 @@
 						<#if tenantList??> <#list tenantList as tenant>
 						
 							<div class="product">
-								<a href="/apps/tenant/canswitch.html?id=<#if tenant?? && tenant.id??>${tenant.id!''}</#if>">
-			                        <img class="product-img" src="<#if tenant?? && tenant.tenantlogo??>/res/image.html?id=${tenant.tenantlogo?url}</#if>" onerror="javascript:this.src='/images/error.jpg';">  
+								<a href="/apps/tenant/canswitch?id=<#if tenant?? && tenant.id??>${tenant.id!''}</#if>">
+			                        <img class="product-img" src="<#if tenant?? && tenant.tenantlogo??>/res/image?id=${tenant.tenantlogo?url}</#if>" onerror="javascript:this.src='/images/error.jpg';">
 			                     <div class="ukefu-tenant-item-div2" 
 									style="font-weight: 400; position: absolute;">${tenant.tenantname!''}
 										<#if user?? && user.admin>
-											<i class="layui-icon ukefu-bt-text-title" href="/apps/tenant/delete.html?id=${tenant.id!''}"  data-toggle="tip" data-title="删除" 
+											<i class="layui-icon ukefu-bt-text-title" href="/apps/tenant/delete?id=${tenant.id!''}"  data-toggle="tip" data-title="删除"
 											style="font-size: 24px;float:right;">&#xe640;</i>
-											<i class="layui-icon ukefu-bt-text-title"  href="/apps/tenant/edit.html?id=<#if tenant?? && tenant.id??>${tenant.id!''}</#if>" data-toggle="ajax" data-width="550" data-height="400" data-title="${systemConfig.namealias!''}编辑"
+											<i class="layui-icon ukefu-bt-text-title"  href="/apps/tenant/edit?id=<#if tenant?? && tenant.id??>${tenant.id!''}</#if>" data-toggle="ajax" data-width="550" data-height="400" data-title="${systemConfig.namealias!''}编辑"
 											style="font-size: 24px;float:right;margin-right:10px;">&#xe642;</i>
 										</#if>
 									</div>
@@ -108,7 +108,7 @@
 			                    </div>
 						</#list> </#if>
 						<#if user?? && user.admin>
-							<a href="/apps/tenant/add.html" data-toggle="ajax"
+							<a href="/apps/tenant/add" data-toggle="ajax"
 									data-width="550" data-height="300"
 									data-title="${systemConfig.namealias!''}创建" class="ukefu-bt">
 									<div id="add-product" class="product add-product"><p>${systemConfig.namealias!''}创建</p></div>

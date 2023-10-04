@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/user/save.html">
+	<form class="layui-form uk-form" action="/admin/user/save">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">用户名：</label>
 	    <div class="layui-input-inline">
@@ -153,7 +153,7 @@ layui.use('form', function(){
                     // 关闭form
                     $("span.layui-layer-setwin > a.layui-layer-close1").click();
                     // 刷新页面
-                    document.getElementById("admin").contentWindow.location = '/admin/user/index.html';
+                    document.getElementById("admin").contentWindow.location = '/admin/user/index';
                 });
 			}
 		}, function(err){

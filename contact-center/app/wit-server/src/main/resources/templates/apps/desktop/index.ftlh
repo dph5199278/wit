@@ -19,7 +19,7 @@
 				<div class="row">
 					<div class="col-lg-3">
 						<div class="ukefu-measure">
-							<a href="/apps/onlineuser.html" class="ukefu-bt"> 
+							<a href="/apps/onlineuser" class="ukefu-bt">
 								<i class="layui-icon ukewo-btn ukefu-measure-btn">&#xe612;</i>
 								<div class="ukefu-bt-text">
 									<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${webIMInvite.inviteusers}/${webIMInvite.refuseusers}</div>
@@ -30,7 +30,7 @@
 					</div>
 					<div class="col-lg-3">
 						<div class="ukefu-measure">
-							<a href="/service/agent/index.html" class="ukefu-bt"> 
+							<a href="/service/agent/index" class="ukefu-bt">
 								<i class="kfont icon-iconfontagent ukewo-btn ukefu-measure-btn ukefu-bg-color-yellow"></i>
 								<div class="ukefu-bt-text">
 									<div class="ukefu-bt-text-title" id="agentReportAgents" style="font-weight:400;font-size:19px;">${agentReport.agents}/${agents!0}</div>
@@ -41,7 +41,7 @@
 					</div>
 					<div class="col-lg-3">
 						<div class="ukefu-measure">
-							<a href="/service/quene/index.html" class="ukefu-bt"> 
+							<a href="/service/quene/index" class="ukefu-bt">
 								<i class="layui-icon ukewo-btn ukefu-measure-btn ukefu-bg-color-pink">&#xe63a;</i>
 								<div class="ukefu-bt-text">
 									<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${agentReport.users}/${agentReport.inquene}</div>
@@ -52,7 +52,7 @@
 					</div>
 					<div class="col-lg-3">
 						<div class="ukefu-measure">
-							<a href="/apps/onlineuser.html" class="ukefu-bt"> 
+							<a href="/apps/onlineuser" class="ukefu-bt">
 								<i class="layui-icon ukewo-btn ukefu-measure-btn ukefu-bg-color-green">&#xe62c;</i>
 								<div class="ukefu-bt-text">
 									<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${webIMReport.ipnums!0}/${webIMReport.pvnums!0}</div>
@@ -89,7 +89,7 @@
 						<#list onlineUserList.content as onlineuser>
 						<tr class="tdHasContorllor design-dropable-td">
 							<td class=" first_td_head">
-								<a href="/service/online/index.html?userid=${onlineuser.userid!''}">${onlineuser.username!''}
+								<a href="/service/online/index?userid=${onlineuser.userid!''}">${onlineuser.username!''}
 								<#if onlineuser.contacts??>（${onlineuser.contacts.name!''}）</#if></a>
 							</td>
 							
@@ -127,7 +127,7 @@
 								<#else> 	
 									<a href="javascript:;" name="${onlineuser.id!''}"  title="邀请访客" class="layui-btn layui-btn-xs  layui-btn-normal" onclick="sendInvitationToOnlineUser('${onlineuser.id}', true)">邀请</a>
 								</#if>
-                <a href="/service/trace.html?sessionid=${onlineuser.sessionid!''}&userid=${onlineuser.id}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn layui-btn-xs layui-btn-normal">轨迹</a>
+                <a href="/service/trace?sessionid=${onlineuser.sessionid!''}&userid=${onlineuser.id}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn layui-btn-xs layui-btn-normal">轨迹</a>
 							</td>
 						</tr>
 						</#list>
@@ -172,7 +172,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/apps/onlineuser.html?p="+data.curr ;
+						location.href = "/apps/onlineuser?p="+data.curr ;
 					}
 				}
 			});

@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			区域列表<#if areaList??>（${areaList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/area/add.html" data-toggle="ajax" data-width="750" data-height="450" data-title="创建新区域">
+				<button class="layui-btn layui-btn-sm green" href="/admin/area/add" data-toggle="ajax" data-width="750" data-height="450" data-title="创建新区域">
 					创建新区域
 				</button>
 			</span>
@@ -33,11 +33,11 @@
 					  </td>
 					  <td>${area.area!''}</td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-					  		<a href="/admin/area/edit.html?id=${area.id!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="编辑区域信息">
+					  		<a href="/admin/area/edit?id=${area.id!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="编辑区域信息">
 					  			<i class="layui-icon">&#xe642;</i>
 					  			编辑
 					  		</a>
-					  		<a href="/admin/area/delete.html?id=${area.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除区域记录？">
+					  		<a href="/admin/area/delete?id=${area.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除区域记录？">
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			删除
 					  		</a>
@@ -66,7 +66,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/user/index.html?p="+data.curr ;
+						location.href = "/admin/user/index?p="+data.curr ;
 					}
 				}
 		   });

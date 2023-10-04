@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/agent/quickreply/type/update.html" id="mainQuickFrom" data-toggle="ajax-form" method="post" data-inner="#quick_reply">
+	<form class="layui-form" action="/agent/quickreply/type/update" id="mainQuickFrom" data-toggle="ajax-form" method="post" data-inner="#quick_reply">
 		<input type="hidden" name="id" value="${quickType.id!''}">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -62,7 +62,7 @@
 		<div class="layui-form-button">
 			<div class="layui-button-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button class="layui-btn layui-btn-danger" lay-submit lay-filter="formDemo" onclick="$('#mainQuickFrom').attr('action' , '/agent/quickreply/deletetype.html')">删除</button>
+				<button class="layui-btn layui-btn-danger" lay-submit lay-filter="formDemo" onclick="$('#mainQuickFrom').attr('action' , '/agent/quickreply/deletetype')">删除</button>
 			</div>
 		</div>
 	</form>

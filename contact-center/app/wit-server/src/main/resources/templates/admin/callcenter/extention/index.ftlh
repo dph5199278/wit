@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			分机列表<#if extentionList??>（${extentionList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/extention/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="添加新分机">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/extention/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="添加新分机">
 					添加分机（支持批量添加）
 				</button>
 				
@@ -85,18 +85,18 @@
 									</#if>
 							  </td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/extention/edit.html?id=${extention.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="编辑分机信息">
+							  		<a href="/admin/callcenter/extention/edit?id=${extention.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="编辑分机信息">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
 							  		<#if extention.extype?? && extention.extype == "ivr">
-							  		<a href="/admin/callcenter/extention/ivr.html?id=${extention.id!''}&hostid=${pbxHost.id!''}" style="margin-left:10px;" data-toggle="ajax" data-width="700" data-height="450" data-title="编辑IVR配置信息">
+							  		<a href="/admin/callcenter/extention/ivr?id=${extention.id!''}&hostid=${pbxHost.id!''}" style="margin-left:10px;" data-toggle="ajax" data-width="700" data-height="450" data-title="编辑IVR配置信息">
 							  			<i class="kfont">&#xe66f;</i>
 							  			IVR配置
 							  		</a>
 							  		
 							  		</#if>
-							  		<a href="/admin/callcenter/extention/delete.html?id=${extention.id!''}&hostid=${pbxHost.id!''}" style="margin-left:10px;" data-toggle="tip" data-callback="loadURL" data-target="#callCenterContent" data-title="请确认是否删除分机号？">
+							  		<a href="/admin/callcenter/extention/delete?id=${extention.id!''}&hostid=${pbxHost.id!''}" style="margin-left:10px;" data-toggle="tip" data-callback="loadURL" data-target="#callCenterContent" data-title="请确认是否删除分机号？">
 							  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 							  			删除
 							  		</a>

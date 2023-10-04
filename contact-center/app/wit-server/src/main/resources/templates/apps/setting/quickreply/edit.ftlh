@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" method="post" action="/setting/quickreply/update.html">
+	<form class="layui-form uk-form" method="post" action="/setting/quickreply/update">
 	  <input type="hidden" name="id" value="${quickReply.id!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">标题：</label>

@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			媒体资源列表<#if mediaList??>（${mediaList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/media/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="添加新媒体资源">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/media/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="300" data-title="添加新媒体资源">
 					添加新媒体资源
 				</button>
 			</span>
@@ -37,7 +37,7 @@
 							<#list mediaList as media>
 							<tr>
 							  <td>
-								 <a href="/apps/callcenter/comment/play.html?id=${media.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="播放录音">${media.name!''}</a>
+								 <a href="/apps/callcenter/comment/play?id=${media.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-height="450" data-title="播放录音">${media.name!''}</a>
 							  </td>
 							  <td>${media.content!''}</td>
 							  <td>${media.filename!''}</td>
@@ -45,11 +45,11 @@
 							  
 							  <td>${media.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/media/edit.html?id=${media.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
+							  		<a href="/admin/callcenter/media/edit?id=${media.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
-							  		<a href="/admin/callcenter/media/delete.html?id=${media.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除服务器？">
+							  		<a href="/admin/callcenter/media/delete?id=${media.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除服务器？">
 							  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 							  			删除
 							  		</a>
@@ -81,7 +81,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/user/index.html?p="+data.curr ;
+						location.href = "/admin/user/index?p="+data.curr ;
 					}
 				}
 		   });

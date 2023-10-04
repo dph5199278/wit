@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form" method="post" action="/apps/report/update.html">
+    <form class="layui-form" method="post" action="/apps/report/update">
     	<input type="hidden" name="id" value="${report.id!''}">
         <div class="layui-form-item" style="margin-top:20px;">
             <div class="layui-inline">

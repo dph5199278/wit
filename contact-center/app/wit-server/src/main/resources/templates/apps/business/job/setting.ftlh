@@ -51,7 +51,7 @@
 	}
 </SCRIPT>
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/job/save.html" method="post" data-toggle="ajax-form" data-close="true" data-callback="location.href=location.href">
+	<form class="layui-form uk-form" action="/apps/job/save" method="post" data-toggle="ajax-form" data-close="true" data-callback="location.href=location.href">
 		<input type="hidden" name="id" value="${job.id!''}">
 	  	<div class="layui-form-item">
 			<div class="layui-inline">

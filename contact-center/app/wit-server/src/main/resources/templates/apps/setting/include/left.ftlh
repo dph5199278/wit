@@ -6,17 +6,17 @@
 			<#if user?? && (user.roleAuthMap["A06_A01_A01"]?? || user.admin) >
 			<dd <#if subtype?? && subtype == 'sessionconfig'>class="layui-this"</#if>>
 				
-				<a href="/setting/agent/index.html">对话设置</a>
+				<a href="/setting/agent/index">对话设置</a>
 			</dd>
 			</#if>
 			<#if user?? && (user.roleAuthMap["A06_A01_A02"]?? || user.admin) >
 			<dd <#if subtype?? && subtype == 'blacklist'>class="layui-this"</#if>>
-				<a href="/setting/blacklist.html">黑名单</a>
+				<a href="/setting/blacklist">黑名单</a>
 			</dd>
 			</#if>
 			<!-- 
 			<dd <#if subtype?? && subtype == 'acd'>class="layui-this"</#if>>
-				<a href="/setting/acd.html">ACD策略</a>
+				<a href="/setting/acd">ACD策略</a>
 			</dd>
 			 -->
 		</dl>
@@ -29,7 +29,7 @@
 			<#if advTypeList??>
 			<#list advTypeList as advDic>
 			<dd <#if advType?? && advDic.id == advType.id>class="layui-this"</#if>>
-				<a href="/setting/adv.html?adpos=${advDic.id!''}">${advDic.name!''}</a>
+				<a href="/setting/adv?adpos=${advDic.id!''}">${advDic.name!''}</a>
 			</dd>
 			</#list>
 			</#if>
@@ -43,7 +43,7 @@
 			<#if tagTypeList??>
 			<#list tagTypeList as tagTypeDic>
 			<dd <#if tagType?? && tagType.code == tagTypeDic.code>class="layui-this"</#if>>
-				<a href="/setting/tag.html?code=${tagTypeDic.code!''}">${tagTypeDic.name!''}</a>
+				<a href="/setting/tag?code=${tagTypeDic.code!''}">${tagTypeDic.name!''}</a>
 			</dd>
 			</#list>
 			</#if>

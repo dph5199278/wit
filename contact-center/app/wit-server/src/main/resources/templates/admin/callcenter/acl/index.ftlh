@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			ACL访问列表策略<#if aclList??>（${aclList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/acl/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加ACL策略">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/acl/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加ACL策略">
 					添加ACL策略
 				</button>
 			</span>
@@ -33,17 +33,17 @@
 							<#list aclList as acl>
 							<tr>
 							  <td>
-								  <a href="/admin/callcenter/resource.html?hostid=${pbxHost.id!''}">${acl.name!''}</a>
+								  <a href="/admin/callcenter/resource?hostid=${pbxHost.id!''}">${acl.name!''}</a>
 							  </td>
 							  <td>${acl.defaultvalue!''}</td>
 							  
 							  <td>${acl.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/acl/edit.html?id=${acl.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑ACL">
+							  		<a href="/admin/callcenter/acl/edit?id=${acl.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑ACL">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
-							  		<a href="/admin/callcenter/acl/delete.html?id=${acl.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除ACL策略？">
+							  		<a href="/admin/callcenter/acl/delete?id=${acl.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除ACL策略？">
 							  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 							  			删除
 							  		</a>
@@ -75,7 +75,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/user/index.html?p="+data.curr ;
+						location.href = "/admin/user/index?p="+data.curr ;
 					}
 				}
 		   });

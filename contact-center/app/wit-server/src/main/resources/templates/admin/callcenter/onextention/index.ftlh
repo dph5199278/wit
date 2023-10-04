@@ -54,7 +54,7 @@
 									${onextention.networkip!''}
 							  </td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/online/extention/detail.html?extno=${onextention.sipauthuser!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="查看分机信息">
+							  		<a href="/admin/callcenter/online/extention/detail?extno=${onextention.sipauthuser!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="700" data-height="450" data-title="查看分机信息">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			详情
 							  		</a>

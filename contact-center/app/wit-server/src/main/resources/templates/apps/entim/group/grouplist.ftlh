@@ -15,7 +15,7 @@
 			<#if groupList??>
 			<#list groupList as imgroup>
 				<li id="group_${imgroup.id}">
-					<a href="javascript:void(0)" onclick="openchat('/ent/im/group.html?id=${imgroup.id!''}', '/images/imgroup.png' , '${imgroup.name!''}' , '${imgroup.id!''}' , '创建时间:${imgroup.createtime?string('yyyy-MM-dd HH:mm:ss')}');">
+					<a href="javascript:void(0)" onclick="openchat('/ent/im/group?id=${imgroup.id!''}', '/images/imgroup.png' , '${imgroup.name!''}' , '${imgroup.id!''}' , '创建时间:${imgroup.createtime?string('yyyy-MM-dd HH:mm:ss')}');">
 						<img src="/images/imgroup.png">
 						<span>${imgroup.name!''}</span>
 					</a>
@@ -44,7 +44,7 @@
 			<#list joinGroupList as imGroup>
 				<#if imGroup.imgroup?? && user.id != imGroup.creater>
 				<li id="group_${imGroup.imgroup.id}">
-					<a href="javascript:void(0)" onclick="openchat('/ent/im/group.html?id=${imGroup.imgroup.id!''}', '/images/imgroup.png' , '${imGroup.imgroup.name!''}' , '${imGroup.imgroup.id!''}' , '创建时间:${imGroup.imgroup.createtime}');">
+					<a href="javascript:void(0)" onclick="openchat('/ent/im/group?id=${imGroup.imgroup.id!''}', '/images/imgroup.png' , '${imGroup.imgroup.name!''}' , '${imGroup.imgroup.id!''}' , '创建时间:${imGroup.imgroup.createtime}');">
 						<img src="/images/imgroup.png">
 						<span>${imGroup.imgroup.name!''}</span>
 					</a>

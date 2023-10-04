@@ -14,15 +14,15 @@
 			</div>
 		</div>
 		<div style="position: absolute;right: 20px;"> 
-			<a class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/workorders/edit.html?id=6acddde4c8d246478073ae8b6644ebe9" data-toggle="tip" title="执行重载配置会是FreeSwitch执行资源重新加载动作，是否执行重载配置？">重载配置</a>
+			<a class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/workorders/edit?id=6acddde4c8d246478073ae8b6644ebe9" data-toggle="tip" title="执行重载配置会是FreeSwitch执行资源重新加载动作，是否执行重载配置？">重载配置</a>
 		</div>
 	</div>
 </div>
 <h1 class="site-h1 ukefu-tab" style="height:26px;">
 	<div class="ukefu-tab-title" style="margin-left:0px;">
 		<ul class="tab-title" id="pbxHostTab">
-			<li class="layui-this"><a href="/admin/callcenter/pbxhost.html" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
-			<li><a href="/admin/callcenter/black.html" data-toggle="load" data-target="#callCenterContent">黑名单</a></li>
+			<li class="layui-this"><a href="/admin/callcenter/pbxhost" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
+			<li><a href="/admin/callcenter/black" data-toggle="load" data-target="#callCenterContent">黑名单</a></li>
 		</ul>					
 	</div>
 </h1>

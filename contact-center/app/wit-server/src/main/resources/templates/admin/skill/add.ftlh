@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/skill/save.html">
+	<form class="layui-form uk-form" action="/admin/skill/save">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">技能组：</label>
 	    <div class="layui-input-inline">

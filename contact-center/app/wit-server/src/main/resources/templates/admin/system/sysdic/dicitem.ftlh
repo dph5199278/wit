@@ -3,11 +3,11 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			${sysDic.name} 字典项<#if sysDicList??>（${sysDicList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/sysdic/dicitem/add.html?id=${sysDic.id!''}" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新字典项">
+				<button class="layui-btn layui-btn-sm green" href="/admin/sysdic/dicitem/add?id=${sysDic.id!''}" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新字典项">
 					创建新字典项
 				</button>
 				
-				<button class="layui-btn layui-btn-sm green" href="/admin/sysdic/dicitem/batadd.html?id=${sysDic.id!''}" data-toggle="ajax" data-width="750" data-title="创建新字典项">
+				<button class="layui-btn layui-btn-sm green" href="/admin/sysdic/dicitem/batadd?id=${sysDic.id!''}" data-toggle="ajax" data-width="750" data-title="创建新字典项">
 					批量创建字典项
 				</button>
 			</span>
@@ -40,7 +40,7 @@
 						<#list sysDicList.content as dic>
 						<tr>
 						  <td>
-							  <a href="/admin/sysdic/dicitem.html?id=${dic.id!''}&dicid=${dic.id!''}">${dic.name!''}</a>
+							  <a href="/admin/sysdic/dicitem?id=${dic.id!''}&dicid=${dic.id!''}">${dic.name!''}</a>
 						  </td>
 						  <td>${dic.code!''}</td>
 						  <td>${dic.url!''}</td>
@@ -52,11 +52,11 @@
 						  </td>
 						  <td><#if dic.iconstr??>${dic.iconstr}</#if></td>
 						  <td style="white-space:nowrap;" nowrap="nowrap">
-								<a href="/admin/sysdic/dicitem/edit.html?id=${dic.id!''}&p=${sysDicList.number+1}" data-width="550" data-height="450" data-toggle="ajax" title="编辑${dic.name!''}">
+								<a href="/admin/sysdic/dicitem/edit?id=${dic.id!''}&p=${sysDicList.number+1}" data-width="550" data-height="450" data-toggle="ajax" title="编辑${dic.name!''}">
 									<i class="layui-icon">&#xe642;</i>
 									编辑
 								</a>
-								<a href="/admin/sysdic/dicitem/delete.html?id=${dic.id!''}&p=${sysDicList.number+1}" data-toggle="tip" data-title="删除字典项同时会删除字典项下的所有子项，请确认是否删除字典项“${dic.name!''}”？" title="删除${dic.name!''}">
+								<a href="/admin/sysdic/dicitem/delete?id=${dic.id!''}&p=${sysDicList.number+1}" data-toggle="tip" data-title="删除字典项同时会删除字典项下的所有子项，请确认是否删除字典项“${dic.name!''}”？" title="删除${dic.name!''}">
 									<i class="layui-icon" style="color:red;">&#x1006;</i>
 									删除
 								</a>
@@ -81,7 +81,7 @@
 						<#list sysDicList.content as dic>
 						<tr>
 						  <td>
-							  <a href="/admin/sysdic/dicitem.html?id=${dic.id!''}&dicid=${dic.id!''}">${dic.name!''}</a>
+							  <a href="/admin/sysdic/dicitem?id=${dic.id!''}&dicid=${dic.id!''}">${dic.name!''}</a>
 						  </td>
 						  <td>${dic.code!''}</td>
 						  <td><#if dic.iconskin?? && dic.iconskin != ''>
@@ -96,11 +96,11 @@
 						  <td><#if dic.discode><i class="layui-icon" style="color:#19a55d;">&#xe618;</i></#if></td>
 						  <td><#if dic.createtime??>${dic.createtime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
 						  <td style="white-space:nowrap;" nowrap="nowrap">
-								<a href="/admin/sysdic/dicitem/edit.html?id=${dic.id!''}&p=${sysDicList.number+1}" data-width="550" data-height="450" data-toggle="ajax" title="编辑${dic.name!''}">
+								<a href="/admin/sysdic/dicitem/edit?id=${dic.id!''}&p=${sysDicList.number+1}" data-width="550" data-height="450" data-toggle="ajax" title="编辑${dic.name!''}">
 									<i class="layui-icon">&#xe642;</i>
 									编辑
 								</a>
-								<a href="/admin/sysdic/dicitem/delete.html?id=${dic.id!''}&p=${sysDicList.number+1}" data-toggle="tip" data-title="删除字典项同时会删除字典项下的所有子项，请确认是否删除字典项“${dic.name!''}”？" title="删除${dic.name!''}">
+								<a href="/admin/sysdic/dicitem/delete?id=${dic.id!''}&p=${sysDicList.number+1}" data-toggle="tip" data-title="删除字典项同时会删除字典项下的所有子项，请确认是否删除字典项“${dic.name!''}”？" title="删除${dic.name!''}">
 									<i class="layui-icon" style="color:red;">&#x1006;</i>
 									删除
 								</a>
@@ -132,7 +132,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/sysdic/dicitem.html?id=${sysDic.id!''}&p="+data.curr ;
+						location.href = "/admin/sysdic/dicitem?id=${sysDic.id!''}&p="+data.curr ;
 					}
 				}
 		   });

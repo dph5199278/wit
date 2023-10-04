@@ -71,7 +71,7 @@ public class DimensionController extends Handler {
             dimension.setCreater(super.getUser(request).getId());
             dimensionRes.save(dimension);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + dimension.getCubeid() + "&dimensionId=" + dimension.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + dimension.getCubeid() + "&dimensionId=" + dimension.getId()));
     }
 
     @RequestMapping("/delete")
@@ -84,7 +84,7 @@ public class DimensionController extends Handler {
         if (!cubeLevelList.isEmpty()) {
             cubeLevelRes.deleteAll(cubeLevelList);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + dimension.getCubeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + dimension.getCubeid()));
     }
 
     @RequestMapping("/edit")
@@ -111,7 +111,7 @@ public class DimensionController extends Handler {
             dimensionRes.findById(dimension.getId()).ifPresent(it -> dimension.setCreatetime(it.getCreatetime()));
             dimensionRes.save(dimension);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + dimension.getCubeid() + "&dimensionId=" + dimension.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + dimension.getCubeid() + "&dimensionId=" + dimension.getId()));
     }
 
     @RequestMapping("/fktableid")

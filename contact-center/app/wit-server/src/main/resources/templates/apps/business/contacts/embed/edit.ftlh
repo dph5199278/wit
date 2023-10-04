@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/contacts/embed/update.html" data-toggle="ajax-form" data-close="false" data-target="#mainajaxwin" method="post" >
+	<form class="layui-form" action="/apps/contacts/embed/update" data-toggle="ajax-form" data-close="false" data-target="#mainajaxwin" method="post" >
 		<input type="hidden" name="id" value="${contacts.id!''}">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -151,7 +151,7 @@
 		<div class="layui-form-button">
 			<div class="layui-button-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button type="reset" class="layui-btn layui-btn-primary" href="/apps/contacts/embed/index.html" data-toggle="load" data-target="#mainajaxwin">返回</button>
+				<button type="reset" class="layui-btn layui-btn-primary" href="/apps/contacts/embed/index" data-toggle="load" data-target="#mainajaxwin">返回</button>
 			</div>
 		</div>
 	</form>
@@ -160,7 +160,7 @@
 <script>
 	//Demo
 	$('#province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
 	})
 	layui.use('form', function() {
 		var form = layui.form;

@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/skill/update.html">
+	<form class="layui-form uk-form" action="/admin/skill/update">
 	  <input type="hidden" name="id" value="${skillData.id!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">技能组：</label>

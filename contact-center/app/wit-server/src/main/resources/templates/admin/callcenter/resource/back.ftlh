@@ -8,7 +8,7 @@
 				<ul>
 					<#if pbxHostList??>
 					<#list pbxHostList as host>
-					<li class="uk_callcenter_pbxhost <#if pbxHost?? && pbxHost.id == host.id>this</#if>" href="/admin/callcenter/resource/pbxhost.html?hostid=${host.id!''}" data-toggle="load" data-target="#callCenterResource">
+					<li class="uk_callcenter_pbxhost <#if pbxHost?? && pbxHost.id == host.id>this</#if>" href="/admin/callcenter/resource/pbxhost?hostid=${host.id!''}" data-toggle="load" data-target="#callCenterResource">
 						<i class="kfont" style="position: relative;">&#xe7fa;</i>
 						${host.name!''}
 						<div style="padding-left:22px;margin-top:5px;color:#cccccc;">

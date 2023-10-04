@@ -40,7 +40,7 @@
 			    //创建新的图片对象
 			    var img = new Image();
 			    //指定图片的URL
-			    img.src = "/res/image.html?id=${chatMessage.attachmentid!''}&cooperation=true&original=true";
+			    img.src = "/res/image?id=${chatMessage.attachmentid!''}&cooperation=true&original=true";
 			    //浏览器加载图片完毕后再绘制图片
 			    img.onload = function(){
 			        //以Canvas画布上的坐标(10,10)为起始点，绘制图像

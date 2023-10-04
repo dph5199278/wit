@@ -170,13 +170,13 @@
 <body class="ukefu-im-theme ukefu-point-text" style="width:100%;overflow:hidden;height:100%;max-height:100%;position: fixed;/* 或者scroll */-webkit-overflow-scrolling: touch;/* 解决ios滑动不流畅问题 */">
 	<div id="header" class="theme${inviteData.consult_dialog_color!''}">
 		<img
-			src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>"
+			src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>"
 			style="height:50px;padding:10px;">
 		
 		<div class="ukefu-func-tab">
 		   		<ul>
 		   			<#if models?seq_contains("chatbot") && inviteData.ai?? && inviteData.ai == true && aiid??>
-		   				<li><a href="/im/index.html?appid=${appid!''}&orgi=${orgi!''}<#if aiid??>&aiid=${aiid}</#if>&ai=true<#if client??>&client=${client!''}</#if><#if type??>&type=text</#if><#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if>&userid=${userid!''}&sessionid=${sessionid!''}&t=${.now?long}">智能客服</a></li>
+		   				<li><a href="/im/index?appid=${appid!''}&orgi=${orgi!''}<#if aiid??>&aiid=${aiid}</#if>&ai=true<#if client??>&client=${client!''}</#if><#if type??>&type=text</#if><#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if>&userid=${userid!''}&sessionid=${sessionid!''}&t=${.now?long}">智能客服</a></li>
 		   				<li class="cur"><a href="javascript:void(0)">人工坐席</a></li>
 		   			<#else>
 		   				<li class="cur"><a href="javascript:void(0)">人工坐席</a></li>
@@ -234,7 +234,7 @@
 		<div class="clearfix chat-block">
 			<div class="chat-left">
 				<img class="user-img"
-					src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>"
+					src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>"
 					alt="">
 				<div class="chat-message">
 					<label class="user"><#if chatMessage?? && chatMessage.chatype?? && chatMessage.chatype == 'aireply'>${inviteData.ainame!'小松'}<#else>${chatMessage.username!''}</#if></label>
@@ -250,7 +250,7 @@
 	</div>
 	
 	<div class="mobile-chat-bottom" id="bottom">
-		<form id="imgForm" action="/im/image/upload.html?userid=${userid!''}&appid=${appid!''}&username=${username!''}&orgi=${orgi!''}" data-toggle="ajax-form"" enctype="multipart/form-data">
+		<form id="imgForm" action="/im/image/upload?userid=${userid!''}&appid=${appid!''}&username=${username!''}&orgi=${orgi!''}" data-toggle="ajax-form"" enctype="multipart/form-data">
 			<a href="javascript:;" class="imgFile" onclick="closeFaceDialog(0)">
 				<img src="/im/img/img.png" class="chat-type" style="width:32px;height:32px;">
 				<input type="file" name="imgFile" id="imgFile" accept="image/*" onChange="$('#imgForm').submit();$(this).val('');">
@@ -466,7 +466,7 @@
 		}else{
 			satisComment = comInputVal;
 		}
-		R3Ajax.post("/im/satis.html?orgi=${orgi!''}" , function(){
+		R3Ajax.post("/im/satis?orgi=${orgi!''}" , function(){
 			document.getElementById("dialogWrap").style.display = "none" ;
 			alert("服务评价已提交");
 		} , "id="+form.id.value+"&satislevel="+document.getElementById("satislevel_input").value +"&satiscomment="+encodeURIComponent(satisComment));
@@ -524,7 +524,7 @@
 		if(data.calltype == "呼入"){
 			output('<div class="chat-right"> <img class="user-img" src="/im/img/user.png" alt=""><div class="chat-message"><label class="time">'+data.createtime+'</label><label  class="user">'+data.username+'</label> </div><div class="chatting-right"><i class="arrow arrow${inviteData.consult_dialog_color!''}"></i><div class="chat-content theme${inviteData.consult_dialog_color!''}">'+chat+'</div></div>' , "chat-block");
 		}else if(data.calltype == "呼出"){
-			output('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+data.username+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
+			output('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+data.username+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
 		}
 	});
 	
@@ -542,7 +542,7 @@
     }
     function acceptInvite(msgid,fileid){
     	document.getElementById("cooperation").style.display = "block" ;
-    	document.getElementById("ukefu_img_ctx").src = "/res/image.html?id="+fileid + "&cooperation=true&original=true";
+    	document.getElementById("ukefu_img_ctx").src = "/res/image?id="+fileid + "&cooperation=true&original=true";
     	
     	$("#ukefu_img_ctx").load(function() {
 			var height = document.getElementById("ukefu-image-content").offsetHeight;
@@ -566,7 +566,7 @@
 			//创建新的图片对象
 			var img = new Image();
 			//指定图片的URL
-			img.src = "/res/image.html?id=" + fileid + "&cooperation=true&original=true";
+			img.src = "/res/image?id=" + fileid + "&cooperation=true&original=true";
 			//浏览器加载图片完毕后再绘制图片
 			img.onload = function() {
 				ctx.clearRect(0,0,canvas.width,canvas.height);    

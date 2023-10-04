@@ -53,7 +53,7 @@ $(document).ready(function(){
 var deletemodel = function(id){
 	let thisid = id?id:$("#rmLayout").attr("data-val");
 	$.ajax({
-		url:'/apps/report/design/modeldelete.html?id='+thisid,
+		url:'/apps/report/design/modeldelete?id='+thisid,
 		cache:false,
 		success: function(data){
 			$('.'+thisid).remove();	
@@ -64,7 +64,7 @@ var deletemodel = function(id){
 var deletefilter = function(id){
 	let thisid = id?id:"";
 	$.ajax({
-		url:'/apps/report/design/rfilterdel.html?id='+thisid,
+		url:'/apps/report/design/rfilterdel?id='+thisid,
 		cache:false,
 		success: function(data){
 			$('#'+thisid).remove();	
@@ -88,9 +88,9 @@ var ElementHelper = {
 
 var btnUndo,btnRedo,btnClear , $templateCache = new Map() , defaultTplType = 'layout', 
 	tpltypes = {
-		layout : new TemplateType("layout" , "布局组件" , "/template/layoutprop.html"),
-		element : new TemplateType("element" , "布局组件" , "/design/default/chart.html"),
-		filter : new TemplateType("filter" , "过滤器组件" , "/design/default/filter.html")	
+		layout : new TemplateType("layout" , "布局组件" , "/template/layoutprop"),
+		element : new TemplateType("element" , "布局组件" , "/design/default/chart"),
+		filter : new TemplateType("filter" , "过滤器组件" , "/design/default/filter")	
 	},tplMap = new Map();
 
 var TempletHelper = {
@@ -137,7 +137,7 @@ var TempletHelper = {
 			TempletHelper.doRender(tpl , data , div , callback , helper , model);
 		});
 		/****
-		if(!$templateCache.containsKey(tplid)){
+		if(!$templateCache.has(tplid)){
 			UKHelper.loadURLWith(tpl.url+"&mid="+model.id , null , function(data){ 		
 				TempletHelper.doRender(tpl , data , div , callback , helper , model);
 			});
@@ -387,7 +387,7 @@ var SpaceTools = {
 				if(ui.helper){
 					SpaceTools.processModel(event , ui , $(this) , false , false);	
 				}else if(ui.item){
-					UKHelper.loadURLWith("/apps/report/design/element.html?id="+ui.item.attr("id")+"&parentid="+ui.item.closest(".ukefu-col").data("mid")+"&colindex="+ui.item.closest(".ukefu-col").data("index"));
+					UKHelper.loadURLWith("/apps/report/design/element?id="+ui.item.attr("id")+"&parentid="+ui.item.closest(".ukefu-col").data("mid")+"&colindex="+ui.item.closest(".ukefu-col").data("index"));
 				}
 			}
 		});
@@ -599,7 +599,7 @@ var UKHelper = {
 	sendAuthCode:function(mobile , mobileelement , btn){
 		if( $(btn).attr("disabled") == null){
 			if(mobile!="" && (mobile.length == 11 && /^(((13[0-9]{1})|(15[0-9]{1})|(17[0-9]{1})|(14[0-9]{1})|(18[0-9]{1}))+\d{8})$/.test(mobile))){
-				UKHelper.loadURLWith("/user/sendauthcode.html?mobile="+mobile , null , function(data){
+				UKHelper.loadURLWith("/user/sendauthcode?mobile="+mobile , null , function(data){
 					if(data!=""){
 						alertMsg(data) ;
 					}
@@ -780,10 +780,10 @@ var DefaultHelper = {
 	}
 }
 var report = {
-		save:"/apps/report/design/save.html?rid=",
-		submit:"/apps/report/design/values.html?rid=",
-		refresh:"/apps/report/design/refresh.html?rid="	,
-		updatefilter:"/apps/report/design/updatefilter.html?rid=" ,
+		save:"/apps/report/design/save?rid=",
+		submit:"/apps/report/design/values?rid=",
+		refresh:"/apps/report/design/refresh?rid="	,
+		updatefilter:"/apps/report/design/updatefilter?rid=" ,
 		designtype : "team" 
 	}
 var DesignHelper = {

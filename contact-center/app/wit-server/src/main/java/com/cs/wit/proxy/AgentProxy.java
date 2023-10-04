@@ -239,11 +239,11 @@ public class AgentProxy {
             FileCopyUtils.copy(multipart.getBytes(), original);
             MainUtils.processImage(thumbnail, original);
             sf.setThumbnail(jpaBlobHelper.createBlobWithFile(thumbnail));
-            sf.setFileUrl("/res/image.html?id=" + fileid);
+            sf.setFileUrl("/res/image?id=" + fileid);
         } else {
             // 其它类型的文件
             AttachmentFile attachmentFile = processAttachmentFile(creator, multipart, fileid);
-            sf.setFileUrl("/res/file.html?id=" + attachmentFile.getId());
+            sf.setFileUrl("/res/file?id=" + attachmentFile.getId());
         }
 
         /*

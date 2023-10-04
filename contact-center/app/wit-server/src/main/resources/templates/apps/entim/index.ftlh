@@ -59,7 +59,7 @@
 						<#list userList as entimuser>
 							<#if entimuser.organs?? && entimuser.id != user.id && entimuser.organs[organ.id]??>
 							<li id="user_${entimuser.id}">
-								<a href="javascript:void(0)" onclick="openchat('/ent/im/chat.html?userid=${entimuser.id!''}' , '/images/user-pc.png' , '${entimuser.uname!''}' , '${entimuser.id!''}' , '最近登陆:${entimuser.lastlogintime}');">
+								<a href="javascript:void(0)" onclick="openchat('/ent/im/chat?userid=${entimuser.id!''}' , '/images/user-pc.png' , '${entimuser.uname!''}' , '${entimuser.id!''}' , '最近登陆:${entimuser.lastlogintime}');">
 									<img src="/images/user-pc.png">
 									<span>${entimuser.uname!''}</span>
 									<p>最近登陆:${entimuser.lastlogintime?string('yyyy-MM-dd HH:mm:ss')}</p>
@@ -91,7 +91,7 @@
 			<#if recentUserList??>
 			<#list recentUserList as recentUser>
 				<li id="recentuser_${recentUser.id}">
-					<a href="javascript:void(0)" onclick="openchat('/ent/im/chat.html?userid=${recentUser.user.id!''}' , '/images/user-pc.png' , '${recentUser.user.uname!''}' , '${recentUser.user.id!''}' , '最近登陆:${recentUser.user.lastlogintime}');">
+					<a href="javascript:void(0)" onclick="openchat('/ent/im/chat?userid=${recentUser.user.id!''}' , '/images/user-pc.png' , '${recentUser.user.uname!''}' , '${recentUser.user.id!''}' , '最近登陆:${recentUser.user.lastlogintime}');">
 						<img src="/images/user-pc.png">
 						<span>${recentUser.user.uname!''}</span>
 						<p><#if recentUser.lastmsg??>${recentUser.lastmsg!''}<#else>最近登陆:${recentUser.user.lastlogintime?string('yyyy-MM-dd HH:mm:ss')}</#if></p>
@@ -118,7 +118,7 @@
 			<span class="layui-anim layer-anim-05 animated" id="msgbox" data-newmsg="${newmsg}" style="<#if newmsg == 0>display:none;</#if>">${newmsg}</span>
 		</li>
 		<#if user?? && (user.roleAuthMap[ "A14_A01"]?? || user.admin )>
-			<li class="layui-icon " title="新建" onclick="layer.prompt({title: '新建一个群', offset: 'b', formType: 0}, function(text, index){layer.close(index);loadURL('/ent/im/group/save.html?name='+encodeURIComponent(text),'#imgroup')});"></li>
+			<li class="layui-icon " title="新建" onclick="layer.prompt({title: '新建一个群', offset: 'b', formType: 0}, function(text, index){layer.close(index);loadURL('/ent/im/group/save?name='+encodeURIComponent(text),'#imgroup')});"></li>
 		 </#if>
 		<li class="layui-icon" title="更换背景" onclick="skin()"></li>
 		<!-- <li class="layui-icon" title="关于" onclick="about()"></li> -->
@@ -167,7 +167,7 @@
 			  title: '选择风格' ,
 			  type: 2
 			  ,id:'selskin'
-			  ,content: '/ent/im/skin.html'
+			  ,content: '/ent/im/skin'
 			  ,btn: '关闭'
 			  ,shade: 0 //不显示遮罩
 		});

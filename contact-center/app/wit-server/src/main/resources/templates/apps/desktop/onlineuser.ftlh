@@ -43,7 +43,7 @@
 						<#list onlineUserList.content as onlineuser>
 						<tr class="tdHasContorllor design-dropable-td">
 							<td title="${onlineuser.username!''}<#if onlineuser.contacts??>（${onlineuser.contacts.name!''}）</#if>" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden">
-								<a href="/service/online/index.html?userid=${onlineuser.userid!''}">${onlineuser.username!''}
+								<a href="/service/online/index?userid=${onlineuser.userid!''}">${onlineuser.username!''}
 								<#if onlineuser.contacts??>（${onlineuser.contacts.name!''}）</#if></a>
 							</td>
 							
@@ -80,7 +80,7 @@
 								<#else> 	
 									<a href="javascript:;" name="${onlineuser.id!''}" title="邀请访客" class="layui-btn  layui-btn-normal layui-btn-xs" onclick="sendInvitationToOnlineUser('${onlineuser.id}', true)">邀请</a>
 								</#if>
-								<a href="/service/trace.html?sessionid=${onlineuser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn  layui-btn-normal layui-btn-xs">轨迹</a>
+								<a href="/service/trace?sessionid=${onlineuser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" class="layui-btn  layui-btn-normal layui-btn-xs">轨迹</a>
 							</td>
 						</tr>
 						</#list>
@@ -115,7 +115,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/apps/onlineuser.html?p="+data.curr ;
+						location.href = "/apps/onlineuser?p="+data.curr ;
 					}
 				}
 		   });

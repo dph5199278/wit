@@ -27,7 +27,7 @@
 						<#list serviceList.content as agentService>
 						<tr class="tdHasContorllor design-dropable-td">
 							<td class=" first_td_head" title="${agentService.username!''}" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
-								<a href="/service/online/index.html?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
+								<a href="/service/online/index?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
 								${agentService.username!''}
 								</a>
 							</td>
@@ -86,7 +86,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/service/comment/index.html?p="+data.curr ;
+						location.href = "/service/comment/index?p="+data.curr ;
 					}
 				}
 		   });

@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/role/auth/save.html">
+	<form class="layui-form uk-form" action="/admin/role/auth/save">
 		<input type="hidden" name="id" value="${role.id!''}">
 		<input type="hidden" name="menus" id="menus" value="<#if roleAuthList??><#list roleAuthList as roleAuth><#if roleAuth_index gt 0>,</#if>${roleAuth.dicid!''}</#list></#if>">
 		<div class="layui-form-item">
@@ -10,7 +10,7 @@
 		<div class="layui-form-button">
 			<div class="layui-button-block">
 				<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-				<button id="reset" type="reset" class="layui-btn layui-btn-primary" href="/admin/role/auth.html?id=${role.id}">重置</button>
+				<button id="reset" type="reset" class="layui-btn layui-btn-primary" href="/admin/role/auth?id=${role.id}">重置</button>
 			</div>
 		</div>
 	</form>

@@ -120,7 +120,7 @@ public class RoleController extends Handler {
 
             roleRepository.save(role);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?msg=" + msg));
     }
 
     @RequestMapping("/seluser")
@@ -158,7 +158,7 @@ public class RoleController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?role=" + role));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?role=" + role));
     }
 
     @RequestMapping("/user/delete")
@@ -167,7 +167,7 @@ public class RoleController extends Handler {
         if (role != null) {
             userRoleRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?role=" + role));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?role=" + role));
     }
 
     @RequestMapping("/edit")
@@ -199,7 +199,7 @@ public class RoleController extends Handler {
         } else if (!role.getId().equals(tempRoleExist.getId())) {
             msg = "admin_role_update_not_exist";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?msg=" + msg));
     }
 
     @RequestMapping("/delete")
@@ -212,7 +212,7 @@ public class RoleController extends Handler {
         } else {
             msg = "admin_role_not_exist";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?msg=" + msg));
     }
 
     @RequestMapping("/auth")
@@ -261,6 +261,6 @@ public class RoleController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index.html?role=" + id));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/role/index?role=" + id));
     }
 }

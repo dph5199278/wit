@@ -80,7 +80,7 @@ public class ApplicationController extends Handler {
                 view = request(super.createRequestPageTempletResponse("redirect:/apps/tenant/index"));
             }
             if (StringUtils.isBlank(logined.getOrgid())) {
-                view = request(super.createRequestPageTempletResponse("redirect:/apps/organization/add.html"));
+                view = request(super.createRequestPageTempletResponse("redirect:/apps/organization/add"));
             }
         }
         view.addObject("agentStatus", cache.findOneAgentStatusByAgentnoAndOrig(logined.getId(), logined.getOrgi()));

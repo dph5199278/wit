@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/customer/update.html" method="post">
+	<form class="layui-form" action="/apps/customer/update" method="post">
 		<input type="hidden" name="entcustomer.id" value="${entCustomer.id!''}">
 		<input type="hidden" name="ekindId" value="${ekindId!''}">
 		<div class="layui-collapse">
@@ -168,7 +168,7 @@
 <script>
 	//Demo
 	$('#entcustomer_province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=entcustomer.city&attr=lay-ignore&style=width:85px;" , '#entcustomer_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=entcustomer.city&attr=lay-ignore&style=width:85px;" , '#entcustomer_city');
 	})
 	layui.use('form', function() {
 		var form = layui.form;

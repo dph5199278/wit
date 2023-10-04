@@ -45,7 +45,7 @@ $(document).ready(function(){
     		multiMediaDialogWin.Proxy.newAgentUserService(data,"agent");
     	}else{
     		//来电弹屏
-			$('#agentdesktop').attr('data-href' , '/agent/index.html?userid='+data.userid).click();
+			$('#agentdesktop').attr('data-href' , '/agent/index?userid='+data.userid).click();
 			WebIM.audioplayer('audioplane', newuser, false); // 播放
 		}
 	}).on('status', function(data) {
@@ -63,7 +63,7 @@ $(document).ready(function(){
 			}
 		}else{
 			//来电弹屏
-			$('#agentdesktop').attr('data-href' , '/agent/index.html?userid='+data.userid).click();
+			$('#agentdesktop').attr('data-href' , '/agent/index?userid='+data.userid).click();
 		}
 	}).on('workorder', function(data) {
 
@@ -109,13 +109,13 @@ $(document).ready(function(){
     		}
     	}else{
     		//来电弹屏
-    		$('#agentdesktop').attr('data-href', '/agent/index.html?userid='+data.userid).click();
+    		$('#agentdesktop').attr('data-href', '/agent/index?userid='+data.userid).click();
     	}
     }).on('leave', function(data){
 		top.layer.msg('当前会话已经过期，稍后将自动登出！',{icon: 1, time: 2000}); 
 		setTimeout(function(){
 			// 执行登出
-			window.location.href = "/logout.html?code=2";
+			window.location.href = "/logout?code=2";
 		}, 2000);
 	});
 	/****每5秒执行一次，与服务器交互，保持会话****/
@@ -156,7 +156,7 @@ var WebIM = {
 		});
 	},
 	ping : function(){
-		loadURL("/message/ping.html") ;	
+		loadURL("/message/ping") ;
 		console.log("ping:" + new Date().getTime());
 	},
 	audioplayer:function(id, file, loop) {

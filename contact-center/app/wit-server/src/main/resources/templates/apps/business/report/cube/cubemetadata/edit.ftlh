@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/cube/metadata/update.html" method="post">
+	<form class="layui-form uk-form" action="/apps/report/cube/metadata/update" method="post">
 		<input type="hidden" name="id" value="${cubeMetadata.id!''}">
 		<input type="hidden" name="cubeid" value="${cubeMetadata.cubeid!''}">
 		<div class="layui-form-item">

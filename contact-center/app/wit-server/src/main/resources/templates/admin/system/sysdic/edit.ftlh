@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/sysdic/update.html">
+	<form class="layui-form uk-form" action="/admin/sysdic/update">
 		<input type="hidden" name="id" value="${sysDic.id!''}">
 		<input type="hidden" name="p" value="${p!'1'}">
 	  <div class="layui-form-item">

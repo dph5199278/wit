@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/cubelevel/update.html" method="post">
+	<form class="layui-form" action="/apps/report/cubelevel/update" method="post">
 		<input type="hidden" name="cubeid" value="${cubeLevel.cubeid!''}">
 		<input type="hidden" name="dimid" value="${cubeLevel.dimid!''}">
 		<input type="hidden" name="id" value="${cubeLevel.id!''}">
@@ -115,7 +115,7 @@
 		}
 	})
 	/* $('#fktable').change(function(){
-		loadURL('/apps/report/cubelevel/fktableid.html?tableid='+$('#fktable option:selected').attr("idval"), '#fktableiddiv');
+		loadURL('/apps/report/cubelevel/fktableid?tableid='+$('#fktable option:selected').attr("idval"), '#fktableiddiv');
 	}) */
 	$('#type').change(function(){
 		if("日期" == $('#type option:selected').text()){

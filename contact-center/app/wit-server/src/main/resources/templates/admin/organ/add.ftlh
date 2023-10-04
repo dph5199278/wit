@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/organ/save.html">
+	<form class="layui-form uk-form" action="/admin/organ/save">
 		<input type="hidden" name="area" id="area" value="">
 		<div class="layui-form-item">
 			<label class="layui-form-label">部门：</label>

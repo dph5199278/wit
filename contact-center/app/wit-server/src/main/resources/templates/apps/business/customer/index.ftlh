@@ -21,7 +21,7 @@
                     </div>
                     <div class="ukefu-bt-text-content"
                          style="position: absolute;right: 5px;top: 0px;padding-right:10px;">
-                        <form class="layui-form" name="search" action="/apps/customer/${subtype!''}.html" method="get"
+                        <form class="layui-form" name="search" action="/apps/customer/${subtype!''}" method="get"
                               style="float: left;">
                             <#if ekind??><input type="hidden" name="ekind" value="${ekind!''}"></#if>
                         <div class="layui-form-item">
@@ -38,7 +38,7 @@
                         </form>
                         <#if user?? && (user.roleAuthMap["A03_A01_A02_B06"]?? || user.admin) >
                         <div class="layui-btn-group ukefu-btn-group">
-                            <a href="/apps/customer/add.html<#if ekind??>?ekind=${ekind}</#if>" title="新建客户"
+                            <a href="/apps/customer/add<#if ekind??>?ekind=${ekind}</#if>" title="新建客户"
                                data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-sm">
                                 <i class="layui-icon">&#xe608;</i>
                                 新建客户
@@ -48,7 +48,7 @@
                     <#if user?? && (user.roleAuthMap["A03_A01_A02_B09"]?? || user.admin) >
                     <div class="layui-btn-group ukefu-btn-group">
                         <button class="layui-btn layui-btn-sm"
-                                href="/apps/customer/imp.html<#if ekind??>?ekind=${ekind}</#if>" title="导入客户"
+                                href="/apps/customer/imp<#if ekind??>?ekind=${ekind}</#if>" title="导入客户"
                                 data-toggle="ajax" data-width="950" data-height="600">
                             <i class="kfont">&#xe641;</i> 导入
                         </button>
@@ -70,14 +70,14 @@
                             </a>
                         </li>
                         <li>
-                            <a href="/apps/customer/expsearch.html?1=1<#if q??>&q=${q!''}</#if><#if ekind??>&ekind=${ekind}</#if>&subtype=${subtype}"
+                            <a href="/apps/customer/expsearch?1=1<#if q??>&q=${q!''}</#if><#if ekind??>&ekind=${ekind}</#if>&subtype=${subtype}"
                                title="导出客户" target="_blank">
                                 <i class="kfont">&#xe672;</i>
                                 导出当前搜索结果
                             </a>
                         </li>
                         <li>
-                            <a href="/apps/customer/expall.html<#if ekind??>?ekind=${ekind}</#if>" title="导出客户"
+                            <a href="/apps/customer/expall<#if ekind??>?ekind=${ekind}</#if>" title="导出客户"
                                target="_blank">
                                 <i class="kfont">&#xe672;</i>
                                 导出全部数据
@@ -145,14 +145,14 @@
                 </td>
                 <td style="white-space:nowrap;width:1%;" nowrap="nowrap">
                     <#if user?? && (user.roleAuthMap["A03_A01_A02_B07"]?? || user.admin) >
-                    <a href="/apps/customer/edit.html?id=${entCustomer.id!''}&ekind=${ekind!''}" data-toggle="ajax" data-width="950"
+                    <a href="/apps/customer/edit?id=${entCustomer.id!''}&ekind=${ekind!''}" data-toggle="ajax" data-width="950"
                        data-height="600" data-title="编辑用户信息">
                         <i class="layui-icon">&#xe642;</i>
                         编辑
                     </a>
                 </#if>
                 <#if user?? && (user.roleAuthMap["A03_A01_A02_B08"]?? || user.admin) >
-                <a href="/apps/customer/delete.html?id=${entCustomer.id!''}&ekind=${ekind!''}" style="margin-left:10px;" data-toggle="tip"
+                <a href="/apps/customer/delete?id=${entCustomer.id!''}&ekind=${ekind!''}" style="margin-left:10px;" data-toggle="tip"
                    data-title="请确认是否删除记录？">
                     <i class="layui-icon" style="color:red;">&#x1006;</i>
                     删除
@@ -211,7 +211,7 @@
                 }
             });
             if(num>0){
-                $('#batexp').attr('href' , '/apps/customer/expids.html?'+ids)	;
+                $('#batexp').attr('href' , '/apps/customer/expids?'+ids)	;
             }else{
                 top.layer.alert("请先选择需要导出的客户信息");
                 $('#batexp').attr("href" , "javascript:void(0)");
@@ -235,7 +235,7 @@
             ,groups: 5 //连续显示分页数
             ,jump:function(data , first){
             if(!first){
-                location.href = "/apps/customer/${subtype!'index'}.html?p="+data.curr + "&ekind=${ekind!''}";
+                location.href = "/apps/customer/${subtype!'index'}?p="+data.curr + "&ekind=${ekind!''}";
             }
         }
     });

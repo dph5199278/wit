@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/profile/save.html" <#if index?? >${index!''}<#else>target="maincontent"</#if> >
+	<form class="layui-form uk-form" action="/apps/profile/save" <#if index?? >${index!''}<#else>target="maincontent"</#if> >
 	  <input type="hidden" name="id" value="${userData.id!''}">
 	  <#if index?? ><input type="hidden" name="index" value="${index!''}"></#if>
 	  <div class="layui-form-item">

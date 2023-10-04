@@ -25,9 +25,9 @@
 				<i class="userarrow"></i>
 				<div class="chat-content">
 					<% if(data.msgtype == 'image'){ %>
-						<a href="/agent/message/image.html?id=<%:=data.id%>" data-toggle="ajax" data-width="950" data-height="600" title="图片"><img src="<%:=data.message%>" class="ukefu-media-image" id="<%:=data.id%>"></a>
+						<a href="/agent/message/image?id=<%:=data.id%>" data-toggle="ajax" data-width="950" data-height="600" title="图片"><img src="<%:=data.message%>" class="ukefu-media-image" id="<%:=data.id%>"></a>
 					<% }else if(data.msgtype == 'cooperation'){ %>
-						<a href="/agent/message/image.html?t=review&id=<%:=data.message%>" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
+						<a href="/agent/message/image?t=review&id=<%:=data.message%>" data-toggle="ajax" data-width="950" data-height="600"  title="图片">
 							系统发送了一个协作邀请
 						</a>
 					<% }else if(data.msgtype == 'file'){ %>
@@ -145,7 +145,7 @@
 	});
 	function otherTopicSearch(){
 		console.log( "otherTopicSearch" )
-		loadURLWithTip("/agent/other/topic.html?q="+ encodeURIComponent($("#otherSearchQuery").val()), "#topiclist" , null , false , true);
+		loadURLWithTip("/agent/other/topic?q="+ encodeURIComponent($("#otherSearchQuery").val()), "#topiclist" , null , false , true);
 	}
 
 	function otherTopicEnter(){

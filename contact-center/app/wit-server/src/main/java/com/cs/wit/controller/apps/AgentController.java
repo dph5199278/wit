@@ -707,7 +707,7 @@
          }
          agentServiceRes.saveAll(agentServiceList);
          return request(super
-                 .createRequestPageTempletResponse("redirect:/agent/index.html"));
+                 .createRequestPageTempletResponse("redirect:/agent/index"));
      }
 
 
@@ -740,7 +740,7 @@
          }
 
          return request(super
-                 .createRequestPageTempletResponse("redirect:/agent/index.html"));
+                 .createRequestPageTempletResponse("redirect:/agent/index"));
      }
 
      @RequestMapping({"/readmsg"})
@@ -906,7 +906,7 @@
                  cache.findOneAgentUserByUserIdAndOrgi(
                          chatMessage.getUserid(), chatMessage.getOrgi()).ifPresent(p -> {
                      Message outMessage = new Message();
-                     outMessage.setMessage("/res/image.html?id=" + fileid + "&cooperation=true");
+                     outMessage.setMessage("/res/image?id=" + fileid + "&cooperation=true");
                      outMessage.setFilename(imageFile.getName());
                      outMessage.setAttachmentid(chatMessage.getAttachmentid());
                      outMessage.setFilesize((int) imageFile.length());
@@ -1108,7 +1108,7 @@
          }
 
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/agentuser.html?id=" + agentuserid + "&channel=" + channel));
+                 "redirect:/agent/agentuser?id=" + agentuserid + "&channel=" + channel));
      }
 
      /**
@@ -1267,7 +1267,7 @@
              quickReplyRes.save(quickReply);
          }
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/quicklist.html?typeid=" + quickReply.getCate()));
+                 "redirect:/agent/quicklist?typeid=" + quickReply.getCate()));
      }
 
      @RequestMapping("/quickreply/delete")
@@ -1276,7 +1276,7 @@
          QuickReply quickReply = requireQuickReply(id);
          quickReplyRes.delete(quickReply);
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/quicklist.html?typeid=" + quickReply.getCate()));
+                 "redirect:/agent/quicklist?typeid=" + quickReply.getCate()));
      }
 
      @NonNull
@@ -1322,7 +1322,7 @@
              quickReplyRes.save(quickReply);
          }
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/quicklist.html?typeid=" + quickReply.getCate()));
+                 "redirect:/agent/quicklist?typeid=" + quickReply.getCate()));
      }
 
      @RequestMapping({"/quickreply/addtype"})
@@ -1352,7 +1352,7 @@
              quickTypeRes.save(quickType);
          }
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/quicklist.html?typeid=" + quickType.getParentid()));
+                 "redirect:/agent/quicklist?typeid=" + quickType.getParentid()));
      }
 
      @RequestMapping({"/quickreply/edittype"})
@@ -1379,7 +1379,7 @@
              quickTypeRes.save(tempQuickType);
          }
          return request(
-                 super.createRequestPageTempletResponse("redirect:/agent/quicklist.html?typeid=" + quickType.getId()));
+                 super.createRequestPageTempletResponse("redirect:/agent/quicklist?typeid=" + quickType.getId()));
      }
 
      @RequestMapping({"/quickreply/deletetype"})
@@ -1395,7 +1395,7 @@
              quickReplyRes.deleteAll(quickReplyList.getContent());
          }
          return request(super.createRequestPageTempletResponse(
-                 "redirect:/agent/quicklist.html" + (tempQuickType != null ? "?typeid=" + tempQuickType.getParentid() : "")));
+                 "redirect:/agent/quicklist" + (tempQuickType != null ? "?typeid=" + tempQuickType.getParentid() : "")));
      }
 
      @RequestMapping({"/quickreply/content"})
@@ -1446,7 +1446,7 @@
          auc.setAppid(au.getAppid());
          auc.setCreater(logined.getId());
          agentUserContactsRes.save(auc);
-         return request(super.createRequestPageTempletResponse("redirect:/agent/index.html"));
+         return request(super.createRequestPageTempletResponse("redirect:/agent/index"));
      }
 
      @RequestMapping("/calloutcontact/update")
@@ -1480,6 +1480,6 @@
                      }
                      contactsRes.save(contacts);
                  });
-         return request(super.createRequestPageTempletResponse("redirect:/agent/index.html"));
+         return request(super.createRequestPageTempletResponse("redirect:/agent/index"));
      }
  }

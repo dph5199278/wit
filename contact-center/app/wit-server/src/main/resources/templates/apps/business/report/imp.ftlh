@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/setting/quickreply/impsave.html" enctype="multipart/form-data"  method="post">
+	<form class="layui-form" action="/setting/quickreply/impsave" enctype="multipart/form-data"  method="post">
 		<#if type??><input type="hidden" name="type" value="${type}"></#if>
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -18,7 +18,7 @@
 						</div>
 						<div class="layui-inline">
 							<font color="red">*（必填项）</font> (需要导入的快捷回复数据Excel文件)
-							<a href="/res/template.html?filename=quickreply_template.xls"  target="_blank" style="margin-left:20px;">
+							<a href="/res/template?filename=quickreply_template.xls"  target="_blank" style="margin-left:20px;">
 										<i class="layui-icon">&#xe601;</i>
 										下载模板
 									</a>

@@ -7,7 +7,7 @@ var config = {} ;
 var cskefuOnlineUserId;
 var ukefu = {
 		time : new Date().getTime(),
-		chat : "/im/index.html?appid=${appid!''}<#if id??>&id=${id}</#if><#if aiid??>&aiid=${aiid}</#if><#if exchange??>&exchange=${exchange}</#if><#if name??>&name=${name}</#if><#if email??>&email=${email}</#if><#if phone??>&phone=${phone}</#if>&orgi=${orgi!''}&client=${client}&type=text<#if skill??>&skill=${skill}</#if><#if agent??>&agent=${agent}</#if>" , 
+		chat : "/im/index?appid=${appid!''}<#if id??>&id=${id}</#if><#if aiid??>&aiid=${aiid}</#if><#if exchange??>&exchange=${exchange}</#if><#if name??>&name=${name}</#if><#if email??>&email=${email}</#if><#if phone??>&phone=${phone}</#if>&orgi=${orgi!''}&client=${client}&type=text<#if skill??>&skill=${skill}</#if><#if agent??>&agent=${agent}</#if>" ,
 		config : function(d){
 			data = d ;	
 			if(d.id != null && d.id != ''){

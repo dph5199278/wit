@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/cube/imptbsave.html">
+	<form class="layui-form uk-form" action="/apps/report/cube/imptbsave">
 		<input type="hidden" name="cubeid" value="${cubeid!''}">
 		<div class="layui-form-item">
 			<div class="layui-input-inline">

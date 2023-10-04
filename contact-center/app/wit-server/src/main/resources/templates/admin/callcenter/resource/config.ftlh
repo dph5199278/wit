@@ -1,4 +1,4 @@
-<form method="post" key="set-mine" action="/admin/callcenter/resource/save.html" class="layui-form">
+<form method="post" key="set-mine" action="/admin/callcenter/resource/save" class="layui-form">
 	<input type="hidden" name="id" value="${pbxHost.id!''}">
 	<div class="row">
 		<div class="col-lg-12">

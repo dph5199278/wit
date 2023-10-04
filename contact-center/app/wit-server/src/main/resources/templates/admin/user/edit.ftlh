@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/user/update.html">
+	<form class="layui-form uk-form" action="/admin/user/update">
 	  <input type="hidden" name="id" value="${userData.id!''}">
 	  <div class="layui-form-item">
 	    <label class="layui-form-label">用户名：</label>
@@ -153,7 +153,7 @@ layui.use('form', function(){
 				processUserAddOrUpdateResult(result.data, function () {
 					$("span.layui-layer-setwin > a.layui-layer-close1").click();
 					// 关闭并刷新页面
-					document.getElementById("admin").contentWindow.location = '/admin/user/index.html';
+					document.getElementById("admin").contentWindow.location = '/admin/user/index';
 				});
 			}
 		}, function(err){

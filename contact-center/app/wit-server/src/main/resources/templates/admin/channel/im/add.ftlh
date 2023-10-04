@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form" action="/admin/im/save.html" method="post">
+	<form class="layui-form" action="/admin/im/save" method="post">
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<label class="layui-form-label" style="width:150px;">网站名称：</label>

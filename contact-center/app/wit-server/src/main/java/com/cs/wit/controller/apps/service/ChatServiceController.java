@@ -338,7 +338,7 @@ public class ChatServiceController extends Handler {
             agentServiceRes.save(agentService);
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/service/current/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/current/index"));
     }
 
     @RequestMapping("/current/end")
@@ -357,7 +357,7 @@ public class ChatServiceController extends Handler {
                 agentServiceRes.save(agentService);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/service/current/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/current/index"));
     }
 
     /**
@@ -409,7 +409,7 @@ public class ChatServiceController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/service/current/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/current/index"));
     }
 
 
@@ -455,7 +455,7 @@ public class ChatServiceController extends Handler {
                     agentUser, false, MainContext.ChatInitiatorType.USER.toString());
             acdVisitorDispatcher.enqueue(ctx);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/service/quene/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/quene/index"));
     }
 
     @RequestMapping("/quene/invite")
@@ -467,7 +467,7 @@ public class ChatServiceController extends Handler {
         if (agentUser != null && agentUser.getStatus().equals(MainContext.AgentUserStatusEnum.INQUENE.toString())) {
             acdAgentService.assignVisitorAsInvite(logined.getId(), agentUser, orgi);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/service/quene/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/quene/index"));
     }
 
     /**
@@ -503,7 +503,7 @@ public class ChatServiceController extends Handler {
         agentStatusProxy.broadcastAgentsStatus(
                 super.getOrgi(request), "agent", "offline", super.getUser(request).getId());
 
-        return request(super.createRequestPageTempletResponse("redirect:/service/agent/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/agent/index"));
     }
 
     /**
@@ -560,6 +560,6 @@ public class ChatServiceController extends Handler {
         if (StringUtils.isNotBlank(id)) {
             leaveMsgRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/service/leavemsg/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/service/leavemsg/index"));
     }
 }

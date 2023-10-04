@@ -6,7 +6,7 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<div class="ukefu-measure">
-					<a href="/apps/onlineuser.html" class="ukefu-bt"> 
+					<a href="/apps/onlineuser" class="ukefu-bt">
 						<i class="layui-icon ukewo-btn ukefu-measure-btn">&#xe612;</i>
 						<div class="ukefu-bt-text">
 							<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${onlineUserCache!0}/${onlineUserClients!0}</div>
@@ -17,7 +17,7 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="ukefu-measure">
-					<a href="/service/agent/index.html" class="ukefu-bt"> 
+					<a href="/service/agent/index" class="ukefu-bt">
 						<i class="kfont icon-iconfontagent ukewo-btn ukefu-measure-btn ukefu-bg-color-yellow"></i>
 						<div class="ukefu-bt-text">
 							<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${agentReport.agents}/${agents!0}</div>
@@ -28,7 +28,7 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="ukefu-measure">
-					<a href="/service/quene/index.html" class="ukefu-bt"> 
+					<a href="/service/quene/index" class="ukefu-bt">
 						<i class="layui-icon ukewo-btn ukefu-measure-btn ukefu-bg-color-pink">&#xe63a;</i>
 						<div class="ukefu-bt-text">
 							<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${agentReport.users}/${agentReport.inquene}</div>
@@ -39,7 +39,7 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="ukefu-measure">
-					<a href="/apps/onlineuser.html" class="ukefu-bt"> 
+					<a href="/apps/onlineuser" class="ukefu-bt">
 						<i class="layui-icon ukewo-btn ukefu-measure-btn ukefu-bg-color-green">&#xe62c;</i>
 						<div class="ukefu-bt-text" title="访客端对话建立的NettySocketIO链接数量/系统缓存数据（SystemCache）">
 							<div class="ukefu-bt-text-title" style="font-weight:400;font-size:19px;">${chatClients!0}/${systemCaches!0}</div>

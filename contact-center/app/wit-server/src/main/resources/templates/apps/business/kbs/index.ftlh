@@ -21,13 +21,13 @@
 			<div class="box ukefu-console">
 				<div class="ukefu-relation">
 					<span lay-event="" class="ukefu-relation-item">知识<a
-						href="/service/current/index.html"
+						href="/service/current/index"
 						class="measure"> ${agentUserCount!0} </a>
 					</span> <span lay-event="" class="ukefu-relation-item">评论<a
-						href="/apps/onlineuser.html"
+						href="/apps/onlineuser"
 						class="measure"> ${0} </a>
 					</span> <span lay-event="" class="ukefu-relation-item">审核<a
-						href="/apps/onlineuser.html"
+						href="/apps/onlineuser"
 						class="measure" <#if inviteResult.refuseusers gt 0>style="color:red !important;"</#if>> 0 </a>
 					</span>
 				</div>
@@ -41,38 +41,38 @@
 					<a class="layui-nav-title" href="javascript:;">快捷菜单<span class="layui-nav-more"></span></a>
 					<dl class="layui-nav-child ukefu-kbs-quick">
 						<dd class="layui-this">
-							<a href="/apps/kbs/index.html">知识门户</a>
+							<a href="/apps/kbs/index">知识门户</a>
 							<div class="tip">1545</div>
 						</dd>
 						<dd>
-							<a href="/apps/kbs/list.html">共享知识库</a>
+							<a href="/apps/kbs/list">共享知识库</a>
 							<div class="tip">1545</div>
 						</dd>
 						<dd>
-							<a href="/setting/agent/index.html">发表新知识</a>
+							<a href="/setting/agent/index">发表新知识</a>
 						</dd>
 						<dd>
-							<a href="/setting/blacklist.html">我发布的知识</a>
+							<a href="/setting/blacklist">我发布的知识</a>
 							<div class="tip">0</div>
 						</dd>
 						<dd >
-							<a href="/setting/acd.html">我收藏的知识</a>
+							<a href="/setting/acd">我收藏的知识</a>
 							<div class="tip">0</div>
 						</dd>
 						<dd>
-							<a href="/setting/quickreply.html">待我审批的知识</a>
+							<a href="/setting/quickreply">待我审批的知识</a>
 							<div class="tip">0</div>
 						</dd>
 						<dd>
-							<a href="/setting/quickreply.html">知识库专家</a>
+							<a href="/setting/quickreply">知识库专家</a>
 							<div class="tip">2</div>
 						</dd>
 						<dd>
-							<a href="/setting/quickreply.html">最新知识（7天内）</a>
+							<a href="/setting/quickreply">最新知识（7天内）</a>
 							<div class="tip">2</div>
 						</dd>
 						<dd>
-							<a href="/setting/quickreply.html">最新评论知识</a>
+							<a href="/setting/quickreply">最新评论知识</a>
 							<div class="tip">22</div>
 						</dd>
 					</dl>

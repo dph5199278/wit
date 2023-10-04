@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			服务器列表<#if pbxHostList??>（${pbxHostList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/pbxhost/add.html" data-toggle="ajax" data-width="750" data-title="添加新服务器">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/pbxhost/add" data-toggle="ajax" data-width="750" data-title="添加新服务器">
 					添加新服务器
 				</button>
 			</span>
@@ -37,7 +37,7 @@
 							<#list pbxHostList as pbxHost>
 							<tr>
 							  <td>
-								  <a href="/admin/callcenter/resource.html?hostid=${pbxHost.id!''}">${pbxHost.name!''}</a>
+								  <a href="/admin/callcenter/resource?hostid=${pbxHost.id!''}">${pbxHost.name!''}</a>
 							  </td>
 							  <td>${pbxHost.hostname!''}（${pbxHost.ipaddr!''}）</td>
 							  <td>${pbxHost.port!''}</td>
@@ -49,11 +49,11 @@
 							  
 							  <td>${pbxHost.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 							  <td style="white-space:nowrap;" nowrap="nowrap">
-							  		<a href="/admin/callcenter/pbxhost/edit.html?id=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
+							  		<a href="/admin/callcenter/pbxhost/edit?id=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
-							  		<a href="/admin/callcenter/pbxhost/delete.html?id=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除服务器？">
+							  		<a href="/admin/callcenter/pbxhost/delete?id=${pbxHost.id!''}" data-callback="loadURL" data-target="#callCenterContent" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除服务器？">
 							  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 							  			删除
 							  		</a>
@@ -85,7 +85,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/user/index.html?p="+data.curr ;
+						location.href = "/admin/user/index?p="+data.curr ;
 					}
 				}
 		   });

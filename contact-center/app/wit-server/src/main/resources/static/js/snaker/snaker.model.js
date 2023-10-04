@@ -52,7 +52,7 @@
 				displayName: {name:'displayName',label: '显示名称', value:'', editor: function(){return new snakerflow.editors.textEditor();}},
 				form: {name:'form', label : '表单类型', value:'', editor: function(){return new snakerflow.editors.selectEditor([{name:'新增',value:'add'},{name:'编辑',value:'edit'},{name:'回复',value:'comment'},{name:'审批',value:'approval'}]);}},
 				assignee: {name:'assignee', value:''},
-				assigneeDisplay: {name:'assigneeDisplay', label: '参与者',key:'', value:'', editor: function(){return new snakerflow.editors.assigneeEditor('/res/bpm/organ.html');}},
+				assigneeDisplay: {name:'assigneeDisplay', label: '参与者',key:'', value:'', editor: function(){return new snakerflow.editors.assigneeEditor('/res/bpm/organ');}},
 				taskType: {name:'taskType', label : '任务类型', value:'', editor: function(){return new snakerflow.editors.selectEditor([{name:'主办任务',value:'Major'},{name:'协办任务',value:'Aidant'}]);}},
 				performType: {name:'performType', label : '参与类型', value:'', editor: function(){return new snakerflow.editors.selectEditor([{name:'普通参与',value:'ANY'},{name:'会签参与',value:'ALL'}]);}},
 			    reminderTime: {name:'reminderTime', label : '提醒时间', value:'', editor: function(){return new snakerflow.editors.inputEditor();}},

@@ -1,4 +1,4 @@
-<form class="layui-form" action="/service/transfer/save.html" method="post" >
+<form class="layui-form" action="/service/transfer/save" method="post" >
 	<input type="hidden" name="id" value="${agentserviceid!''}">
 	<input type="hidden" name="userid" value="${userid!''}">
 	<input type="hidden" name="agentserviceid" value="${agentserviceid!''}">
@@ -20,7 +20,7 @@
 						<#assign agentNum = 0 >
 						<#if userList??><#list userList as agent><#if agent.affiliates?seq_contains(skill.id)><#assign agentNum = agentNum + 1 ></#if></#list></#if>
 						<li title="${skill.name!''}(${agentNum!''})" class="uk_role <#if skill.id == currentorgan>this</#if>" style="margin:0px;padding:7px 0 7px 20px;" onclick="$('.uk_role.this').removeClass('this');$(this).addClass('this');"><a
-							href="/agent/transfer/agent.html?organ=${skill.id!''}" data-toggle="load" data-target="#skillAgentList">
+							href="/agent/transfer/agent?organ=${skill.id!''}" data-toggle="load" data-target="#skillAgentList">
 							<i style="margin-top: 3px;float: left" class="kfont"></i><span style="max-width: 120px;text-overflow: ellipsis;white-space: nowrap; overflow: hidden;float: left;margin: 0 3px">${skill.name!''}</span>(${agentNum!''})
 						</a></li>
 						</#if>
@@ -33,7 +33,7 @@
 						<#assign agentNum = 0 >
 						<#if userList??><#list userList as agent><#if agent.affiliates?seq_contains(skill.id)><#assign agentNum = agentNum + 1 ></#if></#list></#if>
 						<li title="${skill.name!''}${agentNum!''})" class="uk_role <#if skill.id == currentorgan>this</#if>" style="margin:0px;padding:7px 0 7px 20px;"  onclick="$('.uk_role.this').removeClass('this');$(this).addClass('this');"><a
-							href="/agent/transfer/agent.html?organ=${skill.id!''}" data-toggle="load" data-target="#skillAgentList">
+							href="/agent/transfer/agent?organ=${skill.id!''}" data-toggle="load" data-target="#skillAgentList">
 							<i style="margin-top: 3px;float: left" class="kfont"></i><span style="max-width: 120px;text-overflow: ellipsis;white-space: nowrap; overflow: hidden;float: left;margin: 0 3px">${skill.name!''}</span>(${agentNum!''})
 						</a></li>
 						</#if>

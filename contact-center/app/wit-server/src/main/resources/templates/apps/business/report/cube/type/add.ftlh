@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/cube/type/save.html" method="post">
+	<form class="layui-form" action="/apps/report/cube/type/save" method="post">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
 				<h2 class="layui-colla-title">分类基本信息</h2>

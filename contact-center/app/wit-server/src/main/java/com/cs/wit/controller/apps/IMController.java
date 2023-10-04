@@ -1107,7 +1107,7 @@ public class IMController extends Handler {
                     sf.setData(jpaBlobHelper.createBlob(multipart.getInputStream(), multipart.getSize()));
                     sf.setThumbnail(jpaBlobHelper.createBlobWithFile(thumbnail));
                     streamingFileRepository.save(sf);
-                    String fileUrl = "/res/image.html?id=" + fileid;
+                    String fileUrl = "/res/image?id=" + fileid;
                     upload = new UploadStatus("0", fileUrl);
 
                     if (paste == null) {
@@ -1134,8 +1134,8 @@ public class IMController extends Handler {
                     // 存储到本地硬盘
                     String id = processAttachmentFile(multipart,
                             fileid, logined.getOrgi(), logined.getId());
-                    upload = new UploadStatus("0", "/res/file.html?id=" + id);
-                    String file = "/res/file.html?id=" + id;
+                    upload = new UploadStatus("0", "/res/file?id=" + id);
+                    String file = "/res/file?id=" + id;
 
                     File tempFile = new File(multipart.getOriginalFilename());
                     if (StringUtils.isNotBlank(channel)) {

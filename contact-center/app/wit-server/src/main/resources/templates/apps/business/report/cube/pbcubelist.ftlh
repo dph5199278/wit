@@ -39,7 +39,7 @@
 							${cube.createtime!''}
 						</td>
 						<td style="white-space:nowrap;width:1%;" nowrap="nowrap">
-					  		<a href="/apps/report/cube/pbcubedelete.html?id=${cube.id!''}" data-toggle="tip" data-title="请确认是否删除模型？">
+					  		<a href="/apps/report/cube/pbcubedelete?id=${cube.id!''}" data-toggle="tip" data-title="请确认是否删除模型？">
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			删除
 					  		</a>
@@ -76,7 +76,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/apps/report/cube/pbcubelist.html?p="+data.curr+"&typeid=<#if typeid??>${typeid!''}<#else>0</#if>","#ukefu-cube-content");
+						loadURL("/apps/report/cube/pbcubelist?p="+data.curr+"&typeid=<#if typeid??>${typeid!''}<#else>0</#if>","#ukefu-cube-content");
 					}
 				}
 		   });

@@ -25,7 +25,7 @@
 					客服坐席
 					<span>
 						<div class="ukefu-bt-text-content">
-							<form class="layui-form" name="search"	action="/service/stats/agent.html" method="get" style="float: left;margin-right:5px;">
+							<form class="layui-form" name="search"	action="/service/stats/agent" method="get" style="float: left;margin-right:5px;">
 								<div class="layui-form-item">
 									<div class="layui-inline" style="margin-right:0px;">
 										<div class="layui-input-inline" style="width: auto">
@@ -81,7 +81,7 @@
 								</div>
 							</form>
 							<div class="layui-btn-group ukefu-btn-group" style="margin-top:2px;">
-								<a href="/service/stats/agent/exp.html?t=${.now?long}<#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if><#if begin??>&begin=${begin!''}</#if><#if end??>&end=${end!''}</#if>">
+								<a href="/service/stats/agent/exp?t=${.now?long}<#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if><#if begin??>&begin=${begin!''}</#if><#if end??>&end=${end!''}</#if>">
 								<button class="layui-btn layui-btn-sm dropdown-menu">
 									<i class="kfont">&#xe672;</i> 导出 
 								</button>

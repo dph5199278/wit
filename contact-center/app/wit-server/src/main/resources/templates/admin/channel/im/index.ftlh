@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			网站列表<#if snsAccountList??>（${snsAccountList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/im/add.html" data-toggle="ajax" data-width="550" data-height="300" data-title="创建新网站">
+				<button class="layui-btn layui-btn-sm green" href="/admin/im/add" data-toggle="ajax" data-width="550" data-height="300" data-title="创建新网站">
 					创建新网站
 				</button>
 			</span>
@@ -31,16 +31,16 @@
 					  <td>${snsAccount.snsid!''}</td>
 					  <td>${snsAccount.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-						   <a href="/admin/webim/index.html?snsid=${snsAccount.snsid!''}">
+						   <a href="/admin/webim/index?snsid=${snsAccount.snsid!''}">
 							   <i class="layui-icon">&#xe632;</i>
                                接入
 						   </a>
-					  		<a href="/admin/im/edit.html?id=${snsAccount.id!''}" data-toggle="ajax"  data-width="550" data-height="300" data-title="编辑网站">
+					  		<a href="/admin/im/edit?id=${snsAccount.id!''}" data-toggle="ajax"  data-width="550" data-height="300" data-title="编辑网站">
 					  			<i class="layui-icon">&#xe642;</i>
 					  			编辑
 					  		</a>
 					  		<#if !(snsAccount.admin) && snsAccount.datastatus != true >
-					  		<a href="/admin/im/delete.html?id=${snsAccount.id!''}" style="margin-left:10px;" data-toggle="tip"  <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="删除网站需要进行二次密码验证，请确认是否删除？" >
+					  		<a href="/admin/im/delete?id=${snsAccount.id!''}" style="margin-left:10px;" data-toggle="tip"  <#if secret?? && secret.enable == true>data-confirm="请输入二次安全验证密码"</#if> title="删除网站需要进行二次密码验证，请确认是否删除？" >
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			删除
 					  		</a>
@@ -91,7 +91,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/im/index.html?p="+data.curr ;
+						location.href = "/admin/im/index?p="+data.curr ;
 					}
 				}
 		   });

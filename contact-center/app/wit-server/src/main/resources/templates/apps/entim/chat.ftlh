@@ -114,7 +114,7 @@
 			newlineTag : "br" ,
 			filterMode: true,
 			items: ['emoticons', 'image', 'insertfile'],
-			uploadJson:'/ent/im/image/upload.html?userid=${entimuser.id!''}',
+			uploadJson:'/ent/im/image/upload?userid=${entimuser.id!''}',
 			filePostName: 'imgFile',
 			allowImageRemote: false,
 			allowFileUpload: true,
@@ -310,7 +310,7 @@
 
 	function getMoreMessage(){
 		var firstCreateTime=$('.time').first().text();
-		R3Ajax.get("/ent/im/chat/more.html?userid=${entimuser.id!''}&createtime="+firstCreateTime,function (html) {
+		R3Ajax.get("/ent/im/chat/more?userid=${entimuser.id!''}&createtime="+firstCreateTime,function (html) {
 			$('.connect-message').after(html);
 		});
 	}

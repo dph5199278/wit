@@ -41,7 +41,7 @@
 							<td><#if agentStatus.logindate??>${agentStatus.logindate?string('yyyy-MM-dd HH:mm:ss')}</#if></td>
 							<td>
 								<#if agentStatus.agentno != user.id && user.admin>
-								<a href="/service/agent/offline.html?id=${agentStatus.id!''}" data-toggle="tip" title="强制使登陆坐席离线，离线后，坐席不再分配访客，请确认是否操作？">
+								<a href="/service/agent/offline?id=${agentStatus.id!''}" data-toggle="tip" title="强制使登陆坐席离线，离线后，坐席不再分配访客，请确认是否操作？">
 									<i class="layui-icon">&#x1006;</i>强制离线
 								</a>	
 								</#if>

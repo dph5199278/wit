@@ -70,7 +70,7 @@ public class CallCenterAclController extends Handler {
                 aclRes.save(acl);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl.html?hostid=" + acl.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl?hostid=" + acl.getHostid()));
     }
 
     @RequestMapping(value = "/acl/edit")
@@ -93,7 +93,7 @@ public class CallCenterAclController extends Handler {
                 aclRes.save(oldAcl);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl.html?hostid=" + acl.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl?hostid=" + acl.getHostid()));
     }
 
     @RequestMapping(value = "/acl/delete")
@@ -102,6 +102,6 @@ public class CallCenterAclController extends Handler {
         if (!StringUtils.isBlank(id)) {
             aclRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/acl?hostid=" + hostid));
     }
 }

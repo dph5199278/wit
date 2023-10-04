@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/organ/saveuser.html">
+	<form class="layui-form uk-form" action="/admin/organ/saveuser">
 		<input type="hidden" name="organ" value="${organ.id!''}">
 		<div class="layui-form-item">
 			<div class="layui-input-inline">

@@ -104,7 +104,7 @@ public class KbsController extends Handler {
             kbsType.setCreatetime(new Date());
             kbsTypeRes.save(kbsType);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/kbs/list.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/kbs/list"));
     }
 
     @RequestMapping({"/add"})
@@ -123,7 +123,7 @@ public class KbsController extends Handler {
     public ModelAndView save(HttpServletRequest request,
                              final @Valid KbsTopic topic,
                              @RequestParam(value = "files", required = false) MultipartFile[] files) throws IOException {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/kbs/index.html"));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/kbs/index"));
         topic.setOrgi(super.getOrgi(request));
         topic.setCreater(super.getUser(request).getId());
         topic.setUsername(super.getUser(request).getUsername());

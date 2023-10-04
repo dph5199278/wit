@@ -2,7 +2,7 @@
 	<#if topicList?? && topicList?size gt 0>
 	<#list topicList as topic>
 	<li class="ukefu-agentservice-list">
-		<a href="javascript:void(0)" class="othertopicdetail" data-href="/agent/other/topic/detail.html?id=${topic.id!''}">
+		<a href="javascript:void(0)" class="othertopicdetail" data-href="/agent/other/topic/detail?id=${topic.id!''}">
 			${topic.title!''}
 		</a>
 	</li>

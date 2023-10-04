@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form" action="/setting/adv/update.html" method="post" enctype="multipart/form-data">
+	<form class="layui-form" action="/setting/adv/update" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="adpos" value="${adpos!''}">
 		<input type="hidden" name="id" value="${ad.id!''}">
 		<div class="layui-collapse">

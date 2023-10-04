@@ -18,16 +18,16 @@
 <h1 class="site-h1 ukefu-tab" style="height:26px;">
 	<div class="ukefu-tab-title" style="margin-left:0px;">
 		<ul class="tab-title" id="pbxHostTab">
-			<li class="layui-this"><a href="/admin/callcenter/extention.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
-			<li><a href="/admin/callcenter/extention.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">分机配置</a></li>
-			<li><a href="/admin/callcenter/skill.html?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">技能分组</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">路由规则</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">IVR配置</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">录音配置</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">访问列表</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">媒体资源</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">SIP网关</a></li>
-			<li><a href="/apps/contacts/detail.html?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">呼入配置</a></li>
+			<li class="layui-this"><a href="/admin/callcenter/extention?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">服务配置</a></li>
+			<li><a href="/admin/callcenter/extention?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">分机配置</a></li>
+			<li><a href="/admin/callcenter/skill?hostid=${pbxHost.id!''}" data-toggle="load" data-target="#callCenterContent">技能分组</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">路由规则</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">IVR配置</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">录音配置</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">访问列表</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">媒体资源</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">SIP网关</a></li>
+			<li><a href="/apps/contacts/detail?id=d75f133a6e524e0886034ffa5ac867aa" data-toggle="load" data-target="#workOrderContent">呼入配置</a></li>
 		</ul>					
 	</div>
 </h1>

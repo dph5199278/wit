@@ -139,7 +139,7 @@ public class WebIMController extends Handler {
         }
         inviteRes.save(inviteData);
         cache.putConsultInviteByOrgi(inviteData.getOrgi(), inviteData);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/index.html?snsid=" + inviteData.getSnsaccountid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/index?snsid=" + inviteData.getSnsaccountid()));
     }
 
     @RequestMapping("/profile")
@@ -243,7 +243,7 @@ public class WebIMController extends Handler {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Invite data not found");
         }
         cache.putConsultInviteByOrgi(orgi, inviteData);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/profile.html?snsid=" + inviteData.getSnsaccountid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/profile?snsid=" + inviteData.getSnsaccountid()));
     }
 
     @RequestMapping("/invote")
@@ -294,7 +294,7 @@ public class WebIMController extends Handler {
         }
 
         cache.putConsultInviteByOrgi(inviteData.getOrgi(), inviteData);
-        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/invote.html?snsid=" + inviteData.getSnsaccountid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/webim/invote?snsid=" + inviteData.getSnsaccountid()));
     }
 
     /**

@@ -93,9 +93,9 @@ public class UserInterceptorHandler implements AsyncHandlerInterceptor {
 
             if (!filter) {
                 if (StringUtils.isNotBlank(request.getParameter("msg"))) {
-                    response.sendRedirect("/login.html?msg=" + request.getParameter("msg"));
+                    response.sendRedirect("/login?msg=" + request.getParameter("msg"));
                 } else {
-                    response.sendRedirect("/login.html");
+                    response.sendRedirect("/login");
                 }
             }
         } else {

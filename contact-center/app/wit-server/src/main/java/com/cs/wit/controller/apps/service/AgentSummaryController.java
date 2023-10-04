@@ -137,7 +137,7 @@ public class AgentSummaryController extends Handler {
             serviceSummaryRes.save(oldSummary);
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/agent/summary/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/agent/summary/index"));
     }
 
     @RequestMapping("/expids")

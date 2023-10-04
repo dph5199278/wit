@@ -17,7 +17,7 @@
 						</div>
 					</span>
                     <div class="ukefu-bt-text-content" style="position: absolute;right: 5px;top: 0px;">
-                        <form class="layui-form" name="search" action="/apps/contacts/${subtype!''}.html" method="get" style="float: left;">
+                        <form class="layui-form" name="search" action="/apps/contacts/${subtype!''}" method="get" style="float: left;">
 <!--                           <input type="text" id="selflocation">-->
                             <#if ckind??><input type="hidden" name="ckind" value="${ckind!''}"></#if>
                             <#if ckind??><input type="hidden" name="saveStatus" value="${saveStatus!''}"></#if>
@@ -33,12 +33,12 @@
                         </form>
                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B05"]?? || user.admin)>
                             <div class="layui-btn-group">
-                                <a href="/apps/contacts/add.html<#if ckind??>?ckind=${ckind}</#if>" title="新建联系人" data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe608;</i>新建联系人</a>
+                                <a href="/apps/contacts/add<#if ckind??>?ckind=${ckind}</#if>" title="新建联系人" data-toggle="ajax" data-width="950" data-height="600" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe608;</i>新建联系人</a>
                             </div>
                         </#if>
                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B08"]?? || user.admin)>
                             <div class="layui-btn-group ukefu-btn-group">
-                                <button class="layui-btn layui-btn-sm" href="/apps/contacts/imp.html<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
+                                <button class="layui-btn layui-btn-sm" href="/apps/contacts/imp<#if ckind??>?ckind=${ckind}</#if>" title="导入联系人" data-toggle="ajax" data-width="950" data-height="600">
 								    <i class="kfont">&#xe641;</i> 导入
 							    </button>
                             </div>
@@ -56,12 +56,12 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/apps/contacts/expsearch.html?1=1<#if q??>&q=${q!''}</#if><#if ckind??>&ckind=${ckind}</#if>&subtype=${subtype}" title="导出联系人" target="_blank">
+                                        <a href="/apps/contacts/expsearch?1=1<#if q??>&q=${q!''}</#if><#if ckind??>&ckind=${ckind}</#if>&subtype=${subtype}" title="导出联系人" target="_blank">
                                             <i class="kfont">&#xe672;</i> 导出当前搜索结果
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/apps/contacts/expall.html<#if ckind??>?ckind=${ckind}</#if>" title="导出联系人" target="_blank">
+                                        <a href="/apps/contacts/expall<#if ckind??>?ckind=${ckind}</#if>" title="导出联系人" target="_blank">
                                             <i class="kfont">&#xe672;</i> 导出全部数据
                                         </a>
                                     </li>
@@ -99,7 +99,7 @@
                                     </td>
                                     <td title="${contacts.name!''}">
                                         <p>
-                                            <a href="/apps/contacts/detail.html?id=${contacts.id!''}">${contacts.name!''}</a>
+                                            <a href="/apps/contacts/detail?id=${contacts.id!''}">${contacts.name!''}</a>
                                         </p>
                                     </td>
                                     <td>
@@ -141,16 +141,16 @@
                                         </a>
                                         </#if>
 
-                                        <a href="/apps/contacts/detail.html?id=${contacts.id!''}" style="margin-left:10px;">
+                                        <a href="/apps/contacts/detail?id=${contacts.id!''}" style="margin-left:10px;">
                                             <i class="layui-icon">&#xe60a;</i> 详情
                                         </a>
                                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B06"]?? || user.admin)>
-                                            <a href="/apps/contacts/edit.html?id=${contacts.id!''}&ckind=${ckind!''}" data-toggle="ajax" data-width="950" data-height="600" data-title="编辑联系人信息">
+                                            <a href="/apps/contacts/edit?id=${contacts.id!''}&ckind=${ckind!''}" data-toggle="ajax" data-width="950" data-height="600" data-title="编辑联系人信息">
                                                 <i class="layui-icon">&#xe642;</i> 编辑
                                             </a>
                                         </#if>
                                         <#if user?? && (user.roleAuthMap[ "A02_A01_A02_B07"]?? || user.admin)>
-                                            <a href="/apps/contacts/delete.html?id=${contacts.id!''}&ckind=${ckind!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除联系人？">
+                                            <a href="/apps/contacts/delete?id=${contacts.id!''}&ckind=${ckind!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除联系人？">
                                                 <i class="layui-icon" style="color:red;">&#x1006;</i> 删除
                                             </a>
                                         </#if>
@@ -194,7 +194,7 @@
                 }
             });
             if (num > 0) {
-                $('#batexp').attr('href', '/apps/contacts/expids.html?' + ids);
+                $('#batexp').attr('href', '/apps/contacts/expids?' + ids);
             } else {
                 top.layer.alert("请先选择需要导出的联系人信息");
                 $('#batexp').attr("href", "javascript:void(0)");
@@ -211,7 +211,7 @@
             ,groups : 5 //连续显示分页数
             ,jump : function(data, first) {
                 if (!first) {
-                    location.href = "/apps/contacts/${subtype!'index'}.html?ckind=${ckind!''}&p=" + data.curr + "&q=" + $("#q").val();
+                    location.href = "/apps/contacts/${subtype!'index'}?ckind=${ckind!''}&p=" + data.curr + "&q=" + $("#q").val();
                 }
             }
         });
@@ -249,7 +249,7 @@
                 if(multiMediaDialogWin.length > 0){
                     multiMediaDialogWin.load(function(){
                         parent.layui.element.tabChange('ukefutab','multiMediaDialogWin');
-                    }).attr('src' , '/agent/proactive.html?contactid='+id+'&channels='+data.data);
+                    }).attr('src' , '/agent/proactive?contactid='+id+'&channels='+data.data);
                 } else {
                     // 使用API调用，由SocketIO传达弹屏通知，跳转到该访客页面
                     restApiRequest({

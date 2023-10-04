@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" method="post" action="/setting/tag/update.html">
+	<form class="layui-form uk-form" method="post" action="/setting/tag/update">
 		<input type="hidden" name="id" value="${tag.id!''}">
 		<input type="hidden" name="tagtype" value="${tagtype!''}">
 	  <div class="layui-form-item">

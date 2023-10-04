@@ -14,11 +14,11 @@
 	    <link rel="stylesheet" id="skin" type="text/css" href="/im/css/default/ukefu.css">
 	</head>
 	<body style="overflow:hidden;" class="<#if type?? && type='text'>ukefu-point-text</#if>">
-		<form action="/im/leavemsg/save.html?appid=${appid!''}" method="post">
+		<form action="/im/leavemsg/save?appid=${appid!''}" method="post">
 		<div class="large ukefu-im-theme <#if type?? && type='text'>ukefu-theme-border-${inviteData.consult_dialog_color!''}</#if>">
 		    <div id="containter" class="clearfix">
 		    	<div id="header" class="theme${inviteData.consult_dialog_color!''}">
-			   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
+			   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
 			    </div>
 			    <div class="ukef-leavemsg-tip" style="padding-left: 15px">
 					<#if inviteData?? && inviteData.leavemessage>

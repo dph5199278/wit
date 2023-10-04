@@ -102,15 +102,17 @@ public class MediaController extends Handler {
     @RequestMapping("/url")
     @Menu(type = "resouce", subtype = "image", access = true)
     public void url(HttpServletResponse response, @Valid String url) throws IOException {
+        if (StringUtils.isBlank(url)) {
+            return;
+        }
+
         byte[] data = new byte[1024];
         int length;
         OutputStream out = response.getOutputStream();
-        if (StringUtils.isNotBlank(url)) {
-            InputStream input = new URL(url).openStream();
+        try(InputStream input = new URL(url).openStream()) {
             while ((length = input.read(data)) > 0) {
                 out.write(data, 0, length);
             }
-            input.close();
         }
     }
 
@@ -133,7 +135,7 @@ public class MediaController extends Handler {
             sf.setMime(multipart.getContentType());
             sf.setData(jpaBlobHelper.createBlob(multipart.getInputStream(), multipart.getSize()));
             streamingFileRes.save(sf);
-            String fileURL = "/res/image.html?id=" + fileid;
+            String fileURL = "/res/image?id=" + fileid;
             notify = new UploadStatus("0", fileURL); //图片直接发送给 客户，不用返回
         } else {
             notify = new UploadStatus("请选择图片文件");

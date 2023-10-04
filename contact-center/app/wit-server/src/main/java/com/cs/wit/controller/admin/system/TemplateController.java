@@ -90,7 +90,7 @@ public class TemplateController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/template/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/template/index"));
     }
 
     @RequestMapping("/list")
@@ -121,7 +121,7 @@ public class TemplateController extends Handler {
         }
         templateRes.save(template);
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list.html?type=" + dicId));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list?type=" + dicId));
     }
 
     @RequestMapping("/edit")
@@ -151,7 +151,7 @@ public class TemplateController extends Handler {
 
             cache.deleteSystembyIdAndOrgi(template.getId(), super.getOrgi(request));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list.html?type=" + template.getTemplettype()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list?type=" + template.getTemplettype()));
     }
 
     @RequestMapping("/code")
@@ -173,7 +173,7 @@ public class TemplateController extends Handler {
 
             cache.deleteSystembyIdAndOrgi(template.getId(), super.getOrgi(request));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list.html?type=" + template.getTemplettype()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list?type=" + template.getTemplettype()));
     }
 
     @RequestMapping("/delete")
@@ -181,7 +181,7 @@ public class TemplateController extends Handler {
     public ModelAndView delete(HttpServletRequest request, @Valid Template template) {
         templateRes.delete(template);
         cache.deleteSystembyIdAndOrgi(template.getId(), super.getOrgi(request));
-        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list.html?type=" + template.getTemplettype()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/template/list?type=" + template.getTemplettype()));
     }
 
 }

@@ -11,7 +11,7 @@
 					历史会话<#if agentServiceList??>（${agentServiceList.totalElements}）</#if>
 				</h1>
 					<span>
-						<form class="layui-form" name="search" id="search"	action="/service/history/index.html" method="get" style="float: left;margin-right:5px">
+						<form class="layui-form" name="search" id="search"	action="/service/history/index" method="get" style="float: left;margin-right:5px">
 							<div class="layui-form-item" style="width: 700px;padding-left: 5px">
 								<div class="layui-inline">
 									<div class="layui-input-inline" style="width: auto;margin-right:0px;">
@@ -133,7 +133,7 @@
 						<#list agentServiceList.content as agentService>
 						<tr class="tdHasContorllor design-dropable-td">
 							<td title="${agentService.username!''}" class="first_td_head" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
-								<a href="/service/online/index.html?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
+								<a href="/service/online/index?userid=${agentService.userid!''}&agentservice=${agentService.id!''}">
 								${agentService.username!''}
 								</a>
 							</td>
@@ -199,7 +199,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/service/history/index.html?p="+data.curr+searchCondition;
+						location.href = "/service/history/index?p="+data.curr+searchCondition;
 					}
 				}
 		   });

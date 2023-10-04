@@ -75,7 +75,7 @@ public class CallCenterRouterController extends Handler {
                 routerRulesRes.save(router);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer.html?hostid=" + router.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer?hostid=" + router.getHostid()));
     }
 
     @RequestMapping(value = "/router/edit")
@@ -100,7 +100,7 @@ public class CallCenterRouterController extends Handler {
                 routerRulesRes.save(oldRouter);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer.html?hostid=" + router.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer?hostid=" + router.getHostid()));
     }
 
     @RequestMapping(value = "/router/code")
@@ -121,7 +121,7 @@ public class CallCenterRouterController extends Handler {
                 routerRulesRes.save(oldRouter);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer.html?hostid=" + router.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer?hostid=" + router.getHostid()));
     }
 
     @RequestMapping(value = "/router/delete")
@@ -130,6 +130,6 @@ public class CallCenterRouterController extends Handler {
         if (!StringUtils.isBlank(id)) {
             routerRulesRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/peer?hostid=" + hostid));
     }
 }

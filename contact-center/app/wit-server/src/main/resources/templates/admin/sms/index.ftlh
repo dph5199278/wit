@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			短信网关列表<#if smsList??>（${smsList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/sms/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
+				<button class="layui-btn layui-btn-sm green" href="/admin/sms/add" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
 					创建新短信网关
 				</button>
 			</span>
@@ -47,11 +47,11 @@
 					  <td>${sms.moreparam!''}</td>
 					  <td>${sms.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-					  		<a href="/admin/sms/edit.html?id=${sms.id!''}" data-toggle="ajax"  data-width="550" data-height="450" data-title="编辑网站">
+					  		<a href="/admin/sms/edit?id=${sms.id!''}" data-toggle="ajax"  data-width="550" data-height="450" data-title="编辑网站">
 					  			<i class="layui-icon">&#xe642;</i>
 					  			编辑
 					  		</a>
-					  		<a href="/admin/sms/delete.html?id=${sms.id!''}" style="margin-left:10px;" data-toggle="tip"  title="请确认是否删除邮件服务器？" >
+					  		<a href="/admin/sms/delete?id=${sms.id!''}" style="margin-left:10px;" data-toggle="tip"  title="请确认是否删除邮件服务器？" >
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			删除
 					  		</a>
@@ -92,7 +92,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/sms/index.html?p="+data.curr ;
+						location.href = "/admin/sms/index?p="+data.curr ;
 					}
 				}
 		   });

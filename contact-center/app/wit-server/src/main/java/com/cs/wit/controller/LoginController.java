@@ -270,7 +270,7 @@ public class LoginController extends Handler {
             super.setUser(request, loginUser);
             // 当前用户 企业id为空 调到创建企业页面
             if (StringUtils.isBlank(loginUser.getOrgid())) {
-                view = new ModelAndView("redirect:/apps/organization/add.html");
+                view = new ModelAndView("redirect:/apps/organization/add");
             }
         }
         return view;
@@ -325,7 +325,7 @@ public class LoginController extends Handler {
     public ModelAndView addAdmin(HttpServletRequest request, @Valid User user) {
         String msg = validUser(user);
         if (StringUtils.isNotBlank(msg)) {
-            return request(super.createRequestPageTempletResponse("redirect:/register.html?msg=" + msg));
+            return request(super.createRequestPageTempletResponse("redirect:/register?msg=" + msg));
         } else {
             user.setUname(user.getUsername());
             user.setAdmin(true);
@@ -345,7 +345,7 @@ public class LoginController extends Handler {
         ModelAndView view = this.processLogin(request, user, "");
         //当前用户 企业id为空 调到创建企业页面
         if (StringUtils.isBlank(user.getOrgid())) {
-            view = request(super.createRequestPageTempletResponse("redirect:/apps/organization/add.html"));
+            view = request(super.createRequestPageTempletResponse("redirect:/apps/organization/add"));
         }
         return view;
     }

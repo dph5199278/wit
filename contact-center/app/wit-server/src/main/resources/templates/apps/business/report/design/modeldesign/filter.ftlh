@@ -79,7 +79,7 @@
 			  <#if filter?? && filter.childFilter??>
 			  form.on('select(${filter.code!''})', function(data){
 				  if($('#item_${filter.childFilter.code}')){
-					  loadURL('/apps/report/design/filtervalchange.html?id=${filter.modelid}&fid=${filter.childFilter.id!''}&publishedid=<#if publishedReport??>${publishedReport.id!''}<#else></#if>&${filter.code!''}='+data.value, '#item_${filter.childFilter.code}'); 
+					  loadURL('/apps/report/design/filtervalchange?id=${filter.modelid}&fid=${filter.childFilter.id!''}&publishedid=<#if publishedReport??>${publishedReport.id!''}<#else></#if>&${filter.code!''}='+data.value, '#item_${filter.childFilter.code}');
 				  }
 			  });
 			  </#if>

@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			路由规则列表<#if routerRulesList??>（${routerRulesList?size}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/router/add.html?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加路由规则">
+				<button class="layui-btn layui-btn-sm green" href="/admin/callcenter/router/add?hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="添加路由规则">
 					添加规则
 				</button>
 			</span>
@@ -41,7 +41,7 @@
 							<#list routerRulesList as router>
 							<tr>
 								<td>
-									<a href="/admin/callcenter/router/code.html?hostid=${pbxHost.id!''}&id=${router.id!''}" data-toggle="ajax" data-width="650" data-height="350">${router.name!''}</a>
+									<a href="/admin/callcenter/router/code?hostid=${pbxHost.id!''}&id=${router.id!''}" data-toggle="ajax" data-width="650" data-height="350">${router.name!''}</a>
 								 </td>
 								<td>${router.field!''}</td>
 								<td>${router.regex!''}</td>
@@ -60,11 +60,11 @@
 									</#if>
 								</td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/admin/callcenter/router/edit.html?id=${router.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
+								  		<a href="/admin/callcenter/router/edit?id=${router.id!''}&hostid=${pbxHost.id!''}" data-toggle="ajax" data-width="750" data-title="编辑服务器信息">
 								  			<i class="layui-icon">&#xe642;</i>
 								  			编辑
 								  		</a>
-								  		<a href="/admin/callcenter/router/delete.html?id=${router.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-target="#callCenterContent" data-title="请确认是否删除服务器？">
+								  		<a href="/admin/callcenter/router/delete?id=${router.id!''}&hostid=${pbxHost.id!''}" data-callback="loadURL" style="margin-left:10px;" data-toggle="tip" data-target="#callCenterContent" data-title="请确认是否删除服务器？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>

@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/topic/type/update.html">
+	<form class="layui-form uk-form" action="/apps/topic/type/update">
 		<input type="hidden" name="id" value="${knowledgeType.id!''}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">分类名称：</label>

@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/cube/update.html" method="post">
+	<form class="layui-form uk-form" action="/apps/report/cube/update" method="post">
 		<input type="hidden" name="id" value="${cube.id!''}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称</label>

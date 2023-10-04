@@ -12,7 +12,7 @@
 				</span>
 				
 				<div class="ukefu-bt-text-content" style="position: absolute;right: 5px;top: 0px;">
-					<form class="layui-form" name="contactsSearch" action="/apps/contacts/embed/index.html" data-toggle="ajax-form" data-close="false" data-target="#mainajaxwin" style="float: left;">
+					<form class="layui-form" name="contactsSearch" action="/apps/contacts/embed/index" data-toggle="ajax-form" data-close="false" data-target="#mainajaxwin" style="float: left;">
 						<div class="layui-form-item">
 							<div class="layui-inline">
 								<div class="layui-input-inline" style="width: 220px">
@@ -25,7 +25,7 @@
 						</div>
 					</form>
 					<div class="layui-btn-group">
-					  <a href="/apps/contacts/embed/add.html" title="新建联系人"  data-toggle="load" data-target="#mainajaxwin" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe608;</i>新建联系人</a>
+					  <a href="/apps/contacts/embed/add" title="新建联系人"  data-toggle="load" data-target="#mainajaxwin" class="layui-btn layui-btn-sm" ><i class="layui-icon">&#xe608;</i>新建联系人</a>
 					</div>
 				</div>
 			</h1>
@@ -72,7 +72,7 @@
 							${uKeFuDic[contacts.ckind!''].name!''} 
 						</td>
 						<td style="white-space:nowrap;width:1%;" nowrap="nowrap">
-							<a href="/apps/contacts/embed/edit.html?id=${contacts.id!''}" data-toggle="load" data-target="#mainajaxwin">
+							<a href="/apps/contacts/embed/edit?id=${contacts.id!''}" data-toggle="load" data-target="#mainajaxwin">
 								<i class="layui-icon">&#xe642;</i>
 								编辑
 							</a>
@@ -155,7 +155,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/apps/contacts/embed/index.html?<#if q??>q=${q!''}&</#if>p="+data.curr  , "#mainajaxwin");
+						loadURL("/apps/contacts/embed/index?<#if q??>q=${q!''}&</#if>p="+data.curr  , "#mainajaxwin");
 					}
 				}
 		   });

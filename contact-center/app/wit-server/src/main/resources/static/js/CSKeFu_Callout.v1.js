@@ -14,9 +14,9 @@ $(document).ready(function () {
         //     multiMediaDialogWin.Proxy.newAgentUserService(data);
         // }else{
         //     //来电弹屏
-        //     $('#agentdesktop').attr('data-href' , '/agent/index.html?userid='+data.userid).click();
+        //     $('#agentdesktop').attr('data-href' , '/agent/index?userid='+data.userid).click();
         // }
-        $('#agentdesktop').attr('data-href' , '/agent/index.html?userid='+data.userid).click();
+        $('#agentdesktop').attr('data-href' , '/agent/index?userid='+data.userid).click();
         WebIM.audioplayer('audioplane', newuser, false); // 播放
 
     })
@@ -29,7 +29,7 @@ $(document).ready(function () {
                 }
             }else{
                 //来电弹屏
-                $('#agentdesktop').attr('data-href', '/agent/index.html?userid='+data.userid).click();
+                $('#agentdesktop').attr('data-href', '/agent/index?userid='+data.userid).click();
             }
         })
         .on('disconnect', function () {

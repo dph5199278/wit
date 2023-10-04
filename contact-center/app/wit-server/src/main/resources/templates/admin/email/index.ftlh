@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			邮件服务器列表<#if emailList??>（${emailList.totalElements!''}）</#if>
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/email/add.html" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
+				<button class="layui-btn layui-btn-sm green" href="/admin/email/add" data-toggle="ajax" data-width="550" data-height="450" data-title="创建新网站">
 					创建新邮件服务器
 				</button>
 			</span>
@@ -41,11 +41,11 @@
 					  <td>${email.mailfrom!''}</td>
 					  <td>${email.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-					  		<a href="/admin/email/edit.html?id=${email.id!''}" data-toggle="ajax"  data-width="550" data-height="450" data-title="编辑网站">
+					  		<a href="/admin/email/edit?id=${email.id!''}" data-toggle="ajax"  data-width="550" data-height="450" data-title="编辑网站">
 					  			<i class="layui-icon">&#xe642;</i>
 					  			编辑
 					  		</a>
-					  		<a href="/admin/email/delete.html?id=${email.id!''}" style="margin-left:10px;" data-toggle="tip"  title="请确认是否删除邮件服务器？" >
+					  		<a href="/admin/email/delete?id=${email.id!''}" style="margin-left:10px;" data-toggle="tip"  title="请确认是否删除邮件服务器？" >
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			删除
 					  		</a>
@@ -86,7 +86,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/email/index.html?p="+data.curr ;
+						location.href = "/admin/email/index?p="+data.curr ;
 					}
 				}
 		   });

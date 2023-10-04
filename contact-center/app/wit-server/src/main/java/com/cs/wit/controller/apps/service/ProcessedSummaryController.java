@@ -145,7 +145,7 @@ public class ProcessedSummaryController extends Handler {
             serviceSummaryRes.save(oldSummary);
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/agent/processed/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/agent/processed/index"));
     }
 
     @RequestMapping("/expids")

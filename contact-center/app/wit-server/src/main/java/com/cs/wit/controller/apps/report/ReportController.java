@@ -107,7 +107,7 @@ public class ReportController extends Handler {
     @RequestMapping("/save")
     @Menu(type = "setting", subtype = "report", admin = true)
     public ModelAndView quickreplysave(HttpServletRequest request, @Valid Report report) {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + report.getDicid()));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + report.getDicid()));
         if (!StringUtils.isBlank(report.getName())) {
             int count = reportRes.countByOrgiAndName(super.getOrgi(request), report.getName());
             if (count == 0) {
@@ -117,7 +117,7 @@ public class ReportController extends Handler {
                 report.setCode(MainUtils.genID());
                 reportRes.save(report);
             } else {
-                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?msg=rt_name_exist&dicid=" + report.getDicid()));
+                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?msg=rt_name_exist&dicid=" + report.getDicid()));
             }
         }
         return view;
@@ -129,7 +129,7 @@ public class ReportController extends Handler {
         Report report = reportRes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Report %s not found", id)));
         reportRes.delete(report);
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + report.getDicid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + report.getDicid()));
     }
 
     @RequestMapping("/edit")
@@ -157,7 +157,7 @@ public class ReportController extends Handler {
                 reportRes.save(temp);
             });
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + report.getDicid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + report.getDicid()));
     }
 
     @RequestMapping({"/addtype"})
@@ -175,7 +175,7 @@ public class ReportController extends Handler {
     public ModelAndView typesave(HttpServletRequest request, @Valid DataDic dataDic) {
         List<DataDic> dicList = dataDicRes.findByOrgiAndName(super.getOrgi(request), dataDic.getName());
         if (dicList != null && dicList.size() > 0) {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + dataDic.getParentid() + "&msg=qr_type_exist"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + dataDic.getParentid() + "&msg=qr_type_exist"));
         } else {
             dataDic.setOrgi(super.getOrgi(request));
             dataDic.setCreater(super.getUser(request).getId());
@@ -183,7 +183,7 @@ public class ReportController extends Handler {
             dataDic.setTabtype(MainContext.QuickType.PUB.toString());
             dataDicRes.save(dataDic);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + dataDic.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + dataDic.getId()));
     }
 
     @RequestMapping({"/edittype"})
@@ -201,13 +201,13 @@ public class ReportController extends Handler {
     @RequestMapping("/type/update")
     @Menu(type = "apps", subtype = "report")
     public ModelAndView typeupdate(HttpServletRequest request, @Valid DataDic dataDic) {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + dataDic.getId()));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + dataDic.getId()));
         DataDic tempDataDic = dataDicRes.findByIdAndOrgi(dataDic.getId(), super.getOrgi(request));
         if (tempDataDic != null) {
             //判断名称是否重复
             List<DataDic> dicList = dataDicRes.findByOrgiAndNameAndIdNot(super.getOrgi(request), dataDic.getName(), dataDic.getId());
             if (dicList != null && dicList.size() > 0) {
-                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?msg=qr_type_exist&dicid=" + dataDic.getId()));
+                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?msg=qr_type_exist&dicid=" + dataDic.getId()));
             } else {
                 tempDataDic.setName(dataDic.getName());
                 tempDataDic.setDescription(dataDic.getDescription());
@@ -221,15 +221,15 @@ public class ReportController extends Handler {
     @RequestMapping({"/deletetype"})
     @Menu(type = "apps", subtype = "kbs")
     public ModelAndView deletetype(HttpServletRequest request, @Valid String id) {
-        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + id));
+        ModelAndView view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + id));
         if (!StringUtils.isBlank(id)) {
             DataDic tempDataDic = dataDicRes.findByIdAndOrgi(id, super.getOrgi(request));
             int count = reportRes.countByOrgiAndDicid(super.getOrgi(request), id);
             if (count == 0) {
                 dataDicRes.delete(tempDataDic);
-                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?dicid=" + tempDataDic.getParentid()));
+                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?dicid=" + tempDataDic.getParentid()));
             } else {
-                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html?msg=report_exist&dicid=" + id));
+                view = request(super.createRequestPageTempletResponse("redirect:/apps/report/index?msg=report_exist&dicid=" + id));
             }
         }
         return view;
@@ -271,7 +271,7 @@ public class ReportController extends Handler {
             new ExcelImportProecess(event).process();        //启动导入任务
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html" + (!StringUtils.isBlank(type) ? "?dicid=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index" + (!StringUtils.isBlank(type) ? "?dicid=" + type : "")));
     }
 
     @RequestMapping("/batdelete")
@@ -282,7 +282,7 @@ public class ReportController extends Handler {
             reportRes.deleteAll(topicList);
         }
 
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index.html" + (!StringUtils.isBlank(type) ? "?dicid=" + type : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/index" + (!StringUtils.isBlank(type) ? "?dicid=" + type : "")));
     }
 
     @RequestMapping("/expids")
@@ -355,7 +355,7 @@ public class ReportController extends Handler {
     public ModelAndView pbdelete(@Valid String id) {
         PublishedReport report = publishedReportRes.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Report %s not found", id)));
         publishedReportRes.delete(report);
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/pbreportindex.html?dicid=" + report.getDicid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/pbreportindex?dicid=" + report.getDicid()));
     }
 
     /**

@@ -4,7 +4,7 @@
 		<i class="checkStatusI"></i>
 	</div>
 
-<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content.html" class="iframe_btn" data-id="maincontent" data-type="tabChange" style="display: none;">
+<a href="javascript:void(0)" onclick="return false;" data-title="首页" data-href="/apps/content" class="iframe_btn" data-id="maincontent" data-type="tabChange" style="display: none;">
 	<i class="kfont" style="position: relative;">&#xe717;</i>
 	首页
 </a>
@@ -50,7 +50,7 @@
 		function setAgentAsReady(){
 			$("#agentstatus").addClass("layui-form-onswitch");
 			sessionStorage.setItem(agentstatus,"ready")
-			loadURL("/agent/ready.html",null, function(){
+			loadURL("/agent/ready",null, function(){
 				$('#agentstatus_busy').show();
 			});
 		}
@@ -59,7 +59,7 @@
 		function setAgentAsNotReady(){
 			$('#agentstatus').removeClass("layui-form-onswitch");
 			sessionStorage.setItem(agentstatus,"notready");
-			loadURL("/agent/notready.html",null, function(){
+			loadURL("/agent/notready",null, function(){
 				$('#agentstatus_busy').removeClass("layui-form-onswitch-busy").hide();
 			});
 		}
@@ -68,11 +68,11 @@
 			if($(this).hasClass('layui-form-onswitch-busy')){
 				$(this).removeClass("layui-form-onswitch-busy");
 				$(this).addClass("layui-form-onswitch-notbusy");
-				loadURL("/agent/notbusy.html")
+				loadURL("/agent/notbusy")
 			}else{
 				$(this).removeClass("layui-form-onswitch-notbusy");
 				$(this).addClass("layui-form-onswitch-busy");
-				loadURL("/agent/busy.html") ;
+				loadURL("/agent/busy") ;
 			}
 		});
 

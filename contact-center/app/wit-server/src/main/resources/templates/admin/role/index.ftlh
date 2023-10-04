@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			角色列表
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/role/add.html" data-toggle="ajax" data-height="200" data-width="550" data-title="新建角色">
+				<button class="layui-btn layui-btn-sm green" href="/admin/role/add" data-toggle="ajax" data-height="200" data-width="550" data-title="新建角色">
 					新建角色
 				</button>
 			</span>
@@ -14,7 +14,7 @@
 					<#if roleList??>
 					<#list roleList as role>
 					<li class="uk_role <#if roleData?? && roleData.id == role.id>this</#if>">
-						<a href="/admin/role/index.html?role=${role.id!''}" style="word-wrap: break-word;word-break: break-all;">
+						<a href="/admin/role/index?role=${role.id!''}" style="word-wrap: break-word;word-break: break-all;">
 							<i class="kfont">&#xe7d0;</i>
 							${role.name!''}
 						</a>
@@ -31,16 +31,16 @@
 word-break: break-all;"><#if roleData??>${roleData.name!''}<#else>坐席组</#if><#if userList??>（${userList?size!''}）</#if></span>
 			<span style="float:right;">
 				<#if roleData??>
-				<button class="layui-btn layui-btn-sm green" href="/admin/role/seluser.html?role=${roleData.id!''}" data-toggle="ajax" data-width="750" data-title="添加用户到角色">
+				<button class="layui-btn layui-btn-sm green" href="/admin/role/seluser?role=${roleData.id!''}" data-toggle="ajax" data-width="750" data-title="添加用户到角色">
 					添加用户到角色
 				</button>
-				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/role/edit.html?id=${roleData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改角色">
+				<button class="layui-btn layui-btn-primary layui-btn-sm" href="/admin/role/edit?id=${roleData.id}" data-toggle="ajax" data-width="550" data-height="200" data-title="修改角色">
 					修改角色
 				</button>
-				<button class="layui-btn layui-btn-warm layui-btn-sm" href="/admin/role/auth.html?id=${roleData.id}" data-toggle="ajax" title="角色授权" data-width="400" data-height="500">
+				<button class="layui-btn layui-btn-warm layui-btn-sm" href="/admin/role/auth?id=${roleData.id}" data-toggle="ajax" title="角色授权" data-width="400" data-height="500">
 					角色授权
 				</button>
-				<button class="layui-btn layui-btn-danger layui-btn-sm" href="/admin/role/delete.html?id=${roleData.id!''}" data-toggle="tip" data-title="请确认是否删除角色？">
+				<button class="layui-btn layui-btn-danger layui-btn-sm" href="/admin/role/delete?id=${roleData.id!''}" data-toggle="tip" data-title="请确认是否删除角色？">
 					删除角色
 				</button>
 				</#if>
@@ -85,7 +85,7 @@ word-break: break-all;"><#if roleData??>${roleData.name!''}<#else>坐席组</#if
 					  <td style="wdth:150px">${userRole.user.email!''}</td>
 					  <td>${userRole.user.mobile!''}</td>
 					  <td style="white-space: nowrap;">
-					  		<a href="/admin/role/user/delete.html?id=${userRole.id!''}&role=${userRole.role.id!''}"  data-toggle="tip" data-title="请确认是否移除？">
+					  		<a href="/admin/role/user/delete?id=${userRole.id!''}&role=${userRole.role.id!''}"  data-toggle="tip" data-title="请确认是否移除？">
 					  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 					  			移除
 					  		</a>

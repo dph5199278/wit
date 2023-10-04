@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/agent/summary/save.html" data-toggle="ajax-form" data-close="true" data-inner="#ukefu-chat-agent" method="post" >
+	<form class="layui-form" action="/agent/summary/save" data-toggle="ajax-form" data-close="true" data-inner="#ukefu-chat-agent" method="post" >
 		<#if summary??><input type="hidden" name="id" value="${summary.id!''}"></#if>
 		<input type="hidden" name="userid" value="${userid!''}">
 		<input type="hidden" name="agentserviceid" value="${agentserviceid!''}">

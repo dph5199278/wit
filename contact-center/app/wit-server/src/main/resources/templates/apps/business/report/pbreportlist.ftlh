@@ -37,7 +37,7 @@
 						  <td style="width:1%;padding-right:0px;">
 							<input type="checkbox" class="ids" name="ids" value="${report.id!''}"/>
 						  </td>
-						  <td><a href="/apps/report/view.html?id=${report.id!''}" target="_blank"> 
+						  <td><a href="/apps/report/view?id=${report.id!''}" target="_blank">
 								<#if report.name?? && report.name?length gt 100>${report.name[0..100]}...<#else>${report.name!''}</#if>(${report.code!''})
 						  		</a>
 						  </td>
@@ -46,7 +46,7 @@
 							</td>
 						  <td>${report.createtime?string("yyyy-MM-dd HH:mm:ss")}</td>
 						  <td style="white-space:nowrap;" nowrap="nowrap">
-								<a href="/apps/report/pbdelete.html?id=${report.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除报表？">
+								<a href="/apps/report/pbdelete?id=${report.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除报表？">
 									<i class="layui-icon" style="color:red;">&#x1006;</i>
 									删除
 								</a>
@@ -84,7 +84,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						loadURL("/apps/report/pbreportlist.html?p="+data.curr+"&dicid=<#if dataDic??>${dataDic.id!''}<#else>0</#if>","#ukefu-datadic-content");
+						loadURL("/apps/report/pbreportlist?p="+data.curr+"&dicid=<#if dataDic??>${dataDic.id!''}<#else>0</#if>","#ukefu-datadic-content");
 					}
 				}
 		   });

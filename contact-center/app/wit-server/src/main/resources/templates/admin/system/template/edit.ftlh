@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/template/update.html">
+    <form class="layui-form uk-form" action="/admin/template/update">
     	<input type="hidden" name="templettype" value="${sysDic.id!''}">
     	<input type="hidden" name="id" value="${template.id!''}">
         <div class="layui-form-item">

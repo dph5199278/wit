@@ -1,6 +1,6 @@
 <div class="layui-header cskefu-cca-header">
     <!-- 头部区域（可配合layui已有的水平导航） -->
-    <form class="layui-form" name="search"	action="/apps/cca/index.html" method="get" style="float: left;margin-right:5px;">
+    <form class="layui-form" name="search"	action="/apps/cca/index" method="get" style="float: left;margin-right:5px;">
         <div class="layui-form-item">
             <div class="layui-inline" style="margin-right:0px;">
                 <div class="layui-input-inline" style="width: auto;margin-right:0px;">

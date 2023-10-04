@@ -69,7 +69,7 @@ public class SystemMessageController extends Handler {
 			email.setSmtppassword(encryptor.encryption(email.getSmtppassword()));
 		}
     	systemMessageRepository.save(email) ;
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index"));
     }
 
     @RequestMapping("/email/edit")
@@ -94,7 +94,7 @@ public class SystemMessageController extends Handler {
     		}
     		systemMessageRepository.save(email) ;
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index"));
     }
 
     @RequestMapping("/email/delete")
@@ -104,7 +104,7 @@ public class SystemMessageController extends Handler {
     	if(email!=null) {
     		systemMessageRepository.delete(temp);
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/email/index"));
     }
 
 
@@ -132,7 +132,7 @@ public class SystemMessageController extends Handler {
     		sms.setSmtppassword(encryptor.encryption(sms.getSmtppassword()));
 		}
     	systemMessageRepository.save(sms) ;
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index"));
     }
 
     @RequestMapping("/sms/edit")
@@ -158,7 +158,7 @@ public class SystemMessageController extends Handler {
     		}
     		systemMessageRepository.save(sms) ;
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index"));
     }
 
     @RequestMapping("/sms/delete")
@@ -168,6 +168,6 @@ public class SystemMessageController extends Handler {
     	if(sms!=null) {
     		systemMessageRepository.delete(temp);
     	}
-    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index.html"));
+    	return request(super.createRequestPageTempletResponse("redirect:/admin/sms/index"));
     }
 }

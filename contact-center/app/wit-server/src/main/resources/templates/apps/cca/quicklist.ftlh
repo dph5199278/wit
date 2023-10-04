@@ -39,10 +39,10 @@
 	}
 	
 	function updateTarget(id , type){
-		$('#quick_type_add').attr("href","/agent/quickreply/addtype.html?typeid="+id) ;
-		$('#quick_type_edit').attr("href","/agent/quickreply/edittype.html?id="+id) ;
-		$('#quick_add').attr("href","/agent/quickreply/add.html?parentid="+id) ;
-		$('#quick_edit').attr("href","/agent/quickreply/edit.html?id="+id) ;
+		$('#quick_type_add').attr("href","/agent/quickreply/addtype?typeid="+id) ;
+		$('#quick_type_edit').attr("href","/agent/quickreply/edittype?id="+id) ;
+		$('#quick_add').attr("href","/agent/quickreply/add?parentid="+id) ;
+		$('#quick_edit').attr("href","/agent/quickreply/edit?id="+id) ;
 		
 		if(id == "1"){
 			$('#quick_type_edit').hide();
@@ -77,7 +77,7 @@
 	}
 
 	function getQuickReplyContent(id , editor){
-		loadURL("/agent//quickreply/content.html?id="+id , null , function(data){
+		loadURL("/agent//quickreply/content?id="+id , null , function(data){
 			editor.html(data);
 		})
 	}

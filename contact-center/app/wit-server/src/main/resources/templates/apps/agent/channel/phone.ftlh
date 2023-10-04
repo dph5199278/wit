@@ -83,7 +83,7 @@
             <dl class="ukefu-tag-list layui-anim layui-anim-upbit" id="taglist">
                 <#if tags??>
                 <#list tags as tag>
-                <dd><a href="javascript:void(0)" data-href="/agent/tagrelation.html?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}</a></dd>
+                <dd><a href="javascript:void(0)" data-href="/agent/tagrelation?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}</a></dd>
                 </#list>
                 </#if>
             </dl>

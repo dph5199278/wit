@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/template/save.html">
+    <form class="layui-form uk-form" action="/admin/template/save">
     	<input type="hidden" name="templettype" value="${sysDic.id!''}">
         <div class="layui-form-item">
             <label class="layui-form-label">模板名称：</label>

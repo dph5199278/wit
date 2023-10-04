@@ -11,7 +11,7 @@
 				<h1 class="site-h1" style="border-top:1px solid #e6e6e6;">
 					对话质检设置
 				</h1>
-				<form method="post" key="set-mine" action="/apps/quality/save.html" class="layui-form">
+				<form method="post" key="set-mine" action="/apps/quality/save" class="layui-form">
 				<#if sessionConfig??><input type="hidden" name="id" value="${sessionConfig.id!''}"></#if>
 								
 				<div class="box default-box">

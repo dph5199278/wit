@@ -99,7 +99,7 @@ public class CallCenterSkillController extends Handler {
                 skillRes.save(skill);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill.html?hostid=" + skill.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill?hostid=" + skill.getHostid()));
     }
 
     @RequestMapping(value = "/skill/edit")
@@ -124,7 +124,7 @@ public class CallCenterSkillController extends Handler {
                 extentionRes.save(ext);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill.html?hostid=" + extention.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill?hostid=" + extention.getHostid()));
     }
 
     @RequestMapping(value = "/skill/delete")
@@ -133,7 +133,7 @@ public class CallCenterSkillController extends Handler {
         if (!StringUtils.isBlank(id)) {
             extentionRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill?hostid=" + hostid));
     }
 
     @RequestMapping(value = "/skill/imp")
@@ -153,7 +153,7 @@ public class CallCenterSkillController extends Handler {
         if (!StringUtils.isBlank(id)) {
             skillExtentionRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill?hostid=" + hostid));
     }
 
     @RequestMapping(value = "/skill/extention/save")
@@ -182,7 +182,7 @@ public class CallCenterSkillController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/skill?hostid=" + hostid));
     }
 
 }

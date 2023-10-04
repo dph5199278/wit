@@ -10,7 +10,7 @@
 					<h1 class="site-h1" style="background-color:#FFFFFF;">
 						ACD策略（坐席分配策略）<#if userList??>（${userList.totalElements!''}）</#if>
 						<span style="float:right;">
-							<button class="layui-btn layui-btn-sm green" href="/admin/user/add.html" data-toggle="ajax" data-width="750" data-title="创建新用户">
+							<button class="layui-btn layui-btn-sm green" href="/admin/user/add" data-toggle="ajax" data-width="750" data-title="创建新用户">
 								添加策略
 							</button>
 						</span>
@@ -65,11 +65,11 @@
 								  </td>
 								  <td>${user.createtime!''}</td>
 								  <td style="white-space:nowrap;" nowrap="nowrap">
-								  		<a href="/admin/user/edit.html?id=${user.id!''}" data-toggle="ajax" data-width="750" data-title="编辑用户信息">
+								  		<a href="/admin/user/edit?id=${user.id!''}" data-toggle="ajax" data-width="750" data-title="编辑用户信息">
 								  			<i class="layui-icon">&#xe642;</i>
 								  			编辑
 								  		</a>
-								  		<a href="/admin/user/delete.html?id=${user.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
+								  		<a href="/admin/user/delete?id=${user.id!''}" style="margin-left:10px;" data-toggle="tip" data-title="请确认是否删除记录？">
 								  			<i class="layui-icon" style="color:red;">&#x1006;</i>
 								  			删除
 								  		</a>
@@ -111,7 +111,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/admin/user/index.html?p="+data.curr ;
+						location.href = "/admin/user/index?p="+data.curr ;
 					}
 				}
 		   });

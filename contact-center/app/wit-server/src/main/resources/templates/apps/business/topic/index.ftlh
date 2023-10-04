@@ -7,7 +7,7 @@
 				<h1 class="site-h1" style="background-color:#FFFFFF;">
 					知识分类
 					<span style="float:right;">
-						<button class="layui-btn layui-btn-sm green" href="/apps/topic/type/add.html<#if curtype??>?type=${curtype.id!''}</#if>" data-toggle="ajax" data-height="360" data-width="550" data-title="新建分类">
+						<button class="layui-btn layui-btn-sm green" href="/apps/topic/type/add<#if curtype??>?type=${curtype.id!''}</#if>" data-toggle="ajax" data-height="360" data-width="550" data-title="新建分类">
 							新建分类
 						</button>
 					</span>
@@ -26,7 +26,7 @@
 				<h1 class="site-h1" style="background-color:#FFFFFF;">
 					“<#if curtype??>${curtype.name!''}<#else>默认</#if>”<#if topicList??>（${topicList.totalElements!''}）</#if>
 					<div class="ukefu-bt-text-content" style="position: absolute;right: 5px;top: 0px;">
-						<form class="layui-form" name="search" action="/apps/topic.html" method="get" style="float: left;">
+						<form class="layui-form" name="search" action="/apps/topic" method="get" style="float: left;">
 							<#if curtype??><input type="hidden" name="type" value="${curtype.id!''}"></#if>
 							<div class="layui-form-item">
 								<div class="layui-inline">
@@ -38,22 +38,22 @@
 							</div>
 						</form>
 						<#if curtype??>
-						<button class="layui-btn layui-btn-sm green" href="/apps/topic/type/edit.html<#if curtype??>?type=${curtype.id}</#if>" data-toggle="ajax" data-width="550" data-height="360" data-title="编辑分类">
+						<button class="layui-btn layui-btn-sm green" href="/apps/topic/type/edit<#if curtype??>?type=${curtype.id}</#if>" data-toggle="ajax" data-width="550" data-height="360" data-title="编辑分类">
 							编辑分类
 						</button>
-						<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/topic/type/delete.html<#if curtype??>?id=${curtype.id!''}&type=${curtype.id}</#if>" data-toggle="tip" data-title="删除分类前，请确认目录下没有知识条目，请确认是否删除？">
+						<button class="layui-btn layui-btn-sm layui-btn-danger" href="/apps/topic/type/delete<#if curtype??>?id=${curtype.id!''}&type=${curtype.id}</#if>" data-toggle="tip" data-title="删除分类前，请确认目录下没有知识条目，请确认是否删除？">
 							删除分类
 						</button>
-						<button class="layui-btn layui-btn-primary layui-btn-sm" href="/apps/topic/area.html?id=${curtype.id!''}&type=${curtype.id}" data-toggle="ajax" data-width="450" data-height="400" data-title="地区设置">
+						<button class="layui-btn layui-btn-primary layui-btn-sm" href="/apps/topic/area?id=${curtype.id!''}&type=${curtype.id}" data-toggle="ajax" data-width="450" data-height="400" data-title="地区设置">
 							地区设置
 						</button>
 						</#if>
 						<#if curtype??>
-							<button class="layui-btn layui-btn-sm green" href="/apps/topic/add.html<#if curtype??>?type=${curtype.id}</#if>" data-toggle="ajax" data-width="950" data-height="550" data-title="添加知识条目">
+							<button class="layui-btn layui-btn-sm green" href="/apps/topic/add<#if curtype??>?type=${curtype.id}</#if>" data-toggle="ajax" data-width="950" data-height="550" data-title="添加知识条目">
 								新建知识
 							</button>
 							<div class="layui-btn-group ukefu-btn-group">
-								<button class="layui-btn layui-btn-sm" href="/apps/topic/imp.html?<#if curtype??>type=${curtype.id}</#if>" title="导入知识库" data-toggle="ajax" data-width="950" data-height="600">
+								<button class="layui-btn layui-btn-sm" href="/apps/topic/imp?<#if curtype??>type=${curtype.id}</#if>" title="导入知识库" data-toggle="ajax" data-width="950" data-height="600">
 									<i class="kfont">&#xe641;</i> 导入 
 								</button>
 							</div>
@@ -72,13 +72,13 @@
 									</a>
 								</li>
 								<li>
-									<a href="/apps/topic/expsearch.html?1=1<#if q??>&q=${q!''}</#if><#if curtype??>&type=${curtype.id}</#if>&subtype=${subtype}" title="导出知识库" target="_blank">
+									<a href="/apps/topic/expsearch?1=1<#if q??>&q=${q!''}</#if><#if curtype??>&type=${curtype.id}</#if>&subtype=${subtype}" title="导出知识库" target="_blank">
 										<i class="kfont">&#xe672;</i>
 										导出当前搜索结果
 									</a>
 								</li>
 								<li>
-									<a href="/apps/topic/expall.html?<#if curtype??>type=${curtype.id}</#if>" title="导出联系人" target="_blank">
+									<a href="/apps/topic/expall?<#if curtype??>type=${curtype.id}</#if>" title="导出联系人" target="_blank">
 										<i class="kfont">&#xe672;</i>
 										导出全部数据
 									</a>
@@ -133,11 +133,11 @@
 							  	</#if>
 							  </td>
 							  <td style="white-space: nowrap;">
-							  		<a href="/apps/topic/edit.html?id=${topic.id!}<#if curtype??>&type=${curtype.id}</#if>" data-toggle="ajax" data-title="编辑知识条目" data-width="950" data-height="600">
+							  		<a href="/apps/topic/edit?id=${topic.id!}<#if curtype??>&type=${curtype.id}</#if>" data-toggle="ajax" data-title="编辑知识条目" data-width="950" data-height="600">
 							  			<i class="layui-icon">&#xe642;</i>
 							  			编辑
 							  		</a>
-							  		<a href="/apps/topic/delete.html?id=${topic.id!''}<#if curtype??>&type=${curtype.id}</#if>" data-toggle="tip" data-title="请确认是否删除知识条目？">
+							  		<a href="/apps/topic/delete?id=${topic.id!''}<#if curtype??>&type=${curtype.id}</#if>" data-toggle="tip" data-title="请确认是否删除知识条目？">
 							  			<i class="layui-icon" style="color:red;">ဆ</i>
 							  			移除
 							  		</a>
@@ -173,7 +173,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/apps/topic.html?<#if q??>q=${q?url}&</#if><#if curtype??>type=${curtype.id}&</#if>p="+data.curr ;
+						location.href = "/apps/topic?<#if q??>q=${q?url}&</#if><#if curtype??>type=${curtype.id}&</#if>p="+data.curr ;
 					}
 				}
 		   });
@@ -191,7 +191,7 @@
 			}
 		});
 		if(num>0){
-			$('#batexp').attr('href' , '/apps/topic/expids.html?'+ids)	;
+			$('#batexp').attr('href' , '/apps/topic/expids?'+ids)	;
 		}else{
 			top.layer.alert("请先选择需要导出的知识条目");
 			$('#batexp').attr("href" , "javascript:void(0)");
@@ -215,7 +215,7 @@
 			top.layer.confirm("请确认是否删除知识条目？", {icon: 3, title:'提示'}, function(index){
 				top.layer.close(index);
 				if(confirm){
-					location.href = '/apps/topic/batdelete.html?<#if curtype??>type=${curtype.id!''}&</#if>'+ids ;
+					location.href = '/apps/topic/batdelete?<#if curtype??>type=${curtype.id!''}&</#if>'+ids ;
 				}
 			});
 		}else{
@@ -240,9 +240,9 @@
 	
 	function onClick(e, treeId, treeNode) {
 		if(treeNode.topic){
-			location.href = "/apps/topic.html?type="+treeNode.id;
+			location.href = "/apps/topic?type="+treeNode.id;
 		}else if(treeNode.id == "0"){
-			location.href = "/apps/topic.html";
+			location.href = "/apps/topic";
 		}
 	}
 

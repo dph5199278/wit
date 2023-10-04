@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form"  style="margin-top:10px;" action="/apps/tenant/update.html"  enctype="multipart/form-data"  method="post">
+	<form class="layui-form"  style="margin-top:10px;" action="/apps/tenant/update"  enctype="multipart/form-data"  method="post">
 	<input type="hidden" name="id" value="${tenant.id!''}">
 		<div class="layui-form-item">
 			<div class="layui-inline">
@@ -33,7 +33,7 @@
 					<label class="layui-form-label" style="width:150px;"></label>
 					<div class="layui-input-inline">
 						<span class="ukefu-logo">
-						<img src="<#if tenant?? && tenant.tenantlogo??>/res/image.html?id=${tenant.tenantlogo?url}</#if>" style="height:80px;">
+						<img src="<#if tenant?? && tenant.tenantlogo??>/res/image?id=${tenant.tenantlogo?url}</#if>" style="height:80px;">
 					</span>
 					</div>
 				</div>

@@ -5,7 +5,7 @@
 	</div>
 	<div class="layui-body">
 		<div class="layui-side-scroll">
-			<form method="post" key="set-mine" enctype="multipart/form-data" action="/setting/agent/sessionconfig/save.html" class="layui-form">
+			<form method="post" key="set-mine" enctype="multipart/form-data" action="/setting/agent/sessionconfig/save" class="layui-form">
 				<input type="hidden" name="satisfaction" value="1">
 				<#if sessionConfig??><input type="hidden" name="id" value="${sessionConfig.id!''}"></#if>
 				<div class="row">

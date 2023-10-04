@@ -1,4 +1,4 @@
-<form method="post" key="set-mine" enctype="multipart/form-data" action="/setting/agent/sessionconfig/save.html" class="layui-form">
+<form method="post" key="set-mine" enctype="multipart/form-data" action="/setting/agent/sessionconfig/save" class="layui-form">
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="ukefu-customer-div setting-wrapper">

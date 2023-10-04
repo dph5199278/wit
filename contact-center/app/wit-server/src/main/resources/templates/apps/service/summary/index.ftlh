@@ -12,7 +12,7 @@
 					服务小结列表<#if summaryList??>（${summaryList.totalElements}）</#if>
 					<span style="float:right;">
 						<div class="ukefu-bt-text-content" style="position: absolute;right: 5px;top: 0px;">
-							<form class="layui-form" name="search" id="search"	action="/apps/agent/summary/index.html" method="get" style="float: left;margin-right:5px;">
+							<form class="layui-form" name="search" id="search"	action="/apps/agent/summary/index" method="get" style="float: left;margin-right:5px;">
 								<div class="layui-form-item">
 									<div class="layui-inline" style="margin-right:0px;">
 										<div class="layui-input-inline" style="width: auto;margin-right:0px;">
@@ -51,13 +51,13 @@
 										</a>
 									</li>
 									<li>
-										<a href="/apps/agent/summary/expsearch.html?1=1<#if begin??>&begin=${begin}</#if><#if end??>&end=${end}</#if>&subtype=${subtype}" title="导出联系人" target="_blank">
+										<a href="/apps/agent/summary/expsearch?1=1<#if begin??>&begin=${begin}</#if><#if end??>&end=${end}</#if>&subtype=${subtype}" title="导出联系人" target="_blank">
 											<i class="kfont">&#xe672;</i>
 											导出当前搜索结果
 										</a>
 									</li>
 									<li>
-										<a href="/apps/agent/summary/expall.html" title="导出联系人" target="_blank">
+										<a href="/apps/agent/summary/expall" title="导出联系人" target="_blank">
 											<i class="kfont">&#xe672;</i>
 											导出全部数据
 										</a>
@@ -92,7 +92,7 @@
 								<input type="checkbox" class="ids" name="ids" value="${summary.id!''}"/>
 							</td>
 							<td class="ukefu-online-client" title="${summary.username!''}" style="text-overflow: ellipsis;white-space: nowrap;overflow: hidden;">
-								<a href="/service/online/index.html?userid=${summary.userid!''}&agentservice=${summary.agentserviceid!''}&id=${summary.id!''}">
+								<a href="/service/online/index?userid=${summary.userid!''}&agentservice=${summary.agentserviceid!''}&id=${summary.id!''}">
 								${summary.username!''}
 								</a>
 							</td>
@@ -131,7 +131,7 @@
 								${summary.reservtime!''}
 							</td>
 							<td class="minSize ">
-								<a href="/apps/agent/summary/process.html?id=${summary.id!''}" data-toggle="ajax" data-width="950" data-height="450" title="服务小结处理">
+								<a href="/apps/agent/summary/process?id=${summary.id!''}" data-toggle="ajax" data-width="950" data-height="450" title="服务小结处理">
 									<i class="layui-icon">&#xe642;</i>
 									处理
 								</a>
@@ -163,7 +163,7 @@
 				}
 			});
 			if(num>0){
-				$('#batexp').attr('href' , '/apps/agent/summary/expids.html?'+ids)	;
+				$('#batexp').attr('href' , '/apps/agent/summary/expids?'+ids)	;
 			}else{
 				top.layer.alert("请先选择需要导出的服务小结");
 				$('#batexp').attr("href" , "javascript:void(0)");
@@ -190,7 +190,7 @@
 				,groups: 5 //连续显示分页数
 				,jump:function(data , first){
 					if(!first){
-						location.href = "/apps/agent/summary/index.html?p="+data.curr+searchCondition;
+						location.href = "/apps/agent/summary/index?p="+data.curr+searchCondition;
 					}
 				}
 		});

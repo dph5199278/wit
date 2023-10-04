@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/agent/summary/save.html" method="post">
+	<form class="layui-form" action="/apps/agent/summary/save" method="post">
 		<input type="hidden" name="id" value="${summary.id!''}">
 		<div class="layui-collapse">
 			<#if contacts??>

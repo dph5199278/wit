@@ -312,9 +312,9 @@ var Proxy = {
 		}else{
 			if($('.chat-list-item.active').length > 0){
 				var id = $('.chat-list-item.active').data('id') ;
-				type ==  "agent" ? loadURL('/agent/agentusers.html?newuser=true&userid='+id , '#agentusers') : loadURL('/apps/cca/agentusers.html?newuser=true&userid='+id , '#agentuserscca');
+				type ==  "agent" ? loadURL('/agent/agentusers?newuser=true&userid='+id , '#agentusers') : loadURL('/apps/cca/agentusers?newuser=true&userid='+id , '#agentuserscca');
 			}else{
-				type ==  "agent" ? location.href = "/agent/index.html?newuser=true" : location.href = "/apps/cca/index.html?newuser=true";
+				type ==  "agent" ? location.href = "/agent/index?newuser=true" : location.href = "/apps/cca/index?newuser=true";
 			}
 		}
 		if(data.userid == cursession){
@@ -343,7 +343,7 @@ var Proxy = {
 						$(this).attr('name','nolabe')
 					}
 					$.ajax({
-						url: '/agent/agentuserLabel.html',
+						url: '/agent/agentuserLabel',
 						data: {'iconid': $(this).attr('id')},
 						type: "get",
 						success: function () {
@@ -355,7 +355,7 @@ var Proxy = {
 					document.getElementById('chat_msg_list').scrollTop = document.getElementById('chat_msg_list').scrollHeight
 					: document.getElementById('chat_msg_list_cca').scrollTop = document.getElementById('chat_msg_list_cca').scrollHeight;
 			}
-			loadURL("/agent/readmsg.html?userid="+data.agentuser);	//更新数据状态，将当前对话的新消息数量清空
+			loadURL("/agent/readmsg?userid="+data.agentuser);	//更新数据状态，将当前对话的新消息数量清空
 		}else{
 			if(data.type == 'message'){
 				$('#last_msg_'+data.userid).text(data.tokenum).show();
@@ -462,16 +462,16 @@ var Proxy = {
 	execLinkContactsFunction: function(data){
 		if(data!=null && data!= ""){
 			if(typeof ani != "undefined"){
-				loadURL("/apps/softphone/search.html?display=false&ani="+ani+"&q="+data, "#ukefu-chat-agent") ;
+				loadURL("/apps/softphone/search?display=false&ani="+ani+"&q="+data, "#ukefu-chat-agent") ;
 			}else if(userid && userid != '' && agentserviceid && agentserviceid != '' && agentuserid && agentuserid != ''){
-				loadURL("/agent/contacts.html?userid="+userid+"&agentserviceid="+agentserviceid+"&agentuserid="+agentuserid+"&contactsid="+data , "#ukefu_contacts_info") ;
+				loadURL("/agent/contacts?userid="+userid+"&agentserviceid="+agentserviceid+"&agentuserid="+agentuserid+"&contactsid="+data , "#ukefu_contacts_info") ;
 			}
 		}
 	},
 	// 坐席对话取消关联联系人
 	execCancelContactsFunction: function(data){
 		if (data != null){
-			loadURL("/agent/clean/associated.html?currentAgentUserContactsId="+data,"#ukefu_contacts_info");
+			loadURL("/agent/clean/associated?currentAgentUserContactsId="+data,"#ukefu_contacts_info");
 		}
 	},
 	updateData : function(inner , data){

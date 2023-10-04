@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/customer/save.html" method="post">
+	<form class="layui-form" action="/apps/customer/save" method="post">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
 				<h2 class="layui-colla-title">基本信息</h2>
@@ -278,6 +278,6 @@
 
 	});
 	$('#entcustomer_province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=entcustomer.city&attr=lay-ignore&style=width:85px;" , '#entcustomer_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=entcustomer.city&attr=lay-ignore&style=width:85px;" , '#entcustomer_city');
 	})
 </script>

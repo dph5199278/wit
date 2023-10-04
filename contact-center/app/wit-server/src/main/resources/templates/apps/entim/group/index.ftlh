@@ -35,7 +35,7 @@
 		<div class="content-list" style="margin-top: 0px;">
 			<ul class="ukefu-group-apps">
 				<li class="ukefu-group-app">
-					<a href="/ent/im/group/user.html?id=${imGroup.id}">
+					<a href="/ent/im/group/user?id=${imGroup.id}">
 						<div class="ukefu-group-app-icon"><i class="layui-icon">&#xe613;</i></div>
 						<div class="ukefu-group-app-name">成员</div>
 					</a>
@@ -58,7 +58,7 @@
 				<#if imGroupUserList??>
 				<#list imGroupUserList as imGroupUser>
 					<li id="gruop_user_${imGroupUser.user.id}">
-						<a href="javascript:void(0)" <#if imGroupUser.user.id != user.id>onclick="openchat('/ent/im/chat.html?userid=${imGroupUser.user.id!''}' , '/images/user-pc.png' , '${imGroupUser.user.uname!''}' , '${imGroupUser.user.id!''}' , '最近登陆:${imGroupUser.user.lastlogintime}');"</#if>>
+						<a href="javascript:void(0)" <#if imGroupUser.user.id != user.id>onclick="openchat('/ent/im/chat?userid=${imGroupUser.user.id!''}' , '/images/user-pc.png' , '${imGroupUser.user.uname!''}' , '${imGroupUser.user.id!''}' , '最近登陆:${imGroupUser.user.lastlogintime}');"</#if>>
 							<img src="/images/user-pc.png">
 							<span>${imGroupUser.user.uname!''}</span>
 						</a>
@@ -97,7 +97,7 @@
 			newlineTag : "br" ,
 			filterMode:true,
 			items: ['emoticons', 'image', 'insertfile'],
-			uploadJson:'/ent/im/image/upload.html?userid=${user.id!''}&group=${contextid!''}',
+			uploadJson:'/ent/im/image/upload?userid=${user.id!''}&group=${contextid!''}',
 			filePostName: 'imgFile',
 			allowImageRemote: false,
 			allowFileUpload: true,
@@ -303,7 +303,7 @@
 			  ,btn: ['保存','关闭']
 			  ,shade: 0 //不显示遮罩
 			  ,yes: function(){
-				  loadURL('/ent/im/group/tipmsg.html?id=${imGroup.id!''}&tipmsg='+encodeURIComponent($('#tipmsgcontent').val()) , '#group-tipmessage');
+				  loadURL('/ent/im/group/tipmsg?id=${imGroup.id!''}&tipmsg='+encodeURIComponent($('#tipmsgcontent').val()) , '#group-tipmessage');
 				  layer.closeAll();
 			  }
 		});
@@ -311,7 +311,7 @@
 
 	function getMoreMessage(){
 		let firstCreateTime=$('.time').first().text();
-		R3Ajax.get("/ent/im/group/more.html?id=${contextid!''}&createtime="+firstCreateTime,function (html) {
+		R3Ajax.get("/ent/im/group/more?id=${contextid!''}&createtime="+firstCreateTime,function (html) {
 			$('.connect-message').after(html);
 		});
 	}

@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/sysdic/dicitem/save.html">
+	<form class="layui-form uk-form" action="/admin/sysdic/dicitem/save">
 		<input type="hidden" name="parentid" value="${sysDic.id!''}">
 		<input type="hidden" name="dicid" value="<#if sysDic.parentid?? && sysDic.parentid == '0'>${sysDic.id!''}<#else>${sysDic.dicid!''}</#if>">
 		<input type="hidden" name="p" value="${p!'1'}">

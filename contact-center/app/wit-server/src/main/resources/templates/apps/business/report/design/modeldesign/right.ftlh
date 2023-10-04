@@ -1,6 +1,6 @@
 <div>
 	<div class="ukefu-design-title">图表设置</div>
-	<form id="chartppy" class="layui-form layui-form-pane" style="padding:5px;" action="/apps/report/design/changechartppy.html" method="post" >
+	<form id="chartppy" class="layui-form layui-form-pane" style="padding:5px;" action="/apps/report/design/changechartppy" method="post" >
 		<input type="hidden" name="id" value="${reportModel.id!''}" >
 		<div class="layui-form-item" >
 			<label class="layui-form-label">选择组件</label>
@@ -112,13 +112,13 @@
 <script>
 	var submitchartproperty = function(){
 		let params = $("#chartppy").serialize();
-		loadURL("/apps/report/design/changechartppy.html?"+params,"#${reportModel.id!''}");
+		loadURL("/apps/report/design/changechartppy?"+params,"#${reportModel.id!''}");
 	}
 	layui.use('form', function(){
 		  var form = layui.form;
 		  form.render();
 		  form.on('select(templatesel)', function(data){
-			  window.location.href= "/apps/report/design/changetpl.html?mid=${reportModel.id!''}&tplid="+data.value;
+			  window.location.href= "/apps/report/design/changetpl?mid=${reportModel.id!''}&tplid="+data.value;
 			}); 
 		  form.on('select(format)', function(data){
 			  submitchartproperty();

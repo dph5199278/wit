@@ -3,7 +3,7 @@
 		<h1 class="site-h1" style="background-color:#FFFFFF;">
 			${sysDic.name!''} 分类模板
 			<span style="float:right;">
-				<button class="layui-btn layui-btn-sm green" href="/admin/template/add.html?type=${sysDic.id!''}" data-toggle="ajax" data-width="700" data-height="350" data-title="创建新模板">
+				<button class="layui-btn layui-btn-sm green" href="/admin/template/add?type=${sysDic.id!''}" data-toggle="ajax" data-width="700" data-height="350" data-title="创建新模板">
 					创建新模板
 				</button>
 			</span>
@@ -37,7 +37,7 @@
 					<#list templateList as template>
 					<tr>
 					  <td>
-					  	  <a href="/admin/template/code.html?type=${sysDic.id!''}&id=${template.id!''}" data-width="750" data-height="450" data-toggle="ajax" title="编辑${template.name!''}">${template.name!''}</a>
+					  	  <a href="/admin/template/code?type=${sysDic.id!''}&id=${template.id!''}" data-width="750" data-height="450" data-toggle="ajax" title="编辑${template.name!''}">${template.name!''}</a>
 					  </td>
 					  <td><#if template.createtime??>${template.createtime?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
 					  
@@ -50,11 +50,11 @@
 					  	</#if>
 					  </td>
 					  <td style="white-space:nowrap;" nowrap="nowrap">
-							<a href="/admin/template/edit.html?type=${sysDic.id!''}&id=${template.id!''}" data-width="750" data-height="350" data-toggle="ajax" title="编辑${template.name!''}">
+							<a href="/admin/template/edit?type=${sysDic.id!''}&id=${template.id!''}" data-width="750" data-height="350" data-toggle="ajax" title="编辑${template.name!''}">
 								<i class="layui-icon">&#xe642;</i>
 								编辑
 							</a>
-							<a href="/admin/template/delete.html?templettype=${sysDic.id!''}&id=${template.id!''}" data-toggle="tip" data-title="请确认是否系统模板“${template.name!''}”？">
+							<a href="/admin/template/delete?templettype=${sysDic.id!''}&id=${template.id!''}" data-toggle="tip" data-title="请确认是否系统模板“${template.name!''}”？">
 								<i class="layui-icon" style="color:red;">&#x1006;</i>
 								删除
 							</a>

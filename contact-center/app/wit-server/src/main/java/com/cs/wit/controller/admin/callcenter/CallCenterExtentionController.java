@@ -131,7 +131,7 @@ public class CallCenterExtentionController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention.html?hostid=" + extention.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention?hostid=" + extention.getHostid()));
     }
 
     private void createNewExtention(String num, User user, String hostid, String password, String orgi, Extention src) {
@@ -199,7 +199,7 @@ public class CallCenterExtentionController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention.html?hostid=" + extention.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention?hostid=" + extention.getHostid()));
     }
 
     @RequestMapping(value = "/extention/ivr")
@@ -239,7 +239,7 @@ public class CallCenterExtentionController extends Handler {
                 extentionRes.save(ext);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention.html?hostid=" + extention.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention?hostid=" + extention.getHostid()));
     }
 
     @RequestMapping(value = "/extention/delete")
@@ -248,6 +248,6 @@ public class CallCenterExtentionController extends Handler {
         if (StringUtils.isNotBlank(id)) {
             extentionRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/extention?hostid=" + hostid));
     }
 }

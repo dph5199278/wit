@@ -73,7 +73,7 @@ public class CallCenterIvrController extends Handler {
             ext.setDescription(extention.getDescription());
             extentionRes.save(ext);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/ivr.html?hostid=" + extention.getHostid()));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/ivr?hostid=" + extention.getHostid()));
     }
 
 
@@ -83,7 +83,7 @@ public class CallCenterIvrController extends Handler {
         if (!StringUtils.isBlank(id)) {
             extentionRes.deleteById(id);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/ivr.html?hostid=" + hostid));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/callcenter/ivr?hostid=" + hostid));
     }
 
     @RequestMapping(value = "/ivr/design")

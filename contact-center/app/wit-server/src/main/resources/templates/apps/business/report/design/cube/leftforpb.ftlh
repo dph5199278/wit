@@ -27,7 +27,7 @@
 	};
 	
 	function onClick(e, treeId, treeNode) {
-		loadURLWithTip("/apps/report/cube/selpbcubelist.html?typeid="+treeNode.id,"#ukefu-cube-content" , null , null , true);
+		loadURLWithTip("/apps/report/cube/selpbcubelist?typeid="+treeNode.id,"#ukefu-cube-content" , null , null , true);
 	}
 
 	var zNodes =[

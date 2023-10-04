@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/callcenter/acl/update.html" data-toggle="ajax-form" data-inner="#callCenterContent">
+    <form class="layui-form uk-form" action="/admin/callcenter/acl/update" data-toggle="ajax-form" data-inner="#callCenterContent">
     	<input type="hidden" name="hostid" value="${pbxHost.id!''}">
     	<input type="hidden" name="id" value="${acl.id!''}">
         <div class="layui-form-item">

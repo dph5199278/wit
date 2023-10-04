@@ -15,11 +15,11 @@
 	    <link rel="stylesheet" id="skin" type="text/css" href="/im/css/default/ukefu.css">
 	</head>
 	<body style="overflow:hidden;" class="<#if type?? && type='text'>ukefu-point-text</#if>">
-		<form action="${schema!'http'}://${hostname!''}<#if cskefuport?? && cskefuport != 80>:${cskefuport!''}</#if>/im/index.html?userid=${userid!''}&ai=false&appid=${appid!''}&aiid=${aiid!''}&orgi=${inviteData.orgi!''}&client=${client}&type=text<#if skill??>&skill=${skill}</#if><#if agent??>&agent=${agent}</#if><#if sessionid??>&sessionid=${sessionid}</#if>" method="post">
+		<form action="${schema!'http'}://${hostname!''}<#if cskefuport?? && cskefuport != 80>:${cskefuport!''}</#if>/im/index?userid=${userid!''}&ai=false&appid=${appid!''}&aiid=${aiid!''}&orgi=${inviteData.orgi!''}&client=${client}&type=text<#if skill??>&skill=${skill}</#if><#if agent??>&agent=${agent}</#if><#if sessionid??>&sessionid=${sessionid}</#if>" method="post">
 		<div class="large ukefu-im-theme <#if type?? && type='text'>ukefu-theme-border-${inviteData.consult_dialog_color!''}</#if>">
 		    <div id="containter" class="clearfix">
 		    	<div id="header" class="theme${inviteData.consult_dialog_color!''}">
-			   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
+			   		<img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
 			    </div>
 			    <div class="ukef-leavemsg-tip" style="width: 100%;max-width: 550px">
 			    	<#if inviteData?? && inviteData.consult_info_message??>${(inviteData.consult_info_message!'')?no_esc}</#if>

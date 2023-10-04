@@ -70,7 +70,7 @@ public class CubeMeasureController extends Handler {
             cubeMeasure.setCode(cubeMeasure.getColumname());
             cubeMeasureRes.save(cubeMeasure);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
     }
 
     @RequestMapping("/delete")
@@ -79,7 +79,7 @@ public class CubeMeasureController extends Handler {
         cubeMeasureRes.deleteById(id);
         CubeMeasure cubeMeasure = cubeMeasureRes.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Cube measure %s not found", id)));
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
     }
 
     @RequestMapping("/edit")
@@ -107,7 +107,7 @@ public class CubeMeasureController extends Handler {
             cubeMeasure.setCode(cubeMeasure.getColumname());
             cubeMeasureRes.save(cubeMeasure);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?dimensionId=cubemeasure&id=" + cubeMeasure.getCubeid()));
     }
 
     @RequestMapping("/fktableid")

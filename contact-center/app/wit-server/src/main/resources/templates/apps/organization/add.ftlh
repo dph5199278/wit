@@ -27,7 +27,7 @@
 		<div class="login-box-body">
 
 			<p class="login-box-msg">创建企业</p>
-			<form id="loginForm" action="/apps/organization/save.html" class="layui-form" method="post">
+			<form id="loginForm" action="/apps/organization/save" class="layui-form" method="post">
 				<div class="form-group has-feedback" style="margin-bottom:10px;">
 					<input name="name"  autofocus required lay-verify="required"   style="padding: 6px 40px 6px 6px;"
 						class="form-control required" value="" placeholder="企业名称" maxlength="50">
@@ -56,7 +56,7 @@
 </body>
 <script type="text/javascript">
 	if((window.frameElement && window.frameElement.id || '') != ""){
-		top.location.href = "/apps/organization/add.html" ;
+		top.location.href = "/apps/organization/add" ;
 	}
 	layui.use('form', function(){
 		var form = layui.form;

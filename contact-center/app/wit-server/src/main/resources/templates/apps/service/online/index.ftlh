@@ -36,17 +36,17 @@
 					<div class="ukefu-relation">
 						<span lay-event="" class="ukefu-relation-item" style="width:20%;">
 							咨询
-							<a href="/service/history/index.html" class="measure"> <#if agentServiceList??>${agentServiceList?size}</#if></a>
+							<a href="/service/history/index" class="measure"> <#if agentServiceList??>${agentServiceList?size}</#if></a>
 						</span>
 						<span lay-event="" class="ukefu-relation-item">
 							邀请
-							<a href="/apps/onlineuser.html" class="measure">
+							<a href="/apps/onlineuser" class="measure">
 								${inviteResult.users + inviteResult.inviteusers + inviteResult.refuseusers}
 							</a>
 						</span>
 						<span lay-event="" class="ukefu-relation-item">
 							拒绝
-							<a href="/apps/onlineuser.html" class="measure" style="color:red !important;"> ${inviteResult.refuseusers}</a>
+							<a href="/apps/onlineuser" class="measure" style="color:red !important;"> ${inviteResult.refuseusers}</a>
 						</span>
 					</div>
 				</div>
@@ -54,7 +54,7 @@
 					<div class="ukefu-relation">
 						
 						<span class="ukefu-relation-item" style="width:55%;">平均会话时长
-							<a href="/service/history/index.html" class="measure">
+							<a href="/service/history/index" class="measure">
 								<#if agentServicesAvg??>${(agentServicesAvg /(1000*60*60))?string('00')}:${((agentServicesAvg %(1000*60*60))/(1000*60))?string('00')}:${((agentServicesAvg %(1000*60))/(1000))?string('00')}<#else>00:00:00</#if>
 							</a>
 						</span> 
@@ -66,7 +66,7 @@
 							访问信息
 							<!-- 
 							<div style="float:right;">
-								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" data-href="/agent/blacklist.html?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="tip" data-title="拉黑访客后，此访客不会再接入人工坐席，当前对话会立即结束，可以在“客服设置->黑名单”中取消拉黑，请确认是否拉黑该访客？" data-callback="Proxy.tipMsgForm">拉黑访客</button>
+								<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger" data-href="/agent/blacklist?userid=${curagentuser.userid!''}&agentserviceid=${curagentuser.agentserviceid!''}&agentuserid=${curagentuser.id}&times=${serviceCount!0}&chattime=<#if onlineUser?? && onlineUser.betweentime??>${onlineUser.betweentime}<#else>0</#if>" data-toggle="tip" data-title="拉黑访客后，此访客不会再接入人工坐席，当前对话会立即结束，可以在“客服设置->黑名单”中取消拉黑，请确认是否拉黑该访客？" data-callback="Proxy.tipMsgForm">拉黑访客</button>
 							</div>
 							 -->
 						</h1>
@@ -130,7 +130,7 @@
 								<#list agentServiceList as agentService>
 								<tr class="tdHasContorllor design-dropable-td <#if curAgentService?? && curAgentService.id == agentService.id>ukefu-current-agentservice</#if> ukefu-agentservice-list">
 									<td title="${agentService.username!''}">
-										<a href="/service/online/chatmsg.html?id=${agentService.id!''}" data-toggle="load" data-target="#onlinecontent">
+										<a href="/service/online/chatmsg?id=${agentService.id!''}" data-toggle="load" data-target="#onlinecontent">
 										${agentService.username!''}
 										</a>
 									</td>

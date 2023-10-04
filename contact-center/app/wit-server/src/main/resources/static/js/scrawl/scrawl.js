@@ -161,7 +161,7 @@
 			fd.append('image', blob);
 			$.ajax({
 			    type: 'POST',
-			    url: '/agent/message/image/upload.html?id='+msgid+"&fileid="+fileid,
+			    url: '/agent/message/image/upload?id='+msgid+"&fileid="+fileid,
 			    data: fd,
 			    processData: false,
 			    contentType: false

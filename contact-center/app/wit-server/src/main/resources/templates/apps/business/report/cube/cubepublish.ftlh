@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/apps/report/cube/cubepublished.html" method="post">
+	<form class="layui-form uk-form" action="/apps/report/cube/cubepublished" method="post">
 		<input type="hidden" name="cubeid" value="${cubeid!''}">
 			<div class="layui-form-item">
 				<div class="layui-inline">

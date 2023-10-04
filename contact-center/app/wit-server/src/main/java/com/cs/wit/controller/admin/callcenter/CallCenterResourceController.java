@@ -101,7 +101,7 @@ public class CallCenterResourceController extends Handler {
             }
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/admin/callcenter/resource.html?hostid=" + pbxHost.getId()));
+                "redirect:/admin/callcenter/resource?hostid=" + pbxHost.getId()));
     }
 
     @RequestMapping(value = "/resource/pbxhost")

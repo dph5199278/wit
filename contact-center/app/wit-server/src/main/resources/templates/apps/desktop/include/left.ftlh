@@ -28,14 +28,14 @@ word-break: break-all;">
 		<div class="box ukefu-console">
 			<div class="ukefu-relation">
 				<span lay-event="" class="ukefu-relation-item">会话<a
-					href="/service/current/index.html"
+					href="/service/current/index"
 					class="measure"> ${agentUserCount!0} </a>
 				</span> <span lay-event="" class="ukefu-relation-item">邀请<a
 					id="agentInviteTotalTimes"
-					href="/apps/onlineuser.html"
+					href="/apps/onlineuser"
 					class="measure"> ${inviteResult.users + inviteResult.inviteusers + inviteResult.refuseusers} </a>
 				</span> <span lay-event="" class="ukefu-relation-item">拒绝<a
-					href="/apps/onlineuser.html"
+					href="/apps/onlineuser"
 					class="measure" <#if inviteResult.refuseusers gt 0>style="color:red !important;"</#if>> ${inviteResult.refuseusers} </a>
 				</span>
 			</div>
@@ -43,12 +43,12 @@ word-break: break-all;">
 		<div class="box ukefu-console">
 			<div class="ukefu-relation">
 				<span lay-event="" class="ukefu-relation-item" style="width:20%;">已接待<a
-					href="/service/history/index.html"
+					href="/service/history/index"
 					class="measure"> ${agentServicesCount!0} </a>
 				</span>
 				<span class="ukefu-relation-item" style="width:55%;">平均会话时长
 					<a
-						href="/service/history/index.html"
+						href="/service/history/index"
 						class="measure"> <#if agentServicesAvg??>${(agentServicesAvg /(1000*60*60))?string('00')}:${((agentServicesAvg %(1000*60*60))/(1000*60))?string('00')}:${((agentServicesAvg %(1000*60))/(1000))?string('00')}<#else>00:00:00</#if></a>
 				</span> 
 			</div>
@@ -69,7 +69,7 @@ word-break: break-all;">
 			<div class="layui-tab-item layui-show">
 				<ul class="ukewo-btn-group">
 					<!-- <li <#if subtype == 'content'>class="layui-this"</#if>>
-						<a href="/apps/content.html" class="ukefu-bt">
+						<a href="/apps/content" class="ukefu-bt">
 							<i class="kfont ukewo-btn">&#xe717;</i>
 							<div class="ukefu-bt-text">
 								<div class="ukefu-bt-text-title" style="">
@@ -82,7 +82,7 @@ word-break: break-all;">
 						</a>
 					</li>
 					<li <#if subtype == 'onlineuser'>class="layui-this"</#if>>
-						<a href="/apps/onlineuser.html" class="ukefu-bt">
+						<a href="/apps/onlineuser" class="ukefu-bt">
 							<i class="layui-icon ukewo-btn">&#xe612;</i>
 							<div class="ukefu-bt-text">
 								<div class="ukefu-bt-text-title" style="">

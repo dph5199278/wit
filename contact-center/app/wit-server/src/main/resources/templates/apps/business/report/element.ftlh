@@ -7,7 +7,7 @@
 				<a href="javascript:void(0)" data-toggle="tip" data-title="请确认是否从页面中删除组件？" data-callback="deletemodel('${element.id!''}')"  target="_blank" class="ukefu-report-design">删除</a>
 			</span>
 			<span class="layui-btn layui-btn-normal layui-btn-sm ukefu-btn-small" style="">
-				<a  data-id="${element.id!''}" href="/apps/report/design/modeldesign.html?tabid=data&id=${element.id!''}" target="_blank"  class="ukefu-report-design">设计</a>
+				<a  data-id="${element.id!''}" href="/apps/report/design/modeldesign?tabid=data&id=${element.id!''}" target="_blank"  class="ukefu-report-design">设计</a>
 			</span>
 		</div>
 		</#if>
@@ -22,6 +22,6 @@
 </div>
 <script>
 	$(document).ready(function(){
-		loadURL("/apps/report/design/getelement.html?id=${element.id!''}","#elementdiv_${element.id!''}");
+		loadURL("/apps/report/design/getelement?id=${element.id!''}","#elementdiv_${element.id!''}");
 	});
 </script>

@@ -260,7 +260,7 @@ public class ContactsController extends Handler {
             contactsRes.save(contacts);
         }
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/contacts/index.html?p=" + p + "&ckind=" + ckind));
+                "redirect:/apps/contacts/index?p=" + p + "&ckind=" + ckind));
     }
 
     @RequestMapping("/add")
@@ -297,11 +297,11 @@ public class ContactsController extends Handler {
             msg = "new_contacts_success";
 
             return request(super.createRequestPageTempletResponse(
-                    "redirect:/apps/contacts/index.html?ckind=" + contacts.getCkind() + "&msg=" + msg));
+                    "redirect:/apps/contacts/index?ckind=" + contacts.getCkind() + "&msg=" + msg));
         }
         msg = "new_contacts_fail";
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/contacts/index.html?ckind=" + contacts.getCkind() + "&msg=" + msg));
+                "redirect:/apps/contacts/index?ckind=" + contacts.getCkind() + "&msg=" + msg));
     }
 
     @RequestMapping("/edit")
@@ -355,7 +355,7 @@ public class ContactsController extends Handler {
 //        }
 //
 //        return request(
-//                super.createRequestPageTempletResponse("redirect:/apps/contacts/index.html?massStatus=" + massStatus));
+//                super.createRequestPageTempletResponse("redirect:/apps/contacts/index?massStatus=" + massStatus));
 //    }
 
 
@@ -385,13 +385,13 @@ public class ContactsController extends Handler {
             } else {
                 //无修改，直接点击确定
                 return request(super.createRequestPageTempletResponse(
-                        "redirect:/apps/contacts/index.html?ckind=" + ckindId));
+                        "redirect:/apps/contacts/index?ckind=" + ckindId));
             }
         } else {
             logger.info("[contacts edit] errer :The same skypeid exists");
             msg = "edit_contacts_fail";
             return request(super.createRequestPageTempletResponse(
-                    "redirect:/apps/contacts/index.html?ckind=" + ckindId + "&msg=" + msg));
+                    "redirect:/apps/contacts/index?ckind=" + ckindId + "&msg=" + msg));
         }
 
 
@@ -422,7 +422,7 @@ public class ContactsController extends Handler {
 
         contactsRes.save(contacts);
         return request(super.createRequestPageTempletResponse(
-                "redirect:/apps/contacts/index.html?ckind=" + ckindId + "&msg=" + msg));
+                "redirect:/apps/contacts/index?ckind=" + ckindId + "&msg=" + msg));
     }
 
 
@@ -458,7 +458,7 @@ public class ContactsController extends Handler {
             reporterRes.save(event.getDSData().getReport());
             new ExcelImportProecess(event).process();        //启动导入任务
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/index"));
     }
 
     @RequestMapping("/startmass")
@@ -614,10 +614,10 @@ public class ContactsController extends Handler {
             contactsRes.save(contacts);
             msg = "new_contacts_success";
             return request(
-                    super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index.html?msg=" + msg));
+                    super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index?msg=" + msg));
         }
         msg = "new_contacts_fail";
-        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index?msg=" + msg));
     }
 
     @RequestMapping("/embed/edit")
@@ -652,13 +652,13 @@ public class ContactsController extends Handler {
                 msg = "edit_contacts_success";
             } else {
                 //无修改，直接点击确定
-                return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index.html"));
+                return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index"));
             }
         } else {
             logger.info("[contacts edit] errer :The same skypeid exists");
             msg = "edit_contacts_fail";
             return request(
-                    super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index.html?msg=" + msg));
+                    super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index?msg=" + msg));
         }
 
         List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(
@@ -688,6 +688,6 @@ public class ContactsController extends Handler {
         }
 
         contactsRes.save(contacts);
-        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index?msg=" + msg));
     }
 }

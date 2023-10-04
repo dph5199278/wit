@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/admin/sms/update.html" method="post">
+	<form class="layui-form" action="/admin/sms/update" method="post">
 		<input type="hidden" name="id" value="${sms.id!''}">
 		<div class="layui-form-item" style="margin-top:10px;">
 			<div class="layui-inline">

@@ -101,7 +101,7 @@ public class UsersController extends Handler {
         } else {
             msg = "admin_user_not_exist";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/user/index.html?msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/user/index?msg=" + msg));
     }
 
 }

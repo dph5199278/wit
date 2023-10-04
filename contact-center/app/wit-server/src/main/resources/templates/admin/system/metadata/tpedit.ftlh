@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/metadata/properties/update.html">
+	<form class="layui-form uk-form" action="/admin/metadata/properties/update">
 		<input type="hidden" name="id" value="${tp.id!''}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">标题：</label>

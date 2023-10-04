@@ -72,7 +72,7 @@
         if(bot.rc != 0){
             submitChatbotFail(bot);
         } else {
-            parent.location.href = "/apps/chatbot/index.html?chatbotid="+bot.data.id;
+            parent.location.href = "/apps/chatbot/index?chatbotid="+bot.data.id;
         }
     }
 

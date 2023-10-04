@@ -1,6 +1,6 @@
 <#include "/public/macro.ftlh">
 <div class="uk-layui-form">
-	<form class="layui-form" action="/apps/report/cube/type/editupdate.html" method="post">
+	<form class="layui-form" action="/apps/report/cube/type/editupdate" method="post">
 		<input type="hidden" name="id" value="${cubeType.id!''}">
 		<div class="layui-collapse">
 			<div class="layui-colla-item">

@@ -3,7 +3,7 @@
     <div class="box-header" style="background-color: #f5f5f5;">
         <h1 class="site-h1" style="background-color:#FFFFFF;">新建联系人</h1>
     </div>
-	<form class="layui-form" action="/agent/calloutcontact/save.html?agentuser=${curagentuser.id!''}" method="post">
+	<form class="layui-form" action="/agent/calloutcontact/save?agentuser=${curagentuser.id!''}" method="post">
         <input hidden="true" name="calloutcontact"/>
 		<div class="layui-collapse">
 			<div class="layui-colla-item">
@@ -156,7 +156,7 @@
 <script>
 	//Demo
 	$('#province').change(function(){
-		loadURL('/res/dic.html?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
+		loadURL('/res/dic?id='+$(this).val()+"&name=city&attr=lay-ignore&style=width:85px;display:inline-block;" , '#contacts_city');
 	})
 	layui.use('form', function() {
 		var form = layui.form;

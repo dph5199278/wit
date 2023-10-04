@@ -76,7 +76,7 @@ public class SysDicController extends Handler {
         } else {
             msg = "exist";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index.html" + (msg != null ? "?msg=" + msg : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index" + (msg != null ? "?msg=" + msg : "")));
     }
 
     @RequestMapping("/edit")
@@ -104,7 +104,7 @@ public class SysDicController extends Handler {
             String orgi = super.getOrgi(request);
             reloadSysDicItem(sysDic, orgi);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index.html?p=" + p));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index?p=" + p));
     }
 
     @RequestMapping("/delete")
@@ -117,7 +117,7 @@ public class SysDicController extends Handler {
 
         reloadSysDicItem(sysDic, super.getOrgi(request));
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index.html?p=" + p));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/index?p=" + p));
     }
 
     @RequestMapping("/dicitem")
@@ -152,7 +152,7 @@ public class SysDicController extends Handler {
         } else {
             msg = "exist";
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem.html?id=" + dic.getParentid() + (msg != null ? "&p=" + p + "&msg=" + msg : "")));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem?id=" + dic.getParentid() + (msg != null ? "&p=" + p + "&msg=" + msg : "")));
     }
 
     /**
@@ -211,7 +211,7 @@ public class SysDicController extends Handler {
         }
         reloadSysDicItem(sysDicRes.getOne(sysDic.getParentid()), orig);
 
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem.html?id=" + sysDic.getParentid() + "&p=" + p));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem?id=" + sysDic.getParentid() + "&p=" + p));
     }
 
     @RequestMapping("/dicitem/edit")
@@ -242,7 +242,7 @@ public class SysDicController extends Handler {
 
             reloadSysDicItem(sysDic, orgi);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem.html?id=" + dic.getParentid() + "&p=" + p));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem?id=" + dic.getParentid() + "&p=" + p));
     }
 
     @RequestMapping("/dicitem/delete")
@@ -252,7 +252,7 @@ public class SysDicController extends Handler {
         SysDic dic = sysDicRes.getOne(id);
         sysDicRes.delete(dic);
         reloadSysDicItem(dic, super.getOrgi(request));
-        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem.html?id=" + dic.getParentid() + "&p=" + p));
+        return request(super.createRequestPageTempletResponse("redirect:/admin/sysdic/dicitem?id=" + dic.getParentid() + "&p=" + p));
     }
 
 }

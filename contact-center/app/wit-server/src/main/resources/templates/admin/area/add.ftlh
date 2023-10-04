@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-	<form class="layui-form uk-form" action="/admin/area/save.html">
+	<form class="layui-form uk-form" action="/admin/area/save">
 		<input type="hidden" name="area" id="area">
 		<div class="layui-form-item">
 			<label class="layui-form-label">名称：</label>

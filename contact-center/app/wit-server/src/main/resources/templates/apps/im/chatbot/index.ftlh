@@ -33,7 +33,7 @@
                 themeType: 'simple',
                 fontsize: 16,
                 newlineTag : "br" ,
-                uploadJson : "/im/image/upload.html?userid=${userid!''}",
+                uploadJson : "/im/image/upload?userid=${userid!''}",
                 allowFileManager : false,
                 allowInsertUpload:false,		//增加的参数，上传图片后是否插入到当前区域
                 allowImageRemote:false,
@@ -238,7 +238,7 @@
             }
         }
         function submitForm(form){
-            R3Ajax.post("/im/satis.html?orgi=${orgi!''}" , function(){
+            R3Ajax.post("/im/satis?orgi=${orgi!''}" , function(){
                 document.getElementById("diaShade").style.display = "none" ;
                 document.getElementById("dialogWrap").style.display = "none" ;
                 alert("服务评价已提交，请关闭浏览器！");
@@ -302,12 +302,12 @@
 <div class="large ukefu-im-theme <#if type?? && type='text'>ukefu-theme-border-${inviteData.consult_dialog_color!''}</#if>">
     <div id="containter" class="clearfix">
         <div id="header" class="theme${inviteData.consult_dialog_color!''}">
-            <img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image.html?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
+            <img src="<#if inviteData?? && inviteData.consult_dialog_logo??>/res/image?id=${inviteData.consult_dialog_logo?url}<#else>/images/logo.png</#if>" style="height:30px;padding:10px;">
             <div class="ukefu-func-tab">
                 <ul>
                     <#if models?seq_contains("chatbot") && inviteData.ai && aiid??>
                     <#if !exchange?? || exchange == "true">
-                    <li><a href="/im/index.html?appid=${appid!''}&orgi=${orgi!''}&ai=false<#if client??>&client=${client!''}</#if><#if type??>&type=text</#if><#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if><#if title??>&title=${title?url}</#if><#if url??>&url=${url?url}</#if><#if traceid??>&traceid=${traceid}</#if>&userid=${userid!''}&sessionid=${sessionid!''}&t=${.now?long}">人工坐席</a></li>
+                    <li><a href="/im/index?appid=${appid!''}&orgi=${orgi!''}&ai=false<#if client??>&client=${client!''}</#if><#if type??>&type=text</#if><#if skill??>&skill=${skill!''}</#if><#if agent??>&agent=${agent!''}</#if><#if title??>&title=${title?url}</#if><#if url??>&url=${url?url}</#if><#if traceid??>&traceid=${traceid}</#if>&userid=${userid!''}&sessionid=${sessionid!''}&t=${.now?long}">人工坐席</a></li>
                     </#if>
                     <li class="cur"><a href="javascript:void(0)">智能客服</a></li>
                 <#else>
@@ -350,7 +350,7 @@
         <#else>
         <div class="clearfix chat-block">
             <div class="chat-left">
-                <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt="">
+                <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt="">
                 <div class="chat-message">
                     <label class="user"><#if chatMessage?? && chatMessage.chatype?? && chatMessage.chatype == 'aireply'>${inviteData.ainame!'小松'}<#else>${chatMessage.username!''}</#if></label>
                     <label class="time">${chatMessage.createtime!''}</label>
@@ -416,7 +416,7 @@
     <div style='padding:0px 5px 10px 5px;border-bottom:1px solid #dedede;'><a href='${imageAd.url!''}' title='${imageAd.tiptext!''}' target='_blank' id='point_ad_text'>${(imageAd.content!'')?no_esc}</a></div>
 </#if>
 <#elseif inviteData.dialog_ad??>
-<img src="/res/image.html?id=${inviteData.dialog_ad!''}" style="height:190px;width:100%;">
+<img src="/res/image?id=${inviteData.dialog_ad!''}" style="height:190px;width:100%;">
 </#if>
 </div>
 </div>
@@ -548,7 +548,7 @@
                 showExtmsg(data.username, data.createtime,data.message ,data.expmsg);
             }
             else{
-                output('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+data.username+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
+                output('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+data.username+'</label><label class="time">'+data.createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content">'+chat+'</div></div>' , "chat-block");
             }
             R3Ajax.audioplayer('audioplane', newmessage, false); // 播放
         }
@@ -638,7 +638,7 @@
             content = createCard(message,expmsg);
         }
 
-        var box = $('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image.html?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+username+'</label><label class="time">'+createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content"></div></div>');
+        var box = $('<div class="chat-left"> <img class="user-img" src="<#if inviteData?? && inviteData.consult_dialog_headimg??>/res/image?id=${inviteData.consult_dialog_headimg?url}<#else>/images/agent.png</#if>" alt=""><div class="chat-message"><label  class="user">'+username+'</label><label class="time">'+createtime+'</label> </div><div class="chatting-left"><i class="arrow"></i><div class="chat-content"></div></div>');
 
         box.find('.chat-content').append(content);
 

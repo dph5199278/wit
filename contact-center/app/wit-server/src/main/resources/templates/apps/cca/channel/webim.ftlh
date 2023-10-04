@@ -35,7 +35,7 @@
 	</li>
 	</#if>
 	<li>
-	    访问轨迹：<a href="/service/trace.html?sessionid=${curagentuser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
+	    访问轨迹：<a href="/service/trace?sessionid=${curagentuser.sessionid!''}" title="查看访客轨迹" data-toggle="ajax" data-width="1050" style="margin-left:10px;">
 					<i class="kfont">&#xe638;</i>轨迹
 				</a>
 	</li>
@@ -105,14 +105,14 @@
 
 <#if tagValue == 1>
 <dd class="labeldd" style="background: red" onclick="switchbackground(this)">
-	<a href="javascript:void(0)" data-href="/agent/tagrelation.html?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}
+	<a href="javascript:void(0)" data-href="/agent/tagrelation?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}
 		<i class="layui-icon layui-icon-close">&#x1006;</i>
 	</a>
 </dd>
 <#assign  tagValue = 1>
 <#else>
 <dd class="labeldd" onclick="switchbackground(this)">
-	<a href="javascript:void(0)" data-href="/agent/tagrelation.html?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}
+	<a href="javascript:void(0)" data-href="/agent/tagrelation?tagid=${tag.id!''}&userid=${curAgentService.userid!''}&dataid=${onlineUser.id!''}" data-theme="theme${tag.color!'1'}" data-id="${tag.id!''}" data-name="${tag.tag!''}" class="tag-switch">${tag.tag!''}
 		<i class="layui-icon layui-icon-close">&#x1006;</i>
 	</a>
 </dd>

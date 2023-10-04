@@ -17,7 +17,7 @@
                 </ul>
 
             </div>
-    <form class="layui-form" id="massForm" action="/apps/contacts/mass.html" method="post" enctype="multipart/form-data">
+    <form class="layui-form" id="massForm" action="/apps/contacts/mass" method="post" enctype="multipart/form-data">
         <input type="text" name="ids" value="${ids}" style="display: none;">
 
         <div style="margin: 30px 30px 30px 30px;height: 209px">
@@ -138,10 +138,10 @@
         var layer = layui.layer;
         layer.close(layer.index);
         if(multiMediaDialogWin.length>0){
-            parent.$('#admin').attr('src' , '/admin/skype/index.html');
+            parent.$('#admin').attr('src' , '/admin/skype/index');
             parent.layui.element.tabChange('ukefutab','admin');
         } else {
-            parent.$('#agentdesktop').attr('data-href' , '/admin/skype/index.html').click();
+            parent.$('#agentdesktop').attr('data-href' , '/admin/skype/index').click();
         }
     }
 

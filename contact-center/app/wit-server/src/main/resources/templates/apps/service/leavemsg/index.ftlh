@@ -70,7 +70,7 @@
                                         </#if>
                                     </td>
                                     <td valign="top">
-                                        <a href="/service/leavemsg/delete.html?id=${leaveMsg.id!''}" data-toggle="tip"
+                                        <a href="/service/leavemsg/delete?id=${leaveMsg.id!''}" data-toggle="tip"
                                             title="删除留言不可恢复,请确认是否删除留言？">
                                             <i class="layui-icon">&#x1006;</i>删除
                                         </a>
@@ -119,7 +119,7 @@
 				, groups: 5 //连续显示分页数
                 , jump: function(data, first) {
                     if (!first) {
-                        location.href = "/service/leavemsg/index.html?p=" + data.curr;
+                        location.href = "/service/leavemsg/index?p=" + data.curr;
                     }
                 }
     });

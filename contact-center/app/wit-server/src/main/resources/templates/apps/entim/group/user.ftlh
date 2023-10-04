@@ -7,9 +7,9 @@
 			${imGroup.name!''}
 		</div>
 		<div class="group-btn">
-			<a class="layui-btn layui-btn-normal layui-btn-sm" href="/ent/im/group.html?id=${imGroup.id!''}">发消息</a>
+			<a class="layui-btn layui-btn-normal layui-btn-sm" href="/ent/im/group?id=${imGroup.id!''}">发消息</a>
 			<#if user.id = imGroup.creater>
-			<a class="layui-btn layui-btn-danger layui-btn-sm" data-toggle="tip" data-title="解散动作无法恢复，请确认是否解散该群？" href="/ent/im/rmgroup.html?id=${imGroup.id!''}">解散群</a>
+			<a class="layui-btn layui-btn-danger layui-btn-sm" data-toggle="tip" data-title="解散动作无法恢复，请确认是否解散该群？" href="/ent/im/rmgroup?id=${imGroup.id!''}">解散群</a>
 			</#if>
 		</div>	 
 	</div>
@@ -76,9 +76,9 @@
 		  var form = layui.form;
 		  form.on("checkbox(save)" , function(data){
 			  if(data.elem.checked){
-				  loadURL('/ent/im/group/seluser.html?id=${imGroup.id!''}&user='+data.value);
+				  loadURL('/ent/im/group/seluser?id=${imGroup.id!''}&user='+data.value);
 			  }else{
-			  	  loadURL('/ent/im/group/rmuser.html?id=${imGroup.id!''}&user='+data.value);
+			  	  loadURL('/ent/im/group/rmuser?id=${imGroup.id!''}&user='+data.value);
 			  }
 		  });
 	});

@@ -7,7 +7,7 @@
 			<h1 class="site-h1">
 				问答分类
 				<span style="float:right;">
-					<button class="layui-btn layui-btn-sm green" href="/setting/quickreply/addtype.html" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
+					<button class="layui-btn layui-btn-sm green" href="/setting/quickreply/addtype" data-toggle="ajax" data-height="450" data-width="950" data-title="创建分类">
 						<i class="layui-icon">&#xe608;</i>
 						创建分类
 					</button>
@@ -36,7 +36,7 @@
 	};
 	
 	function onClick(e, treeId, treeNode) {
-		loadURLWithTip("/setting/quickreply/replylist.html?typeid="+treeNode.id,"#ukefu-quickreply-content" , null , null , true);
+		loadURLWithTip("/setting/quickreply/replylist?typeid="+treeNode.id,"#ukefu-quickreply-content" , null , null , true);
 	}
 
 	var zNodes =[

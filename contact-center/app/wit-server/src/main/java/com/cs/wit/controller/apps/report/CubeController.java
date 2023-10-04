@@ -100,9 +100,9 @@ public class CubeController extends Handler {
             cubeType.setCreatetime(new Date());
             cubeTypeRes.save(cubeType);
         } else {
-            return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index.html?msg=ct_type_exist"));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index?msg=ct_type_exist"));
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index"));
     }
 
     @RequestMapping({"/type/edit"})
@@ -121,7 +121,7 @@ public class CubeController extends Handler {
             //判断名称是否重复
             CubeType ct = cubeTypeRes.findByOrgiAndName(super.getOrgi(request), cubeType.getName());
             if (ct != null && !ct.getId().equals(cubeType.getId())) {
-                return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index.html?msg=ct_type_exist&typeid=" + cubeType.getId()));
+                return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index?msg=ct_type_exist&typeid=" + cubeType.getId()));
             }
             tempCubeType.setName(cubeType.getName());
             tempCubeType.setDescription(cubeType.getDescription());
@@ -129,7 +129,7 @@ public class CubeController extends Handler {
             tempCubeType.setParentid(cubeType.getParentid());
             cubeTypeRes.save(tempCubeType);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index.html?typeid=" + cubeType.getId()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/business/report/cube/index?typeid=" + cubeType.getId()));
     }
 
     @RequestMapping({"/type/delete"})
@@ -149,7 +149,7 @@ public class CubeController extends Handler {
                 }
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html"));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index"));
     }
 
     @RequestMapping("/index")
@@ -202,7 +202,7 @@ public class CubeController extends Handler {
             cube.setCreater(super.getUser(request).getId());
             cubeRes.save(cube);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html?typeid=" + cube.getTypeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index?typeid=" + cube.getTypeid()));
     }
 
     @RequestMapping("/delete")
@@ -215,7 +215,7 @@ public class CubeController extends Handler {
         cubeLevelRes.deleteAll(cubeLevelRes.findByCubeid(cube.getId()));
         cubeMeasureRes.deleteAll(cubeMeasureRes.findByCubeid(cube.getId()));
         cubeMetadataRes.deleteAll(cubeMetadataRes.findByCubeid(cube.getId()));
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html?typeid=" + cube.getTypeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index?typeid=" + cube.getTypeid()));
     }
 
     @RequestMapping("/edit")
@@ -240,7 +240,7 @@ public class CubeController extends Handler {
             cube.setUpdatetime(new Date());
             cubeRes.save(cube);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html?typeid=" + cube.getTypeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index?typeid=" + cube.getTypeid()));
     }
 
     @RequestMapping("/imptb")
@@ -270,7 +270,7 @@ public class CubeController extends Handler {
                 cubeMetadataRes.save(cubeMetaData);
             }
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeid));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeid));
     }
 
     @RequestMapping("/metadata/edit")
@@ -304,7 +304,7 @@ public class CubeController extends Handler {
                         cubeMetadataRes.save(temp);
                     });
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeMetadata.getCubeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeMetadata.getCubeid()));
     }
 
     @RequestMapping("/metadata/del")
@@ -342,7 +342,7 @@ public class CubeController extends Handler {
             }
 
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + cubeMetadata.getCubeid() + "&msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + cubeMetadata.getCubeid() + "&msg=" + msg));
     }
 
     @RequestMapping("/detail")
@@ -401,7 +401,7 @@ public class CubeController extends Handler {
             msg = "CUBE_VALID_FAILED_2";
         }
         map.put("msg", msg);
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail.html?id=" + id + "&msg=" + msg));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/detail?id=" + id + "&msg=" + msg));
     }
 
     /**
@@ -423,7 +423,7 @@ public class CubeController extends Handler {
         this.cubevalid(map, cubeid);
         if (!StringUtils.isBlank((String) map.get("msg"))) {
             map.put("cubeid", cubeid);
-            return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html?msg=" + map.get("msg")));
+            return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index?msg=" + map.get("msg")));
         }
         User user = super.getUser(request);
         Cube cube = this.getCube(cubeid);
@@ -456,7 +456,7 @@ public class CubeController extends Handler {
             publishCube.setDataversion(1);
             publishedCubeRes.save(publishCube);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index.html?typeid=" + cube.getTypeid()));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/index?typeid=" + cube.getTypeid()));
     }
 
     /**
@@ -506,7 +506,7 @@ public class CubeController extends Handler {
             typeid = pbCube.getTypeid();
             publishedCubeRes.delete(pbCube);
         }
-        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/pbcubeindex.html?typeid=" + typeid));
+        return request(super.createRequestPageTempletResponse("redirect:/apps/report/cube/pbcubeindex?typeid=" + typeid));
     }
 
     /**

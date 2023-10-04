@@ -66,7 +66,7 @@ function handleRestApiFail(status, reason) {
         layer.msg('会话过期，请重新登录！',{icon: 2, time: 3000});
         setTimeout(function(){
             // 执行登出
-            window.location.href = "/logout.html";
+            window.location.href = "/logout";
         }, 3000);
     } else  {
         layer.open({

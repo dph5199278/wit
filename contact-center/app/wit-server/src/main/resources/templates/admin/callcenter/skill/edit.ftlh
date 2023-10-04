@@ -1,5 +1,5 @@
 <div class="uk-layui-form">
-    <form class="layui-form uk-form" action="/admin/callcenter/pbxhost/update.html">
+    <form class="layui-form uk-form" action="/admin/callcenter/pbxhost/update">
     	<input type="hidden" name="id" value="${pbxHost.id!''}">
         <div class="layui-form-item">
             <label class="layui-form-label">名称：</label>
