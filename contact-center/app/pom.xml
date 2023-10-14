@@ -114,7 +114,7 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
-                <version>5.8.21</version>
+                <version>5.8.22</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
