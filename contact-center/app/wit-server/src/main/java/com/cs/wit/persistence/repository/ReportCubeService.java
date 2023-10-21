@@ -270,13 +270,13 @@ public class ReportCubeService {
                                 if (wherecon.length() > 0) {
                                     wherecon.append(" and ");
                                 }
-                                if ("EQUAL".equals(filter.getComparetype().toUpperCase())) {
+                                if ("EQUAL".equalsIgnoreCase(filter.getComparetype())) {
                                     if (value.contains(",")) {
                                         wherecon.append(dataname.toUpperCase()).append(" in ('").append(value.replaceAll(",", "','")).append("') ");
                                     } else {
                                         wherecon.append(dataname.toUpperCase()).append(" = '").append(value).append("' ");
                                     }
-                                } else if ("NOT".equals(filter.getComparetype().toUpperCase())) {
+                                } else if ("NOT".equalsIgnoreCase(filter.getComparetype())) {
                                     if (value.contains(",")) {
                                         wherecon.append(dataname.toUpperCase()).append(" not in ('").append(value.replaceAll(",", "','")).append("') ");
                                     } else {
