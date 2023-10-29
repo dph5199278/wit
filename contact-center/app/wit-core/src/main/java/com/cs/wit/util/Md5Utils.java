@@ -16,7 +16,7 @@
 
 package com.cs.wit.util;
 
-import cn.hutool.crypto.SecureUtil;
+import org.dromara.hutool.crypto.SecureUtil;
 
 /**
  * Md5Utils

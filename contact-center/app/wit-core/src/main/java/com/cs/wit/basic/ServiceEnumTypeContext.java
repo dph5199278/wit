@@ -16,7 +16,7 @@
 
 package com.cs.wit.basic;
 
-import cn.hutool.core.util.StrUtil;
+import org.dromara.hutool.core.text.StrUtil;
 
 /**
  * ServiceEnumTypeContext

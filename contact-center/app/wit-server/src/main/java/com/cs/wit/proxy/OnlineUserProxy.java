@@ -16,8 +16,6 @@
  */
 package com.cs.wit.proxy;
 
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
 import com.cs.wit.acd.ACDServiceRouter;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
@@ -72,6 +70,8 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
+import org.dromara.hutool.http.useragent.UserAgent;
+import org.dromara.hutool.http.useragent.UserAgentUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;

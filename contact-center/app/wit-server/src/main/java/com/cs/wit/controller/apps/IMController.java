@@ -17,8 +17,6 @@
 
 package com.cs.wit.controller.apps;
 
-import cn.hutool.http.useragent.UserAgent;
-import cn.hutool.http.useragent.UserAgentUtil;
 import com.cs.wit.acd.ACDPolicyService;
 import com.cs.wit.acd.ACDWorkMonitor;
 import com.cs.wit.basic.Constants;
@@ -88,6 +86,8 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
+import org.dromara.hutool.http.useragent.UserAgent;
+import org.dromara.hutool.http.useragent.UserAgentUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
