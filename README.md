@@ -1,6 +1,7 @@
-<h3 align="center">
+<h3 style="text-align:center">
   <b>
-  Initialization by <a href="https://github.com/zhangyanbo2007/youkefu">youkefu</a>.</br>
+  Initialization by <a href="https://github.com/zhangyanbo2007/youkefu">youkefu</a>.
+  <br>
   Fork from
   <a href="https://github.com/chatopera/cskefu/tree/springboot2.x">cskefu</a>.
   </b>
@@ -11,11 +12,12 @@
 
 # 智文客服: 多渠道智能客服
 ## 目标
-1. - [x] Spring Boot升级到2.7.x
-2. - [x] ES升级到7.17.x
+1. - [ ] ~~Spring Boot升级到2.7.x~~Spring Boot升级到3.2.x
+2. - [ ] ~~ES升级到7.17.x~~ES升级到8.x
 3. - [x] mondrian升级新版
-4. - [ ] 重构并模块化代码
-5. - [ ] 修复bug与升级部分依赖
+4. - [ ] Java升级21
+5. - [ ] 重构并模块化代码
+6. - [ ] 修复bug与升级部分依赖
 
 ## 声明
 1. 本项目只要遵守协议，可随意使用
@@ -26,8 +28,8 @@
 6. 欢迎热心人士将本项目PR到原项目
 
 ## 项目依赖
-1. Spring Boot 2.7
-2. ES7.17
+1. Spring Boot
+2. Elasticsearch
 3. activeMQ-artemis
 4. redis
 5. mysql
