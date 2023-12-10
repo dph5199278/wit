@@ -1,4 +1,4 @@
-FROM dph5199278/tomcat-native-lib:1.2.36-jre11.0.18
+FROM dph5199278/tomcat-native-lib:1.2-jre17
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG VCS_REF
