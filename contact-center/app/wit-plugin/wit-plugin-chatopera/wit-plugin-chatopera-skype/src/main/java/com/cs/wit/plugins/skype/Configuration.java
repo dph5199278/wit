@@ -20,7 +20,7 @@ import com.cs.compose4j.AbstractContext;
 import com.cs.compose4j.Functional;
 import com.cs.compose4j.Middleware;
 import com.cs.wit.basic.ModuleContext;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

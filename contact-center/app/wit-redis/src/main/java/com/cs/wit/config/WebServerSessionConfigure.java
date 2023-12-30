@@ -16,13 +16,8 @@
 package com.cs.wit.config;
 
 import com.cs.wit.basic.auth.AuthRedisTemplate;
+import com.cs.wit.cache.RedisObjectMapper;
 import com.cs.wit.cache.RedisSsoKey;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
-import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.boot.autoconfigure.session.SessionProperties;
@@ -54,13 +49,15 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession
 public class WebServerSessionConfigure {
 
+    private final RedisObjectMapper mapper = new RedisObjectMapper();
+
     @Primary
     @Bean
-    public RedisIndexedSessionRepository redisIndexedSessionRepository(@NonNull RedisTemplate<Object, Object> sessionRedisTemplate,
+    public RedisIndexedSessionRepository redisIndexedSessionRepository(@NonNull RedisTemplate<String, Object> sessionRedisTemplate,
         @NonNull ApplicationEventPublisher applicationEventPublisher, @NonNull ObjectProvider<SessionRepositoryCustomizer<RedisIndexedSessionRepository>> sessionRepositoryCustomizers,
         @NonNull RedisProperties redisProperties, @NonNull SessionProperties sessionProperties) {
         RedisIndexedSessionRepository repository = new RedisIndexedSessionRepository(sessionRedisTemplate);
-        repository.setDefaultMaxInactiveInterval((int)sessionProperties.getTimeout().toMillis());
+        repository.setDefaultMaxInactiveInterval(sessionProperties.getTimeout());
         repository.setFlushMode(FlushMode.IMMEDIATE);
         repository.setRedisKeyNamespace(RedisSsoKey.CACHE_SESSIONS);
         //  应用事件分发，设置后才能使session监听生效
@@ -72,21 +69,13 @@ public class WebServerSessionConfigure {
     }
 
     @Bean
-    public RedisTemplate<Object, Object> sessionRedisTemplate(
+    public RedisTemplate<String, Object> sessionRedisTemplate(
         @NonNull final RedisConnectionFactory factory) {
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setDefaultSerializer(RedisSerializer.string());
         template.setEnableDefaultSerializer(true);
 
-        final ObjectMapper mapper = new ObjectMapper()
-            .registerModule(new Jdk8Module())
-            .registerModule(new JavaTimeModule())
-            .registerModule(new ParameterNamesModule());
-        GenericJackson2JsonRedisSerializer.registerNullValueSerializer(mapper, null);
-        mapper.activateDefaultTyping(mapper.getPolymorphicTypeValidator(), DefaultTyping.NON_FINAL,
-            As.PROPERTY);
         final RedisSerializer<Object> serializer = new GenericJackson2JsonRedisSerializer(mapper);
-
         template.setValueSerializer(serializer);
         template.setHashValueSerializer(serializer);
         template.setConnectionFactory(factory);
@@ -98,8 +87,9 @@ public class WebServerSessionConfigure {
      * 存储AuthToken
      */
     @Bean
-    public AuthRedisTemplate authRedisTemplate(@NonNull final RedisConnectionFactory factory) {
-        return new AuthRedisTemplate(factory);
+    public AuthRedisTemplate authRedisTemplate(
+        @NonNull final RedisConnectionFactory factory) {
+        return new AuthRedisTemplate(factory, mapper);
     }
 
     @Bean

@@ -40,7 +40,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;

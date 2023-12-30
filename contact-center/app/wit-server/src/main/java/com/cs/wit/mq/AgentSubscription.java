@@ -16,7 +16,7 @@ import com.cs.wit.socketio.client.NettyClients;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;

@@ -50,6 +50,30 @@ spring:
     redis:
       repositories:
         enabled: false
+      ##############################################
+      # Redis Connection
+      ##############################################
+      # Redis数据库索引（默认为0）
+      database: 0
+      # Redis服务器地址
+      host: localhost
+      lettuce:
+        pool:
+          # 连接池最大连接数（使用负值表示没有限制）
+          max-active: -1
+          # 连接池中的最小空闲连接
+          min-idle: 10
+          # 连接池最大阻塞等待时间（使用负值表示没有限制）
+          max-wait: -1
+          # 连接池中的最大空闲连接
+          max-idle: 20
+      # Redis服务器连接密码（默认为空）
+      password: ''
+      # Redis服务器连接端口
+      port: 6379
+      # 连接超时时间（毫秒），因为客服启动时
+      # 占用比较大的时间，此处timeout值必须设置为0才能正常启动
+      timeout: 100s
   ##############################################
   # 数据源
   ##############################################
@@ -127,31 +151,6 @@ spring:
       hibernate:
         current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
     show-sql: false
-  ##############################################
-  # Redis Connection
-  ##############################################
-  redis:
-    # Redis数据库索引（默认为0）
-    database: 0
-    # Redis服务器地址
-    host: localhost
-    lettuce:
-      pool:
-        # 连接池最大连接数（使用负值表示没有限制）
-        max-active: -1
-        # 连接池中的最小空闲连接
-        min-idle: 10
-        # 连接池最大阻塞等待时间（使用负值表示没有限制）
-        max-wait: -1
-        # 连接池中的最大空闲连接
-        max-idle: 20
-    # Redis服务器连接密码（默认为空）
-    password: ''
-    # Redis服务器连接端口
-    port: 6379
-      # 连接超时时间（毫秒），因为客服启动时
-      # 占用比较大的时间，此处timeout值必须设置为0才能正常启动
-    timeout: 100s
   session:
     store-type: redis
     timeout: &timeout 1d

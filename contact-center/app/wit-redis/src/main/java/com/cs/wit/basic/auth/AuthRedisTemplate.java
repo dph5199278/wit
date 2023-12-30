@@ -15,28 +15,34 @@
  */
 package com.cs.wit.basic.auth;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.redis.connection.DefaultStringRedisConnection;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * 存储Auth Token的Redis连接
  */
 public class AuthRedisTemplate extends RedisTemplate<String, String> {
-    public AuthRedisTemplate(RedisConnectionFactory connectionFactory) {
+    public AuthRedisTemplate(RedisConnectionFactory connectionFactory, ObjectMapper mapper) {
         this.setEnableDefaultSerializer(true);
         this.setDefaultSerializer(RedisSerializer.string());
-        //final RedisSerializer<Object> serializer = RedisSerializer.json();
-        //this.setValueSerializer(serializer);
-        //this.setHashValueSerializer(serializer);
+
+        final RedisSerializer<Object> serializer = new GenericJackson2JsonRedisSerializer(mapper);
+        this.setValueSerializer(serializer);
+        this.setHashValueSerializer(serializer);
+
         this.setConnectionFactory(connectionFactory);
         this.afterPropertiesSet();
     }
 
-    protected RedisConnection preProcessConnection(RedisConnection connection, boolean existingConnection) {
+    @NotNull
+    @Override
+    protected RedisConnection preProcessConnection(@NotNull RedisConnection connection, boolean existingConnection) {
         return new DefaultStringRedisConnection(connection);
     }
 }

@@ -23,7 +23,7 @@ import com.cs.wit.basic.plugins.PluginRegistry;
 import com.cs.wit.basic.plugins.PluginsLoader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

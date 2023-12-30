@@ -19,14 +19,14 @@ package com.cs.wit.config;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.model.User;
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.apache.catalina.connector.ClientAbortException;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
@@ -45,8 +45,8 @@ public class DelegateRequestMatchingFilter implements Filter {
                 matchAnyRoles = true;
             }
         }
-        User user = (User) request.getSession().getAttribute(Constants.USER_SESSION_NAME);
         if (matchAnyRoles) {
+            User user = (User) request.getSession().getAttribute(Constants.USER_SESSION_NAME);
             if (user != null && (user.isAdmin())) {
                 chain.doFilter(req, resp);
             } else {

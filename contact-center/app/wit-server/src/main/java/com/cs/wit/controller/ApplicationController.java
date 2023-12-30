@@ -21,7 +21,7 @@ import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.model.User;
 import java.util.TimeZone;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

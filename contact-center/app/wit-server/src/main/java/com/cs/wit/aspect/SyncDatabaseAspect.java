@@ -20,7 +20,7 @@ import com.cs.wit.model.ESBean;
 import com.cs.wit.persistence.hibernate.BaseService;
 import com.cs.wit.util.CskefuList;
 import java.util.List;
-import javax.persistence.RollbackException;
+import jakarta.persistence.RollbackException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

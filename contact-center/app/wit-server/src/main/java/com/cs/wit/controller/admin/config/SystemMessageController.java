@@ -25,7 +25,7 @@ import com.cs.wit.persistence.repository.SystemMessageRepository;
 import com.cs.wit.util.Menu;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

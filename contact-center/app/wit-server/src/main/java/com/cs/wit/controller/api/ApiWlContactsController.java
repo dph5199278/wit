@@ -30,7 +30,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.text.ParseException;
 import java.util.Date;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;

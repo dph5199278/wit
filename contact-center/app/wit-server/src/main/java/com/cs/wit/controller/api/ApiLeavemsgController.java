@@ -25,7 +25,7 @@ import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

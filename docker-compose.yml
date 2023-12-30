@@ -43,9 +43,9 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/cosinee?useUnicode=true&characterEncoding=UTF-8
       - SPRING_DATASOURCE_USERNAME=root
       - SPRING_DATASOURCE_PASSWORD=${DB_PASSWD:-123456}
-      - SPRING_REDIS_HOST=redis
-      - SPRING_REDIS_PORT=6379
-      - SPRING_REDIS_PASSWORD=${DB_PASSWD:-}
+      - SPRING_DATA_REDIS_HOST=redis
+      - SPRING_DATA_REDIS_PORT=6379
+      - SPRING_DATA_REDIS_PASSWORD=${DB_PASSWD:-}
       - SPRING_ELASTICSEARCH_URIS=http://elasticsearch:9200
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NAME=elasticsearch
       #- SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=elasticsearch:9300
@@ -103,17 +103,22 @@ services:
 
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
-    # https://docs.spring.io/spring-data/elasticsearch/docs/4.4.6/reference/html/#preface.versions
-    image: elastic/elasticsearch:7.17.15
+    # https://docs.spring.io/spring-data/elasticsearch/docs/5.0.12/reference/html/#preface.versions
+    image: elastic/elasticsearch:8.5.3
     restart: always
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
       # override default cluster.name
       - cluster.name=elasticsearch
       # disable bootstrap check for development environment
       - discovery.type=single-node
+      # disable xpack security for development environment
+      - xpack.security.enabled=false
+      # reindex whitelist
+      - reindex.remote.whitelist=localhost:*, 127.0.0.1:*, 192.168.*:9200, 10.*:9200, 172.*:9200
     volumes:
       - ./database/elasticsearch/data:/usr/share/elasticsearch/data
       - ./database/elasticsearch/config:/usr/share/elasticsearch/config

@@ -5,7 +5,7 @@ import com.cs.wit.model.SystemMessage;
 import com.cs.wit.persistence.repository.SystemMessageRepository;
 import com.cs.wit.util.mail.MailSender;
 import java.util.List;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Value;

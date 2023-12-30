@@ -22,7 +22,7 @@ import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.util.Menu;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

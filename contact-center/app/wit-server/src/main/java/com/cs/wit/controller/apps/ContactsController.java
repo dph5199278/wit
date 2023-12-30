@@ -16,8 +16,6 @@
  */
 package com.cs.wit.controller.apps;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.exception.CSKefuException;
@@ -49,14 +47,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -114,7 +112,7 @@ public class ContactsController extends Handler {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
 
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/contacts/index"));
@@ -126,7 +124,7 @@ public class ContactsController extends Handler {
 
 
         if (StringUtils.isNotBlank(ckind)) {
-            boolQueryBuilder.must(termQuery("ckind", ckind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ckind").value(ckind)));
             map.put("ckind", ckind);
         }
 
@@ -153,7 +151,7 @@ public class ContactsController extends Handler {
     public ModelAndView today(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ckind) throws CSKefuException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/contacts/index"));
         }
@@ -162,7 +160,7 @@ public class ContactsController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ckind)) {
-            boolQueryBuilder.must(termQuery("ckind", ckind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ckind").value(ckind)));
             map.put("ckind", ckind);
         }
 
@@ -188,7 +186,7 @@ public class ContactsController extends Handler {
     public ModelAndView week(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ckind) throws CSKefuException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/contacts/index"));
         }
@@ -197,7 +195,7 @@ public class ContactsController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ckind)) {
-            boolQueryBuilder.must(termQuery("ckind", ckind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ckind").value(ckind)));
             map.put("ckind", ckind);
         }
 
@@ -222,15 +220,15 @@ public class ContactsController extends Handler {
     public ModelAndView creater(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ckind) throws CSKefuException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/contacts/index"));
         }
 
-        boolQueryBuilder.must(termQuery("creater", logined.getId()));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("creater").value(logined.getId())));
 
         if (StringUtils.isNotBlank(ckind)) {
-            boolQueryBuilder.must(termQuery("ckind", ckind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ckind").value(ckind)));
             map.put("ckind", ckind);
         }
         if (StringUtils.isNotBlank(q)) {
@@ -498,11 +496,11 @@ public class ContactsController extends Handler {
     public void expall(HttpServletRequest request, HttpServletResponse response) throws IOException, CSKefuException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return;
         }
-        boolQueryBuilder.must(termQuery("datastatus", false));        //只导出 数据删除状态 为 未删除的 数据
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));        //只导出 数据删除状态 为 未删除的 数据
         Iterable<Contacts> contactsList = contactsRes.findByCreaterAndSharesAndOrgi(
                 logined.getId(), logined.getId(), orgi, null, null,
                 false, boolQueryBuilder, null, PageRequest.of(super.getP(request), super.getPs(request)));
@@ -527,12 +525,12 @@ public class ContactsController extends Handler {
     public void expall(ModelMap map, HttpServletRequest request, HttpServletResponse response, @Valid String q, @Valid String ekind) throws IOException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (StringUtils.isNotBlank(q)) {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
 
@@ -561,7 +559,7 @@ public class ContactsController extends Handler {
     public ModelAndView embed(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ckind, @Valid String msg, @Valid String userid) throws CSKefuException {
         final User logined = super.getUser(request);
         final String orgi = logined.getOrgi();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         map.put("msg", msg);
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/contacts/embed/index"));
@@ -570,7 +568,7 @@ public class ContactsController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ckind)) {
-            boolQueryBuilder.must(termQuery("ckind", ckind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ckind").value(ckind)));
             map.put("ckind", ckind);
         }
         Page<Contacts> contactsList = contactsRes.findByCreaterAndSharesAndOrgi(

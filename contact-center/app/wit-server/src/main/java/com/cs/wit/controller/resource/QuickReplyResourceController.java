@@ -21,7 +21,7 @@ import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.util.Menu;
 import freemarker.template.TemplateException;
 import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;

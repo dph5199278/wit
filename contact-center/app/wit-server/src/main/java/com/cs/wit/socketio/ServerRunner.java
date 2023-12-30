@@ -36,7 +36,7 @@ import com.cs.wit.socketio.handler.IMEventHandler;
 import com.cs.wit.util.ip.IPTools;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import javax.annotation.PreDestroy;
+import jakarta.annotation.PreDestroy;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.lang.NonNull;

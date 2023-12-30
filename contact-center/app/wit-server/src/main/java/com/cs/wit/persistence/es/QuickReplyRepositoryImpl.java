@@ -16,29 +16,28 @@
  */
 package com.cs.wit.persistence.es;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.QuickReply;
 import com.cs.wit.util.es.SearchTools;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.Operator;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.HighlightQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.data.elasticsearch.core.query.highlight.Highlight;
+import org.springframework.data.elasticsearch.core.query.highlight.HighlightField;
+import org.springframework.data.elasticsearch.core.query.highlight.HighlightFieldParameters;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -47,27 +46,30 @@ import org.springframework.stereotype.Component;
 public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
     @NonNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchOperations operations;
 
     @Override
     public Page<QuickReply> getByOrgiAndCate(String orgi, String cate, String q, Pageable page) {
 
         Page<QuickReply> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("cate", cate));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
-        searchQueryBuilder.withHighlightBuilder(new HighlightBuilder().field("title", 200));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
+        List<HighlightField> fields = new ArrayList<>();
+        fields.add(new HighlightField("title", HighlightFieldParameters.builder().withFragmentSize(200).build()));
+        searchQueryBuilder.withHighlightQuery(new HighlightQuery(new Highlight(fields), null));
         Query searchQuery = searchQueryBuilder.build().setPageable(page);
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
-                searchQuery);
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)),
+                page);
         }
         return pages;
     }
@@ -77,32 +79,35 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         List<QuickReply> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
 
-        BoolQueryBuilder quickQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder quickQueryBuilder = QueryBuilders.bool();
 
-        quickQueryBuilder.should(termQuery("type", MainContext.QuickType.PUB.toString()));
+        quickQueryBuilder.should(QueryBuilders.term(builder -> builder.field("type").value(MainContext.QuickType.PUB.toString())));
 
-        BoolQueryBuilder priQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder priQueryBuilder = QueryBuilders.bool();
 
-        priQueryBuilder.must(termQuery("type", MainContext.QuickType.PRI.toString()));
-        priQueryBuilder.must(termQuery("creater", creater));
+        priQueryBuilder.must(QueryBuilders.term(builder -> builder.field("type").value(MainContext.QuickType.PRI.toString())));
+        priQueryBuilder.must(QueryBuilders.term(builder -> builder.field("creater").value(creater)));
 
-        quickQueryBuilder.should(priQueryBuilder);
+        quickQueryBuilder.should(priQueryBuilder.build()._toQuery());
 
-        boolQueryBuilder.must(quickQueryBuilder);
+        boolQueryBuilder.must(quickQueryBuilder.build()._toQuery());
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
-        searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
+        List<HighlightField> fields = new ArrayList<>();
+        fields.add(new HighlightField("title", HighlightFieldParameters.builder().withFragmentSize(200).build()));
+        searchQueryBuilder.withHighlightQuery(new HighlightQuery(new Highlight(fields), null));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             pages = SearchTools.listUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)));
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)));
         }
         return pages;
     }
@@ -113,18 +118,21 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         Page<QuickReply> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("type", quicktype));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("type").value(quicktype)));
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
 
-        searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
+        List<HighlightField> fields = new ArrayList<>();
+        fields.add(new HighlightField("title", HighlightFieldParameters.builder().withFragmentSize(200).build()));
+        searchQueryBuilder.withHighlightQuery(new HighlightQuery(new Highlight(fields), null));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
-                searchQuery);
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
@@ -134,40 +142,46 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         Page<QuickReply> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("cate", cate));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withQuery(termQuery("creater", user)).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withQuery(QueryBuilders.term(builder -> builder.field("creater").value(user)))
+            .withSort(Sort.by(Order.desc("top"), Order.desc("updatetime")));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
-                searchQuery);
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
 
     @Override
-    public Page<QuickReply> getByCon(BoolQueryBuilder boolQueryBuilder, final int p, final int ps) {
+    public Page<QuickReply> getByCon(BoolQuery.Builder boolQueryBuilder, final int p, final int ps) {
 
         Page<QuickReply> pages = null;
 
-        QueryBuilder beginFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("begintime")).should(QueryBuilders.rangeQuery("begintime").from(new Date().getTime()));
-        QueryBuilder endFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("endtime")).should(QueryBuilders.rangeQuery("endtime").to(new Date().getTime()));
+        BoolQuery.Builder beginFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("begintime").build()._toQuery())
+            .should(QueryBuilders.range().field("begintime").from(String.valueOf(System.currentTimeMillis())).build()._toQuery());
+        BoolQuery.Builder endFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("endtime").build()._toQuery())
+            .should(QueryBuilders.range().field("endtime").to(String.valueOf(System.currentTimeMillis())).build()._toQuery());
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withFilter(QueryBuilders.boolQuery().must(beginFilter).must(endFilter)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withFilter(QueryBuilders.bool().must(beginFilter.build()._toQuery()).must(endFilter.build()._toQuery()).build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
 
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
-                searchQuery);
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
@@ -177,35 +191,36 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         Page<QuickReply> list = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (!StringUtils.isBlank(type)) {
-            boolQueryBuilder.must(termQuery("type", type));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("type").value(type)));
         }
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
         Query searchQuery = searchQueryBuilder.build().setPageable(page);
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             list = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)),
-                searchQuery);
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)),
+                searchQuery.getPageable());
         }
         return list;
     }
 
     @Override
     public void deleteByCate(String cate, String orgi) {
-        NativeSearchQueryBuilder deleteQuery = new NativeSearchQueryBuilder();
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
-        boolQueryBuilder.must(termQuery("cate", cate));
-        deleteQuery.withQuery(boolQueryBuilder);
-        elasticsearchRestTemplate.delete(deleteQuery.build(), QuickReply.class);
+        NativeQueryBuilder deleteQuery = new NativeQueryBuilder();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
+        deleteQuery.withQuery(boolQueryBuilder.build()._toQuery());
+        operations.delete(deleteQuery.build(), QuickReply.class);
     }
 
     @Override
@@ -213,25 +228,26 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
 
         List<QuickReply> list = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
 
         if (!StringUtils.isBlank(cate)) {
-            boolQueryBuilder.must(termQuery("cate", cate));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
         }
         if (!StringUtils.isBlank(type)) {
-            boolQueryBuilder.must(termQuery("type", type));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("type").value(type)));
         }
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("top"), Order.desc("updatetime")));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(0, 10000));
-        if (elasticsearchRestTemplate.indexOps(QuickReply.class).exists()) {
+        if (operations.indexOps(QuickReply.class).exists()) {
             list = SearchTools.listUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, QuickReply.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(QuickReply.class)));
+                operations.search(searchQuery, QuickReply.class,
+                    operations.getIndexCoordinatesFor(QuickReply.class)));
         }
         return list;
     }

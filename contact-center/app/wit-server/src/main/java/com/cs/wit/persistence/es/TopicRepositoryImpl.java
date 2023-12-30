@@ -16,27 +16,26 @@
  */
 package com.cs.wit.persistence.es;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import com.cs.wit.model.Topic;
 import com.cs.wit.util.es.SearchTools;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.Operator;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.highlight.Highlight;
+import org.springframework.data.elasticsearch.core.query.highlight.HighlightField;
+import org.springframework.data.elasticsearch.core.query.HighlightQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
+import org.springframework.data.elasticsearch.core.query.highlight.HighlightFieldParameters;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -44,29 +43,32 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class TopicRepositoryImpl implements TopicEsCommonRepository {
     @NonNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchOperations operations;
 
     @Override
     public Page<Topic> getTopicByCateAndOrgi(String cate, String orgi, String q, final int p, final int ps) {
 
         Page<Topic> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!StringUtils.isBlank(cate)) {
-            boolQueryBuilder.must(termQuery("cate", cate));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
         }
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
-        searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("top"), Order.desc("createtime")));
+        List<HighlightField> fields = new ArrayList<>();
+        fields.add(new HighlightField("title", HighlightFieldParameters.builder().withFragmentSize(200).build()));
+        searchQueryBuilder.withHighlightQuery(new HighlightQuery(new Highlight(fields), null));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
+        if (operations.indexOps(Topic.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Topic.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
-                searchQuery);
+                operations.search(searchQuery, Topic.class,
+                    operations.getIndexCoordinatesFor(Topic.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
@@ -76,26 +78,34 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
 
         Page<Topic> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("top", top));
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("top").value(String.valueOf(top))));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (!StringUtils.isBlank(aiid)) {
-            boolQueryBuilder.must(termQuery("aiid", aiid));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("aiid").value(aiid)));
         }
 
-        QueryBuilder beginFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("begintime")).should(QueryBuilders.rangeQuery("begintime").to(new Date().getTime()));
-        QueryBuilder endFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("endtime")).should(QueryBuilders.rangeQuery("endtime").from(new Date().getTime()));
+        BoolQuery.Builder beginFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("begintime").build()._toQuery())
+            .should(QueryBuilders.range().field("begintime").to(
+                String.valueOf(System.currentTimeMillis())).build()._toQuery());
+        BoolQuery.Builder endFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("endtime").build()._toQuery())
+            .should(QueryBuilders.range().field("endtime").from(
+                String.valueOf(System.currentTimeMillis())).build()._toQuery());
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withFilter(QueryBuilders.boolQuery().must(beginFilter).must(endFilter)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withFilter(QueryBuilders.bool().must(beginFilter.build()._toQuery()).must(endFilter.build()._toQuery()).build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
 
 
-        searchQueryBuilder.withHighlightFields(new HighlightBuilder.Field("title").fragmentSize(200));
+        List<HighlightField> fields = new ArrayList<>();
+        fields.add(new HighlightField("title", HighlightFieldParameters.builder().withFragmentSize(200).build()));
+        searchQueryBuilder.withHighlightQuery(new HighlightQuery(new Highlight(fields), null));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
+        if (operations.indexOps(Topic.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Topic.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
-                searchQuery);
+                operations.search(searchQuery, Topic.class,
+                    operations.getIndexCoordinatesFor(Topic.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
@@ -105,39 +115,45 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
 
         Page<Topic> pages = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("cate", cate));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withQuery(termQuery("creater", user)).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withQuery(QueryBuilders.term(builder -> builder.field("creater").value(user)))
+            .withSort(Sort.by(Order.desc("top"), Order.desc("updatetime")));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
+        if (operations.indexOps(Topic.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Topic.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
-                searchQuery);
+                operations.search(searchQuery, Topic.class,
+                    operations.getIndexCoordinatesFor(Topic.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
 
     @Override
-    public Page<Topic> getTopicByCon(BoolQueryBuilder boolQueryBuilder, final int p, final int ps) {
+    public Page<Topic> getTopicByCon(BoolQuery.Builder boolQueryBuilder, final int p, final int ps) {
 
         Page<Topic> pages = null;
 
-        QueryBuilder beginFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("begintime")).should(QueryBuilders.rangeQuery("begintime").to(new Date().getTime()));
-        QueryBuilder endFilter = QueryBuilders.boolQuery().should(QueryBuilders.existsQuery("endtime")).should(QueryBuilders.rangeQuery("endtime").from(new Date().getTime()));
+        BoolQuery.Builder beginFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("begintime").build()._toQuery())
+            .should(QueryBuilders.range().field("begintime").to(String.valueOf(System.currentTimeMillis())).build()._toQuery());
+        BoolQuery.Builder endFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("endtime").build()._toQuery())
+            .should(QueryBuilders.range().field("endtime").from(String.valueOf(System.currentTimeMillis())).build()._toQuery());
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withFilter(QueryBuilders.boolQuery().must(beginFilter).must(endFilter)).withSort(new FieldSortBuilder("createtime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withFilter(QueryBuilders.bool().must(beginFilter.build()._toQuery()).must(endFilter.build()._toQuery()).build()._toQuery())
+            .withSort(Sort.by(Order.desc("createtime")));
         Query searchQuery = searchQueryBuilder.build().setPageable(PageRequest.of(p, ps));
-        if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
+        if (operations.indexOps(Topic.class).exists()) {
             pages = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Topic.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)),
-                searchQuery);
+                operations.search(searchQuery, Topic.class,
+                    operations.getIndexCoordinatesFor(Topic.class)),
+                searchQuery.getPageable());
         }
         return pages;
     }
@@ -147,23 +163,24 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
 
         List<Topic> list = null;
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
 
         if (!StringUtils.isBlank(type)) {
-            boolQueryBuilder.must(termQuery("cate", type));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(type)));
         }
 
         if (!StringUtils.isBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
 
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("top").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("updatetime").unmappedType("date").order(SortOrder.DESC));
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("top"), Order.desc("updatetime")));
         Query searchQuery = searchQueryBuilder.build();
-        if (elasticsearchRestTemplate.indexOps(Topic.class).exists()) {
+        if (operations.indexOps(Topic.class).exists()) {
             list = SearchTools.listUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Topic.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Topic.class)));
+                operations.search(searchQuery, Topic.class,
+                    operations.getIndexCoordinatesFor(Topic.class)));
         }
         return list;
     }

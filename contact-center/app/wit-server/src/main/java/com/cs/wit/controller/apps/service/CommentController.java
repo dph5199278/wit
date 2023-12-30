@@ -20,7 +20,7 @@ import com.cs.wit.controller.Handler;
 import com.cs.wit.model.AgentService;
 import com.cs.wit.persistence.repository.AgentServiceRepository;
 import com.cs.wit.util.Menu;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

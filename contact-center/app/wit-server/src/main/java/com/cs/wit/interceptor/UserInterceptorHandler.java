@@ -27,8 +27,8 @@ import com.cs.wit.model.User;
 import com.cs.wit.proxy.AgentSessionProxy;
 import com.cs.wit.proxy.UserProxy;
 import com.cs.wit.util.Menu;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
@@ -70,11 +70,11 @@ public class UserInterceptorHandler implements AsyncHandlerInterceptor {
     public boolean preHandle(@NonNull final HttpServletRequest request, @NonNull final HttpServletResponse response,
                              @NonNull Object handler) throws Exception {
         boolean filter = false;
-        User user = (User) request.getSession(true).getAttribute(Constants.USER_SESSION_NAME);
 
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             Menu menu = handlerMethod.getMethod().getAnnotation(Menu.class);
+            User user = (User) request.getSession(true).getAttribute(Constants.USER_SESSION_NAME);
             if (user != null || (menu != null && menu.access()) || handlerMethod.getBean() instanceof BasicErrorController) {
                 filter = true;
                 if (user != null && StringUtils.isNotBlank(user.getId())) {

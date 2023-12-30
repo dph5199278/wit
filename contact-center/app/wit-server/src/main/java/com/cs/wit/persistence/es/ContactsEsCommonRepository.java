@@ -18,7 +18,7 @@ package com.cs.wit.persistence.es;
 
 import com.cs.wit.model.Contacts;
 import java.util.Date;
-import org.elasticsearch.index.query.BoolQueryBuilder;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -32,5 +32,5 @@ public interface ContactsEsCommonRepository {
 	
 	Page<Contacts> findByCreaterAndSharesAndOrgi(String creater, String shares, String orgi, Date begin, Date end, boolean includeDeleteData, String q, Pageable page) ;
 
-	Page<Contacts> findByCreaterAndSharesAndOrgi(String creater, String shares, String orgi, Date begin, Date end, boolean includeDeleteData, BoolQueryBuilder boolQueryBuilder, String q, Pageable page);
+	Page<Contacts> findByCreaterAndSharesAndOrgi(String creater, String shares, String orgi, Date begin, Date end, boolean includeDeleteData, BoolQuery.Builder boolQueryBuilder, String q, Pageable page);
 }

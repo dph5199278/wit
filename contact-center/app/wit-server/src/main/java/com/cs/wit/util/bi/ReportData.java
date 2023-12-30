@@ -23,7 +23,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.apache.lucene.queryparser.flexible.core.nodes.PathQueryNode.QueryText;
 
 
 public interface ReportData extends Serializable{
@@ -45,9 +44,6 @@ public interface ReportData extends Serializable{
 	Exception getException ();
 	RequestData getRequestData();
 	void setRequestData(RequestData data);
-	
-	QueryText getQueryText() ;
-	void setQueryText(QueryText queryText) ;
 	
 	void setTotal(long total) ;
 	long getTotal() ;

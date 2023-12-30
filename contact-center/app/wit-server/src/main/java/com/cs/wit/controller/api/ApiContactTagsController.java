@@ -29,7 +29,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

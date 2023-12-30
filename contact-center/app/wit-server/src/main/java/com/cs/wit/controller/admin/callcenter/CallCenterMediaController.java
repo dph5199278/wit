@@ -25,7 +25,7 @@ import com.cs.wit.util.Menu;
 import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;

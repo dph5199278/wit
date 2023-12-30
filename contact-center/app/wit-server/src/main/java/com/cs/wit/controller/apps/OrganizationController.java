@@ -26,7 +26,7 @@ import com.cs.wit.persistence.repository.OrganizationRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.util.Menu;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;

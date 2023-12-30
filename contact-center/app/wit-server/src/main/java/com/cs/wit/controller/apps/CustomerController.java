@@ -17,8 +17,6 @@
 
 package com.cs.wit.controller.apps;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.controller.Handler;
@@ -50,14 +48,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilders;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -105,7 +103,7 @@ public class CustomerController extends Handler {
                               final @Valid String msg) throws CSKefuException {
         logger.info("[index] query {}, ekind {}, msg {}", q, ekind, msg);
         final User logined = super.getUser(request);
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         map.put("msg", msg);
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
@@ -115,7 +113,7 @@ public class CustomerController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
 
@@ -135,7 +133,7 @@ public class CustomerController extends Handler {
     @RequestMapping("/today")
     @Menu(type = "customer", subtype = "today")
     public ModelAndView today(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ekind) throws CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
 
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
@@ -146,7 +144,7 @@ public class CustomerController extends Handler {
         }
 
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
         map.addAttribute("entCustomerList", entCustomerRes.findByCreaterAndSharesAndOrgi(super.getUser(request).getId(), super.getUser(request).getId(), super.getOrgi(request), MainUtils.getStartTime(), null, false, boolQueryBuilder, q, PageRequest.of(super.getP(request), super.getPs(request))));
@@ -157,7 +155,7 @@ public class CustomerController extends Handler {
     @RequestMapping("/week")
     @Menu(type = "customer", subtype = "week")
     public ModelAndView week(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ekind) throws CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
         }
@@ -166,7 +164,7 @@ public class CustomerController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
         map.addAttribute("entCustomerList", entCustomerRes.findByCreaterAndSharesAndOrgi(super.getUser(request).getId(), super.getUser(request).getId(), super.getOrgi(request), MainUtils.getWeekStartTime(), null, false, boolQueryBuilder, q, PageRequest.of(super.getP(request), super.getPs(request))));
@@ -177,14 +175,14 @@ public class CustomerController extends Handler {
     @RequestMapping("/enterprise")
     @Menu(type = "customer", subtype = "enterprise")
     public ModelAndView enterprise(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ekind) throws CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
         }
 
-        boolQueryBuilder.must(termQuery("etype", MainContext.CustomerTypeEnum.ENTERPRISE.toString()));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("etype").value(MainContext.CustomerTypeEnum.ENTERPRISE.toString())));
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
         if (StringUtils.isNotBlank(q)) {
@@ -197,15 +195,15 @@ public class CustomerController extends Handler {
     @RequestMapping("/personal")
     @Menu(type = "customer", subtype = "personal")
     public ModelAndView personal(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ekind) throws CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
         }
 
-        boolQueryBuilder.must(termQuery("etype", MainContext.CustomerTypeEnum.PERSONAL.toString()));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("etype").value(MainContext.CustomerTypeEnum.PERSONAL.toString())));
 
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
 
@@ -219,15 +217,15 @@ public class CustomerController extends Handler {
     @RequestMapping("/creater")
     @Menu(type = "customer", subtype = "creater")
     public ModelAndView creater(ModelMap map, HttpServletRequest request, @Valid String q, @Valid String ekind) throws CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             return request(super.createAppsTempletResponse("/apps/business/customer/index"));
         }
 
-        boolQueryBuilder.must(termQuery("creater", super.getUser(request).getId()));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("creater").value(super.getUser(request).getId())));
 
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
         if (StringUtils.isNotBlank(q)) {
@@ -384,13 +382,13 @@ public class CustomerController extends Handler {
     @RequestMapping("/expall")
     @Menu(type = "customer", subtype = "customer")
     public void expall(HttpServletRequest request, HttpServletResponse response) throws IOException, CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             // #TODO 提示没有部门
             return;
         }
 
-        boolQueryBuilder.must(termQuery("datastatus", false));        //只导出 数据删除状态 为 未删除的 数据
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));        //只导出 数据删除状态 为 未删除的 数据
         Iterable<EntCustomer> entCustomerList = entCustomerRes.findByCreaterAndSharesAndOrgi(super.getUser(request).getId(), super.getUser(request).getId(), super.getOrgi(request), null, null, false, boolQueryBuilder, null, PageRequest.of(super.getP(request), super.getPs(request)));
 
         MetadataTable table = metadataRes.findByTablename("uk_entcustomer");
@@ -408,7 +406,7 @@ public class CustomerController extends Handler {
     @RequestMapping("/expsearch")
     @Menu(type = "customer", subtype = "customer")
     public void expall(ModelMap map, HttpServletRequest request, HttpServletResponse response, @Valid String q, @Valid String ekind) throws IOException, CSKefuException {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
         if (!super.esOrganFilter(request)) {
             // #TODO 提示没有部门
             return;
@@ -418,7 +416,7 @@ public class CustomerController extends Handler {
             map.put("q", q);
         }
         if (StringUtils.isNotBlank(ekind)) {
-            boolQueryBuilder.must(termQuery("ekind", ekind));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("ekind").value(ekind)));
             map.put("ekind", ekind);
         }
 

@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import org.apache.lucene.queryparser.flexible.core.nodes.PathQueryNode.QueryText;
 
 
 public class CubeReportData implements ReportData, Cloneable {
@@ -38,7 +37,6 @@ public class CubeReportData implements ReportData, Cloneable {
 	private int page ;
 	private long numFound = 0 ;
 	private RequestData reqdata;
-	private QueryText queryText ;
 	private Map<String , Object> options ;
 	private long queryTime ;
 	private long total ;
@@ -184,14 +182,6 @@ public class CubeReportData implements ReportData, Cloneable {
 
 	public void setPage(int page) {
 		this.page = page;
-	}
-
-	public QueryText getQueryText() {
-		return queryText;
-	}
-
-	public void setQueryText(QueryText queryText) {
-		this.queryText = queryText;
 	}
 
 	public Map<String, Object> getOptions() {

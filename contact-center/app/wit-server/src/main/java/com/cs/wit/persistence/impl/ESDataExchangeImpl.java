@@ -16,6 +16,18 @@
  */
 package com.cs.wit.persistence.impl;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregate;
+import co.elastic.clients.elasticsearch._types.aggregations.Aggregation;
+import co.elastic.clients.elasticsearch._types.aggregations.AggregationBuilders;
+import co.elastic.clients.elasticsearch._types.aggregations.StringTermsAggregate;
+import co.elastic.clients.elasticsearch._types.aggregations.StringTermsBucket;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch.core.DeleteRequest;
+import co.elastic.clients.elasticsearch.core.GetRequest;
+import co.elastic.clients.elasticsearch.core.GetResponse;
+import co.elastic.clients.elasticsearch.core.IndexRequest;
+import co.elastic.clients.json.JsonData;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.model.MetadataTable;
 import com.cs.wit.model.Organ;
@@ -31,31 +43,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.action.delete.DeleteRequest;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.search.SearchRequest;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.search.SearchHit;
-import org.elasticsearch.search.aggregations.Aggregation;
-import org.elasticsearch.search.aggregations.AggregationBuilder;
-import org.elasticsearch.search.aggregations.AggregationBuilders;
-import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
-import org.elasticsearch.search.builder.SearchSourceBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchAggregation;
+import org.springframework.data.elasticsearch.client.elc.ElasticsearchAggregations;
+import org.springframework.data.elasticsearch.client.elc.NativeQuery;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.core.SearchHit;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
@@ -74,13 +73,16 @@ public class ESDataExchangeImpl {
     private final OrganRepository organRes;
 
     @NonNull
-    private final RestHighLevelClient client;
+    private final ElasticsearchClient client;
+
+    @NonNull
+    private final ElasticsearchOperations operations;
 
     public void saveIObject(UKDataBean dataBean) throws IOException {
         if (dataBean.getId() == null) {
             dataBean.setId((String) dataBean.getValues().get("id"));
         }
-        client.index(this.saveBulk(dataBean), RequestOptions.DEFAULT);
+        client.index(this.saveBulk(dataBean));
     }
 
     @NonNull
@@ -94,8 +96,12 @@ public class ESDataExchangeImpl {
         } else {
             type = dataBean.getTable().getTablename();
         }
-        return new IndexRequest(Constants.SYSTEM_INDEX,
-                type, dataBean.getId()).source(processValues(dataBean));
+
+        return new IndexRequest.Builder()
+            .index(Constants.SYSTEM_INDEX)
+            .id(dataBean.getId())
+            .document(processValues(dataBean))
+            .build();
     }
 
     /**
@@ -107,7 +113,7 @@ public class ESDataExchangeImpl {
             for (TableProperties tp : dataBean.getTable().getTableproperty()) {
                 if (dataBean.getValues().get(tp.getFieldname()) != null) {
                     values.put(tp.getFieldname(), dataBean.getValues().get(tp.getFieldname()));
-                } else if (tp.getDatatypename().equals("nlp") && dataBean.getValues() != null) {
+                } else if ("nlp".equals(tp.getDatatypename()) && dataBean.getValues() != null) {
                     //智能处理， 需要计算过滤HTML内容，自动获取关键词、摘要、实体识别、情感分析、信息指纹 等功能
                     values.put(tp.getFieldname(), dataBean.getValues().get(tp.getFieldname()));
                 } else {
@@ -122,9 +128,9 @@ public class ESDataExchangeImpl {
 
     public void deleteById(String type, String id) {
         if (!StringUtils.isBlank(type) && !StringUtils.isBlank(id)) {
-            final DeleteRequest request = new DeleteRequest(Constants.SYSTEM_INDEX, type, id);
+            final DeleteRequest request = new DeleteRequest.Builder().index(Constants.SYSTEM_INDEX).id(id).build();
             try {
-                client.delete(request, RequestOptions.DEFAULT);
+                client.delete(request);
             }
             catch(IOException e) {
                 log.error("Error while deleting item request: " + request, e);
@@ -135,11 +141,15 @@ public class ESDataExchangeImpl {
 
     public UKDataBean getIObjectByPK(UKDataBean dataBean) throws IOException {
         if (dataBean.getTable() != null) {
-            GetResponse getResponse = client
-                    .get(new GetRequest(Constants.SYSTEM_INDEX,
-                            dataBean.getTable().getTablename(), dataBean.getId()), RequestOptions.DEFAULT);
-            dataBean.setValues(getResponse.getSource());
-            dataBean.setType(getResponse.getType());
+            GetResponse<String> getResponse = client
+                    .get(new GetRequest.Builder().index(Constants.SYSTEM_INDEX)
+                        .id(dataBean.getId()).build(), String.class);
+            Map<String, Object> map = new HashMap<>(getResponse.fields().size());
+            for(Map.Entry<String, JsonData> entry : getResponse.fields().entrySet()) {
+                map.put(entry.getKey(), entry.getValue().toString());
+            }
+            dataBean.setValues(map);
+            dataBean.setType(dataBean.getTable().getTablename());
         } else {
             dataBean.setValues(new HashMap<>());
         }
@@ -150,11 +160,15 @@ public class ESDataExchangeImpl {
     public UKDataBean getIObjectByPK(String type, String id) throws IOException {
         UKDataBean dataBean = new UKDataBean();
         if (!StringUtils.isBlank(type)) {
-            GetResponse getResponse = client
-                    .get(new GetRequest(Constants.SYSTEM_INDEX,
-                            type, id), RequestOptions.DEFAULT);
-            dataBean.setValues(getResponse.getSource());
-            dataBean.setType(getResponse.getType());
+            GetResponse<String> getResponse = client
+                    .get(new GetRequest.Builder().index(Constants.SYSTEM_INDEX)
+                        .id(id).build(), String.class);
+            Map<String, Object> map = new HashMap<>(getResponse.fields().size());
+            for(Map.Entry<String, JsonData> entry : getResponse.fields().entrySet()) {
+                map.put(entry.getKey(), entry.getValue().toString());
+            }
+            dataBean.setValues(map);
+            dataBean.setType(type);
         } else {
             dataBean.setValues(new HashMap<>());
         }
@@ -164,40 +178,33 @@ public class ESDataExchangeImpl {
     /**
      *
      */
-    public PageImpl<UKDataBean> findPageResult(QueryBuilder query, MetadataTable metadata, Pageable page, boolean loadRef) throws IOException {
-        return findAllPageResult(query, metadata, page, loadRef, metadata != null ? metadata.getTablename() : null);
+    public PageImpl<UKDataBean> findPageResult(BoolQuery.Builder queryBuilder, MetadataTable metadata, Pageable page, boolean loadRef) throws IOException {
+        return findAllPageResult(queryBuilder, metadata, page, loadRef, metadata != null ? metadata.getTablename() : null);
     }
 
     /**
      *
      */
-    public PageImpl<UKDataBean> findAllPageResult(QueryBuilder query, MetadataTable metadata, Pageable page, boolean loadRef, String types) throws IOException {
+    public PageImpl<UKDataBean> findAllPageResult(BoolQuery.Builder queryBuilder, MetadataTable metadata, Pageable page, boolean loadRef, String types) throws IOException {
 
-        SearchSourceBuilder source = new SearchSourceBuilder();
-        int start = page.getPageSize() * page.getPageNumber();
-        source.from(start).size(page.getPageSize()).query(query);
+        NativeQuery query = NativeQuery.builder()
+            .withQuery(queryBuilder.build()._toQuery())
+            .withPageable(page)
+            .build();
 
-        for (Order order : page.getSort()) {
-            source.sort(new FieldSortBuilder(order.getProperty()).unmappedType(order.getProperty().equals("createtime") ? "long" : "string").order(order.isDescending() ? SortOrder.DESC : SortOrder.ASC));
-        }
-
-        SearchRequest request = new SearchRequest(new String[]{Constants.SYSTEM_INDEX}, source);
-        if (!StringUtils.isBlank(types)) {
-            request.types(types);
-        }
-
-        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        SearchHits<String> response = operations.search(query, String.class, IndexCoordinates.of(Constants.SYSTEM_INDEX));
         List<String> users = new ArrayList<>();
         List<String> organs = new ArrayList<>();
         List<String> taskList = new ArrayList<>();
         // List<String> batchList = new ArrayList<>();
         // List<String> activityList = new ArrayList<>();
         List<UKDataBean> dataBeanList = new ArrayList<>();
-        for (SearchHit hit : response.getHits().getHits()) {
+        for (SearchHit<String> hit : response.getSearchHits()) {
             UKDataBean temp = new UKDataBean();
-            temp.setType(hit.getType());
+            temp.setType(types);
             temp.setTable(metadata);
-            temp.setValues(hit.getSourceAsMap());
+            Map<String, Object> map = new HashMap<>(hit.getHighlightFields());
+            temp.setValues(map);
             temp.setId((String) temp.getValues().get("id"));
             dataBeanList.add(processDate(temp));
 
@@ -276,29 +283,29 @@ public class ESDataExchangeImpl {
                 }
             }
         }
-        return new PageImpl<>(dataBeanList, page, Optional.ofNullable(response.getHits().getTotalHits())
-                                                                .map(hits -> (int)hits.value)
-                                                                .orElse(0));
+        return new PageImpl<>(dataBeanList, page, response.getTotalHits());
     }
 
 
     /**
      *
      */
-    public PageImpl<UKDataBean> findAllPageAggResult(QueryBuilder query, String aggField, Pageable page, boolean loadRef, String types) throws IOException {
+    public PageImpl<UKDataBean> findAllPageAggResult(BoolQuery.Builder queryBuilder, String aggField, Pageable page, boolean loadRef, String types) throws IOException {
 
         int size = page.getPageSize() * (page.getPageNumber() + 1);
 
-        AggregationBuilder aggregition = AggregationBuilders.terms(aggField).field(aggField).size(size);
-        aggregition.subAggregation(AggregationBuilders.terms("apstatus").field("apstatus"));
-        aggregition.subAggregation(AggregationBuilders.terms("callstatus").field("callstatus"));
+        Aggregation aggregition = new Aggregation.Builder()
+            .terms(AggregationBuilders.terms().name(aggField).field(aggField).size(size).build())
+            .aggregations("apstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.name("apstatus").field("apstatus")))
+            .aggregations("callstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.name("callstatus").field("callstatus")))
+            .build();
 
-        SearchSourceBuilder source = new SearchSourceBuilder().aggregation(aggregition).query(query);
-        SearchRequest request = new SearchRequest(new String[]{Constants.SYSTEM_INDEX}, source);
-        if (!StringUtils.isBlank(types)) {
-            request.types(types);
-        }
-        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        NativeQuery query = NativeQuery.builder()
+            .withAggregation(aggField, aggregition)
+            .withQuery(queryBuilder.build()._toQuery())
+            .withPageable(page)
+            .build();
+        SearchHits<String> response = operations.search(query, String.class, IndexCoordinates.of(Constants.SYSTEM_INDEX));
         List<String> users = new ArrayList<>();
         List<String> organs = new ArrayList<>();
         List<String> taskList = new ArrayList<>();
@@ -306,50 +313,61 @@ public class ESDataExchangeImpl {
         // List<String> activityList = new ArrayList<>();
         List<UKDataBean> dataBeanList = new ArrayList<>();
 
-        if (response.getAggregations().get(aggField) instanceof Terms) {
-            Terms agg = response.getAggregations().get(aggField);
-            if (agg != null) {
-                if (loadRef) {
-                    if (aggField.equals(Constants.CSKEFU_SYSTEM_DIS_AGENT)) {
-                        users.add(agg.getName());
-                    }
-                    if (aggField.equals(Constants.CSKEFU_SYSTEM_DIS_ORGAN)) {
-                        organs.add(agg.getName());
-                    }
-                    if (aggField.equals("taskid")) {
-                        taskList.add(agg.getName());
-                    }
-                    // if (aggField.equals("batid")) {
-                    //     batchList.add(agg.getName());
-                    // }
-                    // if (aggField.equals("actid")) {
-                    //     activityList.add(agg.getName());
-                    // }
-                }
-                if (agg.getBuckets() != null && agg.getBuckets().size() > 0) {
-                    for (Terms.Bucket entry : agg.getBuckets()) {
-                        UKDataBean dataBean = new UKDataBean();
-                        dataBean.getValues().put("id", entry.getKeyAsString());
-                        dataBean.getValues().put(aggField, entry.getKeyAsString());
-                        dataBean.setId(agg.getName());
-                        dataBean.setType(aggField);
-                        dataBean.getValues().put("total", entry.getDocCount());
-
-                        for (Aggregation temp : entry.getAggregations()) {
-                            if (temp instanceof StringTerms) {
-                                StringTerms agg2 = (StringTerms) temp;
-                                for (Terms.Bucket entry2 : agg2.getBuckets()) {
-                                    dataBean.getValues().put(temp.getName() + "." + entry2.getKeyAsString(), entry2.getDocCount());
-                                }
-                            }
+        if(response.hasAggregations()) {
+            if(response.getAggregations().aggregations() instanceof ElasticsearchAggregations aggregations) {
+                ElasticsearchAggregation aggregation = aggregations.get(aggField);
+                if(null != aggregation) {
+                    org.springframework.data.elasticsearch.client.elc.Aggregation agg = aggregation.aggregation();
+                    if (loadRef) {
+                        if (Constants.CSKEFU_SYSTEM_DIS_AGENT.equals(aggField)) {
+                            users.add(agg.getName());
                         }
-                        dataBeanList.add(dataBean);
+                        if (Constants.CSKEFU_SYSTEM_DIS_ORGAN.equals(aggField)) {
+                            organs.add(agg.getName());
+                        }
+                        if ("taskid".equals(aggField)) {
+                            taskList.add(agg.getName());
+                        }
+                    }
+                    if (agg.getAggregate().isSterms() && null != agg.getAggregate().sterms().buckets()) {
+                        if (agg.getAggregate().sterms().buckets().isArray()) {
+                            dataBeanList.addAll(
+                                agg.getAggregate().sterms().buckets().array()
+                                    .stream()
+                                    .map(entry -> {
+                                        UKDataBean dataBean = new UKDataBean();
+                                        dataBean.getValues()
+                                            .put("id", entry.key().stringValue());
+                                        dataBean.getValues()
+                                            .put(aggField, entry.key().stringValue());
+                                        dataBean.setId(agg.getName());
+                                        dataBean.setType(aggField);
+                                        dataBean.getValues().put("total", entry.docCount());
+
+                                        for (Map.Entry<String, Aggregate> temp : entry.aggregations()
+                                            .entrySet()) {
+                                            if (temp.getValue().isSterms()) {
+                                                StringTermsAggregate agg2 = temp.getValue()
+                                                    .sterms();
+                                                if (agg2.buckets().isArray()) {
+                                                    for (StringTermsBucket entry2 : agg2.buckets()
+                                                        .array()) {
+                                                        dataBean.getValues().put(
+                                                            temp.getKey() + "." + entry2.key()
+                                                                .stringValue(),
+                                                            entry2.docCount());
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        return dataBean;
+                                    }).toList()
+                            );
+                        }
                     }
                 }
             }
-        } else {
-            response.getAggregations().get(aggField);//			InternalDateHistogram agg = response.getAggregations().get(aggField) ;
-//			long total = response.getHits().getTotalHits() ;
         }
 
         if (loadRef) {
@@ -396,9 +414,7 @@ public class ESDataExchangeImpl {
                 }
             }
         }
-        return new PageImpl<>(dataBeanList, page, Optional.ofNullable(response.getHits().getTotalHits())
-                                                          .map(hits -> (int)hits.value)
-                                                          .orElse(0));
+        return new PageImpl<>(dataBeanList, page, response.getTotalHits());
     }
 
 

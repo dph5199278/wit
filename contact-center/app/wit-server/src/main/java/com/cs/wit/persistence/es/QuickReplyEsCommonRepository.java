@@ -18,7 +18,7 @@ package com.cs.wit.persistence.es;
 
 import com.cs.wit.model.QuickReply;
 import java.util.List;
-import org.elasticsearch.index.query.BoolQueryBuilder;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -34,7 +34,7 @@ public interface QuickReplyEsCommonRepository {
 	
 	Page<QuickReply> getByCateAndUser(String cate, String q, String user, int p, int ps) ;
 	
-	Page<QuickReply> getByCon(BoolQueryBuilder booleanQueryBuilder, int p, int ps) ;
+	Page<QuickReply> getByCon(BoolQuery.Builder booleanQueryBuilder, int p, int ps) ;
 	
 	void deleteByCate(String cate, String orgi) ;
 

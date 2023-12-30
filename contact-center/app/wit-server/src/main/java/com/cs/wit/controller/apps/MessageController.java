@@ -21,7 +21,7 @@ import com.cs.wit.cache.Cache;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.model.User;
 import com.cs.wit.util.Menu;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Controller;

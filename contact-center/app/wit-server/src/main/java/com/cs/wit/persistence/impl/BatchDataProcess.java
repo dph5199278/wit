@@ -16,15 +16,19 @@
  */
 package com.cs.wit.persistence.impl;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.elastic.clients.elasticsearch.core.IndexRequest;
+import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.MetadataTable;
 import com.cs.wit.util.dsdata.process.JPAProcess;
 import com.cs.wit.util.es.UKDataBean;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.lang.NonNull;
 
 public class BatchDataProcess implements JPAProcess {
@@ -32,12 +36,12 @@ public class BatchDataProcess implements JPAProcess {
     private final MetadataTable metadata;
     private final ESDataExchangeImpl esDataExchangeImpl;
     @NonNull
-    private final BulkRequest request;
+    private final List<BulkOperation> requestOperations;
 
     public BatchDataProcess(MetadataTable metadata, ESDataExchangeImpl esDataExchangeImpl) {
         this.metadata = metadata;
         this.esDataExchangeImpl = esDataExchangeImpl;
-        request = new BulkRequest();
+        this.requestOperations = Collections.synchronizedList(new ArrayList<>());
     }
 
     @SuppressWarnings("unchecked")
@@ -51,8 +55,14 @@ public class BatchDataProcess implements JPAProcess {
             dataBean.setValues((Map<String, Object>) data);
         }
         try {
-            request.add(esDataExchangeImpl.saveBulk(dataBean));
-            if (request.numberOfActions() % 1000 == 0) {
+            UKDataBean finalDataBean = dataBean;
+            requestOperations.add(BulkOperation.of(op -> op.index(idx -> {
+                IndexRequest indexRequest = esDataExchangeImpl.saveBulk(finalDataBean);
+                return idx.index(indexRequest.index())
+                    .id(indexRequest.index())
+                    .document(indexRequest.document());
+            })));
+            if (requestOperations.size() % 1000 == 0) {
                 end();
             }
         } catch (Exception e) {
@@ -62,7 +72,8 @@ public class BatchDataProcess implements JPAProcess {
 
     @Override
     public void end() throws IOException {
-        MainContext.getContext().getBean(RestHighLevelClient.class).bulk(request, RequestOptions.DEFAULT);
-        request.requests().clear();
+        final BulkRequest request = new BulkRequest.Builder().operations(new ArrayList<>(requestOperations)).build();
+        requestOperations.clear();
+        MainContext.getContext().getBean(ElasticsearchClient.class).bulk(request);
     }
 }

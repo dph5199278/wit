@@ -19,7 +19,7 @@ import com.cs.wit.cache.RedisKey;
 import com.cs.wit.model.User;
 import com.cs.wit.util.SerializeUtil;
 import java.time.Duration;
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

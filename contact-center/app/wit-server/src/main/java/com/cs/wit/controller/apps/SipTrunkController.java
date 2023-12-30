@@ -34,7 +34,7 @@ import com.cs.wit.util.freeswitch.model.CallCenterAgent;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;

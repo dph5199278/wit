@@ -23,7 +23,7 @@ import com.cs.wit.model.AgentUser;
 import com.cs.wit.model.SessionConfig;
 import com.cs.wit.util.ip.IP;
 import com.cs.wit.util.ip.IPTools;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

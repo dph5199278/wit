@@ -15,7 +15,7 @@
 
 package com.cs.wit.mq.broker;
 
-import javax.jms.Destination;
+import jakarta.jms.Destination;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;

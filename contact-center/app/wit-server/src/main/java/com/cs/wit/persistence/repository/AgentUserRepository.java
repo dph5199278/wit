@@ -64,19 +64,19 @@ public interface AgentUserRepository extends JpaRepository<AgentUser, String> {
 
     AgentUser findOneByAgentnoAndStatusAndOrgi(String id, String status, String orgi);
 
-    @Query(value = "SELECT * FROM uk_agentuser AS u " +
+    @Query(value = "SELECT u.* FROM uk_agentuser AS u " +
             "LEFT JOIN uk_agentuser_contacts AS c " +
             "ON u.userid = c.userid WHERE c.id = ?1 AND NOT u.status = ?2 AND c.orgi = ?3 LIMIT 1", nativeQuery = true)
     AgentUser findOneByContactIdAndStatusNotAndOrgi(final String contactid, final String status, final String orgi);
 
-    @Query(value = "SELECT * FROM uk_agentuser AS u " +
+    @Query(value = "SELECT u.* FROM uk_agentuser AS u " +
             "LEFT JOIN uk_agentuser_contacts AS c " +
             "ON u.userid = c.userid WHERE c.contactsid = ?1 " +
             "AND c.channel = ?3 AND NOT u.status = ?2 AND c.orgi = ?4 " +
             "ORDER BY u.createtime DESC LIMIT 1", nativeQuery = true)
     Optional<AgentUser> findOneByContactIdAndStatusNotAndChannelAndOrgi(final String contactid, final String status, final String channel, final String orgi);
 
-    @Query(value = "SELECT * FROM uk_agentuser AS u " +
+    @Query(value = "SELECT u.* FROM uk_agentuser AS u " +
             "LEFT JOIN uk_agentuser_contacts AS c " +
             "ON u.userid = c.userid WHERE c.contactsid = ?1 " +
             "AND c.channel = ?2 AND c.orgi = ?3 " +

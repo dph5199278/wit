@@ -20,7 +20,7 @@ import com.cs.wit.controller.Handler;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;

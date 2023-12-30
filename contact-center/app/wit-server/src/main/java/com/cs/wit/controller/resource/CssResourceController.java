@@ -19,7 +19,7 @@ package com.cs.wit.controller.resource;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.util.Menu;
 import java.io.IOException;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

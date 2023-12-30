@@ -16,8 +16,8 @@
  */
 package com.cs.wit.util.mail;
 
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
+import jakarta.mail.Authenticator;
+import jakarta.mail.PasswordAuthentication;
 
 public class MailAuthenticator extends Authenticator {
 	/**

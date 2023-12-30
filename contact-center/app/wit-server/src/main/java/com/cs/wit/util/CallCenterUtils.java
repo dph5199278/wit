@@ -16,7 +16,7 @@
  */
 package com.cs.wit.util;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
@@ -53,11 +53,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder.In;
-import javax.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.CriteriaBuilder.In;
+import jakarta.persistence.criteria.Predicate;
 import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.ui.ModelMap;
@@ -431,9 +431,9 @@ public class CallCenterUtils {
      * 获取指定活动，已分配的名单数
      */
     public static int getActDisnum(@Valid String actid, @Valid int p, @Valid int ps) throws IOException {
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.must(termQuery("actid", actid));// 活动ID
-        queryBuilder.mustNot(termQuery("status", MainContext.NamesDisStatusType.NOT.toString()));
+        BoolQuery.Builder queryBuilder = QueryBuilders.bool();
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value(actid)));// 活动ID
+        queryBuilder.mustNot(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.NOT.toString())));
         PageImpl<UKDataBean> dataList = SearchTools.search(queryBuilder, p, ps);
         return dataList.getContent().size();
     }

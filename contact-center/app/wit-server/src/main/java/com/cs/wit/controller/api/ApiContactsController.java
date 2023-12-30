@@ -35,7 +35,7 @@ import com.google.gson.JsonParser;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

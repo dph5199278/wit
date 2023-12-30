@@ -16,24 +16,28 @@
  */
 package com.cs.wit.persistence.impl;
 
+import co.elastic.clients.elasticsearch.ElasticsearchClient;
+import co.elastic.clients.elasticsearch.core.BulkRequest;
+import co.elastic.clients.elasticsearch.core.IndexRequest;
+import co.elastic.clients.elasticsearch.core.bulk.BulkOperation;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.util.dsdata.process.JPAProcess;
 import com.cs.wit.util.es.UKDataBean;
 import java.io.IOException;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import org.springframework.lang.NonNull;
 
 public class DataBatProcess implements JPAProcess {
     @NonNull
-    private final BulkRequest request;
+    private final List<BulkOperation> requestOperations;
     @NonNull
     private final ESDataExchangeImpl esDataExchangeImpl;
 
     public DataBatProcess(@NonNull ESDataExchangeImpl esDataExchangeImpl) {
         this.esDataExchangeImpl = esDataExchangeImpl;
-        request = new BulkRequest();
+        this.requestOperations = Collections.synchronizedList(new ArrayList<>());
     }
 
     @Override
@@ -41,8 +45,13 @@ public class DataBatProcess implements JPAProcess {
         if (data instanceof UKDataBean) {
             UKDataBean dataBean = (UKDataBean) data;
             try {
-                request.add(esDataExchangeImpl.saveBulk(dataBean));
-                if (request.numberOfActions() % 1000 == 0) {
+                requestOperations.add(BulkOperation.of(op -> op.index(idx -> {
+                    IndexRequest indexRequest = esDataExchangeImpl.saveBulk(dataBean);
+                    return idx.index(indexRequest.index())
+                        .id(indexRequest.index())
+                        .document(indexRequest.document());
+                })));
+                if (requestOperations.size() % 1000 == 0) {
                     end();
                 }
             } catch (Exception e) {
@@ -53,7 +62,8 @@ public class DataBatProcess implements JPAProcess {
 
     @Override
     public void end() throws IOException {
-        MainContext.getContext().getBean(RestHighLevelClient.class).bulk(request, RequestOptions.DEFAULT);
-        request.requests().clear();
+        final BulkRequest request = new BulkRequest.Builder().operations(new ArrayList<>(requestOperations)).build();
+        requestOperations.clear();
+        MainContext.getContext().getBean(ElasticsearchClient.class).bulk(request);
     }
 }

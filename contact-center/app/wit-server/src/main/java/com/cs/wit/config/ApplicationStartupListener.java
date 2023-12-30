@@ -33,7 +33,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -41,83 +41,83 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ApplicationStartupListener implements ApplicationListener<ContextRefreshedEvent> {
     @NonNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchOperations operations;
 
     @Override
     public void onApplicationEvent(@NonNull ContextRefreshedEvent event) {
-        Optional.of(elasticsearchRestTemplate.indexOps(ContactNotes.class))
+        Optional.of(operations.indexOps(ContactNotes.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(Contacts.class))
+        Optional.of(operations.indexOps(Contacts.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(EntCustomer.class))
+        Optional.of(operations.indexOps(EntCustomer.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(Favorites.class))
+        Optional.of(operations.indexOps(Favorites.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(KbsTopic.class))
+        Optional.of(operations.indexOps(KbsTopic.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(KbsTopicComment.class))
+        Optional.of(operations.indexOps(KbsTopicComment.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(OrdersComment.class))
+        Optional.of(operations.indexOps(OrdersComment.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(PublishedReport.class))
+        Optional.of(operations.indexOps(PublishedReport.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(QuickReply.class))
+        Optional.of(operations.indexOps(QuickReply.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(Report.class))
+        Optional.of(operations.indexOps(Report.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(Topic.class))
+        Optional.of(operations.indexOps(Topic.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(WorkOrders.class))
+        Optional.of(operations.indexOps(WorkOrders.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();
                     indexOps.putMapping(indexOps.createMapping());
                 });
-        Optional.of(elasticsearchRestTemplate.indexOps(ChatMessage.class))
+        Optional.of(operations.indexOps(ChatMessage.class))
                 .filter(indexOps -> !indexOps.exists())
                 .ifPresent(indexOps -> {
                     indexOps.create();

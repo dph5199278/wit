@@ -10,7 +10,7 @@
  */
 package com.cs.wit.mq.config;
 
-import javax.jms.ConnectionFactory;
+import jakarta.jms.ConnectionFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -18,7 +18,7 @@ package com.cs.wit.persistence.es;
 
 import com.cs.wit.model.Topic;
 import java.util.List;
-import org.elasticsearch.index.query.BoolQueryBuilder;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.Page;
 
 public interface TopicEsCommonRepository {
@@ -30,5 +30,5 @@ public interface TopicEsCommonRepository {
 	
 	Page<Topic> getTopicByCateAndUser(String cate, String q, String user, int p, int ps) ;
 	
-	Page<Topic> getTopicByCon(BoolQueryBuilder booleanQueryBuilder, int p, int ps) ;
+	Page<Topic> getTopicByCon(BoolQuery.Builder booleanQueryBuilder, int p, int ps) ;
 }

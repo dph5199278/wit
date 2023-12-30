@@ -26,7 +26,7 @@ import com.cs.wit.persistence.repository.AreaTypeRepository;
 import com.cs.wit.persistence.repository.SysDicRepository;
 import com.cs.wit.util.Menu;
 import java.util.Date;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;

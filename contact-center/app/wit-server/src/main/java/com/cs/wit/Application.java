@@ -19,7 +19,7 @@ package com.cs.wit;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.config.AppCtxRefreshEventListener;
-import javax.servlet.MultipartConfigElement;
+import jakarta.servlet.MultipartConfigElement;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;

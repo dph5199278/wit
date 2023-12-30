@@ -17,8 +17,8 @@
 package com.cs.wit.persistence.hibernate;
 
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.criteria.CriteriaQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

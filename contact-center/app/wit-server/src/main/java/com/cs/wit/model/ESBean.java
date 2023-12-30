@@ -18,7 +18,7 @@
 
 package com.cs.wit.model;
 
-import javax.persistence.Transient;
+import jakarta.persistence.Transient;
 
 public abstract class ESBean {
 	private User user ;

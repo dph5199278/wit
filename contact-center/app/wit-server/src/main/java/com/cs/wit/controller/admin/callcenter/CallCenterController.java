@@ -24,7 +24,7 @@ import com.cs.wit.persistence.interfaces.CallCenterInterface;
 import com.cs.wit.persistence.repository.PbxHostRepository;
 import com.cs.wit.util.Menu;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;

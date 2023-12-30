@@ -1,0 +1,19 @@
+# win
+*.bat eol=crlf
+*.cmd eol=crlf
+
+# linux
+*.sh eol=lf
+
+# project
+*.txt eol=lf
+*.md eol=lf
+
+*.java eol=lf
+*.xml eol=lf
+*.yml eol=lf
+
+*.ftlh eol=lf
+*.html eol=lf
+*.js eol=lf
+*.css eol=lf

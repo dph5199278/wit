@@ -36,7 +36,7 @@ import com.google.gson.JsonParser;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

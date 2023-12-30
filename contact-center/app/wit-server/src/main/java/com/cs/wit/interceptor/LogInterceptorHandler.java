@@ -26,8 +26,8 @@ import com.cs.wit.persistence.repository.RequestLogRepository;
 import com.cs.wit.util.Menu;
 import java.util.Date;
 import java.util.Enumeration;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -57,12 +57,11 @@ public class LogInterceptorHandler implements AsyncHandlerInterceptor {
     @Override
     public void postHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler,
                            ModelAndView modelAndView) {
-        if (!(handler instanceof HandlerMethod)) {
+        if (!(handler instanceof HandlerMethod handlerMethod)) {
             log.debug("Request {} invoked with handler {}", request.getServletPath(), handler.getClass());
             return;
         }
 
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
         Object actualHandler = handlerMethod.getBean();
         RequestMapping obj = handlerMethod.getMethod().getAnnotation(RequestMapping.class);
         if (StringUtils.isNotBlank(request.getRequestURI()) && !(request.getRequestURI().startsWith("/message/ping") || request.getRequestURI().startsWith("/res/css") || request.getRequestURI().startsWith("/error") || request.getRequestURI().startsWith("/im/"))) {
@@ -115,11 +114,10 @@ public class LogInterceptorHandler implements AsyncHandlerInterceptor {
 
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
-        if (!(handler instanceof HandlerMethod)) {
+        if (!(handler instanceof HandlerMethod handlerMethod)) {
             log.debug("Request {} invoked with handler {}", request.getServletPath(), handler.getClass());
             return true;
         }
-        HandlerMethod handlerMethod = (HandlerMethod) handler;
         Object actualHandler = handlerMethod.getBean();
         if (actualHandler instanceof Handler) {
             ((Handler) actualHandler).setStartTime(System.currentTimeMillis());

@@ -22,7 +22,7 @@ import com.cs.wit.persistence.repository.ConsultInviteRepository;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

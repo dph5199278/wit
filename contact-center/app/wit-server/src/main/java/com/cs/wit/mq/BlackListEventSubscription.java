@@ -22,7 +22,7 @@ import com.cs.wit.cache.Cache;
 import com.cs.wit.mq.broker.BrokerPublisher;
 import com.cs.wit.persistence.repository.BlackListRepository;
 import com.google.gson.JsonObject;
-import javax.annotation.Resource;
+import jakarta.annotation.Resource;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;

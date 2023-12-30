@@ -16,8 +16,9 @@
  */
 package com.cs.wit.util.es;
 
-import static org.elasticsearch.index.query.QueryBuilders.rangeQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
+import co.elastic.clients.elasticsearch._types.query_dsl.Query;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
@@ -27,10 +28,7 @@ import com.cs.wit.persistence.impl.ESDataExchangeImpl;
 import java.io.IOException;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.Operator;
-import org.elasticsearch.index.query.QueryBuilder;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +36,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.elasticsearch.core.SearchHitSupport;
 import org.springframework.data.elasticsearch.core.SearchHits;
-import org.springframework.data.elasticsearch.core.query.Query;
 
 /**
  * The type Search tools.
@@ -46,37 +43,37 @@ import org.springframework.data.elasticsearch.core.query.Query;
 public class SearchTools {
 
     public static PageImpl<UKDataBean> search(String orgi, List<FormFilterItem> itemList, MetadataTable metadataTable, boolean loadRef, int p, int ps) throws IOException {
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder queryBuilder = QueryBuilders.bool();
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
 
-        BoolQueryBuilder orBuilder = new BoolQueryBuilder();
+        BoolQuery.Builder orBuilder = QueryBuilders.bool();
         int orNums = 0;
         for (FormFilterItem formFilterItem : itemList) {
-            QueryBuilder tempQueryBuilder = null;
-            if (formFilterItem.getField().equals("q")) {
-                tempQueryBuilder = new QueryStringQueryBuilder(formFilterItem.getValue()).defaultOperator(Operator.AND);
+            Query tempQueryBuilder = null;
+            if ("q".equals(formFilterItem.getField())) {
+                tempQueryBuilder = QueryBuilders.queryString().query(formFilterItem.getValue()).defaultOperator(Operator.And).build()._toQuery();
             } else {
                 switch (formFilterItem.getCond()) {
                     case "01":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).from(formFilterItem.getValue()).includeLower(false);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "02":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).from(formFilterItem.getValue()).includeLower(true);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "03":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).to(formFilterItem.getValue()).includeUpper(false);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "04":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).to(formFilterItem.getValue()).includeUpper(true);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "05":
-                        tempQueryBuilder = termQuery(formFilterItem.getField(), formFilterItem.getValue());
+                        tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
                         break;
                     case "06":
-                        tempQueryBuilder = termQuery(formFilterItem.getField(), formFilterItem.getValue());
+                        tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
                         break;
                     case "07":
-                        tempQueryBuilder = new QueryStringQueryBuilder(formFilterItem.getValue()).field(formFilterItem.getField()).defaultOperator(Operator.AND);
+                        tempQueryBuilder = QueryBuilders.queryString().query(formFilterItem.getValue()).fields(formFilterItem.getField()).defaultOperator(Operator.And).build()._toQuery();
                         break;
                     default:
                         break;
@@ -98,46 +95,46 @@ public class SearchTools {
             }
         }
         if (orNums > 0) {
-            queryBuilder.must(orBuilder);
+            queryBuilder.must(orBuilder.build()._toQuery());
         }
 
         return search(queryBuilder, metadataTable, loadRef, p, ps);
     }
 
     public static PageImpl<UKDataBean> dissearch(String orgi, List<FormFilterItem> itemList, MetadataTable metadataTable, int p, int ps) throws IOException {
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.must(termQuery("orgi", orgi));
-        queryBuilder.must(termQuery("status", MainContext.NamesDisStatusType.NOT.toString()));
-        queryBuilder.must(termQuery("validresult", "valid"));
+        BoolQuery.Builder queryBuilder = QueryBuilders.bool();
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.NOT.toString())));
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("validresult").value("valid")));
 
-        BoolQueryBuilder orBuilder = new BoolQueryBuilder();
+        BoolQuery.Builder orBuilder = QueryBuilders.bool();
         int orNums = 0;
         for (FormFilterItem formFilterItem : itemList) {
-            QueryBuilder tempQueryBuilder = null;
-            if (formFilterItem.getField().equals("q")) {
-                tempQueryBuilder = new QueryStringQueryBuilder(formFilterItem.getValue()).defaultOperator(Operator.AND);
+            Query tempQueryBuilder = null;
+            if ("q".equals(formFilterItem.getField())) {
+                tempQueryBuilder = QueryBuilders.queryString().query(formFilterItem.getValue()).defaultOperator(Operator.And).build()._toQuery();
             } else {
                 switch (formFilterItem.getCond()) {
                     case "01":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).from(formFilterItem.getValue()).includeLower(false);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "02":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).from(formFilterItem.getValue()).includeLower(true);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "03":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).to(formFilterItem.getValue()).includeUpper(false);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "04":
-                        tempQueryBuilder = rangeQuery(formFilterItem.getField()).to(formFilterItem.getValue()).includeUpper(true);
+                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
                         break;
                     case "05":
-                        tempQueryBuilder = termQuery(formFilterItem.getField(), formFilterItem.getValue());
+                        tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
                         break;
                     case "06":
-                        tempQueryBuilder = termQuery(formFilterItem.getField(), formFilterItem.getValue());
+                        tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
                         break;
                     case "07":
-                        tempQueryBuilder = new QueryStringQueryBuilder(formFilterItem.getValue()).field(formFilterItem.getField()).defaultOperator(Operator.AND);
+                        tempQueryBuilder = QueryBuilders.queryString().query(formFilterItem.getValue()).fields(formFilterItem.getField()).defaultOperator(Operator.And).build()._toQuery();
                         break;
                     default:
                         break;
@@ -159,44 +156,46 @@ public class SearchTools {
             }
         }
         if (orNums > 0) {
-            queryBuilder.must(orBuilder);
+            queryBuilder.must(orBuilder.build()._toQuery());
         }
         return search(queryBuilder, metadataTable, false, p, ps);
     }
 
     public static PageImpl<UKDataBean> recoversearch(String orgi, String cmd, String id, MetadataTable metadataTable, int p, int ps) throws IOException {
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.must(termQuery("orgi", orgi));
-        queryBuilder.mustNot(termQuery("status", MainContext.NamesDisStatusType.NOT.toString()));
-        queryBuilder.must(termQuery("validresult", "valid"));
+        BoolQuery.Builder queryBuilder = QueryBuilders.bool();
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
+        queryBuilder.mustNot(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.NOT.toString())));
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("validresult").value("valid")));
 
         switch (cmd) {
             case "actid":
-                queryBuilder.must(termQuery("actid", id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value(id)));
                 break;
             case "batid":
-                queryBuilder.must(termQuery("batid", id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("batid").value(id)));
                 break;
             case "taskid":
-                queryBuilder.must(termQuery("taskid", id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("taskid").value(id)));
                 break;
             case "filterid":
-                queryBuilder.must(termQuery("filterid", id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("filterid").value(id)));
                 break;
             case "agent":
-                queryBuilder.must(termQuery(Constants.CSKEFU_SYSTEM_DIS_AGENT, id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field(Constants.CSKEFU_SYSTEM_DIS_AGENT).value(id)));
                 break;
             case "skill":
-                queryBuilder.must(termQuery(Constants.CSKEFU_SYSTEM_DIS_ORGAN, id));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field(Constants.CSKEFU_SYSTEM_DIS_ORGAN).value(id)));
                 break;
             case "taskskill":
-                queryBuilder.must(termQuery("taskid", id)).must(termQuery("status", MainContext.NamesDisStatusType.DISAGENT.toString()));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("taskid").value(id)))
+                    .must(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.DISAGENT.toString())));
                 break;
             case "filterskill":
-                queryBuilder.must(termQuery("filterid", id)).must(termQuery("status", MainContext.NamesDisStatusType.DISAGENT.toString()));
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("filterid").value(id)))
+                    .must(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.DISAGENT.toString())));
                 break;
             default:
-                queryBuilder.must(termQuery("actid", "NOT_EXIST_KEY"));  //必须传入一个进来;
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value("NOT_EXIST_KEY")));  //必须传入一个进来;
         }
 
         return search(queryBuilder, metadataTable, false, p, ps);
@@ -207,10 +206,10 @@ public class SearchTools {
      *
      */
     public static PageImpl<UKDataBean> namesearch(String orgi, String phonenum) throws IOException {
-        BoolQueryBuilder queryBuilder = new BoolQueryBuilder();
-        queryBuilder.must(termQuery("orgi", orgi));
-        queryBuilder.must(termQuery("validresult", "valid"));
-        queryBuilder.must(termQuery("status", MainContext.NamesDisStatusType.DISAGENT.toString()));
+        BoolQuery.Builder queryBuilder = QueryBuilders.bool();
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("validresult").value("valid")));
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.DISAGENT.toString())));
         StringBuilder strb = new StringBuilder();
         if (!StringUtils.isBlank(phonenum)) {
             strb.append(phonenum);
@@ -220,21 +219,21 @@ public class SearchTools {
         } else {
             strb.append(Constants.CSKEFU_SYSTEM_NO_DAT);
         }
-        queryBuilder.must(new QueryStringQueryBuilder(strb.toString()).defaultOperator(Operator.OR));
+        queryBuilder.must(QueryBuilders.queryString().query(strb.toString()).defaultOperator(Operator.Or).build()._toQuery());
         return search(queryBuilder, 0, 1);
     }
 
     /**
      *
      */
-    public static PageImpl<UKDataBean> search(BoolQueryBuilder queryBuilder, int p, int ps) throws IOException {
+    public static PageImpl<UKDataBean> search(BoolQuery.Builder queryBuilder, int p, int ps) throws IOException {
         return search(queryBuilder, null, true, p, ps);
     }
 
     /**
      *
      */
-    private static PageImpl<UKDataBean> search(BoolQueryBuilder queryBuilder, MetadataTable metadataTable, boolean loadRef, int p, int ps) throws IOException {
+    private static PageImpl<UKDataBean> search(BoolQuery.Builder queryBuilder, MetadataTable metadataTable, boolean loadRef, int p, int ps) throws IOException {
         ESDataExchangeImpl esDataExchange = MainContext.getContext().getBean(ESDataExchangeImpl.class);
         return esDataExchange.findPageResult(queryBuilder, metadataTable, PageRequest.of(p, ps, Sort.Direction.ASC, "createtime"), loadRef);
     }
@@ -242,7 +241,7 @@ public class SearchTools {
     /**
      *
      */
-    public static PageImpl<UKDataBean> aggregation(BoolQueryBuilder queryBuilder, String aggField, boolean loadRef, int p, int ps) throws IOException {
+    public static PageImpl<UKDataBean> aggregation(BoolQuery.Builder queryBuilder, String aggField, boolean loadRef, int p, int ps) throws IOException {
         ESDataExchangeImpl esDataExchange = MainContext.getContext().getBean(ESDataExchangeImpl.class);
         return esDataExchange.findAllPageAggResult(queryBuilder, aggField, PageRequest.of(p, ps, Sort.Direction.ASC, "createtime"), loadRef, null);
     }
@@ -273,18 +272,6 @@ public class SearchTools {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Page unwrap search hits page.
-     *
-     * @param <T>        the type parameter
-     * @param searchHits the search hits
-     * @param query      the query
-     * @return the page
-     */
-    public static <T> Page<T> pageUnwrapSearchHits(SearchHits<T> searchHits, Query query) {
-        return pageUnwrapSearchHits(searchHits, query.getPageable());
     }
 
     /**

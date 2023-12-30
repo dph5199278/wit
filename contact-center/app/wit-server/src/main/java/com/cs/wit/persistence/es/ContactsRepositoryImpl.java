@@ -16,8 +16,10 @@
  */
 package com.cs.wit.persistence.es;
 
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
-
+import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
+import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
 import com.cs.wit.model.Contacts;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.UserRepository;
@@ -27,18 +29,13 @@ import java.util.Date;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
-import org.elasticsearch.index.query.BoolQueryBuilder;
-import org.elasticsearch.index.query.Operator;
-import org.elasticsearch.index.query.QueryBuilders;
-import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.index.query.RangeQueryBuilder;
-import org.elasticsearch.search.sort.FieldSortBuilder;
-import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
+import org.springframework.data.elasticsearch.client.elc.NativeQuery;
+import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -48,25 +45,25 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
     @NonNull
     private final UserRepository userRes;
     @NonNull
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+    private final ElasticsearchOperations operations;
 
     @Override
     public Page<Contacts> findByCreaterAndSharesAndOrgi(String creater, String shares, String orgi, boolean includeDeleteData, String q, Pageable page) {
 
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        BoolQueryBuilder boolQueryBuilder1 = new BoolQueryBuilder();
-        boolQueryBuilder1.should(termQuery("creater", creater));
-        boolQueryBuilder1.should(termQuery("shares", creater));
-        boolQueryBuilder1.should(termQuery("shares", "all"));
-        boolQueryBuilder.must(boolQueryBuilder1);
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        BoolQuery.Builder boolQueryBuilder1 = QueryBuilders.bool();
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("creater").value(creater)),
+            QueryBuilders.term(builder -> builder.field("shares").value(creater)), 
+            QueryBuilders.term(builder -> builder.field("shares").value("all")));
+        boolQueryBuilder.must(boolQueryBuilder1.build()._toQuery(),
+            QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (includeDeleteData) {
-            boolQueryBuilder.must(termQuery("datastatus", true));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.TRUE.toString())));
         } else {
-            boolQueryBuilder.must(termQuery("datastatus", false));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
         if (StringUtils.isNotBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
         return processQuery(boolQueryBuilder, page);
     }
@@ -74,32 +71,32 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
     @Override
     public Page<Contacts> findByCreaterAndSharesAndOrgi(String creater,
                                                         String shares, String orgi, Date begin, Date end, boolean includeDeleteData,
-                                                        BoolQueryBuilder boolQueryBuilder, String q, Pageable page) {
-        BoolQueryBuilder boolQueryBuilder1 = new BoolQueryBuilder();
-        boolQueryBuilder1.should(termQuery("creater", creater));
-        boolQueryBuilder1.should(termQuery("shares", creater));
-        boolQueryBuilder1.should(termQuery("shares", "all"));
-        boolQueryBuilder.must(boolQueryBuilder1);
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+                                                        BoolQuery.Builder boolQueryBuilder, String q, Pageable page) {
+        BoolQuery.Builder boolQueryBuilder1 = QueryBuilders.bool();
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("creater").value(creater)));
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("shares").value(creater)));
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("shares").value("all")));
+        boolQueryBuilder.must(boolQueryBuilder1.build()._toQuery());
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (includeDeleteData) {
-            boolQueryBuilder.must(termQuery("datastatus", true));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.TRUE.toString())));
         } else {
-            boolQueryBuilder.must(termQuery("datastatus", false));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery("createtime");
+        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
         if (begin != null) {
-            rangeQuery.from(begin.getTime());
+            rangeQuery.from(String.valueOf(begin.getTime()));
         }
         if (end != null) {
-            rangeQuery.to(end.getTime());
+            rangeQuery.to(String.valueOf(end.getTime()));
         } else {
-            rangeQuery.to(new Date().getTime());
+            rangeQuery.to(String.valueOf(System.currentTimeMillis()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery);
+            boolQueryBuilder.must(rangeQuery.build()._toQuery());
         }
         if (StringUtils.isNotBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
         return processQuery(boolQueryBuilder, page);
     }
@@ -107,64 +104,65 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
     @Override
     public Page<Contacts> findByOrgi(String orgi, boolean includeDeleteData,
                                      String q, Pageable page) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (includeDeleteData) {
-            boolQueryBuilder.must(termQuery("datastatus", true));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.TRUE.toString())));
         } else {
-            boolQueryBuilder.must(termQuery("datastatus", false));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
         if (StringUtils.isNotBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
         return processQuery(boolQueryBuilder, page);
     }
 
     @Override
     public Page<Contacts> findByCreaterAndSharesAndOrgi(String creater, String shares, String orgi, Date begin, Date end, boolean includeDeleteData, String q, Pageable page) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        BoolQueryBuilder boolQueryBuilder1 = new BoolQueryBuilder();
-        boolQueryBuilder1.should(termQuery("creater", creater));
-        boolQueryBuilder1.should(termQuery("shares", creater));
-        boolQueryBuilder1.should(termQuery("shares", "all"));
-        boolQueryBuilder.must(boolQueryBuilder1);
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        BoolQuery.Builder boolQueryBuilder1 = QueryBuilders.bool();
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("creater").value(creater)));
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("shares").value(creater)));
+        boolQueryBuilder1.should(QueryBuilders.term(builder -> builder.field("shares").value("all")));
+        boolQueryBuilder.must(boolQueryBuilder1.build()._toQuery());
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (includeDeleteData) {
-            boolQueryBuilder.must(termQuery("datastatus", true));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.TRUE.toString())));
         } else {
-            boolQueryBuilder.must(termQuery("datastatus", false));
+            boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQueryBuilder rangeQuery = QueryBuilders.rangeQuery("createtime");
+        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
         if (begin != null) {
-            rangeQuery.from(begin.getTime());
+            rangeQuery.from(String.valueOf(begin.getTime()));
         }
         if (end != null) {
-            rangeQuery.to(end.getTime());
+            rangeQuery.to(String.valueOf(end.getTime()));
         } else {
-            rangeQuery.to(new Date().getTime());
+            rangeQuery.to(String.valueOf(System.currentTimeMillis()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery);
+            boolQueryBuilder.must(rangeQuery.build()._toQuery());
         }
         if (StringUtils.isNotBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
         return processQuery(boolQueryBuilder, page);
     }
 
 
-    private Page<Contacts> processQuery(BoolQueryBuilder boolQueryBuilder, Pageable page) {
-        NativeSearchQueryBuilder searchQueryBuilder = new NativeSearchQueryBuilder().withQuery(boolQueryBuilder).withSort(new FieldSortBuilder("creater").unmappedType("boolean").order(SortOrder.DESC)).withSort(new FieldSortBuilder("name").unmappedType("string").order(SortOrder.DESC));
+    private Page<Contacts> processQuery(BoolQuery.Builder boolQueryBuilder, Pageable page) {
+        NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
+            .withSort(Sort.by(Order.desc("creater"), Order.desc("name")));
 
         searchQueryBuilder.withPageable(page);
 
         Page<Contacts> entCustomerList = null;
-        if (elasticsearchRestTemplate.indexOps(Contacts.class).exists()) {
-            final NativeSearchQuery searchQuery = searchQueryBuilder.build();
+        if (operations.indexOps(Contacts.class).exists()) {
+            final NativeQuery searchQuery = searchQueryBuilder.build();
             entCustomerList = SearchTools.pageUnwrapSearchHits(
-                elasticsearchRestTemplate.search(searchQuery, Contacts.class,
-                    elasticsearchRestTemplate.getIndexCoordinatesFor(Contacts.class)),
-                searchQuery);
+                operations.search(searchQuery, Contacts.class,
+                    operations.getIndexCoordinatesFor(Contacts.class)),
+                page);
         }
         if (entCustomerList != null && entCustomerList.getContent().size() > 0) {
             List<String> ids = new ArrayList<>();
@@ -188,11 +186,11 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
 
     @Override
     public Page<Contacts> findByDataAndOrgi(String orgi, String q, Pageable page) {
-        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
-        boolQueryBuilder.must(termQuery("datastatus", false));
-        boolQueryBuilder.must(termQuery("orgi", orgi));
+        BoolQuery.Builder boolQueryBuilder = QueryBuilders.bool();
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         if (StringUtils.isNotBlank(q)) {
-            boolQueryBuilder.must(new QueryStringQueryBuilder(q).defaultOperator(Operator.AND));
+            boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
         }
         return processQuery(boolQueryBuilder, page);
     }

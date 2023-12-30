@@ -13,7 +13,7 @@ package com.cs.wit.mq.broker;
 
 import com.google.gson.JsonObject;
 import java.util.Map;
-import javax.jms.Destination;
+import jakarta.jms.Destination;
 import org.apache.activemq.artemis.api.core.Message;
 import org.slf4j.Logger;
 import org.springframework.jms.core.JmsTemplate;
