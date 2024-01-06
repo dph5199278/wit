@@ -1,4 +1,4 @@
-<h3 style="text-align:center">
+<h3 align="center" style="text-align:center">
   <b>
   Initialization by <a href="https://github.com/zhangyanbo2007/youkefu">youkefu</a>.
   <br>
