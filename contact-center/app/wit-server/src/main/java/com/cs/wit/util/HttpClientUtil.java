@@ -19,15 +19,16 @@ package com.cs.wit.util;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import javax.net.ssl.SSLContext;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -93,38 +94,18 @@ public class HttpClientUtil {
      * @return 
      * @throws IOException 
      */  
-    public static String doGet(String url, Map<String, Object> params) throws IOException {  
-        String apiUrl = url;  
-        StringBuffer param = new StringBuffer();  
-        int i = 0;  
-        for (String key : params.keySet()) {  
-            if (i == 0)  
-                param.append("?");  
-            else  
-                param.append("&");  
-            param.append(key).append("=").append(params.get(key));  
-            i++;  
-        }  
-        apiUrl += param;  
-        String result = null;  
-        CloseableHttpClient httpclient = HttpClients.createDefault();  
-        try {  
-            HttpGet httpPost = new HttpGet(apiUrl);  
-            HttpResponse response = httpclient.execute(httpPost);  
-  
-            HttpEntity entity = response.getEntity();  
-            if (entity != null) {  
-                InputStream instream = entity.getContent();  
-                result = IOUtils.toString(instream, "UTF-8");  
-            }  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }finally {
-        	if(httpclient!=null) {
-        		httpclient.close();
-        	}
+    public static String doGet(String url, Map<String, Object> params) throws IOException {
+        String param = params.entrySet()
+            .stream()
+            .map(entry -> String.format("%s=%s", entry.getKey(), entry.getValue()))
+            .collect(Collectors.joining("&", "?", ""));
+
+        HttpGet httpPost = new HttpGet(String.format("%s%s", url, param));
+        try (CloseableHttpClient httpclient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpclient.execute(httpPost);
+            InputStream inputStream = response.getEntity().getContent()) {
+            return IOUtils.toString(inputStream, StandardCharsets.UTF_8);
         }
-        return result;  
     }  
   
     /**
@@ -133,36 +114,21 @@ public class HttpClientUtil {
      * @param params 参数map
      * @return
      */
-    public static String doPost(String apiUrl, Map<String, Object> params) {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        String httpStr = null;
+    public static String doPost(String apiUrl, Map<String, Object> params) throws IOException {
         HttpPost httpPost = new HttpPost(apiUrl);
-        CloseableHttpResponse response = null;
+        httpPost.setConfig(requestConfig);
 
-        try {
-            httpPost.setConfig(requestConfig);
-            List<NameValuePair> pairList = new ArrayList<>(params.size());
-            for (Map.Entry<String, Object> entry : params.entrySet()) {
-                NameValuePair pair = new BasicNameValuePair(entry.getKey(), entry
-                        .getValue().toString());
-                pairList.add(pair);
-            }
-            httpPost.setEntity(new UrlEncodedFormEntity(pairList, Charset.forName("UTF-8")));
-            response = httpClient.execute(httpPost);
+        List<NameValuePair> pairList = params
+            .entrySet()
+            .stream()
+            .map(entry -> new BasicNameValuePair(entry.getKey(), entry.getValue().toString()))
+            .collect(Collectors.toList());
+        httpPost.setEntity(new UrlEncodedFormEntity(pairList, StandardCharsets.UTF_8));
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(httpPost);) {
             HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+            return EntityUtils.toString(entity, "UTF-8");
         }
-        return httpStr;
     }
 
     /** 
@@ -172,37 +138,19 @@ public class HttpClientUtil {
      * @return 
      * @throws IOException 
      */
-    public static String doPost(String apiUrl, String json) throws IOException {  
-        CloseableHttpClient httpClient = HttpClients.createDefault();  
-        String httpStr = null;  
-        HttpPost httpPost = new HttpPost(apiUrl);  
-        CloseableHttpResponse response = null;  
-  
-        try {
+    public static String doPost(String apiUrl, String json) throws IOException {
+        HttpPost httpPost = new HttpPost(apiUrl);
+        httpPost.setConfig(requestConfig);
+        StringEntity stringEntity = new StringEntity(json, "UTF-8");//解决中文乱码问题
+        stringEntity.setContentEncoding("UTF-8");
+        stringEntity.setContentType("application/json");
+        httpPost.setEntity(stringEntity);
 
-            httpPost.setConfig(requestConfig);  
-            StringEntity stringEntity = new StringEntity(json,"UTF-8");//解决中文乱码问题  
-            stringEntity.setContentEncoding("UTF-8");  
-            stringEntity.setContentType("application/json");
-            httpPost.setEntity(stringEntity);  
-            response = httpClient.execute(httpPost);  
-            HttpEntity entity = response.getEntity();  
-            httpStr = EntityUtils.toString(entity, "UTF-8");  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        } finally {  
-            if (response != null) {  
-                try {  
-                    EntityUtils.consume(response.getEntity());  
-                } catch (IOException e) {  
-                    e.printStackTrace();  
-                }  
-            }
-            if(httpClient!=null) {
-            	httpClient.close();
-            }
-        }  
-        return httpStr;  
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(httpPost)) {
+            HttpEntity entity = response.getEntity();
+            return EntityUtils.toString(entity, "UTF-8");
+        }
     }
 
     /**
@@ -213,40 +161,19 @@ public class HttpClientUtil {
      * @throws IOException
      */
     public static String doPostToSkype(String apiUrl, String json) throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        String httpStr = null;
         HttpPost httpPost = new HttpPost(apiUrl);
-        CloseableHttpResponse response = null;
+        httpPost.setHeader("Authorization", "Basic Y2hhdG9wZXJhOjEyMw==");
+        httpPost.setConfig(requestConfig);
+        StringEntity stringEntity = new StringEntity(json,"UTF-8");//解决中文乱码问题
+        stringEntity.setContentEncoding("UTF-8");
+        stringEntity.setContentType("application/json");
+        httpPost.setEntity(stringEntity);
 
-
-
-        try {
-            httpPost.setHeader("Authorization", "Basic Y2hhdG9wZXJhOjEyMw==");
-
-            httpPost.setConfig(requestConfig);
-
-            StringEntity stringEntity = new StringEntity(json,"UTF-8");//解决中文乱码问题
-            stringEntity.setContentEncoding("UTF-8");
-            stringEntity.setContentType("application/json");
-            httpPost.setEntity(stringEntity);
-            response = httpClient.execute(httpPost);
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(httpPost)) {
             HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(httpClient!=null) {
-                httpClient.close();
-            }
+            return EntityUtils.toString(entity, "UTF-8");
         }
-        return httpStr;
     }
 
     /**
@@ -257,35 +184,18 @@ public class HttpClientUtil {
      * @throws IOException
      */
     public static String doPost(String apiUrl, String[] json) throws IOException {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        String httpStr = null;
         HttpPost httpPost = new HttpPost(apiUrl);
-        CloseableHttpResponse response = null;
+        httpPost.setConfig(requestConfig);
+        StringEntity stringEntity = new StringEntity(String.valueOf(json), "UTF-8");//解决中文乱码问题
+        stringEntity.setContentEncoding("UTF-8");
+        stringEntity.setContentType("application/json");
+        httpPost.setEntity(stringEntity);
 
-        try {
-            httpPost.setConfig(requestConfig);
-            StringEntity stringEntity = new StringEntity(String.valueOf(json),"UTF-8");//解决中文乱码问题
-            stringEntity.setContentEncoding("UTF-8");
-            stringEntity.setContentType("application/json");
-            httpPost.setEntity(stringEntity);
-            response = httpClient.execute(httpPost);
+        try (CloseableHttpClient httpClient = HttpClients.createDefault();
+            CloseableHttpResponse response = httpClient.execute(httpPost)) {
             HttpEntity entity = response.getEntity();
-            httpStr = EntityUtils.toString(entity, "UTF-8");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (response != null) {
-                try {
-                    EntityUtils.consume(response.getEntity());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            if(httpClient!=null) {
-                httpClient.close();
-            }
+            return EntityUtils.toString(entity, "UTF-8");
         }
-        return httpStr;
     }
 
     /** 
