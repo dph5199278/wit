@@ -108,8 +108,8 @@ services:
 
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
-    # https://docs.spring.io/spring-data/elasticsearch/docs/5.0.12/reference/html/#preface.versions
-    image: elastic/elasticsearch:8.5.3
+    # https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html
+    image: elastic/elasticsearch:8.7.1
     restart: always
     ports:
       - "9200:9200"
@@ -126,4 +126,3 @@ services:
       - reindex.remote.whitelist=localhost:*, 127.0.0.1:*, 192.168.*:9200, 10.*:9200, 172.*:9200
     volumes:
       - ./database/elasticsearch/data:/usr/share/elasticsearch/data
-      - ./database/elasticsearch/config:/usr/share/elasticsearch/config

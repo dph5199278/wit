@@ -38,12 +38,9 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(value = "SELECT * FROM cs_user WHERE sipaccount = ?1 AND DATASTATUS = ?2 LIMIT 1", nativeQuery = true)
     Optional<User> findOneBySipaccountAndDatastatus(String sipaccount, boolean datastatus);
 
-    @Query(value = "SELECT u FROM User u WHERE sipaccount <> '' AND datastatus = 0")
-    List<User> findBySipaccountIsNotNullAndDatastatusIsFalse();
-
     @Query(value = "SELECT u FROM User u WHERE u.callcenter = 1 " +
             "AND u.datastatus = 0 " +
-            "AND (:users is null OR u.id IN :users)")
+            "AND (:users is null OR u.id IN :users)", nativeQuery = true)
     List<User> findAllByCallcenterIsTrueAndDatastatusIsFalseAndIdIn(@Param("users") List<String> users);
 
     User findByUsernameAndDatastatus(String username, boolean datastatus);

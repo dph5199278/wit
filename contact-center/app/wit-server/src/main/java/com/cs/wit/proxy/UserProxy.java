@@ -401,7 +401,10 @@ public class UserProxy {
 
         final List<String> users = findUserIdsInOrgan(organ);
 
-        if (users == null) return null;
+        if(null == users
+        || users.isEmpty()) {
+            return null;
+        }
 
         return userRes.findAllByCallcenterIsTrueAndDatastatusIsFalseAndIdIn(users);
 
