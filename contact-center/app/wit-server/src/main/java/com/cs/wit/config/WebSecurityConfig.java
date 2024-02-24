@@ -1,6 +1,7 @@
 /*
  * Copyright (C) 2017 优客服-多渠道客服系统
  * Modifications copyright (C) 2018-2019 Chatopera Inc, <https://www.chatopera.com>
+ * Modifications copyright (C) 2022-2024 Dely<https://github.com/dph5199278>
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +22,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.servlet.util.matcher.MvcRequestMatcher;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
-import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 /**
  * @author Dely
@@ -38,21 +38,15 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http,
         Filter tokenInfoTokenFilterSecurityInterceptor,
-        Filter apiTokenFilterSecurityInterceptor,
-        HandlerMappingIntrospector introspector) throws Exception {
-        MvcRequestMatcher.Builder mvcMatcherBuilder = new MvcRequestMatcher.Builder(introspector);
-        // https://github.com/spring-projects/spring-security/issues/13568
-        http.addFilterAfter(tokenInfoTokenFilterSecurityInterceptor, BasicAuthenticationFilter.class)
-            .authorizeHttpRequests(authorize -> authorize.requestMatchers(mvcMatcherBuilder.pattern("/**"))
-                .permitAll()
-            )
-            .csrf()
-            .csrfTokenRequestHandler(new CryptoCsrfTokenRequestAttributeHandler())
-            .and()
-            .headers().frameOptions().disable().and()
+        Filter apiTokenFilterSecurityInterceptor) throws Exception {
+        return http.addFilterAfter(tokenInfoTokenFilterSecurityInterceptor, BasicAuthenticationFilter.class)
             .addFilterAfter(apiTokenFilterSecurityInterceptor, BasicAuthenticationFilter.class)
+            // https://github.com/spring-projects/spring-security/issues/13568
+            .authorizeHttpRequests(authorize -> authorize.requestMatchers("/**").permitAll())
+            .csrf(csrf -> csrf.csrfTokenRequestHandler(new CryptoCsrfTokenRequestAttributeHandler()))
+            .headers(headers -> headers.frameOptions(FrameOptionsConfig::disable))
+            .build()
             ;
-        return http.build();
     }
 
     @Bean("tokenInfoTokenFilterSecurityInterceptor")
@@ -75,7 +69,7 @@ public class WebSecurityConfig {
 //        return new DelegateRequestMatchingFilter(autoConfig , configprops , beans , dump , env , health , info , mappings , metrics , trace, druid);
         return new DelegateRequestMatchingFilter(autoConfig , configprops , beans , dump , env , mappings , trace, druid);
     }
-    
+
     @Bean("apiTokenFilterSecurityInterceptor")
     public Filter apiTokenFilterSecurityInterceptor() {
         return new ApiRequestMatchingFilter(new AntPathRequestMatcher("/api/**"));
