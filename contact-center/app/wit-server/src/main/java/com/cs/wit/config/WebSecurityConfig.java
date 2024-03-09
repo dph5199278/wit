@@ -26,7 +26,6 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 /**
  * @author Dely
@@ -51,23 +50,31 @@ public class WebSecurityConfig {
 
     @Bean("tokenInfoTokenFilterSecurityInterceptor")
     public Filter tokenInfoTokenFilterSecurityInterceptor() {
-        RequestMatcher autoConfig = new AntPathRequestMatcher("/autoconfig/**");
-        RequestMatcher configprops = new AntPathRequestMatcher("/configprops/**");
-        RequestMatcher beans = new AntPathRequestMatcher("/beans/**");
-        RequestMatcher dump = new AntPathRequestMatcher("/dump/**");
-        RequestMatcher env = new AntPathRequestMatcher("/env/**");
-        RequestMatcher info = new AntPathRequestMatcher("/info/**");
-        RequestMatcher mappings = new AntPathRequestMatcher("/mappings/**");
-        RequestMatcher trace = new AntPathRequestMatcher("/trace/**");
-        RequestMatcher druid = new AntPathRequestMatcher("/druid/**");
-
-        /**
-         * Bypass actuator api
-         */
-//        RequestMatcher health = new AntPathRequestMatcher("/health/**");
-//        RequestMatcher metrics = new AntPathRequestMatcher("/metrics/**");
-//        return new DelegateRequestMatchingFilter(autoConfig , configprops , beans , dump , env , health , info , mappings , metrics , trace, druid);
-        return new DelegateRequestMatchingFilter(autoConfig , configprops , beans , dump , env , mappings , trace, druid);
+        return DelegateRequestMatchingFilter.builder()
+            // autoConfig
+            .addRequestMatcher(new AntPathRequestMatcher("/autoconfig/**"))
+            // configprops
+            .addRequestMatcher(new AntPathRequestMatcher("/configprops/**"))
+            // beans
+            .addRequestMatcher(new AntPathRequestMatcher("/beans/**"))
+            // dump
+            .addRequestMatcher(new AntPathRequestMatcher("/dump/**"))
+            // env
+            .addRequestMatcher(new AntPathRequestMatcher("/env/**"))
+            // health(Bypass actuator api)
+            //.addRequestMatcher(new AntPathRequestMatcher("/health/**"))
+            // info
+            //.addRequestMatcher(new AntPathRequestMatcher("/info/**"))
+            // mappings
+            .addRequestMatcher(new AntPathRequestMatcher("/mappings/**"))
+            // metrics(Bypass actuator api)
+            //.addRequestMatcher(new AntPathRequestMatcher("/metrics/**"))
+            // trace
+            .addRequestMatcher(new AntPathRequestMatcher("/trace/**"))
+            // druid
+            .addRequestMatcher(new AntPathRequestMatcher("/druid/**"))
+            .build()
+            ;
     }
 
     @Bean("apiTokenFilterSecurityInterceptor")
