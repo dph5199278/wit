@@ -83,7 +83,7 @@ public class AgentSummaryController extends Handler {
         Page<AgentServiceSummary> page = serviceSummaryRes.findAll((Specification<AgentServiceSummary>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
             list.add(cb.equal(root.get("orgi").as(String.class), orgi));
-            list.add(cb.equal(root.get("process").as(boolean.class), 0));
+            list.add(cb.equal(root.get("process").as(Integer.class), 0));
             list.add(cb.notEqual(root.get("channel").as(String.class), MainContext.ChannelType.PHONE.toString()));
             try {
                 if (!StringUtils.isBlank(begin) && begin.matches("[\\d]{4}-[\\d]{2}-[\\d]{2}")) {
@@ -182,7 +182,7 @@ public class AgentSummaryController extends Handler {
         final String orgi = super.getOrgi(request);
         Page<AgentServiceSummary> page = serviceSummaryRes.findAll((Specification<AgentServiceSummary>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
-            list.add(cb.and(cb.equal(root.get("process").as(boolean.class), 0)));
+            list.add(cb.and(cb.equal(root.get("process").as(Integer.class), 0)));
             list.add(cb.equal(root.get("orgi").as(String.class), orgi));
             list.add(cb.and(cb.notEqual(root.get("channel").as(String.class), MainContext.ChannelType.PHONE.toString())));
             try {

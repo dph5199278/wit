@@ -81,7 +81,7 @@ public class ProcessedSummaryController extends Handler {
         final String orgi = super.getOrgi(request);
         Page<AgentServiceSummary> page = serviceSummaryRes.findAll((Specification<AgentServiceSummary>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
-            list.add(cb.equal(root.get("process").as(boolean.class), 1));
+            list.add(cb.equal(root.get("process").as(Integer.class), 1));
             list.add(cb.equal(root.get("orgi").as(String.class), orgi));
             list.add(cb.notEqual(root.get("channel").as(String.class), MainContext.ChannelType.PHONE.toString()));
             if (!StringUtils.isBlank(ani)) {
@@ -191,7 +191,7 @@ public class ProcessedSummaryController extends Handler {
         final String orgi = super.getOrgi(request);
         Page<AgentServiceSummary> page = serviceSummaryRes.findAll((Specification<AgentServiceSummary>) (root, query, cb) -> {
             List<Predicate> list = new ArrayList<>();
-            list.add(cb.equal(root.get("process").as(boolean.class), 1));
+            list.add(cb.equal(root.get("process").as(Integer.class), 1));
             list.add(cb.equal(root.get("orgi").as(String.class), orgi));
             if (!StringUtils.isBlank(ani)) {
                 list.add(cb.equal(root.get("ani").as(String.class), ani));
