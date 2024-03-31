@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.build.targetEncoding>${encoding}</project.build.targetEncoding>
 
-        <java.version>17</java.version>
+        <java.version>21</java.version>
 
         <spring-boot.version>3.1.9</spring-boot.version>
 
@@ -436,6 +436,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven-compiler-plugin.version}</version>
                     <configuration>
+                        <parameters>true</parameters>
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                         <encoding>${encoding}</encoding>
