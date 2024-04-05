@@ -16,7 +16,9 @@
  */
 package com.cs.wit.config;
 
+import com.corundumstudio.socketio.AuthorizationResult;
 import com.corundumstudio.socketio.Configuration;
+import com.corundumstudio.socketio.SocketConfig;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import com.cs.wit.basic.TextEncryptor;
@@ -49,8 +51,6 @@ public class MessagingServerConfigure {
     @Value("${uk.im.server.threads:100}")
     private int threads;
 
-    private SocketIOServer server;
-
     @Autowired
     private TextEncryptor encryptor;
 
@@ -66,41 +66,49 @@ public class MessagingServerConfigure {
     @Bean
     public SocketIOServer socketIOServer() throws NoSuchAlgorithmException, IOException {
         Configuration config = new Configuration();
-//		config.setHostname("localhost");
+        // port
         config.setPort(port);
-
+        // worker threads
+        config.setWorkerThreads(threads);
+        // anyone to authorization
+        config.setAuthorizationListener(data -> new AuthorizationResult(true));
+        // use epoll by os is linux
         config.setUseLinuxNativeEpoll("Linux".equalsIgnoreCase(System.getProperty("os.name")));
-//		config.getSocketConfig().setReuseAddress(true);
-//		config.setSocketConfig(new SocketConfig());
-//		config.setOrigin("*");
+        // exception listener
         config.setExceptionListener(new InstantMessagingExceptionListener());
+        // store factory
+		    //config.setStoreFactory(new HazelcastStoreFactory());
 
+        final SocketConfig socketConfig = config.getSocketConfig();
+        // reuse address
+        socketConfig.setReuseAddress(true);
+        // close delay time
+        socketConfig.setSoLinger(0);
+        // disable nagle(send now)
+        socketConfig.setTcpNoDelay(true);
+        // TCP keep alive
+        socketConfig.setTcpKeepAlive(true);
+
+        // SSL
         File sslFile = new File(path, "ssl/https.properties");
         if (sslFile.exists()) {
             Properties sslProperties = new Properties();
-            FileInputStream in = new FileInputStream(sslFile);
-            sslProperties.load(in);
-            in.close();
-            if (StringUtils.isNotBlank(sslProperties.getProperty("key-store")) && StringUtils.isNotBlank(
-                    sslProperties.getProperty("key-store-password"))) {
-                config.setKeyStorePassword(encryptor.decryption(sslProperties.getProperty("key-store-password")));
+            try (FileInputStream in = new FileInputStream(sslFile)) {
+                sslProperties.load(in);
+            }
+            final String keyStore = sslProperties.getProperty("key-store");
+            final String keyStorePassword = sslProperties.getProperty("key-store-password");
+            if (StringUtils.isNotBlank(keyStore)
+                && StringUtils.isNotBlank(keyStorePassword)) {
+                config.setKeyStorePassword(encryptor.decryption(keyStorePassword));
                 InputStream stream = new FileInputStream(
-                        new File(path, "ssl/" + sslProperties.getProperty("key-store")));
+                        new File(path, "ssl/" + keyStore));
                 config.setKeyStore(stream);
             }
         }
 
-
-//	    config.setSSLProtocol("https");
-        config.setWorkerThreads(threads);
-//		config.setStoreFactory(new HazelcastStoreFactory());
-        config.setAuthorizationListener(data -> true);
-        config.getSocketConfig().setReuseAddress(true);
-        config.getSocketConfig().setSoLinger(0);
-        config.getSocketConfig().setTcpNoDelay(true);
-        config.getSocketConfig().setTcpKeepAlive(true);
-
-        return server = new SocketIOServer(config);
+        // build socket
+        return new SocketIOServer(config);
     }
 
     @Bean
