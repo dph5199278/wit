@@ -109,7 +109,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html
-    image: elastic/elasticsearch:8.7.1
+    image: elastic/elasticsearch:8.10.4
     restart: always
     ports:
       - "9200:9200"
