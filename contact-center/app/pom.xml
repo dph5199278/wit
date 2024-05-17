@@ -205,7 +205,7 @@
             <dependency>
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
-                <version>8.5.7</version>
+                <version>8.5.10</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
