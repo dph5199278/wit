@@ -1,9 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.cs.wit</groupId>
     <artifactId>contact-center</artifactId>
     <version>1.0.0</version>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>3.2.5</version>
+    </parent>
+    <name>dely-contact-center</name>
+    <description>智能客服：多渠道智能客服系统</description>
+    <packaging>pom</packaging>
+
     <modules>
         <module>wit-core</module>
         <module>wit-database</module>
@@ -15,21 +24,48 @@
         <module>wit-plugin</module>
         <module>wit-redis</module>
     </modules>
-    <packaging>pom</packaging>
-    <name>dely-contact-center</name>
-    <description>智能客服：多渠道智能客服系统</description>
+
     <properties>
         <encoding>UTF-8</encoding>
         <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
         <project.build.targetEncoding>${encoding}</project.build.targetEncoding>
 
         <java.version>21</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
 
-        <spring-boot.version>3.2.5</spring-boot.version>
-
-        <artemis.version>2.31.2</artemis.version>
+        <!-- tools -->
+        <bcprov.version>1.76</bcprov.version>
         <fastjson2.version>2.0.41</fastjson2.version>
+        <guava.version>33.0.0-jre</guava.version>
+        <hutool.version>6.0.0-M11</hutool.version>
+        <ip2region.version>2.7.0</ip2region.version>
+        <jasypt.version>1.9.3</jasypt.version>
+        <pinyin4j.version>2.6.1</pinyin4j.version>
+        <poi-ooxml.version>5.2.4</poi-ooxml.version>
+        <snakeyaml.version>2.2</snakeyaml.version>
 
+        <!-- message queue -->
+        <artemis.version>2.31.2</artemis.version>
+
+        <!-- sql -->
+        <mysql.version>8.2.0</mysql.version>
+        <druid-spring-boot-3-starter.version>1.2.21</druid-spring-boot-3-starter.version>
+
+        <!-- elasticsearch -->
+        <elasticsearch-client.version>8.10.4</elasticsearch-client.version>
+
+        <!-- Websocket -->
+        <netty-socketio.version>2.0.3</netty-socketio.version>
+
+        <wechat-mp.version>4.6.0</wechat-mp.version>
+        <ali-sdk-core.version>4.6.3</ali-sdk-core.version>
+        <ali-sms-sdk.version>2.2.1</ali-sms-sdk.version>
+
+        <!-- OSS -->
+        <minio.version>8.5.10</minio.version>
+
+        <!-- maven plugin -->
         <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
@@ -96,93 +132,75 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- tools -->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
             </dependency>
-
             <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>2.2</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
-
             <!-- Hutool -->
             <dependency>
                 <groupId>org.dromara.hutool</groupId>
                 <artifactId>hutool-bom</artifactId>
-                <version>6.0.0-M11</version>
+                <version>${hutool.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <!-- SQL -->
+            <!-- ip -->
             <dependency>
-                <groupId>com.mysql</groupId>
-                <artifactId>mysql-connector-j</artifactId>
-                <version>8.2.0</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.protobuf</groupId>
-                        <artifactId>protobuf-java</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.lionsoul</groupId>
+                <artifactId>ip2region</artifactId>
+                <version>${ip2region.version}</version>
             </dependency>
-            <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
+            <dependency>
+                <groupId>org.jasypt</groupId>
+                <artifactId>jasypt</artifactId>
+                <version>${jasypt.version}</version>
+            </dependency>
+            <!-- pinyin4j -->
+            <dependency>
+                <groupId>io.github.tokenjan</groupId>
+                <artifactId>pinyin4j</artifactId>
+                <version>${pinyin4j.version}</version>
+            </dependency>
+            <!-- POI -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi-ooxml.version}</version>
+            </dependency>
+
+            <!-- sql -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-3-starter</artifactId>
-                <version>1.2.21</version>
+                <version>${druid-spring-boot-3-starter.version}</version>
             </dependency>
 
             <!-- Websocket -->
             <dependency>
                 <groupId>com.corundumstudio.socketio</groupId>
                 <artifactId>netty-socketio</artifactId>
-                <version>2.0.3</version>
-            </dependency>
-
-            <!-- POI -->
-            <dependency>
-                <groupId>org.apache.poi</groupId>
-                <artifactId>poi-ooxml</artifactId>
-                <version>5.2.4</version>
-            </dependency>
-
-            <!-- Jasypt -->
-            <dependency>
-                <groupId>org.jasypt</groupId>
-                <artifactId>jasypt</artifactId>
-                <version>1.9.3</version>
-            </dependency>
-
-            <!-- pinyin4j -->
-            <dependency>
-                <groupId>io.github.tokenjan</groupId>
-                <artifactId>pinyin4j</artifactId>
-                <version>2.6.1</version>
+                <version>${netty-socketio.version}</version>
             </dependency>
 
             <!-- Wechat -->
             <dependency>
                 <groupId>com.github.binarywang</groupId>
                 <artifactId>weixin-java-mp</artifactId>
-                <version>4.6.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.thoughtworks.xstream</groupId>
-                <artifactId>xstream</artifactId>
-                <version>1.4.20</version>
+                <version>${wechat-mp.version}</version>
             </dependency>
 
             <!-- SMS -->
             <dependency>
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>4.6.3</version>
+                <version>${ali-sdk-core.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.bouncycastle</groupId>
@@ -193,24 +211,19 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk18on</artifactId>
-                <version>1.76</version>
+                <version>${bcprov.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-                <version>2.2.1</version>
+                <version>${ali-sms-sdk.version}</version>
             </dependency>
 
             <!-- OSS -->
             <dependency>
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
-                <version>8.5.10</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>33.0.0-jre</version>
+                <version>${minio.version}</version>
             </dependency>
 
             <!-- Thumbnailator -->
@@ -220,32 +233,11 @@
                 <version>0.4.20</version>
             </dependency>
 
-            <!-- ip -->
-            <dependency>
-                <groupId>org.lionsoul</groupId>
-                <artifactId>ip2region</artifactId>
-                <version>2.7.0</version>
-            </dependency>
-
             <!-- Aviator -->
             <dependency>
                 <groupId>com.googlecode.aviator</groupId>
                 <artifactId>aviator</artifactId>
                 <version>4.2.10</version>
-            </dependency>
-
-            <!-- Java EL -->
-            <dependency>
-                <groupId>de.odysseus.juel</groupId>
-                <artifactId>juel-impl</artifactId>
-                <version>2.2.7</version>
-            </dependency>
-
-            <!-- Jsoup -->
-            <dependency>
-                <groupId>org.jsoup</groupId>
-                <artifactId>jsoup</artifactId>
-                <version>1.17.2</version>
             </dependency>
 
             <!-- Audio tagger -->
@@ -256,11 +248,6 @@
             </dependency>
 
             <!-- Other dependencies -->
-            <dependency>
-                <groupId>com.alibaba.fastjson2</groupId>
-                <artifactId>fastjson2</artifactId>
-                <version>${fastjson2.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.github.vip-zpf</groupId>
                 <artifactId>jave</artifactId>
@@ -333,51 +320,6 @@
                 <version>1.4</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>artemis-jakarta-client</artifactId>
-                <version>${artemis.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>artemis-core-client</artifactId>
-                <version>${artemis.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>artemis-commons</artifactId>
-                <version>${artemis.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.activemq</groupId>
-                <artifactId>artemis-selector</artifactId>
-                <version>${artemis.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <artifactId>commons-logging</artifactId>
-                        <groupId>commons-logging</groupId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-
             <!-- Main Service Modules -->
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -434,7 +376,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>${maven-compiler-plugin.version}</version>
                     <configuration>
                         <parameters>true</parameters>
                         <source>${java.version}</source>
@@ -446,7 +387,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven-resources-plugin.version}</version>
                     <configuration>
                         <nonFilteredFileExtensions>
                             <nonFilteredFileExtension>woff</nonFilteredFileExtension>
@@ -505,7 +445,6 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>${maven-surefire-plugin.version}</version>
                     <configuration>
                         <skipTests>true</skipTests>
                     </configuration>
@@ -514,7 +453,6 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
-                    <version>${spring-boot.version}</version>
                     <executions>
                         <execution>
                             <id>repackage</id>
