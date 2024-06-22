@@ -161,6 +161,9 @@ spring:
       max-file-size: 20MB
       max-request-size: 21MB
       location: &path ../data
+  threads:
+    virtual:
+      enabled: true
 
 # suppress inspection "SpringBootApplicationProperties" for whole file
 # 在集群状态下，每个Node都有自己唯一的ID
