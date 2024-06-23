@@ -38,7 +38,7 @@
         <bcprov.version>1.76</bcprov.version>
         <fastjson2.version>2.0.51</fastjson2.version>
         <guava.version>33.0.0-jre</guava.version>
-        <hutool.version>6.0.0-M12</hutool.version>
+        <hutool.version>6.0.0-M13</hutool.version>
         <ip2region.version>2.7.0</ip2region.version>
         <jasypt.version>1.9.3</jasypt.version>
         <pinyin4j.version>2.6.1</pinyin4j.version>
