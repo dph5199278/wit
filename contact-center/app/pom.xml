@@ -56,7 +56,7 @@
         <elasticsearch-client.version>8.10.4</elasticsearch-client.version>
 
         <!-- Websocket -->
-        <netty-socketio.version>2.0.3</netty-socketio.version>
+        <netty-socketio.version>2.0.9</netty-socketio.version>
 
         <wechat-mp.version>4.6.0</wechat-mp.version>
         <ali-sdk-core.version>4.6.4</ali-sdk-core.version>

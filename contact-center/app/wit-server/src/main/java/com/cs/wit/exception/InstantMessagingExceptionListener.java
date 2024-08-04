@@ -67,4 +67,13 @@ public class InstantMessagingExceptionListener extends ExceptionListenerAdapter 
     	ctx.close();
         return true;
     }
+
+	@Override
+	public void onAuthException(Throwable e, SocketIOClient client) {
+		if(e instanceof IOException){
+			logger.info(e.getMessage());
+		}else{
+			logger.error(e.getMessage(), e);
+		}
+	}
 }
