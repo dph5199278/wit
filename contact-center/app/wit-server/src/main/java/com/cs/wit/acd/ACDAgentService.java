@@ -48,12 +48,12 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 @Component
@@ -91,46 +91,46 @@ public class ACDAgentService {
      * ACD结果通知
      */
     public void notifyAgentUserProcessResult(@NonNull final ACDComposeContext ctx) {
-        if (StringUtils.isNotBlank(ctx.getMessage())) {
-            logger.info("[onConnect] find available agent for onlineUser id {}", ctx.getOnlineUserId());
-
-            /*
-             * 发送消息给坐席
-             * 如果没有AgentService或该AgentService没有坐席或AgentService在排队中，则不发送
-             */
-            if (ctx.getAgentService() != null && (!ctx.isNoagent()) && !StringUtils.equals(
-                    MainContext.AgentUserStatusEnum.INQUENE.toString(),
-                    ctx.getAgentService().getStatus())) {
-                // 通知消息到坐席
-                MainContext.getPeerSyncIM().send(MainContext.ReceiverType.AGENT,
-                        MainContext.ChannelType.WEBIM,
-                        ctx.getAppid(),
-                        MainContext.MessageType.NEW,
-                        ctx.getAgentService().getAgentno(),
-                        ctx, true);
-            }
-
-            /*
-             * 发送消息给访客
-             */
-            Message outMessage = new Message();
-            outMessage.setMessage(ctx.getMessage());
-            outMessage.setMessageType(MainContext.MessageType.MESSAGE.toString());
-            outMessage.setCalltype(MainContext.CallType.IN.toString());
-            outMessage.setCreatetime(MainUtils.dateFormate.get().format(new Date()));
-            outMessage.setNoagent(ctx.isNoagent());
-            if (ctx.getAgentService() != null) {
-                outMessage.setAgentserviceid(ctx.getAgentService().getId());
-            }
-
-            MainContext.getPeerSyncIM().send(MainContext.ReceiverType.VISITOR,
-                    MainContext.ChannelType.WEBIM, ctx.getAppid(),
-                    MainContext.MessageType.NEW, ctx.getOnlineUserId(), outMessage, true);
-
-
-        } else {
+        if(!StringUtils.hasText(ctx.getMessage())) {
             logger.info("[onConnect] Message not found for user {}", ctx.getOnlineUserId());
+            return;
         }
+
+        logger.info("[onConnect] find available agent for onlineUser id {}", ctx.getOnlineUserId());
+
+        /*
+         * 发送消息给坐席
+         * 如果没有AgentService或该AgentService没有坐席或AgentService在排队中，则不发送
+         */
+        if (ctx.getAgentService() != null
+            && (!ctx.isNoagent())
+            && !MainContext.AgentUserStatusEnum.INQUENE.toString()
+            .equals(ctx.getAgentService().getStatus())) {
+            // 通知消息到坐席
+            MainContext.getPeerSyncIM().send(MainContext.ReceiverType.AGENT,
+                MainContext.ChannelType.WEBIM,
+                ctx.getAppid(),
+                MainContext.MessageType.NEW,
+                ctx.getAgentService().getAgentno(),
+                ctx, true);
+        }
+
+        /*
+         * 发送消息给访客
+         */
+        Message outMessage = new Message();
+        outMessage.setMessage(ctx.getMessage());
+        outMessage.setMessageType(MainContext.MessageType.MESSAGE.toString());
+        outMessage.setCalltype(MainContext.CallType.IN.toString());
+        outMessage.setCreatetime(MainUtils.dateFormate.get().format(new Date()));
+        outMessage.setNoagent(ctx.isNoagent());
+        if (ctx.getAgentService() != null) {
+            outMessage.setAgentserviceid(ctx.getAgentService().getId());
+        }
+
+        MainContext.getPeerSyncIM().send(MainContext.ReceiverType.VISITOR,
+            MainContext.ChannelType.WEBIM, ctx.getAppid(),
+            MainContext.MessageType.NEW, ctx.getOnlineUserId(), outMessage, true);
     }
 
     /**
@@ -160,8 +160,8 @@ public class ACDAgentService {
                 agentStatus.getId(), agentStatus.getStatus(), agentStatus.getUsers(), agentStatus.getMaxusers(),
                 HashMapUtils.concatKeys(agentStatus.getSkills(), "|"), agentStatus.isBusy());
 
-        if ((!StringUtils.equals(
-                MainContext.AgentStatusEnum.READY.toString(), agentStatus.getStatus())) || agentStatus.isBusy()) {
+        if ((!MainContext.AgentStatusEnum.READY.toString().equals(
+                agentStatus.getStatus())) || agentStatus.isBusy()) {
             // 该坐席处于非就绪状态，或该坐席处于置忙
             // 不分配坐席
             return;
@@ -184,22 +184,22 @@ public class ACDAgentService {
             AgentUser agentUser = entry.getValue();
             boolean process = false;
 
-            if ((StringUtils.equals(agentUser.getAgentno(), agentno))) {
+            if ((agentno.equals(agentUser.getAgentno()))) {
                 // 待服务的访客指定了该坐席
                 process = true;
             } else if (agentStatus.getSkills() != null && agentStatus.getSkills().size() > 0) {
                 // 目标坐席有状态，并且坐席属于某技能组
-                if ((StringUtils.isBlank(agentUser.getAgentno()) &&
-                        StringUtils.isBlank(agentUser.getSkill()))) {
+                if ((!StringUtils.hasText(agentUser.getAgentno()) &&
+                    !StringUtils.hasText(agentUser.getSkill()))) {
                     // 待服务的访客还没有指定坐席，并且也没有绑定技能组
                     process = true;
-                } else if (StringUtils.isBlank(agentUser.getAgentno()) &&
+                } else if (!StringUtils.hasText(agentUser.getAgentno()) &&
                         agentStatus.getSkills().containsKey(agentUser.getSkill())) {
                     // 待服务的访客还没有指定坐席，并且指定的技能组和该坐席的技能组一致
                     process = true;
                 }
-            } else if (StringUtils.isBlank(agentUser.getAgentno()) &&
-                    StringUtils.isBlank(agentUser.getSkill())) {
+            } else if (!StringUtils.hasText(agentUser.getAgentno()) &&
+                !StringUtils.hasText(agentUser.getSkill())) {
                 // 目标坐席没有状态，或该目标坐席有状态但是没有属于任何一个技能组
                 // 待服务访客没有指定坐席，并且没有指定技能组
                 process = true;
@@ -247,7 +247,7 @@ public class ACDAgentService {
             outMessage.setCalltype(MainContext.CallType.IN.toString());
             outMessage.setCreatetime(MainUtils.dateFormate.get().format(new Date()));
 
-            if (StringUtils.isNotBlank(agentUser.getUserid())) {
+            if (StringUtils.hasText(agentUser.getUserid())) {
                 outMessage.setAgentUser(agentUser);
                 outMessage.setChannelMessage(agentUser);
 
@@ -279,7 +279,7 @@ public class ACDAgentService {
              */
             // 获得坐席状态
             AgentStatus agentStatus = null;
-            if (StringUtils.equals(MainContext.AgentUserStatusEnum.INSERVICE.toString(), agentUser.getStatus()) &&
+            if (MainContext.AgentUserStatusEnum.INSERVICE.toString().equals(agentUser.getStatus()) &&
                     agentUser.getAgentno() != null) {
                 agentStatus = cache.findOneAgentStatusByAgentnoAndOrig(agentUser.getAgentno(), orgi);
             }
@@ -299,7 +299,7 @@ public class ACDAgentService {
              * 坐席服务
              */
             AgentService service = null;
-            if (StringUtils.isNotBlank(agentUser.getAgentserviceid())) {
+            if (StringUtils.hasText(agentUser.getAgentserviceid())) {
                 service = agentServiceRes.findByIdAndOrgi(agentUser.getAgentserviceid(), agentUser.getOrgi());
             } else if (agentStatus != null) {
                 // 该访客没有和坐席对话，因此没有 AgentService
@@ -432,7 +432,7 @@ public class ACDAgentService {
             throw new CSKefuException("Invalid agentUser info");
         }
 
-        if (!StringUtils.equals(MainContext.AgentUserStatusEnum.END.toString(), agentUser.getStatus())) {
+        if (!MainContext.AgentUserStatusEnum.END.toString().equals(agentUser.getStatus())) {
             /*
              * 未结束聊天，先结束对话，然后删除记录
              */
@@ -462,7 +462,7 @@ public class ACDAgentService {
             final boolean finished) {
 
         final AgentService agentService;
-        if (StringUtils.isNotBlank(agentUser.getAgentserviceid())) {
+        if (StringUtils.hasText(agentUser.getAgentserviceid())) {
             AgentService existAgentService = agentServiceRes.findByIdAndOrgi(agentUser.getAgentserviceid(), orgi);
             if (existAgentService != null) {
                 agentService = existAgentService;
@@ -540,20 +540,20 @@ public class ACDAgentService {
             agentUser.setAgentname(agent.getUname());
             agentUser.setAgentno(agentService.getAgentno());
 
-            if (StringUtils.isNotBlank(agentUser.getName())) {
+            if (StringUtils.hasText(agentUser.getName())) {
                 agentService.setName(agentUser.getName());
             }
-            if (StringUtils.isNotBlank(agentUser.getPhone())) {
+            if (StringUtils.hasText(agentUser.getPhone())) {
                 agentService.setPhone(agentUser.getPhone());
             }
-            if (StringUtils.isNotBlank(agentUser.getEmail())) {
+            if (StringUtils.hasText(agentUser.getEmail())) {
                 agentService.setEmail(agentUser.getEmail());
             }
-            if (StringUtils.isNotBlank(agentUser.getResion())) {
+            if (StringUtils.hasText(agentUser.getResion())) {
                 agentService.setResion(agentUser.getResion());
             }
 
-            if (StringUtils.isNotBlank(agentUser.getSkill())) {
+            if (StringUtils.hasText(agentUser.getSkill())) {
                 agentService.setAgentskill(agentUser.getSkill());
             }
 
