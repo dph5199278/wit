@@ -90,10 +90,6 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.StringUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
@@ -575,21 +571,6 @@ public class MainUtils {
             strb.append(".").append(msgtype);
         }
         return strb.toString();
-    }
-
-    /**
-     * 处理 对话消息中的图片
-     */
-    public static String filterChatMessage(String message) {
-        Document document = Jsoup.parse(message);
-        Elements pngs = document.select("img[src]");
-        for (Element element : pngs) {
-            String imgUrl = element.attr("src");
-            if (imgUrl.contains("/res/image")) {
-                element.attr("class", "ukefu-media-image");
-            }
-        }
-        return document.html();
     }
 
     /**
