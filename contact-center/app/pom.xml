@@ -63,7 +63,7 @@
         <ali-sms-sdk.version>2.2.1</ali-sms-sdk.version>
 
         <!-- OSS -->
-        <minio.version>8.5.10</minio.version>
+        <minio.version>8.5.12</minio.version>
 
         <!-- maven plugin -->
         <maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
