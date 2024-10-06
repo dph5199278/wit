@@ -8,17 +8,13 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="site-h1 ukefu-tab" style="border-top:1px solid #e6e6e6;height:26px;">
-					<span class="ukefu-bt">
-						<i class="layui-icon ukewo-btn" style="font-size:20px;"></i>
-						<div class="ukefu-bt-text">
-							<div class="ukefu-bt-text-title">
-								全部客户
-							</div>
-						</div>
-					</span>
-                    <div class="ukefu-tab-title" style="margin-top: 26px">
-                        <#include "/apps/business/customer/top.ftlh">
-                    </div>
+                  <span class="ukefu-bt">
+                    <i class="layui-icon ukewo-btn" style="font-size:20px;"></i>
+                    <div class="ukefu-bt-text">
+                      <div class="ukefu-bt-text-title">
+                        全部客户
+                      </div>
+                  </span>
                     <div class="ukefu-bt-text-content"
                          style="position: absolute;right: 5px;top: 0px;padding-right:10px;">
                         <form class="layui-form" name="search" action="/apps/customer/${subtype!''}" method="get"
@@ -88,6 +84,14 @@
             </#if>
         </div>
         </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+        <div class="ukefu-tab-title" style="margin-top: 2px;margin-left: 2px">
+            <#include "/apps/business/customer/top.ftlh">
+        </div>
         <table class="layui-table" lay-skin="line" style="margin-top: 26px">
             <thead>
             <tr class="design-sortable-tr">
@@ -163,7 +167,7 @@
             </#list>
             <#else>
             <tr>
-                <td colspan="20" style="height:400px;">
+                <td colspan="10" style="height:400px;">
                     <div class="ukefu-empty"  style="background: none">
                         <i class="layui-icon">&#xe63a;</i>
                         <div style="">还没有客户信息</div>
