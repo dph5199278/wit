@@ -64,14 +64,13 @@ services:
       - artemis
 
   artemis:
-    image: dph5199278/activemq-artemis:2.31.2
+    image: apache/activemq-artemis:2.33.0-alpine
     restart: always
     environment:
       - ARTEMIS_USER=artemis
       - ARTEMIS_PASSWORD=artemis
       - ANONYMOUS_LOGIN=false
       - EXTRA_ARGS=--http-host 0.0.0.0 --relax-jolokia
-      - LOG4J_FORMAT_MSG_NO_LOOKUPS=true
     volumes:
       - "./database/artemis/data:/var/lib/artemis-instance"
     ports:
@@ -109,7 +108,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html
-    image: elastic/elasticsearch:8.10.4
+    image: elastic/elasticsearch:8.13.4
     restart: always
     ports:
       - "9200:9200"
