@@ -39,63 +39,103 @@ public class SessionConfig implements java.io.Serializable{
 	private String username ;
 	private String name ;
 	
-	private int maxuser = 10 ;	//每个坐席 接入最多访客数量
+	//每个坐席 接入最多访客数量
+	private int maxuser = 10 ;
 	
-	private int initmaxuser = 10 ;	//坐席进入就绪状态的时候，会首次分配用户，initmaxuser控制 分配的用户数量，如果不设置，则会 直接 分配到最大用户数或将当前 等待队列分配完成
+	//坐席进入就绪状态的时候，会首次分配用户，initmaxuser控制 分配的用户数量，如果不设置，则会 直接 分配到最大用户数或将当前 等待队列分配完成
+	private int initmaxuser = 10 ;
 	
-	private String sessionmsg ;	//欢迎消息
-	private String distribution ;	//坐席分配策略
-	private boolean lastagent;			//启用历史服务坐席优先分配
-	private boolean sessiontimeout;	//启用超时提醒功能
-	private int timeout = 120;				//超时时长 , 默认2分钟
-	private String timeoutmsg ;			//超时提醒消息
-	private boolean resessiontimeout;	//启用再次超时断开
-	private int retimeout = 120;				//再次超时时长 ， 默认2分钟
-	private String retimeoutmsg ;		//再次超时断开
-	private boolean satisfaction ;	//启用满意度调查
+	//欢迎消息
+	private String sessionmsg ;
+	//坐席分配策略
+	private String distribution ;
+	//启用历史服务坐席优先分配
+	private boolean lastagent;
+	//启用超时提醒功能
+	private boolean sessiontimeout;
+	//超时时长 , 默认2分钟
+	private int timeout = 120;
+	//超时提醒消息
+	private String timeoutmsg ;
+	//启用再次超时断开
+	private boolean resessiontimeout;
+	//再次超时时长 ， 默认2分钟
+	private int retimeout = 120;
+	//再次超时断开
+	private String retimeoutmsg ;
+	//启用满意度调查
+	private boolean satisfaction ;
 	
-	private String noagentmsg ;		//无客服在线提示信息
-	private String agentbusymsg ;	//坐席忙提示信息
+	//无客服在线提示信息
+	private String noagentmsg ;
+	//坐席忙提示信息
+	private String agentbusymsg ;
 	
-	private boolean agentautoleave;	//坐席关闭浏览器后自动离线
+	//坐席关闭浏览器后自动离线
+	private boolean agentautoleave;
 	
-	private String successmsg ;		//坐席分配成功提示消息
-	private String finessmsg ;		//服务结束提示消息
+	//坐席分配成功提示消息
+	private String successmsg ;
+	//服务结束提示消息
+	private String finessmsg ;
 	
-	private boolean agentreplaytimeout ;	//启用坐席回复超时
+	//启用坐席回复超时
+	private boolean agentreplaytimeout ;
 	private int agenttimeout;
 	private String agenttimeoutmsg ;
 	
-	private boolean agentctrlenter ;		//坐席端启用 CTRL+Enter回复消息
-	private boolean ctrlenter  ;			//访客端启用CTRL+Enter回复消息
+	//坐席端启用 CTRL+Enter回复消息
+	private boolean agentctrlenter ;
+	//访客端启用CTRL+Enter回复消息
+	private boolean ctrlenter  ;
 	
-	private boolean enablequick ;		//坐席工作界面的输入框中启用快捷输入
+	//坐席工作界面的输入框中启用快捷输入
+	private boolean enablequick ;
 	
-	private boolean otherssl ;		//外部知识库访问启用SSL
-	private boolean otherquickplay ;	//启用外部快捷回复功能
-	private String oqrsearchurl ;	//外部快捷回复搜索地址
-	private String oqrsearchinput ;	//外部快捷回复搜索输入参数
-	private String oqrsearchoutput ;	//外部快捷回复搜索输出参数
+	//外部知识库访问启用SSL
+	private boolean otherssl ;
+	//启用外部快捷回复功能
+	private boolean otherquickplay ;
+	//外部快捷回复搜索地址
+	private String oqrsearchurl ;
+	//外部快捷回复搜索输入参数
+	private String oqrsearchinput ;
+	//外部快捷回复搜索输出参数
+	private String oqrsearchoutput ;
 	
-	private String oqrdetailurl ;	//外部快捷回复内容URL
-	private String oqrdetailinput ;	//外部快捷回复详情输入参数
-	private String oqrdetailoutput ;	//外部快捷回复详情输出参数
+	//外部快捷回复内容URL
+	private String oqrdetailurl ;
+	//外部快捷回复详情输入参数
+	private String oqrdetailinput ;
+	//外部快捷回复详情输出参数
+	private String oqrdetailoutput ;
 	
-	private boolean hourcheck ;		//启用工作时间段检查
-	private String workinghours ;	//工作时间段，格式   9:00-12:00,13:30-15:30
-	private String notinwhmsg ;		//非工作时间段 访客咨询的提示消息
+	//启用工作时间段检查
+	private boolean hourcheck ;
+	//工作时间段，格式   9:00-12:00,13:30-15:30
+	private String workinghours ;
+	//非工作时间段 访客咨询的提示消息
+	private String notinwhmsg ;
     
-	private boolean servicetimeoutlimit;//坐席与访客的会话是否超时
-	private int servicetimeout;//会话超时时长	
+	//坐席与访客的会话是否超时
+	private boolean servicetimeoutlimit;
+	//会话超时时长	
+	private int servicetimeout;
 
-	private boolean quality ;		//启用质检功能
-	private String qualityscore ;	//质检方式
+	//启用质检功能
+	private boolean quality ;
+	//质检方式
+	private String qualityscore ;
 	
-	private boolean quene; 			//启用排队自动断开
-	private int quenetimeout = 600;	//访客排队超时时长
-	private String quenetimeoutmsg ;	//访客排队超时提示消息
+	//启用排队自动断开
+	private boolean quene;
+	//访客排队超时时长
+	private int quenetimeout = 600;
+	//访客排队超时提示消息
+	private String quenetimeoutmsg ;
 	
-	private String servicename ;		//无坐席的时候 回复消息的 昵称
+	//无坐席的时候 回复消息的 昵称
+	private String servicename ;
 	
 	
 	@Id

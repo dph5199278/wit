@@ -41,7 +41,8 @@ public class PublishedReport implements java.io.Serializable {
 	private String name;
 	private String code;
 	private String reporttype;
-	private String dicid;    //目录ID
+	//目录ID
+	private String dicid;
 	private String orgi;
 	private String dataid;
 	private String dataflag;

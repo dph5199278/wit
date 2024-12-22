@@ -39,8 +39,10 @@ public class Instruction  implements java.io.Serializable{
 	private String keyword;
 	private String code ;
 	private String plugin;
-	private String type ;		//系统指令， 业务指令
-	private String scope ;		//指令作用域 ， 提示条件： 1：人工坐席状态下提示 ， 0：自动状态下提示 ， 2：所有状态下都提示
+	//系统指令， 业务指令
+	private String type ;
+	//指令作用域 ， 提示条件： 1：人工坐席状态下提示 ， 0：自动状态下提示 ， 2：所有状态下都提示
+	private String scope ;
 	private String parent ;
 	private String memo ;
 	private Date createtime = new Date() ;
@@ -49,15 +51,23 @@ public class Instruction  implements java.io.Serializable{
 	
 	private String userid ;
 	private String username ;
-	private String matcherule ;		//匹配规则， 1：完全匹配，0：模糊匹配
-	private boolean tipdefault ;	//默认提示
+	//匹配规则， 1：完全匹配，0：模糊匹配
+	private String matcherule ;
+	//默认提示
+	private boolean tipdefault ;
 	private String status ;
-	private boolean userbind ;		//是否需要绑定用户身份
-	private String interfacetype ;	//接口处理类型
-	private String interfaceurl ;	//接口访问地址
-	private String interfaceparam ;	//接口参数描述
-	private String adapter 	;		//接口适配器
-	private String messagetype ;	//适用于消息类型 ： exchange ： image ： pos
+	//是否需要绑定用户身份
+	private boolean userbind ;
+	//接口处理类型
+	private String interfacetype ;
+	//接口访问地址
+	private String interfaceurl ;
+	//接口参数描述
+	private String interfaceparam ;
+	//接口适配器
+	private String adapter 	;
+	//适用于消息类型 ： exchange ： image ： pos
+	private String messagetype ;
 	private String eventype ;
 	
 	

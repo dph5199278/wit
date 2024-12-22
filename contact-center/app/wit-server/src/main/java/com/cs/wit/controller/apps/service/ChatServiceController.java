@@ -397,7 +397,8 @@ public class ChatServiceController extends Handler {
                                 "",
                                 ipdata,
                                 agentService.getChannel(),
-                                null, // 此处绑定坐席，不指定技能组
+                                // 此处绑定坐席，不指定技能组
+                                null,
                                 user.getId(),
                                 null,
                                 null,

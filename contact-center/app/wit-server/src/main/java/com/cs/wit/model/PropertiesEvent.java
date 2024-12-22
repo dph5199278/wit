@@ -46,7 +46,8 @@ public class PropertiesEvent implements java.io.Serializable{
 	private String textvalue ;
 	
 	private String orgi ;
-	private String modifyid;	//变更 ID， UUID，随机生成
+	//变更 ID， UUID，随机生成
+	private String modifyid;
 	
 	private String creater ;
 	private Date createtime ;

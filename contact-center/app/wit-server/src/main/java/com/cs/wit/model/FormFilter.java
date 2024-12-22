@@ -44,30 +44,45 @@ public class FormFilter implements Serializable {
 
 	private String id;
 
-	private String orgi; // 租户ID
-	private String organ; // 创建部门
-	private String creater; // 创建人
+	// 租户ID
+	private String orgi;
+	// 创建部门
+	private String organ;
+	// 创建人
+	private String creater;
 
-	private String name; // 筛选表单名称
+	// 筛选表单名称
+	private String name;
 
-	private Date createtime = new Date(); // 创建时间
+	// 创建时间
+	private Date createtime = new Date();
 
 	private Date updatetime = new Date();
 	
-	private String parentid ;	//增加分类目录管理的 目录ID	
+	//增加分类目录管理的 目录ID
+	private String parentid ;
 	
-	private String batid ;	//筛选表单使用导入批次模板
-	private String filtertype ;	//筛选表单使用导入批次模板
-	private String tableid ;	//筛选表单使用元数据
+	//筛选表单使用导入批次模板
+	private String batid ;
+	//筛选表单使用导入批次模板
+	private String filtertype ;
+	//筛选表单使用元数据
+	private String tableid ;
 
-	private String datastatus; // 数据状态（逻辑删除）
-	private String status; // 状态 正常，已处理完，已过期
+	// 数据状态（逻辑删除）
+	private String datastatus;
+	// 状态 正常，已处理完，已过期
+	private String status;
 
-	private int filternum; // 筛选次数
-	private int conditional; // 条件总数
-	private int execnum	;	//执行次数
+	// 筛选次数
+	private int filternum;
+	// 条件总数
+	private int conditional;
+	//执行次数
+	private int execnum	;
 
-	private String description; // 备注
+	// 备注
+	private String description;
 
 	@Id
 	@Column(length = 32)

@@ -41,12 +41,17 @@ public class WorkOrderType implements java.io.Serializable{
 	private String creater;
 	private String username ;
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
-	private boolean bpm ;			//是否启用 流程
-	private String processid ;		//流程ID
-	private boolean sla ;			//是否启用 SLA指标
-	private String slaid ;			//SLA指标ID
+	//是否启用 流程
+	private boolean bpm ;
+	//流程ID
+	private String processid ;
+	//是否启用 SLA指标
+	private boolean sla ;
+	//SLA指标ID
+	private String slaid ;
 	
 	@Id
 	@Column(length = 32)

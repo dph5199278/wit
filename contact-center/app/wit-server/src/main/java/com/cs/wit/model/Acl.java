@@ -41,8 +41,10 @@ public class Acl implements java.io.Serializable{
 	private Date updatetime = new Date();
 	private String hostid ;
 
-	private String defaultvalue ;	//默认 allow
-	private String strategy;		//策略
+	//默认 allow
+	private String defaultvalue ;
+	//策略
+	private String strategy;
 	
 	@Id
 	@Column(length = 32)

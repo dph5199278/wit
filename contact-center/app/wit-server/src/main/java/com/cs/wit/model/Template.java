@@ -39,21 +39,30 @@ public class Template implements java.io.Serializable{
 	private static final long serialVersionUID = 1946579239823440392L;
 	private String id ;
 	private String name ;
-	private String code ;		//修改用处，变更为 SysDic 的 code 		
+	//修改用处，变更为 SysDic 的 code
+	private String code ;
 	private String userid ;					
 	private String groupid ;			
 	private String description ;
-	private String templettitle;//邮件头
+	//邮件头
+	private String templettitle;
 	private String templettext ;
-	private String templettype ; //List OR Preview
+	//List OR Preview
+	private String templettype ;
 	private Date createtime = new Date();
 	private String orgi ;
-	private String iconstr;	//模板图标
-	private String memo ; 	//模板说明内容
-	private String typeid;//分组id
-	private int layoutcols ;		//列数
-	private String datatype ;		//样例数据
-	private String charttype ;		//报表类型
+	//模板图标
+	private String iconstr;
+	//模板说明内容
+	private String memo ;
+	//分组id
+	private String typeid;
+	//列数
+	private int layoutcols ;
+	//样例数据
+	private String datatype ;
+	//报表类型
+	private String charttype ;
 	public String getOrgi() {
 		return orgi;
 	}

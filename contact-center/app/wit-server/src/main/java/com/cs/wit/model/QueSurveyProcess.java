@@ -36,26 +36,45 @@ public class QueSurveyProcess implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	
 	private String id ;
-	private String name;    //问卷名称
-	private String scene;   //问卷适用场景（机器人呼出/坐席手动）
-	private String welword; //问卷欢迎语（文字）
-	private String welvoice;//问卷欢迎语ID（语音）
-	private String weltype; //问卷欢迎语类型
-	private String endword; //问卷结束语（文字）
-	private String endvoice;//问卷结束语ID（语音）
-	private String endtype; //问卷结束语类型
-	private String totalscore;//参考评分值
-	private String score;     //是否评分（0否1是）
-	private String memo;      //问卷描述
-	private String orgi;      //租户ID
-	private String creater;   //创建人
-	private Date createtime;  //创建时间
-	private String updater;   //更新人
-	private Date updatetime;  //更新时间
+	//问卷名称
+	private String name;
+	//问卷适用场景（机器人呼出/坐席手动）
+	private String scene;
+	//问卷欢迎语（文字）
+	private String welword;
+	//问卷欢迎语ID（语音）
+	private String welvoice;
+	//问卷欢迎语类型
+	private String weltype;
+	//问卷结束语（文字）
+	private String endword;
+	//问卷结束语ID（语音）
+	private String endvoice;
+	//问卷结束语类型
+	private String endtype;
+	//参考评分值
+	private String totalscore;
+	//是否评分（0否1是）
+	private String score;
+	//问卷描述
+	private String memo;
+	//租户ID
+	private String orgi;
+	//创建人
+	private String creater;
+	//创建时间
+	private Date createtime;
+	//更新人
+	private String updater;
+	//更新时间
+	private Date updatetime;
 	
-	private String prostatus;//问卷状态（0未发布/1发布）
-	private String sumscore;//总评分
-	private String description;//描述
+	//问卷状态（0未发布/1发布）
+	private String prostatus;
+	//总评分
+	private String sumscore;
+	//描述
+	private String description;
 	
 
 

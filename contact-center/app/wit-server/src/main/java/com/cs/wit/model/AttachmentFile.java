@@ -45,7 +45,8 @@ public class AttachmentFile implements Serializable {
 	private String filetype ;
 	private String fileid ;
 	private String dataid ;
-	private String modelid ;	//功能模块的主数据ID， 例如，工单的回复 数据中，为了方便一次把所有的附件全部查询出来，避免关联查询，可以使用 modelid
+	//功能模块的主数据ID， 例如，工单的回复 数据中，为了方便一次把所有的附件全部查询出来，避免关联查询，可以使用 modelid
+	private String modelid ;
 	private String model ;
 	private boolean image ;
 	

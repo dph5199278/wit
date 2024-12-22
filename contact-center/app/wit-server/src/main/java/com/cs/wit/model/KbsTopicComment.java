@@ -47,16 +47,20 @@ public class KbsTopicComment implements UKAgg {
     @Field(index = false, type = FieldType.Text)
     private String dataid;
 
-    private String content;    //评论内容
+    //评论内容
+    private String content;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date updatetime = new Date();
 
-    private boolean optimal;    //是否最佳答案
+    //是否最佳答案
+    private boolean optimal;
 
-    private int up;            //点赞数量
-    private int comments;        //回复数量
+    //点赞数量
+    private int up;
+    //回复数量
+    private int comments;
 
     private boolean admin;
 

@@ -35,16 +35,22 @@ public class PublishedCube implements java.io.Serializable{
 	private String id ;
 	private String name ;	
 	private String code ;
-	//private String db = RivuDataContext.TabType.PUB.toString();			//变更用处，区分是个人模型还是公共模型， 个人文件夹 / 公共文件夹
-	private String modeltype ;	//模型类型， 虚拟 立方体：立方体
-	private String dstype ;	//db , r3
-	private String mposleft;	//指标位置
-	private String mpostop ;	//指标位置
+	//变更用处，区分是个人模型还是公共模型， 个人文件夹 / 公共文件夹
+	//private String db = RivuDataContext.TabType.PUB.toString();
+	//模型类型， 虚拟 立方体：立方体
+	private String modeltype ;
+	//db , r3
+	private String dstype ;
+	//指标位置
+	private String mposleft;
+	//指标位置
+	private String mpostop ;
 	private String typeid ;	
 	private String orgi ;
 	private String createdata ;
 	private String dataid ;
-	private String dataflag ;			//修改字段用途，改为 数据版本
+	//修改字段用途，改为 数据版本
+	private String dataflag ;
 	private int startindex ;
 	private Date startdate ;
 	private int dataversion;

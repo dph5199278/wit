@@ -26,7 +26,8 @@ public class ChartProperties implements java.io.Serializable{
 	
 	private String xaxis ;	
 	private String xaxis_title = "key";
-	private String xaxis_label ;//x label format
+	//x label format
+	private String xaxis_label ;
 	
 	private String format;
 	
@@ -34,7 +35,8 @@ public class ChartProperties implements java.io.Serializable{
 	private String yaxis_title ="value";
 	private String yaxis_label ;
 	
-	private boolean legen = false;//显示图例
+	//显示图例
+	private boolean legen = false;
 	private String legenalign = "bottom";
 	
 
@@ -43,7 +45,8 @@ public class ChartProperties implements java.io.Serializable{
 	
 	private boolean credits ;
 	private boolean exporting=false;
-	private boolean dataview = false;//显示数值
+	//显示数值
+	private boolean dataview = false;
 	private boolean theme = false;
 	private String themename;
 	public String getChartype() {

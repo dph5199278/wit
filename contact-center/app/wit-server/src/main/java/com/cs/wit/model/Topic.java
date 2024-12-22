@@ -54,46 +54,71 @@ public class Topic implements java.io.Serializable{
 
 	private String sessionid ;
 
-	private String title ;		//标题
-	private String content ;	//内容
-	private String weixin;		//微信渠道回复
-	private String email ;		//邮件渠道回复
-	private String sms ;		//短信回复
-	private String tts ;		//语音播报回复
+	//标题
+	private String title ;
+	//内容
+	private String content ;
+	//微信渠道回复
+	private String weixin;
+	//邮件渠道回复
+	private String email ;
+	//短信回复
+	private String sms ;
+	//语音播报回复
+	private String tts ;
 
-	private float price ;		//问题价格
-	private String keyword ;	//关键词
-	private String summary ;	//摘要
-	private boolean anonymous ;		//是否匿名提问
+	//问题价格
+	private float price ;
+	//关键词
+	private String keyword ;
+	//摘要
+	private String summary ;
+	//是否匿名提问
+	private boolean anonymous ;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-	private Date begintime ;		//有效期开始
+	//有效期开始
+	private Date begintime ;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-	private Date endtime ;			//有效期结束
+	//有效期结束
+	private Date endtime ;
 
-	private boolean top ;		//是否置顶
-	private boolean essence ;	//是否精华
-	private boolean accept ;	//是否已采纳最佳答案
-	private boolean finish	;	//结贴
+	//是否置顶
+	private boolean top ;
+	//是否精华
+	private boolean essence ;
+	//是否已采纳最佳答案
+	private boolean accept ;
+	//结贴
+	private boolean finish	;
 
 
 	@Transient
 	private List<String> silimar = new ArrayList<String>();
 
-	private int answers;        //回答数量
+	//回答数量
+	private int answers;
 
 
-	private int views;            //阅读数量
-	private int followers;        //关注数量
-	private int collections;    //收藏数量
-	private int comments;        //评论数量
-	private boolean mobile;    //是否移动端提问
-	private String status;    //	状态
-	private String tptype;    //主题类型		问答:分享:讨论
-	private String cate;    //主题 栏目
+	//阅读数量
+	private int views;
+	//关注数量
+	private int followers;
+	//收藏数量
+	private int collections;
+	//评论数量
+	private int comments;
+	//是否移动端提问
+	private boolean mobile;
+	//	状态
+	private String status;
+	//主题类型		问答:分享:讨论
+	private String tptype;
+	//主题 栏目
+	private String cate;
 
 	private String username;
 	private String orgi;
@@ -109,7 +134,8 @@ public class Topic implements java.io.Serializable{
 	private String memo;
 	private String organ;
 
-	private String aiid ;		//机器人ID
+	//机器人ID
+	private String aiid ;
 
 
 	private User user;

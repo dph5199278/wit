@@ -437,7 +437,8 @@ public class OnlineUserProxy {
                 logger.info("[online] new online user is created but not persisted.");
             } else {
                 // 从DB或缓存找到OnlineUser
-                onlineUser.setCreatetime(now); // 刷新创建时间
+                // 刷新创建时间
+                onlineUser.setCreatetime(now);
                 if ((StringUtils.isNotBlank(onlineUser.getSessionid()) && !StringUtils.equals(
                         onlineUser.getSessionid(), sessionid)) ||
                         !StringUtils.equals(
@@ -445,16 +446,22 @@ public class OnlineUserProxy {
                     // 当新的session与从DB或缓存查找的session不一致时，或者当数据库或缓存的OnlineUser状态不是ONLINE时
                     // 代表该用户登录了新的Session或从离线变为上线！
 
-                    onlineUser.setStatus(MainContext.OnlineUserStatusEnum.ONLINE.toString()); // 设置用户到上线
-                    onlineUser.setChannel(channel);          // 设置渠道
+                    // 设置用户到上线
+                    onlineUser.setStatus(MainContext.OnlineUserStatusEnum.ONLINE.toString());
+                    // 设置渠道
+                    onlineUser.setChannel(channel);
                     onlineUser.setAppid(appid);
-                    onlineUser.setUpdatetime(now);           // 刷新更新时间
+                    // 刷新更新时间
+                    onlineUser.setUpdatetime(now);
                     if (StringUtils.isNotBlank(onlineUser.getSessionid()) && !StringUtils.equals(
                             onlineUser.getSessionid(), sessionid)) {
                         onlineUser.setInvitestatus(MainContext.OnlineUserInviteStatus.DEFAULT.toString());
-                        onlineUser.setSessionid(sessionid);  // 设置新的session信息
-                        onlineUser.setLogintime(now);        // 设置更新时间
-                        onlineUser.setInvitetimes(0);        // 重置邀请次数
+                        // 设置新的session信息
+                        onlineUser.setSessionid(sessionid);
+                        // 设置更新时间
+                        onlineUser.setLogintime(now);
+                        // 重置邀请次数
+                        onlineUser.setInvitetimes(0);
                     }
                 }
 
@@ -679,8 +686,9 @@ public class OnlineUserProxy {
                 if (cate.equals(sceneType.getId())) {
                     if (StringUtils.isNotBlank(sceneType.getArea())) {
                         if (ipdata != null) {
+                            //找到技能组配置的地区信息
                             List<AreaType> atList = getAreaTypeList(
-                                    sceneType.getArea(), areaTypeList);    //找到技能组配置的地区信息
+                                    sceneType.getArea(), areaTypeList);
                             for (AreaType areaType : atList) {
                                 if (areaType.getArea().contains(ipdata.getProvince()) || areaType.getArea().contains(ipdata.getCity())) {
                                     result = true;

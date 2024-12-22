@@ -127,7 +127,8 @@ public class ExcelImportProecess extends DataProcess {
                     }
                     Map<String, Object> values = new HashMap<>();
                     ArrayListMultimap<String, Object> multiValues = ArrayListMultimap.create();
-                    boolean skipDataVal = false; //跳过数据校验
+                    //跳过数据校验
+                    boolean skipDataVal = false;
                     StringBuilder pkStr = new StringBuilder(), allStr = new StringBuilder();
                     for (int col = 0; col < colNum; col++) {
                         Cell value = row.getCell(col);

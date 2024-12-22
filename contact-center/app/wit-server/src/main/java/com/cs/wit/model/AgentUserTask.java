@@ -42,18 +42,26 @@ public class AgentUserTask {
 	
 	private Date logindate; 
 	
-	private int agentreplyinterval;//回复时间间隔
+	//回复时间间隔
+	private int agentreplyinterval;
 	private int agentreplytime;
 	private int avgreplyinterval;
 	private int avgreplytime;
 	
-	private int agenttimeout;//坐席回复超时时长
-	private int agenttimeouttimes;//坐席超时回复次数
-	private boolean servicetimeout;//坐席与访客的会话是否超时
-	private int agentservicetimeout;//会话超时时长
-	private int agentfrewords;//客服提起敏感词次数
-	private int servicefrewords;//客户提起敏感词次数
-	private int firstreplytime ;//首次消息回复时间
+	//坐席回复超时时长
+	private int agenttimeout;
+	//坐席超时回复次数
+	private int agenttimeouttimes;
+	//坐席与访客的会话是否超时
+	private boolean servicetimeout;
+	//会话超时时长
+	private int agentservicetimeout;
+	//客服提起敏感词次数
+	private int agentfrewords;
+	//客户提起敏感词次数
+	private int servicefrewords;
+	//首次消息回复时间
+	private int firstreplytime ;
 	
 	private int agentreplys;
 	private int userasks;
@@ -66,8 +74,10 @@ public class AgentUserTask {
 	
 	private Date waittingtimestart = new Date();
 	
-	private Date reptime ;	//坐席长时间未回复 ，由系统发送消息 ，该字段记录 最后一次发送消息的时间 
-	private String reptimes ;	//坐席长时间未回复 ，由系统发送消息 ，该字段记录系统发送的次数
+	//坐席长时间未回复 ，由系统发送消息 ，该字段记录 最后一次发送消息的时间 
+	private Date reptime ;
+	//坐席长时间未回复 ，由系统发送消息 ，该字段记录系统发送的次数
+	private String reptimes ;
 	
 	@Id
 	@Column(length=32)

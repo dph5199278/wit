@@ -41,7 +41,8 @@ public class ACDChatbotService {
      */
     @Nullable
     public AgentService processChatbotService(final String botName, final AgentUser agentUser, final String orgi) {
-        AgentService agentService = new AgentService();    //放入缓存的对象
+        //放入缓存的对象
+        AgentService agentService = new AgentService();
         Date now = new Date();
         if (StringUtils.isNotBlank(agentUser.getAgentserviceid())) {
             agentService = agentServiceRes.findByIdAndOrgi(agentUser.getAgentserviceid(), orgi);

@@ -35,49 +35,71 @@ import java.util.List;
 public class Message extends AbstractContext {
 
     public String id;
-    private String orgi;                   // 租户
+    // 租户
+    private String orgi;
     /**
      * 发送方向：IN 访客给坐席，OUT 坐席给访客
      * NOTE callType应尽早设置
      */
     private String calltype;
-    private String messageType;            // 消息类型 [必填]
+    // 消息类型 [必填]
+    private String messageType;
     private SNSAccount snsAccount;
 
     private Serializable channelMessage;
 
     // 渠道信息
-    private String channel;                 // 渠道类型
-    private String appid;                   // 渠道应用ID
+    // 渠道类型
+    private String channel;
+    // 渠道应用ID
+    private String appid;
 
     private String attachmentid;
-    private boolean noagent;              // 是否有坐席，用于为新访客分配坐席的一个flag
+    // 是否有坐席，用于为新访客分配坐席的一个flag
+    private boolean noagent;
 
-    private AgentUser agentUser;          // 访客坐席会话
-    private AgentStatus agentStatus;      // 坐席状态
-    private AgentService agentService;    // 访客会话服务
-    private String agentserviceid;        // 此值倾向于发送给前端，后端接口直接使用agentService传对象
-    private OnlineUser onlineUser;        // 访客
-    private User agent;                   // 坐席
-    private User supervisor;              // 会话监控人员
+    // 访客坐席会话
+    private AgentUser agentUser;
+    // 坐席状态
+    private AgentStatus agentStatus;
+    // 访客会话服务
+    private AgentService agentService;
+    // 此值倾向于发送给前端，后端接口直接使用agentService传对象
+    private String agentserviceid;
+    // 访客
+    private OnlineUser onlineUser;
+    // 坐席
+    private User agent;
+    // 会话监控人员
+    private User supervisor;
 
     // 访客关联的联系人信息
-    private Contacts contact;             // 访客关联的联系人
-    private AgentUserContacts agentUserContacts; // 会话联系关联信息
+    // 访客关联的联系人
+    private Contacts contact;
+    // 会话联系关联信息
+    private AgentUserContacts agentUserContacts;
 
     // 会话ID
-    private String session;               // 会话周期
-    private String contextid;             // 上下文ID
-    private String createtime;            // 创建时间
-    private String sign;                  // 消息签名
+    // 会话周期
+    private String session;
+    // 上下文ID
+    private String contextid;
+    // 创建时间
+    private String createtime;
+    // 消息签名
+    private String sign;
 
     // 消息属性
-    private String message;              // 文本
-    private String filename;             // 文件名
-    private int filesize;                // 文件大小
+    // 文本
+    private String message;
+    // 文件名
+    private String filename;
+    // 文件大小
+    private int filesize;
 
     // boolean 处理结果
-    private boolean isResolved;          // 该请求是否被正常处理
+    // 该请求是否被正常处理
+    private boolean isResolved;
 
     private List<OtherMessageItem> suggest;
 

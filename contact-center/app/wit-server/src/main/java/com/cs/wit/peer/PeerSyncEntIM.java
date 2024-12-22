@@ -57,13 +57,16 @@ public class PeerSyncEntIM {
             chatMessageRes.save(data);
             ChatMessage outMessage = new ChatMessage();
             BeanUtils.copyProperties(data, outMessage);
-            NettyClients.getInstance().sendEntIMEventMessage(data.getUserid(), msgType.toString(), outMessage);    //同时将消息发送给自己
+            //同时将消息发送给自己
+            NettyClients.getInstance().sendEntIMEventMessage(data.getUserid(), msgType.toString(), outMessage);
             data.setCalltype(MainContext.CallType.IN.toString());
             data.setContextid(user);
             data.setUserid(data.getTouser());
             data.setId(MainUtils.getUUID());
-            chatMessageRes.save(data);    //每条消息存放两条，一个是我的对话记录 ， 另一条是对方的对话历史， 情况当前聊天记录的时候，只清理自己的
-            NettyClients.getInstance().sendEntIMEventMessage(data.getTouser(), msgType.toString(), data);    //发送消息给目标用户
+            //每条消息存放两条，一个是我的对话记录 ， 另一条是对方的对话历史， 情况当前聊天记录的时候，只清理自己的
+            chatMessageRes.save(data);
+            //发送消息给目标用户
+            NettyClients.getInstance().sendEntIMEventMessage(data.getTouser(), msgType.toString(), data);
 
             recentUserRes.findByCreaterAndUserAndOrgi(data.getTouser(), new User(user), orgi).ifPresent(u -> {
                 u.setNewmsg(u.getNewmsg() + 1);

@@ -97,7 +97,8 @@ public class BatchResource extends Resource {
                 }
             }
             reporterRes.save(event.getDSData().getReport());
-            new ExcelImportProecess(event).process();        //启动导入任务
+            //启动导入任务
+            new ExcelImportProecess(event).process();
         }
     }
 

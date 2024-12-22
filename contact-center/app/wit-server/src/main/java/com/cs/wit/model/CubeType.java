@@ -33,15 +33,18 @@ public class CubeType implements java.io.Serializable{
 	private String id ;
 	private String name ;
 	
-	private int inx;			//分类排序位置
+	//分类排序位置
+	private int inx;
 	
 	private Date createtime ;
 	private String creater;
 	
-	private String description	;//分类备注描述信息
+	//分类备注描述信息
+	private String description	;
 	
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
 	
 	@Id

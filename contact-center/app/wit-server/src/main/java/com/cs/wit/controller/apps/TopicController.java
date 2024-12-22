@@ -382,7 +382,8 @@ public class TopicController extends Handler {
             event.getValues().put("creater", super.getUser(request).getId());
             event.getDSData().setProcess(new TopicProcess(topicRes));
             reporterRes.save(event.getDSData().getReport());
-            new ExcelImportProecess(event).process();        //启动导入任务
+            //启动导入任务
+            new ExcelImportProecess(event).process();
         }
 
         return request(super.createRequestPageTempletResponse("redirect:/apps/topic?type=" + type));

@@ -267,7 +267,8 @@ public class QuickReplyController extends Handler {
             event.getValues().put("creater", super.getUser(request).getId());
             event.getDSData().setProcess(new QuickReplyProcess(quickReplyRes));
             reporterRes.save(event.getDSData().getReport());
-            new ExcelImportProecess(event).process();        //启动导入任务
+            //启动导入任务
+            new ExcelImportProecess(event).process();
         }
 
         return request(super.createRequestPageTempletResponse("redirect:/setting/quickreply/index" + (!StringUtils.isBlank(type) ? "?typeid=" + type : "")));

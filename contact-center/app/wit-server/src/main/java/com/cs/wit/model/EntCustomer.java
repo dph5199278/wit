@@ -69,7 +69,8 @@ public class EntCustomer extends ESBean implements java.io.Serializable {
 	private String country;
 	private String province;
 
-	private String entcusid;    //客户ID
+	//客户ID
+	private String entcusid;
 
 	private String city;
 	private String sarea;
@@ -119,7 +120,8 @@ public class EntCustomer extends ESBean implements java.io.Serializable {
 	private String datadept;
 	private String batid;
 
-	private String pinyin;        //拼音首字母
+	//拼音首字母
+	private String pinyin;
 
 
 	@Id

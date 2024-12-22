@@ -40,20 +40,31 @@ public class WorkTime implements java.io.Serializable{
 	private Date createtime = new Date();
 	private Date updatetime = new Date();
 	
-	private String day ;		//默认 allow
-	private String begintime;		//工作时间开始  ：例如：201707010830
-	private String endtime 	;		//工作时间结束	例如： 201707011530
-	private int wfrom ;				//工作时间 星期开始 
-	private int wto ;				//工作时间 星期结束
+	//默认 allow
+	private String day ;
+	//工作时间开始  ：例如：201707010830
+	private String begintime;
+	//工作时间结束	例如： 201707011530
+	private String endtime 	;
+	//工作时间 星期开始 
+	private int wfrom ;
+	//工作时间 星期结束
+	private int wto ;
 	
-	private String wbegintime ;		//星期 时间开始
-	private String wendtime ;		//星期 时间结束
+	//星期 时间开始
+	private String wbegintime ;
+	//星期 时间结束
+	private String wendtime ;
 	
-	private int dfrom ;				//工作时间 日期开始
-	private int dto ;				//工作时间 日期结束
+	//工作时间 日期开始
+	private int dfrom ;
+	//工作时间 日期结束
+	private int dto ;
 	
-	private String  dbegintime ;	//日期 时间开始
-	private String dendtime 	;	//日期 时间结束
+	//日期 时间开始
+	private String  dbegintime ;
+	//日期 时间结束
+	private String dendtime 	;
 	
 	@Id
 	@Column(length = 32)

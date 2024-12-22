@@ -35,9 +35,12 @@ public class StatusEventSatisf implements Serializable{
 	 */
 	private static final long serialVersionUID = 3169891408571074136L;
 	private String id ;
-	private boolean satisf ;	//是否记录满意度调查
-	private String satisfaction 	;		//服务小结ID
-	private Date satisfdate ;				//满意度调查提交时间
+	//是否记录满意度调查
+	private boolean satisf ;
+	//服务小结ID
+	private String satisfaction 	;
+	//满意度调查提交时间
+	private Date satisfdate ;
 	
 	@Id
 	@Column(length = 32)

@@ -89,9 +89,12 @@ public class ExcelExporterProcess {
     private CellStyle createContentStyle() {
         CellStyle cellStyle = wb.createCellStyle();
 
-        cellStyle.setAlignment(HorizontalAlignment.CENTER); // 指定单元格居中对齐
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);// 指定单元格垂直居中对齐
-        cellStyle.setWrapText(false);// 指定单元格自动换行
+        // 指定单元格居中对齐
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        // 指定单元格垂直居中对齐
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        // 指定单元格自动换行
+        cellStyle.setWrapText(false);
 
         // 设置单元格字体
         Font font = wb.createFont();

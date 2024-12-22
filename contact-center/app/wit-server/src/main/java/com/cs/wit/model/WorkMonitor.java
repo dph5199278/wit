@@ -36,28 +36,37 @@ public class WorkMonitor implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id;
-	private String agent;//坐席工号
+	//坐席工号
+	private String agent;
 	private String username;
-	private String agentno;//'分机号（坐席登录的分机号码）
+	//'分机号（坐席登录的分机号码）
+	private String agentno;
 	
 	private String extno ;
 	
-	private boolean admin ;	//管理员账号
+	//管理员账号
+	private boolean admin ;
 	
-	private boolean firsttime ;		//是否首次在线
-	private int firsttimes ;			//首次在线时长
+	//是否首次在线
+	private boolean firsttime ;
+	//首次在线时长
+	private int firsttimes ;
 	
 	private String name;
-	private String status;//实时坐席状态
-	private String code;//对应字典管理CODE
-	private String worktype ;	//状态模式 ，  文本坐席，语音坐席
+	//实时坐席状态
+	private String status;
+	//对应字典管理CODE
+	private String code;
+	//状态模式 ，  文本坐席，语音坐席
+	private String worktype ;
 	private String orgi;
 	private String agentserviceid;
 	private String skill;
 	private String skillname;
 	private boolean busy;
 	private String workstatus;
-	private Date createtime;//记录创建时间
+	//记录创建时间
+	private Date createtime;
 	private String ani;
 	private String called;
 	private String direction;
@@ -67,8 +76,10 @@ public class WorkMonitor implements java.io.Serializable {
 	private String serviceid;
 	private String datestr;
 	private String servicestatus;
-	private String userid;////登录人ID
-	private String organ;//所属组织机构ID
+	////登录人ID
+	private String userid;
+	//所属组织机构ID
+	private String organ;
 	
 	@Id
 	@Column(length = 32)

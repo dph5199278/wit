@@ -40,8 +40,10 @@ public class InviteRecord {
     private String agentno;
     private Date createtime = new Date();
     private Date updatetime;
-    private String result = MainContext.OnlineUserInviteStatus.DEFAULT.toString();        //邀请结果， 拒绝 /接受
-    private int responsetime;    //响应时间
+    //邀请结果， 拒绝 /接受
+    private String result = MainContext.OnlineUserInviteStatus.DEFAULT.toString();
+    //响应时间
+    private int responsetime;
 
     @Id
     @Column(length = 32)

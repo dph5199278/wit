@@ -579,8 +579,10 @@ public class MainUtils {
     public static boolean isInWorkingHours(String timeRanges) {
         boolean workintTime = true;
         String timeStr = timeRangeDateFormat.get().format(new Date());
-        if (StringUtils.isNotBlank(timeRanges)) {        //设置了 工作时间段
-            workintTime = false;                    //将 检查结果设置为 False ， 如果当前时间是在 时间范围内，则 置为 True
+        //设置了 工作时间段
+        if (StringUtils.isNotBlank(timeRanges)) {
+            //将 检查结果设置为 False ， 如果当前时间是在 时间范围内，则 置为 True
+            workintTime = false;
             String[] timeRange = timeRanges.split(",");
             for (String tr : timeRange) {
                 String[] timeGroup = tr.split("~");
@@ -973,11 +975,15 @@ public class MainUtils {
                 System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
                 System.setProperty("sun.net.client.defaultReadTimeout", "10000");
                 //初始化ascClient需要的几个参数
-                final String product = "Dysmsapi";//短信API产品名称（短信产品名固定，无需修改）
-                final String domain = "dysmsapi.aliyuncs.com";//短信API产品域名（接口地址固定，无需修改）
+                //短信API产品名称（短信产品名固定，无需修改）
+                final String product = "Dysmsapi";
+                //短信API产品域名（接口地址固定，无需修改）
+                final String domain = "dysmsapi.aliyuncs.com";
                 //替换成你的AK
-                final String accessKeyId = systemMessage.getAppkey();//你的accessKeyId,参考本文档步骤2
-                final String accessKeySecret = systemMessage.getAppsec();//你的accessKeySecret，参考本文档步骤2
+                //你的accessKeyId,参考本文档步骤2
+                final String accessKeyId = systemMessage.getAppkey();
+                //你的accessKeySecret，参考本文档步骤2
+                final String accessKeySecret = systemMessage.getAppsec();
                 //初始化ascClient,暂时不支持多region（请勿修改）
                 IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
                         accessKeySecret);
@@ -1077,7 +1083,8 @@ public class MainUtils {
                         jobDetail.getNextfiretime() != null ? jobDetail.getNextfiretime() : date));
             } catch (ParseException e) {
                 nextFireDate = new Date(
-                        System.currentTimeMillis() + 1000 * 60 * 60 * 24);    //一旦任务的 Cron表达式错误，将下次执行时间自动设置为一天后，避免出现任务永远无法终止的情况
+                        //一旦任务的 Cron表达式错误，将下次执行时间自动设置为一天后，避免出现任务永远无法终止的情况
+                        System.currentTimeMillis() + 1000 * 60 * 60 * 24);
                 e.printStackTrace();
             }
         }

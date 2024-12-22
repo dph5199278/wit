@@ -345,24 +345,32 @@ public class CallCenterUtils {
 
         //修改，拨打任务
         if (task != null) {
-            task.setAssigned(task.getAssigned() - 1);//分配到坐席数
-            task.setNotassigned(task.getNotassigned() + 1);//未分配数
-            task.setRenum(task.getRenum() + 1);//回收到池子数
+            //分配到坐席数
+            task.setAssigned(task.getAssigned() - 1);
+            //未分配数
+            task.setNotassigned(task.getNotassigned() + 1);
+            //回收到池子数
+            task.setRenum(task.getRenum() + 1);
             callOutTaskRes.save(task);
         }
 
         //修改，批次
         if (batch != null) {
-            batch.setAssigned(batch.getAssigned() - 1);//已分配
-            batch.setNotassigned(batch.getNotassigned() + 1);//未分配
+            //已分配
+            batch.setAssigned(batch.getAssigned() - 1);
+            //未分配
+            batch.setNotassigned(batch.getNotassigned() + 1);
             batchRes.save(batch);
         }
 
         //修改，筛选记录
         if (ukefuCallOutFilter != null) {
-            ukefuCallOutFilter.setAssigned(ukefuCallOutFilter.getAssigned() - 1);//分配给坐席数
-            ukefuCallOutFilter.setRenum(ukefuCallOutFilter.getRenum() + 1);//回收到池子数
-            ukefuCallOutFilter.setNotassigned(ukefuCallOutFilter.getNotassigned() + 1);//未分配数
+            //分配给坐席数
+            ukefuCallOutFilter.setAssigned(ukefuCallOutFilter.getAssigned() - 1);
+            //回收到池子数
+            ukefuCallOutFilter.setRenum(ukefuCallOutFilter.getRenum() + 1);
+            //未分配数
+            ukefuCallOutFilter.setNotassigned(ukefuCallOutFilter.getNotassigned() + 1);
             callOutFilterRes.save(ukefuCallOutFilter);
         }
     }
@@ -378,17 +386,22 @@ public class CallCenterUtils {
 
         //修改，拨打任务
         if (task != null) {
-            task.setNotassigned(task.getNotassigned() + 1);//未分配数
-            task.setAssignedorgan(task.getAssignedorgan() - 1);//分配到部门数
-            task.setReorgannum(task.getReorgannum() + 1);//回收到部门数
+            //未分配数
+            task.setNotassigned(task.getNotassigned() + 1);
+            //分配到部门数
+            task.setAssignedorgan(task.getAssignedorgan() - 1);
+            //回收到部门数
+            task.setReorgannum(task.getReorgannum() + 1);
             callOutTaskRes.save(task);
         }
 
 
         //修改，筛选记录
         if (ukefuCallOutFilter != null) {
-            ukefuCallOutFilter.setAssigned(ukefuCallOutFilter.getAssigned() - 1);//分配给坐席数
-            ukefuCallOutFilter.setReorgannum(ukefuCallOutFilter.getReorgannum() + 1);//回收到部门数
+            //分配给坐席数
+            ukefuCallOutFilter.setAssigned(ukefuCallOutFilter.getAssigned() - 1);
+            //回收到部门数
+            ukefuCallOutFilter.setReorgannum(ukefuCallOutFilter.getReorgannum() + 1);
             callOutFilterRes.save(ukefuCallOutFilter);
         }
     }
@@ -405,24 +418,32 @@ public class CallCenterUtils {
 
         //修改，拨打任务
         if (task != null) {
-            task.setAssignedorgan(task.getAssignedorgan() - 1);//分配到部门数
-            task.setNotassigned(task.getNotassigned() + 1);//未分配数
-            task.setRenum(task.getRenum() + 1);//回收到池子数
+            //分配到部门数
+            task.setAssignedorgan(task.getAssignedorgan() - 1);
+            //未分配数
+            task.setNotassigned(task.getNotassigned() + 1);
+            //回收到池子数
+            task.setRenum(task.getRenum() + 1);
             callOutTaskRes.save(task);
         }
 
         //修改，批次
         if (batch != null) {
-            batch.setAssigned(batch.getAssigned() - 1);//已分配
-            batch.setNotassigned(batch.getNotassigned() + 1);//未分配
+            //已分配
+            batch.setAssigned(batch.getAssigned() - 1);
+            //未分配
+            batch.setNotassigned(batch.getNotassigned() + 1);
             batchRes.save(batch);
         }
 
         //修改，筛选记录
         if (ukefuCallOutFilter != null) {
-            ukefuCallOutFilter.setAssignedorgan(ukefuCallOutFilter.getAssignedorgan() - 1);//分配到部门数
-            ukefuCallOutFilter.setRenum(ukefuCallOutFilter.getRenum() + 1);//回收到池子数
-            ukefuCallOutFilter.setNotassigned(ukefuCallOutFilter.getNotassigned() + 1);//未分配数
+            //分配到部门数
+            ukefuCallOutFilter.setAssignedorgan(ukefuCallOutFilter.getAssignedorgan() - 1);
+            //回收到池子数
+            ukefuCallOutFilter.setRenum(ukefuCallOutFilter.getRenum() + 1);
+            //未分配数
+            ukefuCallOutFilter.setNotassigned(ukefuCallOutFilter.getNotassigned() + 1);
             callOutFilterRes.save(ukefuCallOutFilter);
         }
     }
@@ -432,7 +453,8 @@ public class CallCenterUtils {
      */
     public static int getActDisnum(@Valid String actid, @Valid int p, @Valid int ps) throws IOException {
         BoolQuery.Builder queryBuilder = QueryBuilders.bool();
-        queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value(actid)));// 活动ID
+        // 活动ID
+        queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value(actid)));
         queryBuilder.mustNot(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.NOT.toString())));
         PageImpl<UKDataBean> dataList = SearchTools.search(queryBuilder, p, ps);
         return dataList.getContent().size();

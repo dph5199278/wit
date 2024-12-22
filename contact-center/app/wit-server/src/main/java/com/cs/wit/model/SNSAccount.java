@@ -33,18 +33,25 @@ public class SNSAccount {
     private String id;
 
     @Column(unique = true)
-    private String snsid;        //表示 SNSAccount
+    //表示 SNSAccount
+    private String snsid;
     private String name;
     private String code;
     private String username;
     private String password;
-    private String snstype;//改字段为为大类  微信/微博/易信等
-    private Date createtime = new Date();    //创建时间
-    private Date updatetime;        //更新时间
-    private int expirestime;        //过期时间
-    private String account;    //该字段修改为子类型   订阅号(sub)/服务号(sev)/企业号(enpt)
+    //改字段为为大类  微信/微博/易信等
+    private String snstype;
+    //创建时间
+    private Date createtime = new Date();
+    //更新时间
+    private Date updatetime;
+    //过期时间
+    private int expirestime;
+    //该字段修改为子类型   订阅号(sub)/服务号(sev)/企业号(enpt)
+    private String account;
 
-    private String verify;        // 是否认证
+    // 是否认证
+    private String verify;
     private String headimg;
     private String qrcode;
     private String alias;
@@ -67,12 +74,14 @@ public class SNSAccount {
     private String aeskey;
 
 
-    private String baseURL;    //网站URL
+    //网站URL
+    private String baseURL;
 
     private String apptoken;
     private String sessionkey;
     private boolean defaultaccount;
-    private String moreparam;                //改变用处，用于记录 爬虫的 爬取位置(微博)/如果是微信记录Secret
+    //改变用处，用于记录 爬虫的 爬取位置(微博)/如果是微信记录Secret
+    private String moreparam;
     private String orgi;
     private String organ;
     private String creater;

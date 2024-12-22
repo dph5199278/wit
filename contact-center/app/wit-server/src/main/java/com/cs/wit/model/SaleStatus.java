@@ -34,26 +34,27 @@ import org.hibernate.annotations.GenericGenerator;
 @org.hibernate.annotations.Proxy(lazy = false)
 public class SaleStatus implements java.io.Serializable{
 	/**
-	 * 
+	 * 默认序列ID
 	 */
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 */
-	
 	private String id  ;
-	
-	private String name ;		//状态名
-	private String code ;	//状态代码
-	private String cate ;	//状态分类ID
+
+	//状态名
+	private String name ;
+	//状态代码
+	private String code ;
+	//状态分类ID
+	private String cate ;
 	private String orgi ;
 	private String creater;
 	private Date createtime ;
 	private Date updatetime ;
-	private String memo;	//备注
-	
-	private String activityid;	//所属的活动ID
+	//备注
+	private String memo;
+
+	//所属的活动ID
+	private String activityid;
 	
 	/**
 	 * @return the id

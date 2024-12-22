@@ -253,7 +253,8 @@ public class MetadataController extends Handler {
                 tablePorperties.setFieldstatus(!colum.getName().startsWith("field"));
                 table.getTableproperty().add(tablePorperties);
             }
-            table.setTablename(table.getTablename().toLowerCase());//转小写
+            //转小写
+            table.setTablename(table.getTablename().toLowerCase());
         }
         return table;
     }

@@ -80,10 +80,14 @@ public class ApiTagsController extends Handler {
         }
 
         resp.add("data", ja);
-        resp.addProperty("size", records.getSize()); // 每页条数
-        resp.addProperty("number", records.getNumber()); // 当前页
-        resp.addProperty("totalPage", records.getTotalPages()); // 所有页
-        resp.addProperty("totalElements", records.getTotalElements()); // 所有检索结果数量
+        // 每页条数
+        resp.addProperty("size", records.getSize());
+        // 当前页
+        resp.addProperty("number", records.getNumber());
+        // 所有页
+        resp.addProperty("totalPage", records.getTotalPages());
+        // 所有检索结果数量
+        resp.addProperty("totalElements", records.getTotalElements());
         resp.addProperty(RestUtils.RESP_KEY_RC, RestUtils.RESP_RC_SUCC);
 
         return resp;

@@ -37,7 +37,8 @@ public class MainContext {
 
     private final static Logger logger = LoggerFactory.getLogger(MainContext.class);
 
-    private static boolean imServerRunning = false;  // IM服务状态
+    // IM服务状态
+    private static boolean imServerRunning = false;
 
     public static String SYSTEM_ORGI = "cskefu";
 
@@ -140,8 +141,10 @@ public class MainContext {
     }
 
     public enum NameStatusType {
-        CALLED,    //已拨打
-        NOTCALL    //未拨打
+        //已拨打
+        CALLED,
+        //未拨打
+        NOTCALL
         ;
 
         public String toString() {
@@ -150,13 +153,20 @@ public class MainContext {
     }
 
     public enum NamesCalledEnum {
-        SUCCESS,//拨打成功
-        FAILD,    //拨打失败
-        NOANSWER,//无人接听
-        EMPNO,    //空号
-        ARREARS,//欠费
-        APPO,    //预约拨打
-        INVALID;//无效名单
+        //拨打成功
+        SUCCESS,
+        //拨打失败
+        FAILD,
+        //无人接听
+        NOANSWER,
+        //空号
+        EMPNO,
+        //欠费
+        ARREARS,
+        //预约拨打
+        APPO,
+        //无效名单
+        INVALID;
 
         public String toString() {
             return super.toString().toLowerCase();
@@ -198,8 +208,10 @@ public class MainContext {
     }
 
     public enum SalesNamesStatusEnum {
-        DIST,            //已分配
-        NOTDIST;        //未分配
+        //已分配
+        DIST,
+        //未分配
+        NOTDIST;
 
         public String toString() {
             return super.toString().toLowerCase();
@@ -208,8 +220,10 @@ public class MainContext {
 
 
     public enum LeaveMsgStatus {
-        PROCESSED,        //已处理
-        NOTPROCESS;        //未处理
+        //已处理
+        PROCESSED,
+        //未处理
+        NOTPROCESS;
 
         public String toString() {
             return super.toString().toLowerCase();
@@ -238,9 +252,12 @@ public class MainContext {
     }
 
     public enum QualityStatusEnum {
-        NO,        //未开启质检
-        DIS,        //已分配
-        NODIS;        //未分配
+        //未开启质检
+        NO,
+        //已分配
+        DIS,
+        //未分配
+        NODIS;
 
         public String toString() {
             return super.toString().toLowerCase();
@@ -252,10 +269,12 @@ public class MainContext {
         ORGCALLOUT("部门外呼", 2),
         ORGCALLIN("部门呼入", 3),
         INSIDEQUENE("内线排队", 4),
-        INSIDETRANS("内线转接", 5),            //已分配
+        //已分配
+        INSIDETRANS("内线转接", 5),
         OUTSIDELINE("外线", 6),
         OUTSIDEQUENE("外线排队", 7),
-        OUTSIDETRANS("外线转接", 8);        //未分配
+        //未分配
+        OUTSIDETRANS("外线转接", 8);
 
         private final String name;
         private final int index;
@@ -380,9 +399,12 @@ public class MainContext {
 
     public enum DTMFType {
         SATISF,
-        PASSWORD,        //密码验证
-        IDCARD,            //身份证号码
-        CARDNO;            //银行卡号
+        //密码验证
+        PASSWORD,
+        //身份证号码
+        IDCARD,
+        //银行卡号
+        CARDNO;
 
         public String toString() {
             return super.toString().toLowerCase();
@@ -431,8 +453,10 @@ public class MainContext {
     }
 
     public enum WorkOrdersEventType {
-        ACCEPTUSER,        //审批人变更
-        OTHER;            //其他变更
+        //审批人变更
+        ACCEPTUSER,
+        //其他变更
+        OTHER;
 
         @Override
         public String toString() {
@@ -650,9 +674,12 @@ public class MainContext {
      * 接收消息的人员类型
      */
     public enum ReceiverType {
-        AGENT,   // 坐席
-        VISITOR, // 访客
-        CHATBOT; // 聊天机器人
+        // 坐席
+        AGENT,
+        // 访客
+        VISITOR,
+        // 聊天机器人
+        CHATBOT;
 
         @Override
         public String toString() {
@@ -677,14 +704,17 @@ public class MainContext {
         MESSAGE,
         END,
         TRANS,
-        TRANSOUT,     // 当前会话被转接出去
+        // 当前会话被转接出去
+        TRANSOUT,
         STATUS,
         AGENTSTATUS,
         SERVICE,
         WRITING,
-        LEAVE,         // 浏览器端执行退出
+        // 浏览器端执行退出
+        LEAVE,
         SATISFACTION,
-        AUDIT_MESSAGE, // 会话监控消息类型
+        // 会话监控消息类型
+        AUDIT_MESSAGE,
         AUDIT_NEW,
         AUDIT_END,
         AUDIT_TRANS,
@@ -959,8 +989,10 @@ public class MainContext {
      * 呼出电话的主叫类型
      */
     public enum CallerType {
-        AI,     // 机器人
-        AGENT;  // 人工坐席
+        // 机器人
+        AI,
+        // 人工坐席
+        AGENT;
 
         @Override
         public String toString() {

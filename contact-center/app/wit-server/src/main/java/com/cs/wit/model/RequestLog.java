@@ -41,38 +41,64 @@ public class RequestLog implements java.io.Serializable  {
 	private String name;
 	private String funtype;
 	private String fundesc ;
-	private String username;//操作人
-	private String userid ;	//操作人员ID
-	private String usermail ; //操作人员的EMAIL
-	private Date starttime;//登陆时间或者操作时间
-	private Date endtime;//退出
-	private String url;//操作url
-	private String parameters;//传入参数
-	private String reportname;//报表名称
-	private String type;// 1操作日志  2系统日志  3登录日志  4报表日志
-	private String detailtype;// 日志小分类
-	private String orgi;//组织
-	private String ip;//ip地址
-	private String hostname ; //hostname
-	private String statues;//操作状态
-	private String error;//错误提示
-	private String reportdic;//报表目录
-	private String flowid ;	//请求标识ID
-	private Date createdate = new Date();	//创建时间
+	//操作人
+	private String username;
+	//操作人员ID
+	private String userid ;
+	//操作人员的EMAIL
+	private String usermail ;
+	//登陆时间或者操作时间
+	private Date starttime;
+	//退出
+	private Date endtime;
+	//操作url
+	private String url;
+	//传入参数
+	private String parameters;
+	//报表名称
+	private String reportname;
+	// 1操作日志  2系统日志  3登录日志  4报表日志
+	private String type;
+	// 日志小分类
+	private String detailtype;
+	//组织
+	private String orgi;
+	//ip地址
+	private String ip;
+	//hostname
+	private String hostname ;
+	//操作状态
+	private String statues;
+	//错误提示
+	private String error;
+	//报表目录
+	private String reportdic;
+	//请求标识ID
+	private String flowid ;
+	//创建时间
+	private Date createdate = new Date();
 	
 	
-	private String classname;//类名
-	private String methodname;//方法名
-	private String filename;//字段名
-	private String linenumber;//行号
-	private String throwable;//线程
+	//类名
+	private String classname;
+	//方法名
+	private String methodname;
+	//字段名
+	private String filename;
+	//行号
+	private String linenumber;
+	//线程
+	private String throwable;
 	private long   querytime ;
-	private String optext ;	//报表时长 
+	//报表时长 
+	private String optext ;
 	private String field6;
 	private String field7;
 	private String field8;
-	private String triggerwarning ; //触发预警服务
-	private String   triggertime ;// 触发预警服务时间
+	//触发预警服务
+	private String triggerwarning ;
+	// 触发预警服务时间
+	private String   triggertime ;
 	
 	@Id
 	@Column(length = 32)

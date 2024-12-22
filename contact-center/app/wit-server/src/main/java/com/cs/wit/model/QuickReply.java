@@ -37,18 +37,25 @@ public class QuickReply {
 
 	private String id  = MainUtils.getUUID();
 
-	private String title ;		//标题
-	private String content ;	//内容
+	//标题
+	private String title ;
+	//内容
+	private String content ;
 
-	private String type ;		//公用 /私有
-	private String creater; 	//创建人
+	//公用 /私有
+	private String type ;
+	//创建人
+	private String creater;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-	private Date createtime = new Date();	//创建时间
+	//创建时间
+	private Date createtime = new Date();
 
-	private String orgi ;		//
+	//租户id
+	private String orgi ;
 
-	private String cate ; 		//所属分类
+	//所属分类
+	private String cate ;
 
 
 	@Id

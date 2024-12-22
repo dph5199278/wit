@@ -47,40 +47,67 @@ public class Scene implements java.io.Serializable{
 	
 	private String sessionid ;
 	
-	private String title ;		//标题
-	private String content ;	//内容
-	private float price ;		//问题价格
-	private String keyword ;	//关键词
-	private String summary ;	//摘要
-	private boolean anonymous ;		//是否匿名提问
+	//标题
+	private String title ;
+	//内容
+	private String content ;
+	//问题价格
+	private float price ;
+	//关键词
+	private String keyword ;
+	//摘要
+	private String summary ;
+	//是否匿名提问
+	private boolean anonymous ;
 	
-	private Date begintime ;		//有效期开始
-	private Date endtime ;			//有效期结束
+	//有效期开始
+	private Date begintime ;
+	//有效期结束
+	private Date endtime ;
 	
-	private boolean top ;		//是否置顶
-	private boolean essence ;	//是否精华
-	private boolean accept ;	//是否已采纳最佳答案
-	private boolean finish	;	//结贴
+	//是否置顶
+	private boolean top ;
+	//是否精华
+	private boolean essence ;
+	//是否已采纳最佳答案
+	private boolean accept ;
+	//结贴
+	private boolean finish	;
 	
-	private String replaytype ;	//回复方式 ， random ; order
-	private boolean allowask ;	//允许AI自动询问用户
+	//回复方式 ， random ; order
+	private String replaytype ;
+	//允许AI自动询问用户
+	private boolean allowask ;
 	
-	private String inputcon ;	//输入条件
-	private String outputcon ;	//输出条件
+	//输入条件
+	private String inputcon ;
+	//输出条件
+	private String outputcon ;
 	
-	private String userinput ;	//用户输入的提问 首条
-	private String aireply ;	//AI回复的 首条
+	//用户输入的提问 首条
+	private String userinput ;
+	//AI回复的 首条
+	private String aireply ;
 	
-	private int answers ;		//回答数量
+	//回答数量
+	private int answers ;
 	
-	private int views ;			//阅读数量
-	private int followers ;		//关注数量
-	private int collections;	//收藏数量
-	private int comments ;		//评论数量
-	private boolean frommobile ;	//是否移动端提问
-	private String status ;	//	状态	
-	private String tptype;	//主题类型		问答:分享:讨论
-	private String cate ;	//主题 栏目 
+	//阅读数量
+	private int views ;
+	//关注数量
+	private int followers ;
+	//收藏数量
+	private int collections;
+	//评论数量
+	private int comments ;
+	//是否移动端提问
+	private boolean frommobile ;
+	//	状态
+	private String status ;
+	//主题类型		问答:分享:讨论
+	private String tptype;
+	//主题 栏目
+	private String cate ;
 		
 	private String username ;
 	private String orgi ;

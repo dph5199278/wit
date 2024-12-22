@@ -35,7 +35,8 @@ public class SysDic  implements java.io.Serializable {
 	private static final long serialVersionUID = 8699781935163431952L;
 	private String id ;
 	private String name ;
-	private String title = "pub";			//改变用处， 变更为 CubeDic 的 目录类型， 个人文件夹  / 公共文件夹
+	//改变用处， 变更为 CubeDic 的 目录类型， 个人文件夹  / 公共文件夹
+	private String title = "pub";
 	private String code ;
 	private String orgi ;
 	private String ctype ;
@@ -46,20 +47,25 @@ public class SysDic  implements java.io.Serializable {
 	private String catetype ;				
 	private String memo ;					
 	private String creater;
-	private boolean haschild ;				//修改用处，改为 是否允许租户扩展 字典项目
-	private boolean discode ;				//是否显示code
+	//修改用处，改为 是否允许租户扩展 字典项目
+	private boolean haschild ;
+	//是否显示code
+	private boolean discode ;
 	private Date createtime;
 	private Date updatetime;
 	private int sortindex ;
 	private String dicid ;
 	
-	private String menutype ;				//菜单类型，顶部导航菜单， 左侧菜单
+	//菜单类型，顶部导航菜单， 左侧菜单
+	private String menutype ;
 	
-	private String rules ;					//角色要求 ， 管理员 / 普通用户 / 多媒体坐席  / 呼叫中心坐席
+	//角色要求 ， 管理员 / 普通用户 / 多媒体坐席  / 呼叫中心坐席
+	private String rules ;
 	
 	private String module ;
 	private String url ;
-	private String mlevel ;					//菜单级别， 一级 菜单， 二级菜单
+	//菜单级别， 一级 菜单， 二级菜单
+	private String mlevel ;
 	
 	private boolean defaultvalue = false;
 	@Id

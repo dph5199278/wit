@@ -164,7 +164,8 @@ public class Cache {
      * 更新坐席状态
      */
     public void putAgentStatusByOrgi(AgentStatus agentStatus, String orgi) {
-        String pre = getAgentStatusStatus(agentStatus.getAgentno(), orgi); // 坐席前状态
+        // 坐席前状态
+        String pre = getAgentStatusStatus(agentStatus.getAgentno(), orgi);
 
         if (StringUtils.equals(pre, MainContext.AgentStatusEnum.OFFLINE.toString())) {
             // 之前不存在，新建缓存

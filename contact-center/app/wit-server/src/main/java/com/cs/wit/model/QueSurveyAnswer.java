@@ -37,21 +37,35 @@ public class QueSurveyAnswer implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	
 	private String id ;
-	private String questionid;//问题ID
-	private String questionname;//问题名称
-	private String answer;//问题答案
-	private String queid;//跳转问题ID
-	private int answerscore;//答案评分
-	private String orgi;//租户ID
-	private String creater;//创建人
-	private Date createtime;//创建时间
-	private Date updatetime;//更新时间
-	private String processid;//问卷ID
-	private String correct;//是否是正确答案（0正确1不正确）
+	//问题ID
+	private String questionid;
+	//问题名称
+	private String questionname;
+	//问题答案
+	private String answer;
+	//跳转问题ID
+	private String queid;
+	//答案评分
+	private int answerscore;
+	//租户ID
+	private String orgi;
+	//创建人
+	private String creater;
+	//创建时间
+	private Date createtime;
+	//更新时间
+	private Date updatetime;
+	//问卷ID
+	private String processid;
+	//是否是正确答案（0正确1不正确）
+	private String correct;
 	
-	private String hanguptype ;		//结束类型
-	private String hangupmsg ;		//结束文字
-	private String hangupvoice ;	//结束语音
+	//结束类型
+	private String hanguptype ;
+	//结束文字
+	private String hangupmsg ;
+	//结束语音
+	private String hangupvoice ;
 
 	
 	@Id

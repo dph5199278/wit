@@ -38,22 +38,29 @@ public class QuickType implements java.io.Serializable{
 	private String name ;
 	private String code ;
 	
-	private int inx;			//知识分类排序位置
+	//知识分类排序位置
+	private int inx;
 	
-	private String quicktype ;	//个人/公共
+	//个人/公共
+	private String quicktype ;
 	private Date createtime ;
 	private String creater;
 	private String username ;
 	
-	private Date startdate;		//有效期开始
-	private Date enddate ;		//有效期结束
+	//有效期开始
+	private Date startdate;
+	//有效期结束
+	private Date enddate ;
 	
-	private boolean enable ;	//状态是否可用
+	//状态是否可用
+	private boolean enable ;
 	
-	private String description	;//分类备注描述信息
+	//分类备注描述信息
+	private String description	;
 	
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
 	
 	@Id

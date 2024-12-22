@@ -54,47 +54,76 @@ public class ReportModel implements java.io.Serializable {
 	private String stylestr;
 	private String labeltext ;
 	private String cssclassname ;
-	private String mposleft;	//指标位置
-	private String mpostop ;	//指标位置
+	//指标位置
+	private String mposleft;
+	//指标位置
+	private String mpostop ;
 	private String title ;
-	private boolean exchangerw = false ;	//行列转换
+	//行列转换
+	private boolean exchangerw = false ;
 	private String publishedcubeid ;
-	private String rowdimension ;	//逗号分隔
-	private String coldimension ;	//逗号分隔
-	private String measure ;		//逗号分隔
-	private String dstype ;		//数据源类型cube or table
-	private String dbtype;      //数据库类型：sqlserver oracle mysql hive ....
+	//逗号分隔
+	private String rowdimension ;
+	//逗号分隔
+	private String coldimension ;
+	//逗号分隔
+	private String measure ;
+	//数据源类型cube or table
+	private String dstype ;
+	//数据库类型：sqlserver oracle mysql hive ....
+	private String dbtype;
 	private String orgi ;
 	private String objectid ;
 	private Date createtime ;
 	private String filterstr;
 	private String sortstr ;
-	private String viewtype = "view";	//视图类型, 图表,组件, 仪表盘
-	private String chartemplet ;		//图表显示数据XML文件的模板,存放显示模板的id
-	private String chartype ;			//图表类型
-	private String chartdatatype	;	//图表数据类型
-	private String chart3d = "false";			//显示为3D图表
-	private String xtitle ;				//修改用处，对图表，用于控制是否显示X轴标题 ， 对于表格，用于控制需要隐藏的参数
-	private String ytitle ;				//修改用处。对图表，用于控制是否显示Y轴标题，对于表格，用于控制当前当前选中的参数的名称
+	//视图类型, 图表,组件, 仪表盘
+	private String viewtype = "view";
+	//图表显示数据XML文件的模板,存放显示模板的id
+	private String chartemplet ;
+	//图表类型
+	private String chartype ;
+	//图表数据类型
+	private String chartdatatype	;
+	//显示为3D图表
+	private String chart3d = "false";
+	//修改用处，对图表，用于控制是否显示X轴标题 ， 对于表格，用于控制需要隐藏的参数
+	private String xtitle ;
+	//修改用处。对图表，用于控制是否显示Y轴标题，对于表格，用于控制当前当前选中的参数的名称
+	private String ytitle ;
 	private String charttitle = "false";
-	private String displayborder ;			//显示边框
-	private String bordercolor = "#FFFFFF";			//边框颜色
-	private String displaydesc ;	//显示颜色说明区域
-	private String formdisplay ;	//表单内显示模式 ，行内（Form-Inline）：换行（form-horizontal）
-	private String labelstyle ;		//表单样式
-	private String formname ;		//表单名称 name
-	private String defaultvalue ;	//默认值
-	private String querytext ;		//查询语法
-	private String tempquey ;		//保存当次查询语句
-	private boolean displaytitle = false ;	//显示表头
-	private boolean clearzero = false ;	//除零
+	//显示边框
+	private String displayborder ;
+	//边框颜色
+	private String bordercolor = "#FFFFFF";
+	//显示颜色说明区域
+	private String displaydesc ;
+	//表单内显示模式 ，行内（Form-Inline）：换行（form-horizontal）
+	private String formdisplay ;
+	//表单样式
+	private String labelstyle ;
+	//表单名称 name
+	private String formname ;
+	//默认值
+	private String defaultvalue ;
+	//查询语法
+	private String querytext ;
+	//保存当次查询语句
+	private String tempquey ;
+	//显示表头
+	private boolean displaytitle = false ;
+	//除零
+	private boolean clearzero = false ;
 	
 	private String titlestr ;
 	private String width = "100";
 	private String height = "100";
-	private String widthunit = "";	//宽度单位  % OR px
-	private String heightunit = ""; 	//高度单位 % OR px
-	private String defheight = "200px";   //默认内部元素的高度，默认为 200px
+	//宽度单位  % OR px
+	private String widthunit = "";
+	//高度单位 % OR px
+	private String heightunit = "";
+	//默认内部元素的高度，默认为 200px
+	private String defheight = "200px";
 	private String defwidth = "98" ;
 	
 	private String neckwidth ;
@@ -112,24 +141,33 @@ public class ReportModel implements java.io.Serializable {
 	private String colformatstr ;
 	private String publishtype ;	
 	
-	private String editview ="view";			//编辑视图
-	private boolean expandbtm = true;	//展开底部工具栏
-	private boolean expandrgt = true;	//展开右侧工具栏
-	private String curtab 	;	 //当前默认展开的 工具栏  ： 数据 ： 组件
+	//编辑视图
+	private String editview ="view";
+	//展开底部工具栏
+	private boolean expandbtm = true;
+	//展开右侧工具栏
+	private boolean expandrgt = true;
+	//当前默认展开的 工具栏  ： 数据 ： 组件
+	private String curtab 	;
 	
-	private String hiddencolstr;//隐藏的列
+	//隐藏的列
+	private String hiddencolstr;
 
-	private String eventstr ;	//事件
-	private String dsmodel;	//数据源对象
+	//事件
+	private String eventstr ;
+	//数据源对象
+	private String dsmodel;
 	
-	private String html;//自定义报表文本
+	//自定义报表文本
+	private String html;
 	
 	private String mid ;		
 	private String parentid ;
 	private String templetid;
 	private int colspan ;
 	
-	private int colindex ;	//列位置
+	//列位置
+	private int colindex ;
 	
 	private String sqldialect;
 	private int pagesize = 20;
@@ -141,10 +179,13 @@ public class ReportModel implements java.io.Serializable {
 	
 	private String exporttitle ;
 	
-	private int colsize = 100;//报表显示列大小
+	//报表显示列大小
+	private int colsize = 100;
 	
-	private String sorttype;//排序类型
-	private String sortname;//排序列名称；
+	//排序类型
+	private String sorttype;
+	//排序列名称；
+	private String sortname;
 	
 	private List<ColumnProperties> properties = new ArrayList<ColumnProperties>();
 	private List<ColumnProperties> colproperties = new ArrayList<ColumnProperties>();

@@ -45,108 +45,168 @@ public class JobDetail implements Serializable {
 
     private String id;
 
-    private String orgi;        //租户ID
-    private String organ;        //创建部门
-    private String creater;    //创建人
-    private String batchtype;    //导入类型（计划批次/临时批次）
-    private String imptype;    //导入方式：本地文件导入/远程文件导入/数据库导入/手动上传导入
+    //租户ID
+    private String orgi;
+    //创建部门
+    private String organ;
+    //创建人
+    private String creater;
+    //导入类型（计划批次/临时批次）
+    private String batchtype;
+    //导入方式：本地文件导入/远程文件导入/数据库导入/手动上传导入
+    private String imptype;
 
-    private String actype;        //活动类型
-    private String filterid;    //筛选表单ID
+    //活动类型
+    private String actype;
+    //筛选表单ID
+    private String filterid;
 
-    private String parentid;    //目录ID
+    //目录ID
+    private String parentid;
 
-    private int threads;        //并发限制
+    //并发限制
+    private int threads;
 
     private String impurl;
     private String filetype;
-    private String dbtype;        //数据库类型
+    //数据库类型
+    private String dbtype;
     private String jdbcurl;
     private String driverclazz;
     private String username;
     private String password;
 
-    private String clazz;            //结算表的时候，危险操作提示
-    private String taskid;     //任务目标id
-    private String tasktype; //table 模型任务 、report报表计划任务
-    private boolean plantask;    // true后台任务，false交互式任务
-    private String source;   //File source eg:e:\document
-    private String userid;        //schedule user
+    //结算表的时候，危险操作提示
+    private String clazz;
+    //任务目标id
+    private String taskid;
+    //table 模型任务 、report报表计划任务
+    private String tasktype;
+    // true后台任务，false交互式任务
+    private boolean plantask;
+    //File source eg:e:\document
+    private String source;
+    //schedule user
+    private String userid;
     private String email;
     private String nickname;
-    private String crawltaskid;//用来标记是手动点击的还是到了执行时间执行的，手动：operation，自动：auto或null
+    //用来标记是手动点击的还是到了执行时间执行的，手动：operation，自动：auto或null
+    private String crawltaskid;
     private long lastindex = 0;
-    private String dataid;//为了在状态中检索，存放了报表的id集合
-    private String dicid;//存放了报表所在目录
+    //为了在状态中检索，存放了报表的id集合
+    private String dataid;
+    //存放了报表所在目录
+    private String dicid;
 
     private Date taskfiretime;
     private String crawltask;
     private String targettask;
     private boolean createtable;
     private String taskstatus = "0";
-    private long startindex;    //数据更新位置
-    private Date lastdate;        //数据更新时间
-    private Date nextfiretime;        //数据更新时间
+    //数据更新位置
+    private long startindex;
+    //数据更新时间
+    private Date lastdate;
+    //数据更新时间
+    private Date nextfiretime;
     private String cronexp;
     private boolean fetcher = true;
     private boolean pause = false;
     private boolean plantaskreadtorun = false;
 
-    private boolean mapping;    //是否已经映射数据结构
+    //是否已经映射数据结构
+    private boolean mapping;
 
 
-    private String memo;        //任务类型，如果是 cubedata , 则在执行完毕后更新cube信息   , 导出任务时改变用处，用于导出是的 导出格式
+    //任务类型，如果是 cubedata , 则在执行完毕后更新cube信息   , 导出任务时改变用处，用于导出是的 导出格式
+    private String memo;
     private long fetchSize;
-    private String usearea;    //启用分区采集    ， 改变用处，在 导出文件的时候，用于记录当前导出的 数据集的 total
-    private String areafield;    //分区字段
-    private String areafieldtype;    //字段类型
-    private String arearule;    //分区递增规则
-    private String minareavalue;    //最小值
-    private String maxareavalue;    //最大值
-    private String formatstr;        //格式化字符串
-    private String taskinfo;       //序列化以后的结果，JSON格式
-    private int priority;           //优先级
-    private String runserver;        //执行此任务的 服务器
+    //启用分区采集    ， 改变用处，在 导出文件的时候，用于记录当前导出的 数据集的 total
+    private String usearea;
+    //分区字段
+    private String areafield;
+    //字段类型
+    private String areafieldtype;
+    //分区递增规则
+    private String arearule;
+    //最小值
+    private String minareavalue;
+    //最大值
+    private String maxareavalue;
+    //格式化字符串
+    private String formatstr;
+    //序列化以后的结果，JSON格式
+    private String taskinfo;
+    //优先级
+    private int priority;
+    //执行此任务的 服务器
+    private String runserver;
 
-    private String actid;        //元数据ID
-    private String distype;    //名单分配方式
-    private String distpolicy;    //分配策略
-    private int policynum;    //策略数量
-    private String busstype;    //业务类型
+    //元数据ID
+    private String actid;
+    //名单分配方式
+    private String distype;
+    //分配策略
+    private String distpolicy;
+    //策略数量
+    private int policynum;
+    //业务类型
+    private String busstype;
 
-    private int disnum;        //默认分配数量
+    //默认分配数量
+    private int disnum;
 
-    private String siptrunk;    //线路资源
-    private String province;    //线路省份
-    private String city;        //线路地区
-    private boolean prefix;    //异地号码加拨前缀 0
+    //线路资源
+    private String siptrunk;
+    //线路省份
+    private String province;
+    //线路地区
+    private String city;
+    //异地号码加拨前缀 0
+    private boolean prefix;
 
-    private Date createtime = new Date();    //创建时间
+    //创建时间
+    private Date createtime = new Date();
 
     private Date updatetime = new Date();
 
-    private String datastatus;    //数据状态（逻辑删除）
-    private String status;        //状态		正常，已处理完，已过期
+    //数据状态（逻辑删除）
+    private String datastatus;
+    //状态		正常，已处理完，已过期
+    private String status;
 
-    private int namenum;        //名单总数
-    private int validnum;        //有效名单
-    private int invalidnum;    //无效名单
+    //名单总数
+    private int namenum;
+    //有效名单
+    private int validnum;
+    //无效名单
+    private int invalidnum;
 
-    private int execnum;        //执行次数
+    //执行次数
+    private int execnum;
 
-    private int assigned;        //已分配
-    private int notassigned;    //未分配
-    private String description;    //备注
+    //已分配
+    private int assigned;
+    //未分配
+    private int notassigned;
+    //备注
+    private String description;
 
-    private String execmd;        //执行的指令：分配|回收
-    private String exectype;    //回收的类型
-    private String exectarget;    //回收的对象
+    //执行的指令：分配|回收
+    private String execmd;
+    //回收的类型
+    private String exectype;
+    //回收的对象
+    private String exectarget;
 
-    private String execto;        //回收到部门对象
+    //回收到部门对象
+    private String execto;
 
-    private String reportid;    //当前正在执行的 ReportID
+    //当前正在执行的 ReportID
+    private String reportid;
 
-    private String name;        //导入的批次名称 ， 自动生成， 规则为 yyyyMMdd--ORDER
+    //导入的批次名称 ， 自动生成， 规则为 yyyyMMdd--ORDER
+    private String name;
 
     @Transient
     private String exceptionMsg = null;

@@ -33,11 +33,15 @@ public class DrillDown implements java.io.Serializable  {
 	private String id ;
 	private boolean enable = true;
 	private String modelid;
-	private String drillpos ;	//钻取位置，指标或者维度
+	//钻取位置，指标或者维度
+	private String drillpos ;
 	private String dataid ;
-	private String dataname ; 	//如果存放的是指标，则此处为指标名称 
-	private String paramtype ;//是否带参数钻取,paramvalue为带参数，否则不带参数
-	private String drilltype ;	//钻取类型 ， URL , DETAIL , REPORT,chart
+	//如果存放的是指标，则此处为指标名称
+	private String dataname ;
+	//是否带参数钻取,paramvalue为带参数，否则不带参数
+	private String paramtype ;
+	//钻取类型 ， URL , DETAIL , REPORT,chart
+	private String drilltype ;
 	private String tdstyle ;	
 	private String paramtarget ;
 	private String paramreport ;
@@ -51,10 +55,13 @@ public class DrillDown implements java.io.Serializable  {
 	private String code ;
 	private String memo ;
 	private String chartid ;
-	private String paramvalue;//用户自定义参数；
-	private String gotomaxvalue;//钻取最大阀值；如果大于这个设置不允许跳转；
+	//用户自定义参数；
+	private String paramvalue;
+	//钻取最大阀值；如果大于这个设置不允许跳转；
+	private String gotomaxvalue;
 	
-	private Map<String, String> paramvalues;//钻取到别的报表要带的参数
+	//钻取到别的报表要带的参数
+	private Map<String, String> paramvalues;
 	
 	
 	@Id

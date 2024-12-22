@@ -28,12 +28,16 @@ import org.apache.commons.lang.StringUtils;
  */
 public class InterventMessage implements java.io.Serializable {
 
-    private String supervisorid;      // 监控者用户ID
-    private String agentuserid;       // 访客坐席会话ID
-    private InterventMessageType msgtype;           // 消息类型
+    // 监控者用户ID
+    private String supervisorid;
+    // 访客坐席会话ID
+    private String agentuserid;
+    // 消息类型
+    private InterventMessageType msgtype;
     private String content;
     private JsonObject extra;
-    private String session;           // 登录会话ID
+    // 登录会话ID
+    private String session;
 
     public String getSupervisorid() {
         return supervisorid;

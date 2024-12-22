@@ -37,33 +37,49 @@ public class CallAgent implements java.io.Serializable{
 
 	private String id;
 
-	private String orgi; // 租户ID
-	private String organ; // 创建部门
-	private String creater; // 创建人
+	// 租户ID
+	private String orgi;
+	// 创建部门
+	private String organ;
+	// 创建人
+	private String creater;
 
-	private String name; // 筛选表单名称
+	// 筛选表单名称
+	private String name;
 
-	private Date createtime = new Date(); // 创建时间
+	// 创建时间
+	private Date createtime = new Date();
 
 	private Date updatetime = new Date();
 	
-	private String parentid ;	//增加分类目录管理的 目录ID	
+	//增加分类目录管理的 目录ID	
+	private String parentid ;
 	
-	private String actid ;		//活动ID
+	//活动ID
+	private String actid ;
 	
-	private String batid ;	//筛选表单使用导入批次模板
-	private String filtertype ;	//筛选表单使用导入批次模板
-	private String tableid ;	//筛选表单使用元数据
+	//筛选表单使用导入批次模板
+	private String batid ;
+	//筛选表单使用导入批次模板
+	private String filtertype ;
+	//筛选表单使用元数据
+	private String tableid ;
 	
-	private String distype ;	//f分配类型 ： 技能组 |坐席|机器人
-	private String distarget ;	//分配对象， 技能组|坐席|智能IVR的ID
-	private int disnum ;		//分配数量
+	//f分配类型 ： 技能组 |坐席|机器人
+	private String distype ;
+	//分配对象， 技能组|坐席|智能IVR的ID
+	private String distarget ;
+	//分配数量
+	private int disnum ;
 	
 
-	private String datastatus; // 数据状态（逻辑删除）
-	private String status; // 状态 正常，已处理完，已过期
+	// 数据状态（逻辑删除）
+	private String datastatus;
+	// 状态 正常，已处理完，已过期
+	private String status;
 
-	private String description; // 备注
+	// 备注
+	private String description;
 	
 	/**
 	 * 已分配名单数量

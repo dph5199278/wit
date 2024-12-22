@@ -27,7 +27,8 @@ public class FirstTitle implements java.io.Serializable{
 	private int depth = 0;
 	private String rename ;
 	private String level ;
-	private String description;//标题描述
+	//标题描述
+	private String description;
 	public FirstTitle(){}
 	public FirstTitle(String name ){
 		this.name = name ;

@@ -35,12 +35,14 @@ public class ServiceAi implements java.io.Serializable{
 	private String name ;
 	private String code ;
 	
-	private int inx;			//分类排序位置
+	//分类排序位置
+	private int inx;
 	
 	private Date createtime ;
 	private String creater;
 	
-	private String description	;//分类备注描述信息
+	//分类备注描述信息
+	private String description	;
 	
 	private Date updatetime ;
 	private String orgi ;

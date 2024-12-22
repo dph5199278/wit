@@ -33,26 +33,43 @@ public class BlackEntity implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 7852633351774613958L;
 	private String id ;
-	private String orgi ;			//orgi
-	private String userid ;			//加黑用户ID
-	private String contactid ;		//联系人ID
-	private String sessionid ;		//当前会话
-	private Date createtime = new Date() ;		//加黑时间
+	//orgi
+	private String orgi ;
+	//加黑用户ID
+	private String userid ;
+	//联系人ID
+	private String contactid ;
+	//当前会话
+	private String sessionid ;
+	//加黑时间
+	private Date createtime = new Date() ;
 	
-	private int controltime ;	//加黑时间，1小时~N小时
-	private Date endtime ;			//结束时间
+	//加黑时间，1小时~N小时
+	private int controltime ;
+	//结束时间
+	private Date endtime ;
 	
-	private String agentuser ;		//用户名
+	//用户名
+	private String agentuser ;
 	
-	private String channel ;		//渠道
-	private String creater ;		//创建人，和 加黑坐席同一个人
-	private String agentid ;		//加黑坐席
-	private String phone ;			//用户电话
-	private String openid ;			//用户openid
-	private String agentserviceid ;	//agent service id		
-	private String description ;	//备注黑名单原因
-	private int times ;				//对话次数
-	private int chattime ;     //最后一次对话时长
+	//渠道
+	private String channel ;
+	//创建人，和 加黑坐席同一个人
+	private String creater ;
+	//加黑坐席
+	private String agentid ;
+	//用户电话
+	private String phone ;
+	//用户openid
+	private String openid ;
+	//agent service id		
+	private String agentserviceid ;
+	//备注黑名单原因
+	private String description ;
+	//对话次数
+	private int times ;
+	//最后一次对话时长
+	private int chattime ;
 	
 	@Id
 	@Column(length = 32)

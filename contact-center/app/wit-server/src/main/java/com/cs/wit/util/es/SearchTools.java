@@ -195,7 +195,8 @@ public class SearchTools {
                     .must(QueryBuilders.term(builder -> builder.field("status").value(MainContext.NamesDisStatusType.DISAGENT.toString())));
                 break;
             default:
-                queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value("NOT_EXIST_KEY")));  //必须传入一个进来;
+                //必须传入一个进来;
+                queryBuilder.must(QueryBuilders.term(builder -> builder.field("actid").value("NOT_EXIST_KEY")));
         }
 
         return search(queryBuilder, metadataTable, false, p, ps);

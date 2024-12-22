@@ -190,7 +190,8 @@ public class ChatbotEventHandler {
                 // 在线客服访客咨询记录
                 AgentUser agentUser = new AgentUser(
                         onlineUser.getId(),
-                        MainContext.ChannelType.WEBIM.toString(), // callout
+                        // callout
+                        MainContext.ChannelType.WEBIM.toString(),
                         onlineUser.getId(),
                         onlineUser.getUsername(),
                         MainContext.SYSTEM_ORGI,
@@ -204,7 +205,8 @@ public class ChatbotEventHandler {
 
                 // 聊天机器人处理的请求
                 agentUser.setOpttype(MainContext.OptType.CHATBOT.toString());
-                agentUser.setAgentno(aiid); // 聊天机器人ID
+                // 聊天机器人ID
+                agentUser.setAgentno(aiid);
                 agentUser.setAgentname(invite != null ? invite.getAiname() : "机器人客服");
                 agentUser.setCity(onlineUser.getCity());
                 agentUser.setProvince(onlineUser.getProvince());
@@ -304,15 +306,18 @@ public class ChatbotEventHandler {
                 data.setMessage(data.getMessage().substring(0, 300));
             }
 
-            data.setUsession(user); // 绑定唯一用户
+            // 绑定唯一用户
+            data.setUsession(user);
             data.setSessionid(sessionid);
-            data.setMessage(MainUtils.processEmoti(data.getMessage())); // 处理表情
+            // 处理表情
+            data.setMessage(MainUtils.processEmoti(data.getMessage()));
             data.setTouser(aiid);
             data.setUsername(p.getUsername());
             data.setAiid(aiid);
             data.setAgentserviceid(p.getAgentserviceid());
             data.setChannel(p.getChannel());
-            data.setContextid(p.getAgentserviceid()); // 一定要设置 ContextID
+            // 一定要设置 ContextID
+            data.setContextid(p.getAgentserviceid());
             data.setCalltype(MainContext.CallType.IN.toString());
 
             // 保存并发送消息给访客

@@ -33,14 +33,19 @@ import org.hibernate.annotations.GenericGenerator;
 public class CubeMeasure implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;
-	private String name ;	//维度名称	
-	private String code ;	//代码
-	private String modeltype ;	//虚拟维度
+	//维度名称	
+	private String name ;
+	//代码
+	private String code ;
+	//虚拟维度
+	private String modeltype ;
 	private CubeMeasure measure ;
 	private String columname;
 	private boolean uniquemembers ;
-	private String type ;	//类型：Numeric
-	private String aggregator = "sum";	// 聚合方式：sum ， distinctcount , count
+	//类型：Numeric
+	private String type ;
+	// 聚合方式：sum ， distinctcount , count
+	private String aggregator = "sum";
 	private boolean calculatedmember = false ;
 	private String formatstring ;
 	private String tablename ; 

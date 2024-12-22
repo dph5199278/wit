@@ -41,27 +41,38 @@ public class SystemMessage implements java.io.Serializable {
 	
 	private String name ;
 	
-	private String msgtype ;	//配置类型 ： 邮件 | 短信 
+	//配置类型 ： 邮件 | 短信
+	private String msgtype ;
 	
 	private String smtpserver ;   
 	private String smtpuser;
 	private String smtppassword ;
 	private String mailfrom ;
-	private String seclev;   //ssl...
-	private String sslport;   //sslport...
+	//ssl...
+	private String seclev;
+	//sslport...
+	private String sslport;
 	private String orgi;
 	
-	private String smstype ;	//短信发送类型 ,SDK或者 URL提交方式
-	private String url ;		//短信网关的URL ， 通过URL方式提交短信
-	private String appkey ;		//短信网关的APPKEY
-	private String appsec ;		//短信网关的 APPSEC
-	private String sign ;		//短信网关的签名
+	//短信发送类型 ,SDK或者 URL提交方式
+	private String smstype ;
+	//短信网关的URL ， 通过URL方式提交短信
+	private String url ;
+	//短信网关的APPKEY
+	private String appkey ;
+	//短信网关的 APPSEC
+	private String appsec ;
+	//短信网关的签名
+	private String sign ;
 	
-	private Date createtime = new Date();	//创建时间
+	//创建时间
+	private Date createtime = new Date();
 	
-	private String tpcode ;		//短信网关的模板代码
+	//短信网关的模板代码
+	private String tpcode ;
 	
-	private String moreparam ;	//更多参数
+	//更多参数
+	private String moreparam ;
 	/**
 	 * @return the id
 	 */

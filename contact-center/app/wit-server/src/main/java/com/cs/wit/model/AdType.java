@@ -42,21 +42,31 @@ public class AdType implements java.io.Serializable{
 	private String creater;
 	private String username ;
 	
-	private String area	;//分类备注描述信息
+	//分类备注描述信息
+	private String area	;
 	
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
 	
-	private String imgurl ;			//图片URL
-	private String tiptext ;		//title文本
-	private String url ;			//跳转URL
-	private String content ;		//广告文本
-	private int weight ;			//广告权重
-	private String adpos ;			//广告位置	
-	private String status ;			//状态
+	//图片URL
+	private String imgurl ;
+	//title文本
+	private String tiptext ;
+	//跳转URL
+	private String url ;
+	//广告文本
+	private String content ;
+	//广告权重
+	private int weight ;
+	//广告位置	
+	private String adpos ;
+	//状态
+	private String status ;
 	
-	private String adtype ;			//广告类型：图片/文字
+	//广告类型：图片/文字
+	private String adtype ;
 	
 	@Id
 	@Column(length = 32)

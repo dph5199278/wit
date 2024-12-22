@@ -38,11 +38,15 @@ public class SystemConfig implements java.io.Serializable{
 	private String name ;
 	private String title ;	
 	
-	private String theme = "01";	//默认绿色
+	//默认绿色
+	private String theme = "01";
 	
-	private String loginlogo ;		//登录页 LOGO
-	private String consolelogo ;	//后台页面LOGO
-	private String favlogo ;		//系统Fav图片，icon格式，小图标
+	//登录页 LOGO
+	private String loginlogo ;
+	//后台页面LOGO
+	private String consolelogo ;
+	//系统Fav图片，icon格式，小图标
+	private String favlogo ;
 	
 	private String code ;
 	private String orgi ;
@@ -56,13 +60,18 @@ public class SystemConfig implements java.io.Serializable{
 	private String jksfile ;
 	private String jkspassword ;
 	private String mapkey ;
-	private boolean workorders ;	//工单启用三栏布局
-	private String iconstr;			//修改服务器url地址
+	//工单启用三栏布局
+	private boolean workorders ;
+	//修改服务器url地址
+	private String iconstr;
 	
-	private boolean callout ;		//允许在电话号码上点击呼出
-	private boolean auth ;			//启用权限控制
+	//允许在电话号码上点击呼出
+	private boolean callout ;
+	//启用权限控制
+	private boolean auth ;
 	
-	private boolean callcenter ;	//启用呼叫中心模板配置
+	//启用呼叫中心模板配置
+	private boolean callcenter ;
 	private String cc_extention ;
 	private String cc_quene ;
 	private String cc_router ;
@@ -72,31 +81,49 @@ public class SystemConfig implements java.io.Serializable{
 	private String cc_callcenter ;
 	
 	
-	private boolean enablemail ;	//启用电子邮件
-	private String emailid ;		//电子邮件服务器
-	private String emailworkordertp;//工单电子邮件默认模板
-	private String mailcreatetp;	//工单创建的邮件模板
-	private String mailupdatetp;	//工单状态更新的邮件模板
-	private String mailprocesstp ;	//工单审批信息的邮件模板
+	//启用电子邮件
+	private boolean enablemail ;
+	//电子邮件服务器
+	private String emailid ;
+	//工单电子邮件默认模板
+	private String emailworkordertp;
+	//工单创建的邮件模板
+	private String mailcreatetp;
+	//工单状态更新的邮件模板
+	private String mailupdatetp;
+	//工单审批信息的邮件模板
+	private String mailprocesstp ;
 	
-	private boolean emailtocreater ;	//工单状态有更新的时候通知创建人
-	private String emailtocreatertp ;	//发送给创建人的邮件模板
+	//工单状态有更新的时候通知创建人
+	private boolean emailtocreater ;
+	//发送给创建人的邮件模板
+	private String emailtocreatertp ;
 	
-	private boolean emailshowrecipient; //是否显示收件人名称
+	//是否显示收件人名称
+	private boolean emailshowrecipient;
 	
-	private boolean enablesms ;		//启用短信
-	private String smsid ;			//短信网关ID
-	private String smsworkordertp ;	//工单短信通知的模板
+	//启用短信
+	private boolean enablesms ;
+	//短信网关ID
+	private String smsid ;
+	//工单短信通知的模板
+	private String smsworkordertp ;
 	
-	private String smscreatetp;	//工单创建的邮件模板
-	private String smsupdatetp;	//工单状态更新的邮件模板
-	private String smsprocesstp ;	//工单审批信息的邮件模板
+	//工单创建的邮件模板
+	private String smscreatetp;
+	//工单状态更新的邮件模板
+	private String smsupdatetp;
+	//工单审批信息的邮件模板
+	private String smsprocesstp ;
 	
-	private boolean smstocreater ;	//工单状态有更新的时候通知创建人
-	private String smstocreatertp ;//工单状态有更新的时候通知创建人的短信模板
+	//工单状态有更新的时候通知创建人
+	private boolean smstocreater ;
+	//工单状态有更新的时候通知创建人的短信模板
+	private String smstocreatertp ;
 	
 	
-	private boolean enabletneant ;	//启用多租户管理模式
+	//启用多租户管理模式
+	private boolean enabletneant ;
 	public boolean isEmailshowrecipient() {
 		return emailshowrecipient;
 	}
@@ -104,11 +131,15 @@ public class SystemConfig implements java.io.Serializable{
 		this.emailshowrecipient = emailshowrecipient;
 	}
 
-	private boolean tenantshare;	//多租户模式下共享组织机构
-	private String namealias ;		//多租户模式的名称
-	private boolean tenantconsole ;	//登录后进入租户选择模式
+	//多租户模式下共享组织机构
+	private boolean tenantshare;
+	//多租户模式的名称
+	private String namealias ;
+	//登录后进入租户选择模式
+	private boolean tenantconsole ;
 	
-	private boolean enableregorgi ; //启用自主注册功能
+	//启用自主注册功能
+	private boolean enableregorgi ;
 	
 	
 	@Id

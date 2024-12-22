@@ -173,7 +173,8 @@ public class CallCenterExtentionController extends Handler {
         if (StringUtils.isNotBlank(extention.getId())) {
             Extention ext = extentionRes.findByIdAndOrgi(extention.getId(), super.getOrgi(request));
             if (ext != null) {
-//				ext.setExtention(extention.getExtention());//分机号不能修改
+                //分机号不能修改
+                //ext.setExtention(extention.getExtention());
                 if (StringUtils.isNotBlank(extention.getPassword())) {
                     ext.setPassword(extention.getPassword());
                 }

@@ -40,8 +40,10 @@ public class IMGroup implements java.io.Serializable{
 	private String creater ;
 	private Date createtime = new Date();
 	private Date updatetime = new Date();
-	private String descript ;//群描述	
-	private String tipmessage ;	//群通知 / 公告
+	//群描述
+	private String descript ;
+	//群通知 / 公告
+	private String tipmessage ;
 	@Id
 	@Column(length = 32)
 	@GeneratedValue(generator = "system-uuid")

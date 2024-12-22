@@ -93,7 +93,8 @@ public class UsersController extends Handler {
         String msg = "admin_user_delete";
         if (user != null) {
             List<UserRole> userRole = userRoleRes.findByOrgiAndUser(super.getOrgiByTenantshare(request), user);
-            userRoleRes.deleteAll(userRole);    //删除用户的时候，同时删除用户对应的
+            //删除用户的时候，同时删除用户对应的
+            userRoleRes.deleteAll(userRole);
             user = userRepository.getOne(user.getId());
             user.setDatastatus(true);
             userRepository.save(user);

@@ -42,8 +42,10 @@ public class CallOutDialplan {
     private User creater;
 
     private boolean isrecord;
-    private Date createtime= new Date(); // 创建时间
-    private Date updatetime= new Date(); // 更新时间
+    // 创建时间
+    private Date createtime= new Date();
+    // 更新时间
+    private Date updatetime= new Date();
     private String orgi;
     private boolean isarchive;
     private String status;
@@ -53,7 +55,8 @@ public class CallOutDialplan {
     private Date executelasttime;
     private int maxconcurrence;
     private float concurrenceratio;
-    private int curconcurrence; // 当前并发
+    // 当前并发
+    private int curconcurrence;
 
     @Id
     @Column(length = 32)

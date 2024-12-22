@@ -42,7 +42,8 @@ public class CubeMetadata implements java.io.Serializable{
 	private String cubeid;
 	private String postop;
 	private String posleft ;
-	private String mtype  ;//主表0 从表
+	//主表0 从表
+	private String mtype  ;
 	private String parameters;
 	private String attribue;
 	private String namealias ;

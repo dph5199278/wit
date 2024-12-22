@@ -36,7 +36,8 @@ public interface ReportData extends Serializable{
 	int getPage();
 	void setPage(int page) ;
 	void setViewData(String viewData) ;
-	void exchangeColRow() ;	//行列转换
+	//行列转换
+	void exchangeColRow() ;
 	void merge(ReportData data) ;
 	Date getDate() ;
 	void setDate(Date createtime) ;

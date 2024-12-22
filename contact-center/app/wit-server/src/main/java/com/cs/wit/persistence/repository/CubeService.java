@@ -81,8 +81,8 @@ public class CubeService {
 			template = FreemarkerUtils.getTemplate(writer.toString(), requestValues);
 		}
 
-		// 输出到临时文件
-		FileUtils.write(schemaFile, template, StandardCharsets.UTF_8);	//使用系统默认编码
+		// 使用系统默认编码输出到临时文件
+		FileUtils.write(schemaFile, template, StandardCharsets.UTF_8);
 	}
 	
 	public CubeReportData execute(String mdx) throws Exception {
@@ -274,7 +274,8 @@ public class CubeService {
 					}
 				}
 			}
-			valueStr.add(strb.toString().replace("#null", " "));//替换掉所有的#null为空字符串
+			//替换掉所有的#null为空字符串
+			valueStr.add(strb.toString().replace("#null", " "));
 		}
 		int depth = 0 ;
 		for (int inx = 0 ; inx< valueStr.size() ; inx++) {
@@ -340,7 +341,8 @@ public class CubeService {
 			temp.setParent(level) ;
 		}
 		sumRowspanColspan(level);
-		level.init() ;	//格式化
+		//格式化
+		level.init() ;
 		return level;
 	}
 	

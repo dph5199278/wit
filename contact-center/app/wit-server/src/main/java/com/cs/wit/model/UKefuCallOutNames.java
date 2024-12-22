@@ -37,58 +37,90 @@ public class UKefuCallOutNames implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	private String id  = MainUtils.getUUID();
-	private String orgi ;		//租户ID
-	private String organ ;		//创建部门
-	private String creater ;	//创建人
-	private String batid ;		//导入 批次ID
+	//租户ID
+	private String orgi ;
+	//创建部门
+	private String organ ;
+	//创建人
+	private String creater ;
+	//导入 批次ID
+	private String batid ;
 	
-	private String calltype ;	//缓存里的临时字段， 人工外呼和机器人外呼，不存储进数据库
+	//缓存里的临时字段， 人工外呼和机器人外呼，不存储进数据库
+	private String calltype ;
 	
-	private Date createtime = new Date();	//创建时间
+	//创建时间
+	private Date createtime = new Date();
 	
 	private Date updatetime = new Date();
 	
-	private String datastatus;	//数据状态（逻辑删除）
-	private String status ;		//状态
-	private int calls;			//拨打次数
-	private int faildcalls ;	//失败拨打次数
+	//数据状态（逻辑删除）
+	private String datastatus;
+	//状态
+	private String status ;
+	//拨打次数
+	private int calls;
+	//失败拨打次数
+	private int faildcalls ;
 	
-	private boolean invalid ;	//多次未接通名单（6次以上）
-	private boolean failed ;	//无效名单
+	//多次未接通名单（6次以上）
+	private boolean invalid ;
+	//无效名单
+	private boolean failed ;
 	
-	private String workstatus ;	//名单状态
+	//名单状态
+	private String workstatus ;
 	
-	private boolean reservation ;	//是否预约
-	private Date optime ;		//预约的下次拨打时间
-	private String memo ;		//预约备注
+	//是否预约
+	private boolean reservation ;
+	//预约的下次拨打时间
+	private Date optime ;
+	//预约备注
+	private String memo ;
 	
 	private String batname ;
 	private String taskname ;
 	
-	private String servicetype ;	//服务类型标签
+	//服务类型标签
+	private String servicetype ;
 	
-	private int leavenum ;		//剩余名单数量
+	//剩余名单数量
+	private int leavenum ;
 	
-	private String metaname ;	//表名
+	//表名
+	private String metaname ;
 	
 	
-	private String owneruser ;	//分配 坐席
-	private String ownerdept ;	//分配 部门
+	//分配 坐席
+	private String owneruser ;
+	//分配 部门
+	private String ownerdept ;
 	
-	private String dataid ;		//UKDataBean对象ID
-	private String taskid ;		//任务ID
-	private String filterid;	//筛选ID
-	private String actid ;		//活动ID
+	//UKDataBean对象ID
+	private String dataid ;
+	//任务ID
+	private String taskid ;
+	//筛选ID
+	private String filterid;
+	//活动ID
+	private String actid ;
 	
-	private String name ;		//名单名称	
-	private String phonenumber;	//电话号码
-	private String distype ;	//号码隐藏
+	//名单名称	
+	private String name ;
+	//电话号码
+	private String phonenumber;
+	//号码隐藏
+	private String distype ;
 	
-	private int previewtimes ;	//预览次数
-	private int previewtime ;	//预览时长
+	//预览次数
+	private int previewtimes ;
+	//预览时长
+	private int previewtime ;
 	
-	private Date firstcalltime ;	//首次拨打时间
-	private String firstcallstatus;	//首次拨打状态
+	//首次拨打时间
+	private Date firstcalltime ;
+	//首次拨打状态
+	private String firstcallstatus;
 	
 	@Id
 	@Column(length = 32)

@@ -35,10 +35,14 @@ public class UKefuCallOutRole implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	
 	private String id ;
-	private String rolename ;//角色名称
-	private String roleid ;//角色ID
-	private String bustype ;//业务类型
-	private String organid ;//部门ID
+	//角色名称
+	private String rolename ;
+	//角色ID
+	private String roleid ;
+	//业务类型
+	private String bustype ;
+	//部门ID
+	private String organid ;
 	private Date createtime ;
 	private String creater;
 	private Date updatetime ;

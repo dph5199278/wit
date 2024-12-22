@@ -35,13 +35,16 @@ import org.hibernate.annotations.NotFoundAction;
 public class CubeLevel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;
-	private String name ;	//维度名称	
+	//维度名称	
+	private String name ;
 	private String code ;
 	private String formatstr ;
 	private String columname;
 	private boolean uniquemembers ;
-	private String type ;	//类型：Numeric
-	private String leveltype ;	// 类型 ， TimeMonths ： TimeWeeks ： TimeYears
+	//类型：Numeric
+	private String type ;
+	// 类型 ， TimeMonths ： TimeWeeks ： TimeYears
+	private String leveltype ;
 	private String tablename ; 
 	private String cubeid;
 	private TableProperties tableproperty ;

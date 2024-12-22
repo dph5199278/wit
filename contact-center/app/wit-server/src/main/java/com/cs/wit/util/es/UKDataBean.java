@@ -33,11 +33,16 @@ public class UKDataBean implements java.io.Serializable{
 	private static final long serialVersionUID = -8610410476273340864L;
 	
 	public String id ;
-	private String creater ;	//创建人
-	private String username;	//创建人用户名
-	private String orgi ;		//租户ID
-	private Date createtime ;	//创建时间
-	private Date updatetime ;	//修改时间
+	//创建人
+	private String creater ;
+	//创建人用户名
+	private String username;
+	//租户ID
+	private String orgi ;
+	//创建时间
+	private Date createtime ;
+	//修改时间
+	private Date updatetime ;
 	private MetadataTable table ;
 	
 	private String type ;

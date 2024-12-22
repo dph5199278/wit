@@ -207,7 +207,8 @@ public class AgentUserProxy {
             final AgentUser agentUser) throws IOException, TemplateException {
         Sort defaultSort = null;
         if (StringUtils.isBlank(sort)) {
-            Cookie[] cookies = request.getCookies();// 这样便可以获取一个cookie数组
+            // 这样便可以获取一个cookie数组
+            Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("sort")) {

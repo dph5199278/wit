@@ -67,7 +67,8 @@ public class AppCtxRefreshEventListener implements ApplicationListener<ContextRe
                 cache.eraseSysDicByOrgi(MainContext.SYSTEM_ORGI);
 
                 List<SysDic> sysDicList = sysDicRes.findAll();
-                Map<String, List<SysDic>> rootDictItems = new HashMap<>(); // 关联根词典及其子项
+                // 关联根词典及其子项
+                Map<String, List<SysDic>> rootDictItems = new HashMap<>();
                 Map<String, SysDic> rootDics = new HashMap<>();
                 Set<String> parents = new HashSet<>();
 
@@ -134,7 +135,8 @@ public class AppCtxRefreshEventListener implements ApplicationListener<ContextRe
             MainUtils.initSystemArea();
 
             MainUtils.initSystemSecField(event.getApplicationContext().getBean(TablePropertiesRepository.class));
-            // MainUtils.initAdv();//初始化广告位
+            //初始化广告位
+            // MainUtils.initAdv();
         } else {
             logger.info("[onApplicationEvent] bypass, initialization has been done already.");
         }

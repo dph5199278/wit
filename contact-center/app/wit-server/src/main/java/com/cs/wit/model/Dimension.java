@@ -35,14 +35,17 @@ import org.hibernate.annotations.GenericGenerator;
 public class Dimension implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;
-	private String name ;	//维度名称	
+	//维度名称	
+	private String name ;
 	private String code ;
-	private String type ;	//类型：TimeDimension
+	//类型：TimeDimension
+	private String type ;
 	private String modeltype ;
 	private String cubeid;
 	private String orgi ;
 	private String allmembername ;
-	private String postop ;			//改变用处， 修改为 是否权限控制字段
+	//改变用处， 修改为 是否权限控制字段
+	private String postop ;
 	private Dimension dim ;
 	private String posleft ;
 	private int sortindex ;

@@ -475,11 +475,15 @@ public class AgentAuditController extends Handler {
     @Menu(type = "apps", subtype = "transfersave")
     public ModelAndView transfersave(
             HttpServletRequest request,
-            @Valid final String userid,         // 访客ID
-            @Valid final String agentserviceid, // 服务记录ID
-            @Valid final String agentuserid,    // 坐席访客ID
+            // 访客ID
+            @Valid final String userid,
+            // 服务记录ID
+            @Valid final String agentserviceid,
+            // 坐席访客ID
+            @Valid final String agentuserid,
             @Valid final String currentAgentnoid,
-            @Valid final String agentno,   // 会话转接给下一个坐席
+            // 会话转接给下一个坐席
+            @Valid final String agentno,
             @Valid final String memo
     ) throws CSKefuException {
 

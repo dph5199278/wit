@@ -49,7 +49,8 @@ public class ReportFilter implements java.io.Serializable{
 	private String reportid ;
 	private String contype ;
 	private Date createtime = new Date();
-	private String funtype ;	//过滤功能类型： filter , rank , 
+	//过滤功能类型： filter , rank , 
+	private String funtype ;
 	private String filtertype ;
 	private String measureid ;	
 	private String dimid ;
@@ -57,7 +58,8 @@ public class ReportFilter implements java.io.Serializable{
 	
 	private String cubeid ;
 	
-	private String modeltype ;			// 组件类型
+	// 组件类型
+	private String modeltype ;
 	private String formatstr ; 
 	private String convalue ;
 	private String userdefvalue ;
@@ -67,44 +69,59 @@ public class ReportFilter implements java.io.Serializable{
 	private String orgi ;
 	private String content ;
 	private String valuestr ;
-	private String filterprefix ;		//修改用处 ， 改为 当前过滤器是否是对权限维度的 过滤，如果是，则不允许普通用修改
+	//修改用处 ， 改为 当前过滤器是否是对权限维度的 过滤，如果是，则不允许普通用修改
+	private String filterprefix ;
 	private String filtersuffix ;
 	private String valuecompare ;
 	private String defaultvalue ;
-	private String noformatvalue;    //去掉格式化的值例如defaultvalue[time].[nain].[2014],这儿只存2014
-	private String startvalue ;		//范围过滤的  开始默认值
-	private String endvalue ;		//范围查询的 结束默认值
+	//去掉格式化的值例如defaultvalue[time].[nain].[2014],这儿只存2014
+	private String noformatvalue;
+	//范围过滤的  开始默认值
+	private String startvalue ;
+	//范围查询的 结束默认值
+	private String endvalue ;
 	private String comparetype ;
-	private String requestvalue ;		//保存最后一次从页面上点击查询后获取的数据
-	private boolean child = false ;				//是否是 下级查询的过滤条件
+	//保存最后一次从页面上点击查询后获取的数据
+	private String requestvalue ;
+	//是否是 下级查询的过滤条件
+	private boolean child = false ;
 	
-	private String requeststartvalue ;			//范围查询的  开始值
-	private String requestendvalue ;			//范围查询的结束值
+	//范围查询的  开始值
+	private String requeststartvalue ;
+	//范围查询的结束值
+	private String requestendvalue ;
 	private String defaultvaluerule ;
 	
 	
 	private CubeLevel level ;
 	
-	private ReportData reportData ;	//过滤器的 默认加载的数据， 缓存的数据，可以重新加载
+	//过滤器的 默认加载的数据， 缓存的数据，可以重新加载
+	private ReportData reportData ;
 	//private QueryText query ;
 	private String queryText ;
 	
-	private String mustvalue="";//是否必须输入mustvalue必须输入，否则为空
+	//是否必须输入mustvalue必须输入，否则为空
+	private String mustvalue="";
 	
 	
-	private String cascadeid;//用于过滤器级联操作，下一级id
+	//用于过滤器级联操作，下一级id
+	private String cascadeid;
 	
-	private TableProperties tableproperty;//查询的字段
+	//查询的字段
+	private TableProperties tableproperty;
 	
-	private ReportFilter childFilter;//级联下一级
+	//级联下一级
+	private ReportFilter childFilter;
 	
 	@SuppressWarnings("unused")
-	private ReportFilter parentFilter;//级联中上一级
+	//级联中上一级
+	private ReportFilter parentFilter;
 	
 	private String parentValue;
 	
 	
-	private String groupids; //指标分组id，多个分组id用“,”分隔开
+	//指标分组id，多个分组id用“,”分隔开
+	private String groupids;
 	
 	private String filtertemplet;
 	
@@ -114,15 +131,24 @@ public class ReportFilter implements java.io.Serializable{
 	
 	private int sortindex;
 	
-	private String tableid;//主表
-	private String fieldid;//主表映射字段
-	private String fktableid;//过滤关联表
-	private String fkfieldid;//过滤映射字段
-	private String filterfieldid;//过滤字段
-	private boolean isdic = false;//启用字典
-	private String diccode;//字典类型
-	private String keyfield;//key字段
-	private String valuefield;//value字段
+	//主表
+	private String tableid;
+	//主表映射字段
+	private String fieldid;
+	//过滤关联表
+	private String fktableid;
+	//过滤映射字段
+	private String fkfieldid;
+	//过滤字段
+	private String filterfieldid;
+	//启用字典
+	private boolean isdic = false;
+	//字典类型
+	private String diccode;
+	//key字段
+	private String keyfield;
+	//value字段
+	private String valuefield;
 	/**
 	 * @return the id
 	 */

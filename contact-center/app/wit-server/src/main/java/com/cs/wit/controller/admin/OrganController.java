@@ -157,7 +157,8 @@ public class OrganController extends Handler {
         String msg = "admin_organ_new_success";
         String firstId = null;
         if (tempOrgan != null) {
-            msg = "admin_organ_update_name_not"; //分类名字重复
+            //分类名字重复
+            msg = "admin_organ_update_name_not";
         } else {
             organ.setOrgi(super.getOrgiByTenantshare(request));
 

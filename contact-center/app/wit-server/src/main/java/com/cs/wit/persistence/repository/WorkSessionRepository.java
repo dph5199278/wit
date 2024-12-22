@@ -33,7 +33,8 @@ public interface WorkSessionRepository extends JpaRepository<WorkSession, String
 
 	List<WorkSession> findByOrgiAndClientid(String orgi, String clientid) ;
 	
-	Page<WorkSession> findAll(Specification<WorkSession> spec, Pageable pageable);  //分页按条件查询
+	//分页按条件查询
+	Page<WorkSession> findAll(Specification<WorkSession> spec, Pageable pageable);
 	
 	int countByAgentAndDatestrAndOrgi(String agent, String datestr, String orgi) ;
 }

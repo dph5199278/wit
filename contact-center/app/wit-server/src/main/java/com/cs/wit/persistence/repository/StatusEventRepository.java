@@ -44,7 +44,13 @@ public interface StatusEventRepository extends JpaRepository<StatusEvent, String
 
     // Page<StatusEvent> findByCalledAndOrgi(String voicemail, String orgi, Pageable page);
 
-    Page<StatusEvent> findAll(Specification<StatusEvent> spec, Pageable pageable);  //分页按条件查询
+    /**
+     * 分页按条件查询
+     * @param spec
+     * @param pageable
+     * @return
+     */
+    Page<StatusEvent> findAll(Specification<StatusEvent> spec, Pageable pageable);
 
 
     // /**

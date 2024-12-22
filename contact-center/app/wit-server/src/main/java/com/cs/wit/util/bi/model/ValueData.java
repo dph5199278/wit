@@ -41,10 +41,14 @@ public class ValueData implements java.io.Serializable,Cloneable{
 	private String cellmergeid ;
 	private String drillthroughsql ;
 	private Object tempValue ;
-	private String url ;			//钻取的时候保存的URL，在ReportDataFactor中设置
-	private String target ;			//钻取的时候保存的target，在ReportDataFactor中设置
-	private String vtclass ;		//指标数据类型 对应的  html style class
-	private String valueStyle;		//预警一块的格式化样式，背景色，字体什么的
+	//钻取的时候保存的URL，在ReportDataFactor中设置
+	private String url ;
+	//钻取的时候保存的target，在ReportDataFactor中设置
+	private String target ;
+	//指标数据类型 对应的  html style class
+	private String vtclass ;
+	//预警一块的格式化样式，背景色，字体什么的
+	private String valueStyle;
 	
 	private String style ;
 	public ValueData(Object value , String foramatValue, String valueType , boolean canbedrill , String sql , String name , String formatStr , List<ColumnProperties> cols){

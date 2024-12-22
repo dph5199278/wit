@@ -96,14 +96,18 @@ public class ComposeMw1 extends BasePeerContextMw {
                         received.setLastagentmsgtime(agentUserTask.getLastgetmessage());
                         received.setLastmsgtime(agentUserTask.getLastmessage());
                         received.setAgentreplyinterval(
-                                (int) ((System.currentTimeMillis() - agentUserTask.getLastgetmessage().getTime()) / 1000));    //坐席上次回复消息的间隔
+                                //坐席上次回复消息的间隔
+                                (int) ((System.currentTimeMillis() - agentUserTask.getLastgetmessage().getTime()) / 1000));
                         received.setAgentreplytime(
-                                (int) ((System.currentTimeMillis() - agentUserTask.getLastmessage().getTime()) / 1000));        //坐席回复消息花费时间
+                                //坐席回复消息花费时间
+                                (int) ((System.currentTimeMillis() - agentUserTask.getLastmessage().getTime()) / 1000));
                     }
 
-                    agentUserTask.setAgentreplys(agentUserTask.getAgentreplys() + 1);    // 总咨询记录数量
+                    // 总咨询记录数量
+                    agentUserTask.setAgentreplys(agentUserTask.getAgentreplys() + 1);
                     agentUserTask.setAgentreplyinterval(
-                            agentUserTask.getAgentreplyinterval() + received.getAgentreplyinterval());    //总时长
+                            //总时长
+                            agentUserTask.getAgentreplyinterval() + received.getAgentreplyinterval());
                     if (agentUserTask.getAgentreplys() > 0) {
                         agentUserTask.setAvgreplyinterval(
                                 agentUserTask.getAgentreplyinterval() / agentUserTask.getAgentreplys());

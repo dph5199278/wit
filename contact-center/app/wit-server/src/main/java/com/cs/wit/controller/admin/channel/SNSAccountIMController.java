@@ -109,8 +109,10 @@ public class SNSAccountIMController extends Handler {
                     coultInvite.setOrgi(super.getOrgi(request));
                     coultInvite.setName(snsAccount.getName());
                     coultInvite.setOwner(snsAccount.getCreater());
-                    coultInvite.setSkill(false); // 不启动技能组
-                    coultInvite.setConsult_skill_fixed(false); // 不绑定唯一技能组
+                    // 不启动技能组
+                    coultInvite.setSkill(false);
+                    // 不绑定唯一技能组
+                    coultInvite.setConsult_skill_fixed(false);
                     coultInvite.setAi(false);
                     coultInvite.setAifirst(false);
                     invite.save(coultInvite);

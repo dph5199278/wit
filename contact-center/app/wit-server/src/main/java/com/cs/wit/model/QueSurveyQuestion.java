@@ -37,58 +37,102 @@ public class QueSurveyQuestion implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	
 	private String id ;
-	private String name;//问题名称
-	private String sortindex;//问题序号
-	private int quetype;//问题类型（选择题/问答题）
-	private String orgi;//租户ID
-	private String creater;//创建人
-	private Date createtime;//创建时间
-	private Date updatetime;//更新时间
+	//问题名称
+	private String name;
+	//问题序号
+	private String sortindex;
+	//问题类型（选择题/问答题）
+	private int quetype;
+	//租户ID
+	private String orgi;
+	//创建人
+	private String creater;
+	//创建时间
+	private Date createtime;
+	//更新时间
+	private Date updatetime;
 	
-	private String description;//描述
-	private String memo;//备注
-	private int score;//问题分值
-	private String processid;//问卷ID
-	private String wvtype;//类型（文字/语音）
-	private String quevoice;//问题语音ID
+	//描述
+	private String description;
+	//备注
+	private String memo;
+	//问题分值
+	private int score;
+	//问卷ID
+	private String processid;
+	//类型（文字/语音）
+	private String wvtype;
+	//问题语音ID
+	private String quevoice;
 	
-	private String confirmtype;//答案确认语类型
-	private String confirmword;//答案确认语文字
-	private String confirmvoice;//答案确认语语音
+	//答案确认语类型
+	private String confirmtype;
+	//答案确认语文字
+	private String confirmword;
+	//答案确认语语音
+	private String confirmvoice;
 	
-	private String overtimetype;//回答超时语
-	private String overtimeword;//回答超时语文字
-	private String overtimevoice;//回答超时语语音
+	//回答超时语
+	private String overtimetype;
+	//回答超时语文字
+	private String overtimeword;
+	//回答超时语语音
+	private String overtimevoice;
 	
-	private String errortype;//回答错误语
-	private String errorword;//回答错误语文字
-	private String errorvoice;//回答错误语语音
+	//回答错误语
+	private String errortype;
+	//回答错误语文字
+	private String errorword;
+	//回答错误语语音
+	private String errorvoice;
 	
-	private String replykeyword ;	//遇到设置的关键词后重复播放语音
-	private String replytype;//重复提示类型
-	private String replyword;//重复提示语文字
-	private String replyvoice;//重复提示语语音
+	//遇到设置的关键词后重复播放语音
+	private String replykeyword ;
+	//重复提示类型
+	private String replytype;
+	//重复提示语文字
+	private String replyword;
+	//重复提示语语音
+	private String replyvoice;
 	
-	private String replyrepeat;//重复确认语-最大重复次数
-	private String replyoperate;//重复确认语-到达最大次数的操作（转接trans/挂断/handup）
-	private String replytrans;//重复确认语-转接号码
-	private String replytypeup;//重复确认语-挂断提示语类型
-	private String replywordup;//重复确认语-挂断提示语（文字）
-	private String replyvoiceup;//重复确认语-挂断提示语（语音ID）
+	//重复确认语-最大重复次数
+	private String replyrepeat;
+	//重复确认语-到达最大次数的操作（转接trans/挂断/handup）
+	private String replyoperate;
+	//重复确认语-转接号码
+	private String replytrans;
+	//重复确认语-挂断提示语类型
+	private String replytypeup;
+	//重复确认语-挂断提示语（文字）
+	private String replywordup;
+	//重复确认语-挂断提示语（语音ID）
+	private String replyvoiceup;
 	
-	private String overtimerepeat;//回答超时语-最大重复次数
-	private String overtimeoperate;//回答超时语-到达最大次数的操作（转接trans/挂断/handup）
-	private String overtimetrans;//回答超时语-转接号码
-	private String overtimetypeup;//回答超时语-挂断提示语类型
-	private String overtimewordup;//回答超时语-挂断提示语（文字）
-	private String overtimevoiceup;//回答超时语-挂断提示语（语音ID）
+	//回答超时语-最大重复次数
+	private String overtimerepeat;
+	//回答超时语-到达最大次数的操作（转接trans/挂断/handup）
+	private String overtimeoperate;
+	//回答超时语-转接号码
+	private String overtimetrans;
+	//回答超时语-挂断提示语类型
+	private String overtimetypeup;
+	//回答超时语-挂断提示语（文字）
+	private String overtimewordup;
+	//回答超时语-挂断提示语（语音ID）
+	private String overtimevoiceup;
 	
-	private String errorepeat;//回答错误语-最大重复次数
-	private String erroroperate;//回答错误语-到达最大次数的操作（转接trans/挂断/handup）
-	private String errortrans;//回答错误语-转接号码
-	private String errortypeup;//回答错误语-挂断提示语类型
-	private String errorwordup;//回答错误语-挂断提示语（文字）
-	private String errorvoiceup;//回答错误语-挂断提示语（语音ID）
+	//回答错误语-最大重复次数
+	private String errorepeat;
+	//回答错误语-到达最大次数的操作（转接trans/挂断/handup）
+	private String erroroperate;
+	//回答错误语-转接号码
+	private String errortrans;
+	//回答错误语-挂断提示语类型
+	private String errortypeup;
+	//回答错误语-挂断提示语（文字）
+	private String errorwordup;
+	//回答错误语-挂断提示语（语音ID）
+	private String errorvoiceup;
 	
 	@Id
 	@Column(length = 32)

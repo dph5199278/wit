@@ -44,118 +44,185 @@ public class StatusEvent implements Serializable, Comparable<StatusEvent>{
 	private Date createtime = new Date();
 	private Date updatetime = new Date() ;
 	
-	private boolean inside ;		//是否内线
+	//是否内线
+	private boolean inside ;
 	private String code ;
 	
-	private String source ;	//来源
-	private String answer ;//应答时间
+	//来源
+	private String source ;
+	//应答时间
+	private String answer ;
 	
-	private boolean callback ;	//是否是回呼
-	private String ccquene ;	//队列
+	//是否是回呼
+	private boolean callback ;
+	//队列
+	private String ccquene ;
 	
-	private String calltype ;	//呼叫方向类型 | 计费类型
+	//呼叫方向类型 | 计费类型
+	private String calltype ;
 	
-	private String voicecalled ;//
+	private String voicecalled ;
 	
-	private String servicestatus ;	//通话状态
+	//通话状态
+	private String servicestatus ;
 	
-	private String channelstatus ;	//通道状态
+	//通道状态
+	private String channelstatus ;
 	
-	private Date answertime ;//应答时间
-	private int ringduration ;//振铃时长
+	//应答时间
+	private Date answertime ;
+	//振铃时长
+	private int ringduration ;
 	
 	
-	private boolean current ;//
+	private boolean current ;
 	
-	private boolean init ;//
+	private boolean init ;
 	
-	private String caller ;//呼叫发起号码
+	//呼叫发起号码
+	private String caller ;
 	
-	private String calling ;//呼叫对象
-	private String called ;//被叫号码
+	//呼叫对象
+	private String calling ;
+	//被叫号码
+	private String called ;
 	
-	private String discaller;//
-	private String discalled;//
+	private String discaller;
+	private String discalled;
 	
-	private String agentype ;	//callback
-	private String quene ;		//呼入队列
+	//callback
+	private String agentype ;
+	//呼入队列
+	private String quene ;
 	
-	private String ani ;//主叫号码
+	//主叫号码
+	private String ani ;
 	
-	private String touser ;//目标用户
-	private String direction ;//呼叫方向
+	//目标用户
+	private String touser ;
+	//呼叫方向
+	private String direction ;
 	
-	private String calldir ;	//呼叫方向
-	private String otherdir;	//对边呼叫方向
+	//呼叫方向
+	private String calldir ;
+	//对边呼叫方向
+	private String otherdir;
 	
-	private String otherlegdest ;	//对边呼叫号码
+	//对边呼叫号码
+	private String otherlegdest ;
 	
-	private long time ;///
-	private String localdatetime ;//时间发起时间
+	///
+	private long time ;
+	//时间发起时间
+	private String localdatetime ;
 	
-	private Date starttime ;//通话开始时间
-	private Date endtime ;//通话结束时间
+	//通话开始时间
+	private Date starttime ;
+	//通话结束时间
+	private Date endtime ;
 	
-	private int duration ;//通话时长
+	//通话时长
+	private int duration ;
 	
-	private String status ;//
-	private String state ;//
-	private String agent ;//坐席工号
-    private String agentname; // 坐席名字
-	private String action ;//
-	private String name;// 访客名字
-	private String host ;//时间主机
-	private String ipaddr ;//主机IP	
+	private String status ;
+	private String state ;
+	//坐席工号
+	private String agent ;
+    // 坐席名字
+    private String agentname;
+	private String action ;
+	// 访客名字
+	private String name;
+	//时间主机
+	private String host ;
+	//主机IP	
+	private String ipaddr ;
 	
-	private String extention ;//联系人ID
-	private String hostid ;//服务器ID
+	//联系人ID
+	private String extention ;
+	//服务器ID
+	private String hostid ;
 	
-	private String taskid ;			//呼叫ID，电销业务产生的
-	private String actid ;			//呼叫ID，电销业务产生的
-	private String batid ;			//呼叫ID，电销业务产生的
-	private String dataid ;			//呼叫ID，电销业务产生的
-	private String nameid ;			//名单ID，电销业务产生的
-	private String statustype = MainContext.StatusType.INBOUND.toString();		//呼叫类型 ： 电销业务产生的
-	private String disphonenum ;	//是否隐藏号码 
-	private String distype ;		//号码隐藏方式
+	//呼叫ID，电销业务产生的
+	private String taskid ;
+	//呼叫ID，电销业务产生的
+	private String actid ;
+	//呼叫ID，电销业务产生的
+	private String batid ;
+	//呼叫ID，电销业务产生的
+	private String dataid ;
+	//名单ID，电销业务产生的
+	private String nameid ;
+	//呼叫类型 ： 电销业务产生的
+	private String statustype = MainContext.StatusType.INBOUND.toString();
+	//是否隐藏号码 
+	private String disphonenum ;
+	//号码隐藏方式
+	private String distype ;
 	
-	private String siptrunk ;		//自定义 SIP Trunk
-	private boolean prefix ;		//是否启用加0前缀
-	private String dialplan ;       // 外呼系统，呼叫计划ID
-    private String voicechannel;    // 语音渠道标识
-    private String callid ;         // FreeSwitch中的通话ID，全局唯一
-	private boolean record ;        //是否录音
-	private String recordingfile ;  // 录音文件标识
+	//自定义 SIP Trunk
+	private String siptrunk ;
+	//是否启用加0前缀
+	private boolean prefix ;
+	// 外呼系统，呼叫计划ID
+	private String dialplan ;
+    // 语音渠道标识
+    private String voicechannel;
+    // FreeSwitch中的通话ID，全局唯一
+    private String callid ;
+	//是否录音
+	private boolean record ;
+	// 录音文件标识
+	private String recordingfile ;
 	
-	private Date startrecord ;//开始录音时间
-	private Date endrecord ;//结束录音时间
-	private int recordtime ;//录音时长
-	private String recordfile ;//开始录音时间
-	private String recordfilename ;//结束录音时间
+	//开始录音时间
+	private Date startrecord ;
+	//结束录音时间
+	private Date endrecord ;
+	//录音时长
+	private int recordtime ;
+	//开始录音时间
+	private String recordfile ;
+	//结束录音时间
+	private String recordfilename ;
 	
-	private String contactsid ;//
+	private String contactsid ;
 	
-	private String bridgeid ;			//桥接对方ID
-	private boolean bridge ;			//是否桥接
+	//桥接对方ID
+	private String bridgeid ;
+	//是否桥接
+	private boolean bridge ;
 	
-	private boolean misscall = true;	//是否漏话
+	//是否漏话
+	private boolean misscall = true;
 	
-	private boolean servicesummary ;	//是否记录服务小结
-	private String serviceid 	;		//服务小结ID
+	//是否记录服务小结
+	private boolean servicesummary ;
+	//服务小结ID
+	private String serviceid 	;
 	
-	private int calls ;//
+	private int calls ;
 	
-	private String orgi ;//
-    private String organ; // 部门
-    private String organid; // 部门ID
+	private String orgi ;
+    // 部门
+    private String organ;
+    // 部门ID
+    private String organid;
 
-	private String country ;	//国家
-	private String province ;	//省份
-	private String city ;		//城市
-	private String isp ;		//运营商
-	private boolean satisf ;	//是否记录满意度调查
-	private String satisfaction 	;		//满意度评价
-	private Date satisfdate ;				//满意度调查提交时间
+	//国家
+	private String country ;
+	//省份
+	private String province ;
+	//城市
+	private String city ;
+	//运营商
+	private String isp ;
+	//是否记录满意度调查
+	private boolean satisf ;
+	//满意度评价
+	private String satisfaction 	;
+	//满意度调查提交时间
+	private Date satisfdate ;
 	
 	private String datestr = MainUtils.simpleDateFormat.get().format(new Date());
 	private String hourstr = new SimpleDateFormat("HH").format(new Date());

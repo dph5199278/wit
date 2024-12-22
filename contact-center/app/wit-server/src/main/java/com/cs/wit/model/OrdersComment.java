@@ -48,23 +48,34 @@ public class OrdersComment implements UKAgg {
     private Date createtime = new Date();
     @Field(index = false, type = FieldType.Text)
     private String dataid;
-    private String content;    //评论内容
+    //评论内容
+    private String content;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
     private Date updatetime = new Date();
-    private boolean optimal;    //变更用处，流程回复
-    private boolean prirep;    //变更用处， 是否私密回复
-    private int up;            //点赞数量
-    private int comments;        //回复数量
-    private boolean admin;        //变更用处 ， 是否审批流程
-    private boolean datastatus;    //数据状态，是否已删除
+    //变更用处，流程回复
+    private boolean optimal;
+    //变更用处， 是否私密回复
+    private boolean prirep;
+    //点赞数量
+    private int up;
+    //回复数量
+    private int comments;
+    //变更用处 ， 是否审批流程
+    private boolean admin;
+    //数据状态，是否已删除
+    private boolean datastatus;
     private String orgi;
     private String cate;
     private String optype;
-    private String approval;    //审批结果
-    private String retback;    //退回位置 ， 退回到 创建人
-    private String accdept;    //转办 部门
-    private String accuser;    //转办人
+    //审批结果
+    private String approval;
+    //退回位置 ， 退回到 创建人
+    private String retback;
+    //转办 部门
+    private String accdept;
+    //转办人
+    private String accuser;
     private String ipcode;
     private String country;
     private String province;

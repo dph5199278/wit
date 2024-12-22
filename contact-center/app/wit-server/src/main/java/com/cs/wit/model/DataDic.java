@@ -37,12 +37,16 @@ public class DataDic implements java.io.Serializable {
 	private String name ;
 	private String code ;
 	private String title ;					
-	private String dstype ; 		//dashboard类型
-	private String dstemplet ;		//dashboard类型对应的  展示模板
+	//dashboard类型
+	private String dstype ;
+	//dashboard类型对应的  展示模板
+	private String dstemplet ;
 	private String parentid;
 	private String type ;
-	private String memo ;			//改变用处，变更为  目录序号
-	private String distitle;		//分栏时 左侧 栏目的 显示标题
+	//改变用处，变更为  目录序号
+	private String memo ;
+	//分栏时 左侧 栏目的 显示标题
+	private String distitle;
 	private String orgi ;
 	private String status ;
 	private String iconclass;
@@ -55,19 +59,29 @@ public class DataDic implements java.io.Serializable {
 	private String description ;
 	private String tabtype ;
 	private String dictype ;
-	private boolean spsearch = true;	//是否支持搜索
+	//是否支持搜索
+	private boolean spsearch = true;
 	private boolean defaultmenu ;
 	private String projectid ;
-	private int sortindex = 1; 		//排序位置
-	private String dataid ;			//dstype = singel 的时候，用于定义获取数据的 ID
-	private String dicicon ;			//菜单图标
-	private String curicon ;			//菜单选中时候 的 图标
-	private String bgcolor ;			//在列表的时候显示的背景颜色，用于反显图标用的
-	private String curbgcolor;			//在列表的时候显示的背景颜色，用于反显图标用的
-	private String menupos ;			//菜单显示位置，左侧显示 ： 顶部显示
+	//排序位置
+	private int sortindex = 1;
+	//dstype = singel 的时候，用于定义获取数据的 ID
+	private String dataid ;
+	//菜单图标
+	private String dicicon ;
+	//菜单选中时候 的 图标
+	private String curicon ;
+	//在列表的时候显示的背景颜色，用于反显图标用的
+	private String bgcolor ;
+	//在列表的时候显示的背景颜色，用于反显图标用的
+	private String curbgcolor;
+	//菜单显示位置，左侧显示 ： 顶部显示
+	private String menupos ;
 	
-	private boolean navmenu ;			//顶部导航菜单按钮
-	private boolean quickmenu ;			//左侧快捷菜单按钮
+	//顶部导航菜单按钮
+	private boolean navmenu ;
+	//左侧快捷菜单按钮
+	private boolean quickmenu ;
 
 
 	@Id

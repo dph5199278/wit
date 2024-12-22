@@ -66,7 +66,8 @@ public class EntIMEventHandler
 			    	outMessage.setContextid(user);
 			    	outMessage.setMessageType(MainContext.MessageType.MESSAGE.toString());
 			    	outMessage.setCalltype(MainContext.CallType.IN.toString());
-					client.getNamespace().getBroadcastOperations().sendEvent("status", outMessage); //广播所有人，用户上线
+					//广播所有人，用户上线
+					client.getNamespace().getBroadcastOperations().sendEvent("status", outMessage);
 				}
 				if(!StringUtils.isBlank(user)){
 					NettyClients.getInstance().putEntIMEventClient(user, client);
@@ -105,7 +106,8 @@ public class EntIMEventHandler
 			    	outMessage.setContextid(user);
 			    	outMessage.setMessageType(MainContext.MessageType.MESSAGE.toString());
 			    	outMessage.setCalltype(MainContext.CallType.IN.toString());
-					client.getNamespace().getBroadcastOperations().sendEvent("status", outMessage); //广播所有人，用户上线
+					//广播所有人，用户上线
+					client.getNamespace().getBroadcastOperations().sendEvent("status", outMessage);
 				}
 				
 				IMGroupUserRepository imGroupUserRes = MainContext.getContext().getBean(IMGroupUserRepository.class) ;

@@ -492,7 +492,8 @@ public class ReportDesignController extends Handler {
                 if (!inlist) {
                     ColumnProperties col = new ColumnProperties();
                     if (StringUtils.isBlank(dtype)) {
-                        col.setCur("field"); // 数据结构字段
+                        // 数据结构字段
+                        col.setCur("field");
                     } else {
                         col.setCur(dtype);
                     }
@@ -536,7 +537,8 @@ public class ReportDesignController extends Handler {
                 }
                 if (!inlist) {
                     ColumnProperties col = new ColumnProperties();
-                    col.setCur("measure"); // 数据结构字段
+                    // 数据结构字段
+                    col.setCur("measure");
                     col.setId(MainUtils.genID());
                     CubeMeasure cubeMeasure = null;
                     for (CubeMeasure measure : cube.getCube().getMeasure()) {

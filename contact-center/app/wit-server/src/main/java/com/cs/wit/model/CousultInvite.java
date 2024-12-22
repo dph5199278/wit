@@ -43,15 +43,21 @@ public class CousultInvite implements java.io.Serializable {
     private String update_user;
     private String username;
     private String wfstatus;
-    private boolean consult_invite_enable;    //启用邀请框
+    //启用邀请框
+    private boolean consult_invite_enable;
     private String consult_invite_model;
     private String consult_invite_content;
-    private String consult_invite_accept;        //显示接收咨询按钮的文本
-    private String consult_invite_later;        //显示稍后咨询的按钮
-    private int consult_invite_delay;            //延时弹出邀请框
-    private String consult_invite_bg;            //邀请框背景图片
+    //显示接收咨询按钮的文本
+    private String consult_invite_accept;
+    //显示稍后咨询的按钮
+    private String consult_invite_later;
+    //延时弹出邀请框
+    private int consult_invite_delay;
+    //邀请框背景图片
+    private String consult_invite_bg;
 
-    private boolean ctrlenter;                    //启用 CTRL+Enter发送消息
+    //启用 CTRL+Enter发送消息
+    private boolean ctrlenter;
 
     private boolean whitelist_mode;
 
@@ -85,23 +91,36 @@ public class CousultInvite implements java.io.Serializable {
     /**
      * 技能组设置
      */
-    private boolean consult_skill_fixed; // 是否绑定单一技能组
-    private String consult_skill_fixed_id; // 绑定单一技能组，技能组ID
-    private String consult_skill_logo;        //显示技能组  logo
-    private String consult_skill_title;    //显示技能组标题
-    private String consult_skill_img;        //显示技能组 图片
-    private String consult_skill_msg;        //显示技能组 提示信息
-    private int consult_skill_numbers;        //显示最大 分组数
-    private int consult_skill_maxagent;    //每个技能组最多显示多少坐席
-    private String consult_skill_bottomtitle;    //显示技能组底部标题
-    private boolean consult_skill_agent;    //是否显示技能组下的坐席
+    // 是否绑定单一技能组
+    private boolean consult_skill_fixed;
+    // 绑定单一技能组，技能组ID
+    private String consult_skill_fixed_id;
+    //显示技能组  logo
+    private String consult_skill_logo;
+    //显示技能组标题
+    private String consult_skill_title;
+    //显示技能组 图片
+    private String consult_skill_img;
+    //显示技能组 提示信息
+    private String consult_skill_msg;
+    //显示最大 分组数
+    private int consult_skill_numbers;
+    //每个技能组最多显示多少坐席
+    private int consult_skill_maxagent;
+    //显示技能组底部标题
+    private String consult_skill_bottomtitle;
+    //是否显示技能组下的坐席
+    private boolean consult_skill_agent;
 
     private int consult_vsitorbtn_display;
 
-    private boolean recordhis;            //记录访客的网页访问记录
-    private boolean traceuser;            //实时追踪访客
+    //记录访客的网页访问记录
+    private boolean recordhis;
+    //实时追踪访客
+    private boolean traceuser;
 
-    private int maxwordsnum;            //允许访客端输入的最大文本字数
+    //允许访客端输入的最大文本字数
+    private int maxwordsnum;
 
 
     private String consult_dialog_color;
@@ -115,39 +134,60 @@ public class CousultInvite implements java.io.Serializable {
     private String dialog_message;
     private String dialog_ad;
 
-    private String lvmopentype;    //留言板弹出方式
-    private boolean leavemessage;    //启用留言功能
+    //留言板弹出方式
+    private String lvmopentype;
+    //启用留言功能
+    private boolean leavemessage;
     private boolean lvmname;
     private boolean lvmphone;
     private boolean lvmemail;
     private boolean lvmaddress;
     private boolean lvmqq;
     private boolean lvmcontent = true;
-    private boolean skill;        //启用技能组功能
+    //启用技能组功能
+    private boolean skill;
 
-    private boolean onlyareaskill;    //只显示地区技能组 ， 无地区技能组是 提示消息，不显示公共技能组
-    private String areaskilltipmsg;//未配置地区技能组是提示消息
+    //只显示地区技能组 ， 无地区技能组是 提示消息，不显示公共技能组
+    private boolean onlyareaskill;
+    //未配置地区技能组是提示消息
+    private String areaskilltipmsg;
 
-    private boolean consult_info;    //启用咨询信息收集功能
-    private boolean consult_info_cookies;    //启用Cookies存储用户录入的信息， 最长有效时间是 3600秒，超时需要重新填写
-    private boolean consult_info_name;//填写姓名
-    private boolean consult_info_email;    //填写 邮件地址
-    private boolean consult_info_phone;//填写 电话号码
-    private boolean consult_info_resion;    //填写咨询问题
-    private String consult_info_message;    //咨询窗口显示的欢迎语
+    //启用咨询信息收集功能
+    private boolean consult_info;
+    //启用Cookies存储用户录入的信息， 最长有效时间是 3600秒，超时需要重新填写
+    private boolean consult_info_cookies;
+    //填写姓名
+    private boolean consult_info_name;
+    //填写 邮件地址
+    private boolean consult_info_email;
+    //填写 电话号码
+    private boolean consult_info_phone;
+    //填写咨询问题
+    private boolean consult_info_resion;
+    //咨询窗口显示的欢迎语
+    private String consult_info_message;
 
-    private String agentshortcutkey;        //坐席回复快捷键
-    private String usershortcutkey;        //访客快捷键
+    //坐席回复快捷键
+    private String agentshortcutkey;
+    //访客快捷键
+    private String usershortcutkey;
 
-    private boolean ai;        //是否启用 AI
-    private boolean aifirst;    //AI优先接入
-    private boolean aisearch;    //AI允许使用 搜索引擎， 例如百度 等
-    private String aimsg;        //AI欢迎信息，可以使用 HTML
-    private String aisuccesstip;//AI服务连接成功的消息提示
-    private String ainame;        //AI服务 昵称
+    //是否启用 AI
+    private boolean ai;
+    //AI优先接入
+    private boolean aifirst;
+    //AI允许使用 搜索引擎， 例如百度 等
+    private boolean aisearch;
+    //AI欢迎信息，可以使用 HTML
+    private String aimsg;
+    //AI服务连接成功的消息提示
+    private String aisuccesstip;
+    //AI服务 昵称
+    private String ainame;
     private boolean aisuggest;
 
-    private String aiid;        //默认的机器人
+    //默认的机器人
+    private String aiid;
 
     private String datadept;
     private String agent_online;

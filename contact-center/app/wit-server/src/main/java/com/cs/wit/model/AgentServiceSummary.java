@@ -69,12 +69,17 @@ public class AgentServiceSummary implements Serializable{
 	private String called ;
 	private String agent ;
 	
-	private String summary ;	//服务小结 ， 备注
+	//服务小结 ， 备注
+	private String summary ;
 
-	private boolean process ;	//已处理
-	private String updateuser ;	//处理人
-	private Date updatetime ;	//处理时间
-	private String processmemo;	//处理备注
+	//已处理
+	private boolean process ;
+	//处理人
+	private String updateuser ;
+	//处理时间
+	private Date updatetime ;
+	//处理备注
+	private String processmemo;
 	
 	public String getAgentusername() {
 		return agentusername;

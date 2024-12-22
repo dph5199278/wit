@@ -73,7 +73,8 @@ public class TableProperties implements java.io.Serializable,Cloneable{
 	private String name ;
 	private String code ;
 	private String fieldname ;
-	private int datatypecode ;		//变更用处，修改为字段长度
+	//变更用处，修改为字段长度
+	private int datatypecode ;
 	private String datatypename ;
 	private String indexdatatype ;
 	private String groupid ;
@@ -81,27 +82,37 @@ public class TableProperties implements java.io.Serializable,Cloneable{
 	private boolean pk = false;
 	private boolean modits = false ;
 	private String orgi ;
-	private String viewtype;				//变更用处，修改为 在哪些地方显示  ， view | edit | add | detail
+	//变更用处，修改为 在哪些地方显示  ， view | edit | add | detail
+	private String viewtype;
 	private int sortindex = 100;
 	private boolean token ;
-	private String tokentype ;	//分词方式
+	//分词方式
+	private String tokentype ;
 	private boolean inx = true;
 	private boolean title = false ;
-	private boolean systemfield  = false ;	//变更用处，是否流程变量
+	//变更用处，是否流程变量
+	private boolean systemfield  = false ;
 	private int length = 255 ;
 	private boolean fieldstatus ;			
 	
-	private boolean secfield ;			//隐藏字段
-	private String secdistype;			//字段隐藏方式
+	//隐藏字段
+	private boolean secfield ;
+	//字段隐藏方式
+	private String secdistype;
 	
-	private boolean phonenumber ;	//是否电话号码
-	private String phonetype ;		//号码类型   ， 第一联系号码|家庭电话|工作电话
-	private String phonememo ;		//号码备注
-	private String styletype ;		//样式类型  ： 文本框、文本域 ， 单选列表、复选框、单选按钮等等
+	//是否电话号码
+	private boolean phonenumber ;
+	//号码类型   ， 第一联系号码|家庭电话|工作电话
+	private String phonetype ;
+	//号码备注
+	private String phonememo ;
+	//样式类型  ： 文本框、文本域 ， 单选列表、复选框、单选按钮等等
+	private String styletype ;
 	
 	
 	private boolean seldata ;
-	private String seldatatype ;	//选择数据方式  ： 字典数据  ， 表数据  ， 如果是表数据，则需要选择 表ID
+	//选择数据方式  ： 字典数据  ， 表数据  ， 如果是表数据，则需要选择 表ID
+	private String seldatatype ;
 	private String seldatacode ;
 	private String seldatakey ;
 	private String seldatavalue ;
@@ -111,19 +122,26 @@ public class TableProperties implements java.io.Serializable,Cloneable{
 	private String reftpname;
 	private String reftype ;
 	private String reftptitlefield ;
-	private boolean defaultsort ;		//是否默认排序字段
-	private boolean descorder ;			//默认倒叙排列
+	//是否默认排序字段
+	private boolean defaultsort ;
+	//默认倒叙排列
+	private boolean descorder ;
 	private String defaultvalue ;
-	private String defaultvaluetitle ;	//改变用途，修改为 数据完整性校验
-	private String defaultfieldvalue ;	//改变用处，是否需要转换日期
+	//改变用途，修改为 数据完整性校验
+	private String defaultvaluetitle ;
+	//改变用处，是否需要转换日期
+	private String defaultfieldvalue ;
 	private boolean multpartfile = true;
 	private String uploadtype ;
-	private String cascadetype;//级联删除 none不删除，deleteself删除主数据，deleteall删除关联数据
+	//级联删除 none不删除，deleteself删除主数据，deleteall删除关联数据
+	private String cascadetype;
 	private boolean impfield = false ;
 	
-	private boolean reffk = false ; 		//是否外键关联
+	//是否外键关联
+	private boolean reffk = false ;
 	
-	private boolean sysfield ; 				//系统字段
+	//系统字段
+	private boolean sysfield ;
 	/**
 	 * @return the id
 	 */

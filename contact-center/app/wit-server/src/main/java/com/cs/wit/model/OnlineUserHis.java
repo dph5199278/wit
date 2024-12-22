@@ -51,7 +51,8 @@ public class OnlineUserHis implements java.io.Serializable{
 	private String resolution;
 	private String opersystem;
 	
-	private String dataid ;		//记录当前 OnlineUser对象的ID，用于 在 根据服务记录找到当前在线用户的时候 的关联字段
+	//记录当前 OnlineUser对象的ID，用于 在 根据服务记录找到当前在线用户的时候 的关联字段
+	private String dataid ;
 
 	private String browser;
 	private String status;
@@ -80,8 +81,10 @@ public class OnlineUserHis implements java.io.Serializable{
 	
 	private String contactsid ;
 
-	private int invitetimes; // 邀请次数
-	private String invitestatus; // 邀请状态
+	// 邀请次数
+	private int invitetimes;
+	// 邀请状态
+	private String invitestatus;
 	private int refusetimes ;
 	
 	

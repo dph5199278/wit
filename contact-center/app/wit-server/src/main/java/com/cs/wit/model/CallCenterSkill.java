@@ -35,10 +35,12 @@ public class CallCenterSkill implements java.io.Serializable{
 	private static final long serialVersionUID = 3932323765657445180L;
 	private String id;
 	private String name;
-	private String skill;	//Or IP
+	//Or IP
+	private String skill;
 	private String hostid ;
 	private String quene;
-	private String password ;	//pbx host password
+	//pbx host password
+	private String password ;
 	
 	private String orgi;
 	private String creater ;

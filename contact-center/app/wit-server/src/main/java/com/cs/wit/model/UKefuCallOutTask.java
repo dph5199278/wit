@@ -42,37 +42,57 @@ public class UKefuCallOutTask implements Serializable{
 	
 	private String id ;
 	
-	private String orgi ;		//租户ID
-	private String organ ;		//创建部门
-	private String creater ;	//创建人
+	//租户ID
+	private String orgi ;
+	//创建部门
+	private String organ ;
+	//创建人
+	private String creater ;
 	
-	private String actid ;		//活动ID
-	private String batid ;		//批次ID
-	private String filterid ;	//筛选表单ID
+	//活动ID
+	private String actid ;
+	//批次ID
+	private String batid ;
+	//筛选表单ID
+	private String filterid ;
 	
-	private Date createtime = new Date();	//创建时间
+	//创建时间
+	private Date createtime = new Date();
 	
 	private Date updatetime = new Date();
 	
-	private String datastatus;	//数据状态（逻辑删除）
-	private String status ;		//状态		正常，已处理完，已过期
+	//数据状态（逻辑删除）
+	private String datastatus;
+	//状态		正常，已处理完，已过期
+	private String status ;
 	
-	private String exectype ;	//任务类型
+	//任务类型
+	private String exectype ;
 	
-	private int namenum ;		//批次名单总数
+	//批次名单总数
+	private int namenum ;
 	
-	private int execnum ;		//执行次数
+	//执行次数
+	private int execnum ;
 	
-	private int renum ;		//回收数量
-	private int reorgannum ;		//回收到部门数量
+	//回收数量
+	private int renum ;
+	//回收到部门数量
+	private int reorgannum ;
 	
-	private int assigned ;		//已分配到坐席
-	private int assignedorgan ;	//已分配到部门
-	private int assignedai ;	//已分配到AI
-	private int notassigned;	//未分配
-	private String description ;//备注
+	//已分配到坐席
+	private int assigned ;
+	//已分配到部门
+	private int assignedorgan ;
+	//已分配到AI
+	private int assignedai ;
+	//未分配
+	private int notassigned;
+	//备注
+	private String description ;
 	
-	private String name;		//导入的任务名称 ， 自动生成， 规则为 yyyyMMdd--ORDER
+	//导入的任务名称 ， 自动生成， 规则为 yyyyMMdd--ORDER
+	private String name;
 
 	@Id
 	@Column(length = 32)

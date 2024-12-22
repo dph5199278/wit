@@ -45,15 +45,18 @@ public class DataEvent implements java.io.Serializable{
 	private String name ;
 	
 	private String orgi ;
-	private String modifyid;	//变更 ID， UUID，随机生成
+	//变更 ID， UUID，随机生成
+	private String modifyid;
 	
 	private User user ;
 	private String creater ;
 	private Date createtime ;
 	
-	private String content ;		//只发布  回复的 记录
+	//只发布  回复的 记录
+	private String content ;
 	
-	private String eventtype ;		//修改审批人员 ： 普通变更	
+	//修改审批人员 ： 普通变更	
+	private String eventtype ;
 	
 	private String dataid ;
 	

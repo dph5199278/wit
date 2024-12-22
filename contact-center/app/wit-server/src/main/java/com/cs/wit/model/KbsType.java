@@ -39,29 +39,39 @@ public class KbsType implements java.io.Serializable{
 	private String id ;
 	private String name ;
 	private String code ;
-	private boolean approval ;	//是否需要专家审批
-	
-	private boolean bpm ;		//是否需要流程审批
-	
-	private String bpmid ;		//知识审批流程ID
-	
-	private String pc ;			//知识分类负责人
-	
-	private int inx;			//知识分类排序位置
+	//是否需要专家审批
+	private boolean approval ;
+
+	//是否需要流程审批
+	private boolean bpm ;
+
+	//知识审批流程ID
+	private String bpmid ;
+
+	//知识分类负责人
+	private String pc ;
+
+	//知识分类排序位置
+	private int inx;
 
 	private Date createtime ;
 	private String creater;
 	private String username ;
-	
-	private Date startdate;		//有效期开始
-	private Date enddate ;		//有效期结束
-	
-	private boolean enable ;	//状态是否可用
-	
-	private String description	;//分类备注描述信息
+
+	//有效期开始
+	private Date startdate;
+	//有效期结束
+	private Date enddate ;
+
+	//状态是否可用
+	private boolean enable ;
+
+	//分类备注描述信息
+	private String description	;
 	
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
 	
 	@Id

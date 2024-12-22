@@ -57,15 +57,22 @@ public class Product implements java.io.Serializable{
 	private String id  ;
 	
 	
-	private String title ;		//标题
-	private String content ;	//内容
+	//标题
+	private String title ;
+	//内容
+	private String content ;
 	
-	private String keyword ;	//关键词
-	private String summary ;	//摘要
+	//关键词
+	private String keyword ;
+	//摘要
+	private String summary ;
 	
-	private String status ;	//	状态	
-	private String tptype;	//类型		
-	private String cate ;	//分类
+	//	状态
+	private String status ;
+	//类型
+	private String tptype;
+	//分类
+	private String cate ;
 		
 	private String username ;
 	private String orgi ;
@@ -74,14 +81,20 @@ public class Product implements java.io.Serializable{
 	private Date updatetime = new Date();
 	private String memo;
 	private String organ;
-	private int price;//价格
-	private int quota;//库存
+	//价格
+	private int price;
+	//库存
+	private int quota;
 	
-	private String termtype;	//有效期类型
-	private Date begintime; 	//有效期开始时间
-	private Date endtime; 		//有效期结束时间
+	//有效期类型
+	private String termtype;
+	//有效期开始时间
+	private Date begintime;
+	//有效期结束时间
+	private Date endtime;
 	
-	private String provoice;//语音介绍
+	//语音介绍
+	private String provoice;
 	
 	
 	/**

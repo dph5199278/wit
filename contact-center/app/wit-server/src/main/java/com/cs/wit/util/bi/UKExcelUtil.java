@@ -55,7 +55,8 @@ public class UKExcelUtil {
     private Sheet sheet;
     private int rowNum = 0;
     private int rowTitleNum = 0;
-    private int cellNumber = 0;        //总列数
+    //总列数
+    private int cellNumber = 0;
     private String headTitle = "报表";
     private String startTime = "";
     private String endTime = "";
@@ -110,7 +111,8 @@ public class UKExcelUtil {
                 rowTitleNum = reportData.getRow().getTitle().size();
             }
         }
-        cellNumber = reportData.getCol().getColspan() + rowTitleNum;    //总列数
+        //总列数
+        cellNumber = reportData.getCol().getColspan() + rowTitleNum;
         getnewCol();
         sheet.setColumnWidth(0, 8000);
         for (int i = 1; i < cellNumber; i++) {
@@ -153,9 +155,12 @@ public class UKExcelUtil {
 
         CellStyle cellStyle = wb.createCellStyle();
 
-        cellStyle.setAlignment(HorizontalAlignment.CENTER); // 指定单元格居中对齐
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);// 指定单元格垂直居中对齐
-        cellStyle.setWrapText(true);// 指定单元格自动换行
+        // 指定单元格居中对齐
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        // 指定单元格垂直居中对齐
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        // 指定单元格自动换行
+        cellStyle.setWrapText(true);
 
         // 设置单元格字体
         Font font = wb.createFont();
@@ -182,9 +187,12 @@ public class UKExcelUtil {
     private void createSubHead() {
 
         CellStyle cellStyle = wb.createCellStyle();
-        cellStyle.setAlignment(HorizontalAlignment.CENTER); // 指定单元格居中对齐
-        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);// 指定单元格垂直居中对齐
-        cellStyle.setWrapText(true);// 指定单元格自动换行
+        // 指定单元格居中对齐
+        cellStyle.setAlignment(HorizontalAlignment.CENTER);
+        // 指定单元格垂直居中对齐
+        cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        // 指定单元格自动换行
+        cellStyle.setWrapText(true);
 
         // 设置单元格字体
         Font font = wb.createFont();
@@ -200,9 +208,12 @@ public class UKExcelUtil {
 
 
         CellStyle leftStyle = wb.createCellStyle();
-        leftStyle.setAlignment(HorizontalAlignment.LEFT); // 指定单元格居中对齐
-        leftStyle.setVerticalAlignment(VerticalAlignment.CENTER);// 指定单元格垂直居中对齐
-        leftStyle.setWrapText(true);// 指定单元格自动换行
+        // 指定单元格居中对齐
+        leftStyle.setAlignment(HorizontalAlignment.LEFT);
+        // 指定单元格垂直居中对齐
+        leftStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+        // 指定单元格自动换行
+        leftStyle.setWrapText(true);
         leftStyle.setFont(font);
 
         leftStyle.setBorderTop(BorderStyle.THIN);
@@ -368,9 +379,11 @@ public class UKExcelUtil {
                             cell3.setCellStyle(style);
                         }
                         if (currentLevel.getRowspan() > 1) {
-                            sbRol.append(rowNum).append(",").append(cellNum).append(",").append(currentLevel.getRowspan()).append(";");//开始行；开始列；合并行数
+                            //开始行；开始列；合并行数
+                            sbRol.append(rowNum).append(",").append(cellNum).append(",").append(currentLevel.getRowspan()).append(";");
                         } else if (currentLevel.getColspan() > 1) {
-                            sbCol.append(rowNum).append(",").append(cellNum).append(",").append(currentLevel.getColspan()).append(";");//开始行；开始列；合并列数
+                            //开始行；开始列；合并列数
+                            sbCol.append(rowNum).append(",").append(cellNum).append(",").append(currentLevel.getColspan()).append(";");
                         }
                     } else {
                         cell3.setCellValue("");
@@ -383,9 +396,11 @@ public class UKExcelUtil {
                     Cell cell3 = row2.createCell(cellNum);
                     String value = String.valueOf(dataList.get(r).get(j));
                     if (dataList.get(r).get(j) != null && dataList.get(r).get(j).getRowspan() > 1) {
-                        sbDataRol.append(rowNum).append(",").append(cellNum).append(",").append(dataList.get(r).get(j).getRowspan()).append(";");//开始行；开始列；合并行数
+                        //开始行；开始列；合并行数
+                        sbDataRol.append(rowNum).append(",").append(cellNum).append(",").append(dataList.get(r).get(j).getRowspan()).append(";");
                     } else if (dataList.get(r).get(j) != null && dataList.get(r).get(j).getColspan() > 1) {
-                        sbDataCol.append(rowNum).append(",").append(cellNum).append(",").append(dataList.get(r).get(j).getColspan()).append(";");//开始行；开始列；合并列数
+                        //开始行；开始列；合并列数
+                        sbDataCol.append(rowNum).append(",").append(cellNum).append(",").append(dataList.get(r).get(j).getColspan()).append(";");
                     }
                     if (!"".equals(value)) {
                         if (value.contains("%")) {

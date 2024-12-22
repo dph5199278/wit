@@ -34,17 +34,26 @@ public class Chatbot {
     private String description;
     private String primaryLanguage;
     private String fallback;
-    private String welcome; // 问候语
-    private String baseUrl; // 智能问答引擎服务地址
-    private String orgi;    // 租户标识
-    private String creater; // 创建者
-    private String channel; // 渠道类型
+    // 问候语
+    private String welcome;
+    // 智能问答引擎服务地址
+    private String baseUrl;
+    // 租户标识
+    private String orgi;
+    // 创建者
+    private String creater;
+    // 渠道类型
+    private String channel;
 
     @Column(unique = true)
-    private String snsAccountIdentifier; // 渠道唯一标识
-    private boolean enabled; // 当前是否被启用
-    private boolean aisuggest; // 智能回复是否被启用
-    private String workmode; // 工作模式, 机器人优先还是人工客服优先
+    // 渠道唯一标识
+    private String snsAccountIdentifier;
+    // 当前是否被启用
+    private boolean enabled;
+    // 智能回复是否被启用
+    private boolean aisuggest;
+    // 工作模式, 机器人优先还是人工客服优先
+    private String workmode;
 
     private Date createtime;
     private Date updatetime;

@@ -36,16 +36,20 @@ public class StreamingFile implements java.io.Serializable {
     @NotNull
     private String name;
 
-    private String mime;      // Media Type over HTTP
+    // Media Type over HTTP
+    private String mime;
 
     @NotNull
     private Blob data;
 
-    private Blob thumbnail;   // 图片缩略图
+    // 图片缩略图
+    private Blob thumbnail;
 
-    private Blob cooperation; // 图片协作图
+    // 图片协作图
+    private Blob cooperation;
 
-    private String fileUrl;   // 提供网络访问时的URL
+    // 提供网络访问时的URL
+    private String fileUrl;
 
     @Id
     @Column(length = 32)

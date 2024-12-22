@@ -60,8 +60,10 @@ public class User implements java.io.Serializable {
     private String birthday;
     private String nickname;
     private String secureconf = "5";
-    private boolean admin;                 // 是否是管理员
-    private boolean superadmin = false;    // 是否是系统管理员
+    // 是否是管理员
+    private boolean admin;
+    // 是否是系统管理员
+    private boolean superadmin = false;
 
     private String orgi;
     private String orgid;
@@ -71,27 +73,39 @@ public class User implements java.io.Serializable {
     private Date passupdatetime = new Date();
     private Date updatetime = new Date();
     private String memo;
-    private boolean agent;         // 是否开通坐席功能
-    private boolean callcenter;    // 是否启用呼叫中心 坐席功能
+    // 是否开通坐席功能
+    private boolean agent;
+    // 是否启用呼叫中心 坐席功能
+    private boolean callcenter;
     private String sipaccount;
-    private String city;           // 城市
-    private String province;       // 省份
-    private boolean login;         // 是否登录
+    // 城市
+    private String city;
+    // 省份
+    private String province;
+    // 是否登录
+    private boolean login;
 
-    private String status;         //
-    private boolean datastatus;    // 数据状态，是否已删除
+    private String status;
+    // 数据状态，是否已删除
+    private boolean datastatus;
 
-    private int maxuser;           // 排队队列最大数值 ， 开启坐席功能后启用
-    private String ordertype;      // 坐席的工作队列排序方式
+    // 排队队列最大数值 ， 开启坐席功能后启用
+    private int maxuser;
+    // 坐席的工作队列排序方式
+    private String ordertype;
 
 
-    private Date lastlogintime = new Date();    //最后登录时间
+    //最后登录时间
+    private Date lastlogintime = new Date();
 
     private AgentStatus agentStatus;
 
-    private int fans;               // 粉丝
-    private int follows;            // 关注
-    private int integral;           // 积分
+    // 粉丝
+    private int fans;
+    // 关注
+    private int follows;
+    // 积分
+    private int integral;
 
     /**
      * 权限相关

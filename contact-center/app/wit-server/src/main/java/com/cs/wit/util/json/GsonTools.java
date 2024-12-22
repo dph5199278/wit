@@ -74,9 +74,11 @@ public class GsonTools {
         {
             switch (conflictStrategy) {
                 case PREFER_FIRST_OBJ:
-                    break;//do nothing, the right val gets thrown out
+                    //do nothing, the right val gets thrown out
+                    break;
                 case PREFER_SECOND_OBJ:
-                    leftObj.add(key, rightVal);//right side auto-wins, replace left val with its val
+                    //right side auto-wins, replace left val with its val
+                    leftObj.add(key, rightVal);
                     break;
                 case PREFER_NON_NULL:
                     //check if right side is not null, and left side is null, in which case we use the right val

@@ -34,8 +34,10 @@ public class Fetcher implements Runnable {
     private static Cache cache;
     private JobDetail job = null;
     private AtomicInteger activeThreads = new AtomicInteger(0);
-    private AtomicInteger pages = new AtomicInteger(0); // total pages fetched
-    private AtomicInteger errors = new AtomicInteger(0); // total pages fetched
+    // total pages fetched
+    private AtomicInteger pages = new AtomicInteger(0);
+    // total pages fetched
+    private AtomicInteger errors = new AtomicInteger(0);
     private Resource resource = null;
     private int processpages = 0;
 
@@ -58,7 +60,8 @@ public class Fetcher implements Runnable {
                 resource.begin();
             }
             this.job.setLastindex(job.getStartindex());
-            this.pages = new AtomicInteger((int) job.getReport().getPages()); // total pages fetched
+            // total pages fetched
+            this.pages = new AtomicInteger((int) job.getReport().getPages());
             processpages = this.pages.intValue();
             job.getReport().setDataid(this.job.getId());
         } catch (Exception e1) {
@@ -78,7 +81,8 @@ public class Fetcher implements Runnable {
         job.getReport().setStarttime(new java.util.Date());
         try {
             synchronized (activeThreads) {
-                activeThreads.incrementAndGet(); // count threads
+                // count threads
+                activeThreads.incrementAndGet();
             }
             reportStatus();
             OutputTextFormat obj;
@@ -129,7 +133,8 @@ public class Fetcher implements Runnable {
 
             Fetcher.getReporterRes().save(this.job.getReport());
             synchronized (activeThreads) {
-                activeThreads.decrementAndGet(); // count threads
+                // count threads
+                activeThreads.decrementAndGet();
             }
         }
     }

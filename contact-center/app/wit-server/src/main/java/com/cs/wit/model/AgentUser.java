@@ -48,7 +48,8 @@ public class AgentUser implements Serializable, Comparable<AgentUser> {
     private String url;
     private String traceid;
 
-    private String owner;    //变更用处，修改为 智能IVR的 EventID
+    //变更用处，修改为 智能IVR的 EventID
+    private String owner;
 
     private String ipaddr;
     private String osname;
@@ -80,11 +81,15 @@ public class AgentUser implements Serializable, Comparable<AgentUser> {
     private String lastmsg;
     private String opttype;
 
-    // 客服的信息
-    private String skill;        // 请求的技能组
-    private String skillname;    // 技能组名称
-    private String agentno;      // 请求的坐席
-    private String agentname;    // 客服的名字
+    ///// 客服的信息
+    // 请求的技能组
+    private String skill;
+    // 技能组名称
+    private String skillname;
+    // 请求的坐席
+    private String agentno;
+    // 客服的名字
+    private String agentname;
 
     @Transient
     private String agentskill;
@@ -96,10 +101,12 @@ public class AgentUser implements Serializable, Comparable<AgentUser> {
     private String resion;
 
 
-
-    private boolean chatbotops;    // 是否是机器人客服
-    private int chatbotlogicerror; // 机器人客服逻辑错误回复累计
-    private int chatbotround;      // 机器人客服对话轮次(一问一答是一轮)
+    // 是否是机器人客服
+    private boolean chatbotops;
+    // 机器人客服逻辑错误回复累计
+    private int chatbotlogicerror;
+    // 机器人客服对话轮次(一问一答是一轮)
+    private int chatbotround;
 
     public String getCreater() {
         return creater;

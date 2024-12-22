@@ -54,16 +54,21 @@ public class Constants {
     public static final String CSKEFU_SYSTEM_AI_INPUT = "inputparam";
     public static final String CSKEFU_SYSTEM_AI_OUTPUT = "outputparam";
 
-    public static final String CSKEFU_SYSTEM_INFOACQ = "infoacq";        // 数据采集模式
-    public static final String DEFAULT_TYPE = "default";                 // 默认分类代码
-    public static final String CACHE_SKILL = "cache_skill_";             // 技能组的缓存
-    public static final String CACHE_AGENT = "cache_agent_";             // 坐席列表的缓存
+    // 数据采集模式
+    public static final String CSKEFU_SYSTEM_INFOACQ = "infoacq";
+    // 默认分类代码
+    public static final String DEFAULT_TYPE = "default";
+    // 技能组的缓存
+    public static final String CACHE_SKILL = "cache_skill_";
+    // 坐席列表的缓存
+    public static final String CACHE_AGENT = "cache_agent_";
 
     public static final String CUBE_TITLE_MEASURE = "指标";
 
     public static final String CSKEFU_SYSTEM_AREA = "cskefu_system_area";
 
-    public static final String CSKEFU_SYSTEM_ADV = "cskefu_system_adv";   // 系统广告位
+    // 系统广告位
+    public static final String CSKEFU_SYSTEM_ADV = "cskefu_system_adv";
 
     public static final String SYSTEM_CACHE_CALLOUT_CONFIG = "callout_config";
 
@@ -137,10 +142,14 @@ public class Constants {
     /**
      * FreeSwitch Communication
      */
-    public final static String FS_SIP_STATUS = "pbx:%s:sips"; // 查询SIP状态
-    public final static String FS_CHANNEL_CC_TO_FS = "pbx/%s/execute"; // 发送外呼执行信号
-    public final static String FS_DIALPLAN_STATUS = "pbx:%s:status"; // 外呼执行状态存储
-    public final static String FS_DIALPLAN_TARGET = "pbx:%s:targets:%s";   // 外呼计划电话列表
+    // 查询SIP状态
+    public final static String FS_SIP_STATUS = "pbx:%s:sips";
+    // 发送外呼执行信号
+    public final static String FS_CHANNEL_CC_TO_FS = "pbx/%s/execute";
+    // 外呼执行状态存储
+    public final static String FS_DIALPLAN_STATUS = "pbx:%s:status";
+    // 外呼计划电话列表
+    public final static String FS_DIALPLAN_TARGET = "pbx:%s:targets:%s";
     public final static String FS_BRIDGE_CONNECT = "callOutConnect";
     public final static String FS_LEG_ANSWER = "answer";
     public final static String FS_LEG_HANGUP = "hangup";

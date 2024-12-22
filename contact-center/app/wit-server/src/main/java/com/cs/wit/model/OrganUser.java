@@ -32,12 +32,18 @@ import jakarta.persistence.Table;
 @IdClass(OrganUserId.class)
 public class OrganUser implements java.io.Serializable {
 
-    @Id private String userid;     // 用户标识
-    @Id private String organ;      // 部门标识
-    private Date createtime;   // 创建时间
-    private String creator;    // 创建人
-    private Date updatetime;   // 更新时间
-    private String orgi;       // 租户ID
+    // 用户标识
+    @Id private String userid;
+    // 部门标识
+    @Id private String organ;
+    // 创建时间
+    private Date createtime;
+    // 创建人
+    private String creator;
+    // 更新时间
+    private Date updatetime;
+    // 租户ID
+    private String orgi;
 
     public String getUserid() {
         return userid;

@@ -35,7 +35,8 @@ public interface WorkMonitorRepository extends JpaRepository<WorkMonitor, String
 
 	List<WorkMonitor> findByOrgiAndAgentAndDatestrAndFirsttime(String orgi, String agent, String datestr, boolean firsttime) ;
 	
-	Page<WorkMonitor> findAll(Specification<WorkMonitor> spec, Pageable pageable);  //分页按条件查询
+	//分页按条件查询
+	Page<WorkMonitor> findAll(Specification<WorkMonitor> spec, Pageable pageable);
 	
 	
 	

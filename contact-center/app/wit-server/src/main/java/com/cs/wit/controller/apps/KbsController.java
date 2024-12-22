@@ -140,11 +140,13 @@ public class KbsController extends Handler {
 
     private void processAttachmentFile(MultipartFile[] files, KbsTopic topic, HttpServletRequest request, String dataid, String modelid) throws IOException {
         if (files != null && files.length > 0) {
-            topic.setAttachment("");        //序列化 附件文件，方便显示，避免多一次查询 附件的操作
+            //序列化 附件文件，方便显示，避免多一次查询 附件的操作
+            topic.setAttachment("");
             //保存附件
             for (MultipartFile file : files) {
                 if (file.getSize() > 0) {            //文件尺寸 限制 ？在 启动 配置中 设置 的最大值，其他地方不做限制
-                    String fileid = Md5Utils.md5(file.getBytes());    //使用 文件的 MD5作为 ID，避免重复上传大文件
+                    //使用 文件的 MD5作为 ID，避免重复上传大文件
+                    String fileid = Md5Utils.md5(file.getBytes());
                     if (!StringUtils.isBlank(fileid)) {
                         AttachmentFile attachmentFile = new AttachmentFile();
                         attachmentFile.setCreater(super.getUser(request).getId());

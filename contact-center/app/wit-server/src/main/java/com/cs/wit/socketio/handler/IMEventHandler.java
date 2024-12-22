@@ -216,7 +216,8 @@ public class IMEventHandler {
             p.setPhone(contacts.getPhone());
             p.setEmail(contacts.getEmail());
             p.setResion(contacts.getMemo());
-            p.setChatbotops(false); // 非机器人客服
+            // 非机器人客服
+            p.setChatbotops(false);
             p.setOpttype(MainContext.OptType.HUMAN.toString());
             getAgentUserProxy().save(p);
         });

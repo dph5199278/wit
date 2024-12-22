@@ -40,21 +40,27 @@ public class FormFilterItem  implements java.io.Serializable{
 	
 	private String formfilterid;
 	
-	private String field ;	//字段
-	private String cond;	//条件
-	private String value;	//值
+	//字段
+	private String field ;
+	//条件
+	private String cond;
+	//值
+	private String value;
 	
 	
-	private String contype;	//条件类型
+	//条件类型
+	private String contype;
 	
 	private String orgi ;
 	private String creater;
 	private Date createtime = new Date();
 	private Date updatetime = new Date();
 	
-	private String itemtype ;	//类型， 
+	//类型， 
+	private String itemtype ;
 	
-	private String comp ;		//逻辑条件
+	//逻辑条件
+	private String comp ;
 	
 	
 	/**

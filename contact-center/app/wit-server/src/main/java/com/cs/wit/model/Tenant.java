@@ -42,7 +42,8 @@ public class Tenant implements java.io.Serializable{
 	private String tenantname;
 	private String tenantcode;
 	private boolean systemtenant ;
-	private boolean inited ;		//是否已经初始化
+	//是否已经初始化
+	private boolean inited ;
 	private boolean inites ;
 	private boolean initdb ;
 	private String adminuser ;		
@@ -52,12 +53,16 @@ public class Tenant implements java.io.Serializable{
 	private Date lastmenutime;
 	private Date lastbasetime;
 	private String tenantlogo;
-	private String tenantvalid;//0未认证，1邮箱认证，2手机认证
-	private Date createtime  = new Date();//创建时间
+	//0未认证，1邮箱认证，2手机认证
+	private String tenantvalid;
+	//创建时间
+	private Date createtime  = new Date();
 	private String password ;
-	private String genpasstype ;//密码生成方式
+	//密码生成方式
+	private String genpasstype ;
 	private String sign;
-	private String orgid ;	//企业ID
+	//企业ID
+	private String orgid ;
 	
 	
 	@Id

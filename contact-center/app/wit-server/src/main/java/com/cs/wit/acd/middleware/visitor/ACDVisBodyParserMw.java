@@ -116,7 +116,8 @@ public class ACDVisBodyParserMw extends BaseACDComposeContextMw {
             }
         }
 
-        agentUser.setOwner(ctx.getOwnerid());        // 智能IVR的 EventID
+        // 智能IVR的 EventID
+        agentUser.setOwner(ctx.getOwnerid());
         agentUser.setHeadimgurl(ctx.getOnlineUserHeadimgUrl());
         agentUser.setTitle(ctx.getTitle());
         agentUser.setUrl(ctx.getUrl());

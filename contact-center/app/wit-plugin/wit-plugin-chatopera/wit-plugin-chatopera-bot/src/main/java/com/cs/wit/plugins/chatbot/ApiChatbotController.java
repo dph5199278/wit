@@ -407,8 +407,10 @@ public class ApiChatbotController extends Handler {
             // SNSAccount
             SNSAccount snsAccount = snsAccountRes.findBySnsidAndOrgi(c.getSnsAccountIdentifier(), orgi);
             if (snsAccount == null) {
-                chatbotRes.delete(c); // 删除不存在snsAccount的机器人
-                continue; // 忽略不存在snsAccount的机器人
+                // 删除不存在snsAccount的机器人
+                chatbotRes.delete(c);
+                // 忽略不存在snsAccount的机器人
+                continue;
             }
 
             o.addProperty("snsurl", snsAccount.getBaseURL());
@@ -425,10 +427,14 @@ public class ApiChatbotController extends Handler {
 
         resp.addProperty(RestUtils.RESP_KEY_RC, RestUtils.RESP_RC_SUCC);
         resp.add("data", ja);
-        resp.addProperty("size", records.getSize()); // 每页条数
-        resp.addProperty("number", records.getNumber()); // 当前页
-        resp.addProperty("totalPage", records.getTotalPages()); // 所有页
-        resp.addProperty("totalElements", records.getTotalElements()); // 所有检索结果数量
+        // 每页条数
+        resp.addProperty("size", records.getSize());
+        // 当前页
+        resp.addProperty("number", records.getNumber());
+        // 所有页
+        resp.addProperty("totalPage", records.getTotalPages());
+        // 所有检索结果数量
+        resp.addProperty("totalElements", records.getTotalElements());
 
         return resp;
     }

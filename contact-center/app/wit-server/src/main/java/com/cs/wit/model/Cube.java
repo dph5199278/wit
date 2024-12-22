@@ -39,23 +39,30 @@ public class Cube implements java.io.Serializable{
 	private String id ;
 	private String name ;	
 	private String code ;
-	private String modeltype ;	//模型类型， 虚拟 立方体：立方体
-	private String dstype ;	//db , r3
+	//模型类型， 虚拟 立方体：立方体
+	private String modeltype ;
+	//db , r3
+	private String dstype ;
 	private String db;
 	private Date createtime ;
-	private String mposleft;	//指标位置
-	private String mpostop ;	//指标位置
+	//指标位置
+	private String mposleft;
+	//指标位置
+	private String mpostop ;
 	private String typeid ;	
 	private String orgi ;
 	private String createdata ;
 	private String dataid ;
-	private String dataflag ;			//修改字段用途，改为 数据版本
+	//修改字段用途，改为 数据版本
+	private String dataflag ;
 	private int startindex ;
 	private Date startdate ;
 	private String creater;
 	private Date updatetime;
-	private String cubefile ;			//修改字段用途，改为 授权信息
-	private String sql ;				//CUBE的临时SQL信息
+	//修改字段用途，改为 授权信息
+	private String cubefile ;
+	//CUBE的临时SQL信息
+	private String sql ;
 	
 	private List<CubeMetadata> metadata = new ArrayList<CubeMetadata>();
 	private List<Dimension> dimension = new ArrayList<Dimension>();

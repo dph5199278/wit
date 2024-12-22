@@ -246,7 +246,8 @@ public class MailSender {
 			}     
         }   
 		
-		message.setContent(multipart); //Multipart加入到信件  
+		//Multipart加入到信件  
+		message.setContent(multipart);
 		// 发送
 		Transport.send(message);
 	}

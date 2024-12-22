@@ -59,51 +59,75 @@ public class ChatMessage implements java.io.Serializable {
     private String usession;
     private String agentserviceid;
 
-    private String sessionid;    //增加记录 AI 的 Client Session ID
+    //增加记录 AI 的 Client Session ID
+    private String sessionid;
 
-    private String topicid;    //命中的 知识库 ID
-    private String topicatid;    //命中的知识库分类ID
-    private boolean topic;        //是否命中知识库
-    private boolean aichat;    //是否和AI提问
+    //命中的 知识库 ID
+    private String topicid;
+    //命中的知识库分类ID
+    private String topicatid;
+    //是否命中知识库
+    private boolean topic;
+    //是否和AI提问
+    private boolean aichat;
 
     private String message;
-    private String expmsg;        // 语音消息时，显示为ASR的识别结果，文字消息时，显示为附带的动态业务字段
+    // 语音消息时，显示为ASR的识别结果，文字消息时，显示为附带的动态业务字段
+    private String expmsg;
 
     private String orgi;
     private String channel;
-    private String model;            //消息所属模块， WebIM/EntIM
-    private String chatype;        //对话类型，是私聊还是群聊 或者是智能机器人对话
+    //消息所属模块， WebIM/EntIM
+    private String model;
+    //对话类型，是私聊还是群聊 或者是智能机器人对话
+    private String chatype;
+    //前一条的坐席发送消息时间
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-    private Date lastagentmsgtime;    //前一条的坐席发送消息时间
+    private Date lastagentmsgtime;
+    //前一条的访客发送消息时间
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-    private Date lastmsgtime;        //前一条的访客发送消息时间
-    private int agentreplytime;    //坐席回复消息时长		单位：秒
-    private int agentreplyinterval;//坐席回复消息时间间隔 ， 单位：秒
+    private Date lastmsgtime;
+    //坐席回复消息时长		单位：秒
+    private int agentreplytime;
+    //坐席回复消息时间间隔 ， 单位：秒
+    private int agentreplyinterval;
 
-    private String batid;        //变更用处，修改为是否有协作保存的图片
+    //变更用处，修改为是否有协作保存的图片
+    private String batid;
 
-    private String headimgurl;        //用户头像 ，临时用
+    //用户头像 ，临时用
+    private String headimgurl;
 
-    private String filename;        //文件名
-    private int filesize;            //文件尺寸
-    private String attachmentid;    //附件ID
+    //文件名
+    private String filename;
+    //文件尺寸
+    private int filesize;
+    //附件ID
+    private String attachmentid;
 
-    private boolean datastatus;    //数据状态，是否已撤回消息
+    //数据状态，是否已撤回消息
+    private boolean datastatus;
 
     private String mediaid;
-    private String locx;    //location x
-    private String locy;    //location y
+    //location x
+    private String locx;
+    //location y
+    private String locy;
 
     private long updatetime = System.currentTimeMillis();
 
-    private int duration;    //音频时长
+    //音频时长
+    private int duration;
 
-    private String scale;        //地图级别
-    private String suggestmsg;    //推荐消息
+    //地图级别
+    private String scale;
+    //推荐消息
+    private String suggestmsg;
 
-    private int tokenum;    //当前未读消息数量
+    //当前未读消息数量
+    private int tokenum;
     private String agentuser;
 
     /**
@@ -112,11 +136,13 @@ public class ChatMessage implements java.io.Serializable {
      * supervisorname: 坐席监控人员名字
      * creater: 坐席监控人员的ID
      */
-    private boolean intervented;     // 是否是会话监控发出的干预消息
+    // 是否是会话监控发出的干预消息
+    private boolean intervented;
     // 坐席监控人员的名字
     private String supervisorname;
 
-    private boolean islabel;   //是否添加标记
+    //是否添加标记
+    private boolean islabel;
 
     public String getAppid() {
         return appid;
@@ -186,7 +212,8 @@ public class ChatMessage implements java.io.Serializable {
         this.channel = channel;
     }
 
-    private String type;        // 类型有两种 ， 一种 message ， 一种 writing
+    // 类型有两种 ， 一种 message ， 一种 writing
+    private String type;
     private String contextid;
     private String calltype;
 

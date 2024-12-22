@@ -569,7 +569,8 @@
          acdWorkMonitor.recordAgentStatus(agentStatus.getAgentno(),
                  agentStatus.getUsername(),
                  agentStatus.getAgentno(),
-                 logined.isAdmin(), // 0代表admin
+                 // 0代表admin
+                 logined.isAdmin(),
                  agentStatus.getAgentno(),
                  MainContext.AgentStatusEnum.NOTREADY.toString(),
                  MainContext.AgentStatusEnum.READY.toString(),
@@ -604,7 +605,8 @@
          acdWorkMonitor.recordAgentStatus(agentStatus.getAgentno(),
                  agentStatus.getUsername(),
                  agentStatus.getAgentno(),
-                 logined.isAdmin(), // 0代表admin
+                 // 0代表admin
+                 logined.isAdmin(),
                  agentStatus.getAgentno(),
                  MainContext.AgentStatusEnum.READY.toString(),
                  MainContext.AgentStatusEnum.NOTREADY.toString(),
@@ -1454,8 +1456,9 @@
      public ModelAndView update(HttpServletRequest request, @Valid Contacts contacts) {
          contactsRes.findById(contacts.getId())
                  .ifPresent(data -> {
+                     //记录 数据变更 历史
                      List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(
-                             request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");    //记录 数据变更 历史
+                             request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");
                      if (events.size() > 0) {
                          String modifyid = MainUtils.getUUID();
                          Date modifytime = new Date();

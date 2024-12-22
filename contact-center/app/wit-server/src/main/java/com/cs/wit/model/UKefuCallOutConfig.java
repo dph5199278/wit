@@ -38,24 +38,34 @@ public class UKefuCallOutConfig implements java.io.Serializable{
 	private String creater ;
 	private String type;
 	
-	private String dataid ;		//部门ID，将来按照部门扩展，每个部门可以有团队长独立设置 部门策略或其他标识
+	//部门ID，将来按照部门扩展，每个部门可以有团队长独立设置 部门策略或其他标识
+	private String dataid ;
 	
 	private Date createtime = new Date();
 	private Date updatetime = new Date();
 	private String username ;
-	private boolean enablecallout ;	//启用自动外呼
-	private int countdown ;			//外呼倒计时时长
-	private boolean enabletagentthreads ;	//启用人工坐席并发控制
-	private int agentthreads ;				//人工坐席外呼并发数量
+	//启用自动外呼
+	private boolean enablecallout ;
+	//外呼倒计时时长
+	private int countdown ;
+	//启用人工坐席并发控制
+	private boolean enabletagentthreads ;
+	//人工坐席外呼并发数量
+	private int agentthreads ;
 	
-	private boolean enabletaithreads ;		//启用机器人并发外呼限制
-	private int aithreads ;					//机器人外呼并发数量
+	//启用机器人并发外呼限制
+	private boolean enabletaithreads ;
+	//机器人外呼并发数量
+	private int aithreads ;
 	
 	
-	private String defaultvalue ;	//默认 allow
-	private String strategy;		//策略
+	//默认 allow
+	private String defaultvalue ;
+	//策略
+	private String strategy;
 	
-	private boolean previewautocallout ;	//启用主动预览下的自动外呼功能
+	//启用主动预览下的自动外呼功能
+	private boolean previewautocallout ;
 	
 	@Id
 	@Column(length = 32)

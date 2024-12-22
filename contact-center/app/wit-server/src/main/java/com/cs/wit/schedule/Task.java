@@ -73,7 +73,8 @@ public class Task implements Runnable {
             if (jobDetail.getCronexp() != null && jobDetail.getCronexp().length() > 0 && jobDetail.isPlantask() && !"operation".equals(jobDetail.getCrawltaskid())) {
                 jobDetail.setNextfiretime(TaskTools.updateTaskNextFireTime(jobDetail));
             }
-            jobDetail.setStartindex(0);    //将分页位置设置为从头开始，对数据采集有效，对RivuES增量采集无效
+            //将分页位置设置为从头开始，对数据采集有效，对RivuES增量采集无效
+            jobDetail.setStartindex(0);
             jobDetail.setFetcher(true);
             jobDetail.setPause(false);
             jobDetail.setTaskstatus(MainContext.TaskStatusType.NORMAL.getType());

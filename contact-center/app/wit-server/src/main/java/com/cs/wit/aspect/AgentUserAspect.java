@@ -92,7 +92,8 @@ public class AgentUserAspect {
     public Object LinkAgentUser(ProceedingJoinPoint joinPoint) throws Throwable {
         final AgentUser updated = (AgentUser) joinPoint.getArgs()[0];
         final String orgi = (String) joinPoint.getArgs()[1];
-        Object proceed = joinPoint.proceed(); // after things are done.
+        // after things are done.
+        Object proceed = joinPoint.proceed();
         logger.info(
                 "[linkAgentUser] agentUser: status {}, userId {}, agentno {}, orgi {}", updated.getStatus(),
                 updated.getUserid(), updated.getAgentno(), orgi);

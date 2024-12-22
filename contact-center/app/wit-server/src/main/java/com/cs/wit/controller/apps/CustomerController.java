@@ -277,7 +277,8 @@ public class CustomerController extends Handler {
             String customerId = entCustomer.getId();
             entCustomer = entCustomerRes.findById(customerId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Customer %s not found", customerId)));
-            entCustomer.setDatastatus(true);                            //客户和联系人都是 逻辑删除
+            //客户和联系人都是 逻辑删除
+            entCustomer.setDatastatus(true);
             entCustomerRes.save(entCustomer);
         }
         return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index?p=" + p + "&ekind=" + ekind));
@@ -300,7 +301,8 @@ public class CustomerController extends Handler {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Customer %s not found", customerId)));
         String msg = "";
 
-        List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(request, customerGroupForm.getEntcustomer(), customer, "id", "orgi", "creater", "createtime", "updatetime");    //记录 数据变更 历史
+        //记录 数据变更 历史
+        List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(request, customerGroupForm.getEntcustomer(), customer, "id", "orgi", "creater", "createtime", "updatetime");
         if (events.size() > 0) {
             msg = "edit_entcustomer_success";
             String modifyid = MainUtils.getUUID();
@@ -354,7 +356,8 @@ public class CustomerController extends Handler {
 	    	}*/
             event.getValues().put("creater", super.getUser(request).getId());
             reporterRes.save(event.getDSData().getReport());
-            new ExcelImportProecess(event).process();        //启动导入任务
+            //启动导入任务
+            new ExcelImportProecess(event).process();
         }
 
         return request(super.createRequestPageTempletResponse("redirect:/apps/customer/index"));
@@ -388,7 +391,8 @@ public class CustomerController extends Handler {
             return;
         }
 
-        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));        //只导出 数据删除状态 为 未删除的 数据
+        //只导出 数据删除状态 为 未删除的 数据
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         Iterable<EntCustomer> entCustomerList = entCustomerRes.findByCreaterAndSharesAndOrgi(super.getUser(request).getId(), super.getUser(request).getId(), super.getOrgi(request), null, null, false, boolQueryBuilder, null, PageRequest.of(super.getP(request), super.getPs(request)));
 
         MetadataTable table = metadataRes.findByTablename("uk_entcustomer");

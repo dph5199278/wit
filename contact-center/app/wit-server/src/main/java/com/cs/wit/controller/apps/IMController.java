@@ -442,7 +442,8 @@ public class IMController extends Handler {
         if (StringUtils.isNotBlank(userid)) {
             emitter.onCompletion(() -> {
                 try {
-                    OnlineUserProxy.webIMClients.removeClient(userid, client, false); // 执行了 邀请/再次邀请后终端的
+                    // 执行了 邀请/再次邀请后终端的
+                    OnlineUserProxy.webIMClients.removeClient(userid, client, false);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -450,7 +451,8 @@ public class IMController extends Handler {
             emitter.onTimeout(() -> {
                 try {
                     emitter.complete();
-                    OnlineUserProxy.webIMClients.removeClient(userid, client, true); // 正常的超时断开
+                    // 正常的超时断开
+                    OnlineUserProxy.webIMClients.removeClient(userid, client, true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -552,7 +554,8 @@ public class IMController extends Handler {
                 appid) && ((!blackOpt.isPresent()) || (blackOpt.get().getEndtime() != null && blackOpt.get().getEndtime().before(
                 new Date())))) {
             CousultInvite invite = OnlineUserProxy.consult(appid, orgi);
-            String randomUserId; // 随机生成OnlineUser的用户名，使用了浏览器指纹做唯一性KEY
+            // 随机生成OnlineUser的用户名，使用了浏览器指纹做唯一性KEY
+            String randomUserId; 
             if (StringUtils.isNotBlank(userid)) {
                 randomUserId = MainUtils.genIDByKey(userid);
             } else {
@@ -574,7 +577,8 @@ public class IMController extends Handler {
 
             view.addObject("nickname", nickname);
 
-            boolean consult = true;                //是否已收集用户信息
+            //是否已收集用户信息
+            boolean consult = true;
             SessionConfig sessionConfig = acdPolicyService.initSessionConfig(orgi);
 
             // 强制开启满意调查问卷
@@ -692,7 +696,8 @@ public class IMController extends Handler {
                     } else {
                         //从 Cookies里尝试读取
                         if (invite.isConsult_info_cookies()) {
-                            Cookie[] cookies = request.getCookies();//这样便可以获取一个cookie数组
+                            //这样便可以获取一个cookie数组
+                            Cookie[] cookies = request.getCookies();
                             contacts = new Contacts();
                             if (cookies != null) {
                                 for (Cookie cookie : cookies) {
@@ -840,15 +845,17 @@ public class IMController extends Handler {
                         view = request(super.createRequestPageTempletResponse("/apps/im/chatbot/index"));
                         if (ua.isMobile()
                             || StringUtils.isNotBlank(mobile)) {
+                            // 智能机器人 移动端
                             view = request(super.createRequestPageTempletResponse(
-                                    "/apps/im/chatbot/mobile"));        // 智能机器人 移动端
+                                    "/apps/im/chatbot/mobile"));
                         }
                     } else {
                         // 维持人工坐席的设定，检查是否进入留言
                         if (!isLeavemsg && (ua.isMobile()
                             || StringUtils.isNotBlank(mobile))) {
+                            // WebIM移动端。再次点选技能组？
                             view = request(
-                                    super.createRequestPageTempletResponse("/apps/im/mobile"));    // WebIM移动端。再次点选技能组？
+                                    super.createRequestPageTempletResponse("/apps/im/mobile"));
                         }
                     }
 

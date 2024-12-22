@@ -115,7 +115,8 @@ public class Contacts extends ESBean implements java.io.Serializable{
 
 	private String marriage;
 
-	private String entcusid;	//客户ID
+	//客户ID
+	private String entcusid;
 
 	private String education;
 	private String identifytype;
@@ -183,7 +184,8 @@ public class Contacts extends ESBean implements java.io.Serializable{
 	private String owner;
 	private String datadept;
 
-	private String pinyin ;		//拼音首字母
+	//拼音首字母
+	private String pinyin ;
 
 	@Id
 	@Column(length = 32)

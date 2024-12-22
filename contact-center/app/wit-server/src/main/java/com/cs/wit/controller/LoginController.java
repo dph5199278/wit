@@ -102,7 +102,8 @@ public class LoginController extends Handler {
             if (StringUtils.isNotBlank(referer)) {
                 view.addObject("referer", referer);
             }
-            Cookie[] cookies = request.getCookies(); // 这样便可以获取一个cookie数组
+            // 这样便可以获取一个cookie数组
+            Cookie[] cookies = request.getCookies();
             if (cookies != null) {
                 for (Cookie cookie : cookies) {
                     if (cookie != null && StringUtils.isNotBlank(cookie.getName()) && StringUtils.isNotBlank(
@@ -171,7 +172,8 @@ public class LoginController extends Handler {
                     final String orgi = loginUser.getOrgi();
                     String auth = MainUtils.getUUID();
                     authToken.putUserByAuth(auth, loginUser);
-                    userRepository.save(loginUser); // 更新登录状态到数据库
+                    // 更新登录状态到数据库
+                    userRepository.save(loginUser);
                     response.addCookie((new Cookie("authorization", auth)));
 
                     // 该登录用户是坐席，并且具有坐席对话的角色
@@ -193,7 +195,8 @@ public class LoginController extends Handler {
                             acdWorkMonitor.recordAgentStatus(agentStatus.getAgentno(),
                                     agentStatus.getUsername(),
                                     agentStatus.getAgentno(),
-                                    user.isAdmin(), // 0代表admin
+                                    // 0代表admin
+                                    user.isAdmin(),
                                     agentStatus.getAgentno(),
                                     MainContext.AgentStatusEnum.OFFLINE.toString(),
                                     MainContext.AgentStatusEnum.READY.toString(),

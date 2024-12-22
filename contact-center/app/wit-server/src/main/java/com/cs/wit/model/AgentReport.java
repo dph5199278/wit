@@ -38,10 +38,14 @@ public class AgentReport implements java.io.Serializable {
 
     private String id;
     private Date createtime = new Date();
-    private int agents;           // 坐席数量，所有在线的并且就绪的坐席
-    private int users;            // 服务中的用户
-    private int inquene;          // 队列中的用户
-    private int busy;             // 队列中忙的坐席，所有在线就绪并且繁忙的坐席（包括自己置忙或达到最大服务人数的坐席）
+    // 坐席数量，所有在线的并且就绪的坐席
+    private int agents;
+    // 服务中的用户
+    private int users;
+    // 队列中的用户
+    private int inquene;
+    // 队列中忙的坐席，所有在线就绪并且繁忙的坐席（包括自己置忙或达到最大服务人数的坐席）
+    private int busy;
     private String orgi;
 
     private String worktype;
@@ -60,7 +64,8 @@ public class AgentReport implements java.io.Serializable {
         this.orgi = orgi;
     }
 
-    private String type = "status";    //坐席状态
+    //坐席状态
+    private String type = "status";
 
     public int getAgents() {
         return agents;

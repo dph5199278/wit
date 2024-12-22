@@ -48,7 +48,8 @@ public class Reporter implements java.io.Serializable{
 	private String status ;
 	private String amount ;
 	private long pages ;
-	private long total ;//数据总条数
+	//数据总条数
+	private long total ;
 	private int errors ;
 	private long bytes ;
 	private int threads ;

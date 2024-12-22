@@ -38,21 +38,28 @@ public class CallMonitorPerformance implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private String id;
-	private String agent;//坐席工号
+	//坐席工号
+	private String agent;
 	private String username;
-	private String agentno;//'分机号（坐席登录的分机号码）
+	//'分机号（坐席登录的分机号码）
+	private String agentno;
 	private String name;
 	private String startstatus;
-	private String status;//坐席历史状态
-	private String code;//对应字典管理CODE
+	//坐席历史状态
+	private String status;
+	//对应字典管理CODE
+	private String code;
 	private String orgi;
 	private String agentserviceid;
 	private String skill;
 	private String skillname;
 	private String busy;
-	private Date createtime;//状态开始时间（取值（坐席监控表的记录创建时间））'
-	private Date endtime;//记录创建时间（取值（状态更换时的时间））
-	private long intervaltime;//状态持续时间（endtime - endtime = intervaltime）
+	//状态开始时间（取值（坐席监控表的记录创建时间））'
+	private Date createtime;
+	//记录创建时间（取值（状态更换时的时间））
+	private Date endtime;
+	//状态持续时间（endtime - endtime = intervaltime）
+	private long intervaltime;
 	private String ani;
 	private String called;
 	private String direction;
@@ -95,7 +102,8 @@ public class CallMonitorPerformance implements java.io.Serializable {
 	private String satisf;
 	private String satisfaction;
 	private String satisfdate;
-	private String userid;//登录人ID
+	//登录人ID
+	private String userid;
 	private String organ;
 	
 	

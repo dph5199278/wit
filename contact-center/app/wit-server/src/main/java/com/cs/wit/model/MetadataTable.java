@@ -50,34 +50,48 @@ public class MetadataTable implements java.io.Serializable{
 	private String tablename;
 	private String code;
 	private String secure;
-	private String tabletype = "1"; // 1:Table : 2:SQL
+	// 1:Table : 2:SQL
+	private String tabletype = "1";
 	private String datasql ;
 	private int startindex = 0;
 	private Date updatetime ;
 	private long updatetimenumber ;
 	
-	private String tabtype ; //project
-	private String pid ; 	//product
-	private String secmenuid ; //Sec Menu
-	private String reportid ;	//report
+	//project
+	private String tabtype ;
+	//product
+	private String pid ;
+	//Sec Menu
+	private String secmenuid ;
+	//report
+	private String reportid ;
 	private boolean timeline ;
 	private String eventname ;
 	
-	private int tbversion ;	 //table schedule version
+	//table schedule version
+	private int tbversion ;
 	
 	// private SecureConfigure secureconfigure;
 	private Date lastupdate;
 	private String taskname;
-	private String taskplan; //改变用处， 改为 left
-	private String taskstatus ;	//改变用处 ， 改为 top
-	private String tasktype; // R3 CRM修改用处，修改为   二级菜单下的主表
+	//改变用处， 改为 left
+	private String taskplan;
+	//改变用处 ， 改为 top
+	private String taskstatus ;
+	// R3 CRM修改用处，修改为   二级菜单下的主表
+	private String tasktype;
 	private Date createtime;
-	private String configure;	//改变用处，改为   链接对象 一
-	private String secureconf;	//改变用处，改为   链接对象 二
+	//改变用处，改为   链接对象 一
+	private String configure;
+	//改变用处，改为   链接对象 二
+	private String secureconf;
 	private String userid;
-	private String groupid;		//如果为结算过后的表，储存模型名称
-	private String previewtemplet ;	//修改用处，改为JAVABean对象名
-	private String listblocktemplet ;//修改用处，改为存储 ES的 JPA
+	//如果为结算过后的表，储存模型名称
+	private String groupid;
+	//修改用处，改为JAVABean对象名
+	private String previewtemplet ;
+	//修改用处，改为存储 ES的 JPA
+	private String listblocktemplet ;
 	private String orgi ;
 	private String creater ;
 	private String creatername ;

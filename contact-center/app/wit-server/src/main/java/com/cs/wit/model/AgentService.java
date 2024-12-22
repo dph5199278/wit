@@ -55,7 +55,8 @@ public class AgentService implements Serializable {
 	private Date endtime;
 	private String ipaddr;
 	
-	private String owner ;	//变更用处，修改为 智能IVR的 EventID
+	//变更用处，修改为 智能IVR的 EventID
+	private String owner ;
 	private String osname;
 	private String browser;
 	private String nickname;
@@ -93,32 +94,51 @@ public class AgentService implements Serializable {
 	private int agentreplys;
 	private int userasks;
 	
-	private boolean trans ;	//是否转接
-	private String transmemo ;	//转接附言
-	private Date transtime ;	//转件时间
+	//是否转接
+	private boolean trans ;
+	//转接附言
+	private String transmemo ;
+	//转件时间
+	private Date transtime ;
 	
-	private String initiator ;	//对话发起方
-	
-	
-	private String endby ;				//终止方 ， agent  ， user ， system
-	private String aiid ;				//AI 的ID
-	private boolean aiservice ;//是否是AI在提供服务
-	private boolean foragent ;	//AI直接转人工
-	
-	private String solvestatus ;		//问题解决状态
-	private boolean leavemsg ;	//是否留言
-	private String leavemsgstatus = MainContext.LeaveMsgStatus.NOTPROCESS.toString();	//已处理、未处理
+	//对话发起方
+	private String initiator ;
 	
 	
-	private String qualitystatus ;//质检状态  ， 已分配/未分配
-	private String qualitydisorgan ;	//分配的质检部门
-	private String qualitydisuser;		//分配的质检人
+	//终止方 ， agent  ， user ， system
+	private String endby ;
+	//AI 的ID
+	private String aiid ;
+	//是否是AI在提供服务
+	private boolean aiservice ;
+	//AI直接转人工
+	private boolean foragent ;
 	
-	private String qualityorgan ;		//实际的质检部门
-	private String qualityuser;			//实际的质检人
-	private int qualityscore ;			//质检评分
-	private Date qualitytime ;			//质检时间
-	private Date qualitytype ;			//质检类型
+	//问题解决状态
+	private String solvestatus ;
+	//是否留言
+	private boolean leavemsg ;
+	//已处理、未处理
+	private String leavemsgstatus = MainContext.LeaveMsgStatus.NOTPROCESS.toString();
+	
+	
+	//质检状态  ， 已分配/未分配
+	private String qualitystatus ;
+	//分配的质检部门
+	private String qualitydisorgan ;
+	//分配的质检人
+	private String qualitydisuser;
+	
+	//实际的质检部门
+	private String qualityorgan ;
+	//实际的质检人
+	private String qualityuser;
+	//质检评分
+	private int qualityscore ;
+	//质检时间
+	private Date qualitytime ;
+	//质检类型
+	private Date qualitytype ;
 	
 	
 	
@@ -130,7 +150,8 @@ public class AgentService implements Serializable {
 	private String resion ;
 	
 	private String contextid;
-	private String dataid; // 用户记录 OnlineUser对象的ID
+	// 用户记录 OnlineUser对象的ID
+	private String dataid;
 	private String agentserviceid;
 	private long ordertime = System.currentTimeMillis();
 	private String snsuser;

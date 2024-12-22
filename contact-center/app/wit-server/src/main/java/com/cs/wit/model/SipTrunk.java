@@ -41,18 +41,27 @@ public class SipTrunk implements java.io.Serializable{
 	private Date updatetime = new Date();
 	private String hostid ;
 	
-	private String sipserver ;	//SIP Server
-	private int port ;			//SIP 端口， 5060 / 5080
-	private String extention ;	//注册分机号
-	private String outnumber;	//外呼 号码
-	private String prefix ;		//前缀号码， 手机拨打的时候 需要加 0
+	//SIP Server
+	private String sipserver ;
+	//SIP 端口， 5060 / 5080
+	private int port ;
+	//注册分机号
+	private String extention ;
+	//外呼 号码
+	private String outnumber;
+	//前缀号码， 手机拨打的时候 需要加 0
+	private String prefix ;
 	
-	private String dtmf ;		//DTMF模式  ， rfc 2833 , inbound ,sip info
+	//DTMF模式  ， rfc 2833 , inbound ,sip info
+	private String dtmf ;
 	
-	private boolean register ;	//是否注册
+	//是否注册
+	private boolean register ;
 	
-	private boolean defaultsip ;//是否默认SIP网关
-	private String title ;		//网关标题
+	//是否默认SIP网关
+	private boolean defaultsip ;
+	//网关标题
+	private String title ;
 	
 	private String username ;
 	private String authuser;
@@ -60,19 +69,29 @@ public class SipTrunk implements java.io.Serializable{
 	private String fromuser ; 	
 	private boolean transprotocol;
 	private String protocol;
-	private int exptime = 1800;		//认证过期时间
-	private int retry = 60;		//重试时间间隔
-	private int heartbeat = 5; 	//心跳
+	//认证过期时间
+	private int exptime = 1800;
+	//重试时间间隔
+	private int retry = 60;
+	//心跳
+	private int heartbeat = 5;
 	
-	private String sipcontent ;		//SIP配置代码
+	//SIP配置代码
+	private String sipcontent ;
 	
-	private String busyext ;	//坐席忙的时候转入号码
-	private String notready ;	//坐席不在线的的时候转入号码
-	private String noname ;		//无名单或未分配的时候转入号码
-	private boolean enablecallagent ;	//坐席不在线的时候，转坐席手机号
+	//坐席忙的时候转入号码
+	private String busyext ;
+	//坐席不在线的的时候转入号码
+	private String notready ;
+	//无名单或未分配的时候转入号码
+	private String noname ;
+	//坐席不在线的时候，转坐席手机号
+	private boolean enablecallagent ;
 	
-	private String province ;		//号码省份
-	private String city ;			//号码城市
+	//号码省份
+	private String province ;
+	//号码城市
+	private String city ;
 	
 	@Id
 	@Column(length = 32)

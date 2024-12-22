@@ -23,7 +23,8 @@ public class WebIMClient {
     private String userid;
     private String client;
     private SseEmitter sse;
-    private String traceid; // 跟踪用户的ID
+    // 跟踪用户的ID
+    private String traceid;
 
     public WebIMClient(String userid, String client, SseEmitter sse) {
         this(userid, client, sse, null);

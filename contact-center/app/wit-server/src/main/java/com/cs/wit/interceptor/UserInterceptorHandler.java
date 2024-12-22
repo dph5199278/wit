@@ -108,8 +108,9 @@ public class UserInterceptorHandler implements AsyncHandlerInterceptor {
     public void postHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler,
                            @Nullable ModelAndView view) {
         final User user = (User) request.getSession().getAttribute(Constants.USER_SESSION_NAME);
+        //进入信息采集模式
         final String infoace = (String) request.getSession().getAttribute(
-                Constants.CSKEFU_SYSTEM_INFOACQ);        //进入信息采集模式
+                Constants.CSKEFU_SYSTEM_INFOACQ);
         final SystemConfig systemConfig = MainUtils.getSystemConfig();
         if (view != null) {
             if (user != null) {
@@ -138,7 +139,8 @@ public class UserInterceptorHandler implements AsyncHandlerInterceptor {
                 view.addObject("orgi", user.getOrgi());
             }
             if (StringUtils.isNotBlank(infoace)) {
-                view.addObject("infoace", infoace);        //进入信息采集模式
+                //进入信息采集模式
+                view.addObject("infoace", infoace);
             }
             view.addObject("webimport", getWebIMPort());
             view.addObject("sessionid", MainUtils.getContextID(request.getSession().getId()));
@@ -166,12 +168,14 @@ public class UserInterceptorHandler implements AsyncHandlerInterceptor {
                 view.addObject("msg", request.getParameter("msg"));
             }
 
-            view.addObject("uKeFuDic", Dict.getInstance());    //处理系统 字典数据 ， 通过 字典code 获取
+            //处理系统 字典数据 ， 通过 字典code 获取
+            view.addObject("uKeFuDic", Dict.getInstance());
 
+            //处理系统 需要隐藏号码的字段， 启动的时候加载
             view.addObject(
                     "uKeFuSecField", MainContext.getCache().findOneSystemByIdAndOrgi(
                             Constants.CSKEFU_SYSTEM_SECFIELD,
-                            MainContext.SYSTEM_ORGI));    //处理系统 需要隐藏号码的字段， 启动的时候加载
+                            MainContext.SYSTEM_ORGI));
 
             if (systemConfig != null) {
                 view.addObject("systemConfig", systemConfig);

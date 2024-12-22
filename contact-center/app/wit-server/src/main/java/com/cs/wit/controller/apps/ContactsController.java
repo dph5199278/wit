@@ -254,7 +254,8 @@ public class ContactsController extends Handler {
             String contactsId = contacts.getId();
             contacts = contactsRes.findById(contactsId)
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, String.format("Contacts %s not found", contactsId)));
-            contacts.setDatastatus(true); //客户和联系人都是 逻辑删除
+            //客户和联系人都是 逻辑删除
+            contacts.setDatastatus(true);
             contactsRes.save(contacts);
         }
         return request(super.createRequestPageTempletResponse(
@@ -314,7 +315,8 @@ public class ContactsController extends Handler {
     @Menu(type = "customer", subtype = "index")
     public ModelAndView detail(ModelMap map, @Valid String id) {
         if (id == null) {
-            return null; // id is required. Block strange requst anyway with g2.min, https://github.com/alibaba/BizCharts/issues/143
+            // id is required. Block strange requst anyway with g2.min, https://github.com/alibaba/BizCharts/issues/143
+            return null;
         }
         map.addAttribute("contacts", contactsRes.findById(id).orElse(null));
         return request(super.createAppsTempletResponse("/apps/business/contacts/detail"));
@@ -393,8 +395,9 @@ public class ContactsController extends Handler {
         }
 
 
+        //记录 数据变更 历史
         List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(
-                request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");    //记录 数据变更 历史
+                request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");
         if (events.size() > 0) {
             String modifyid = MainUtils.getUUID();
             Date modifytime = new Date();
@@ -454,7 +457,8 @@ public class ContactsController extends Handler {
             event.setOrgi(orgi);
             event.getValues().put("creater", logined.getId());
             reporterRes.save(event.getDSData().getReport());
-            new ExcelImportProecess(event).process();        //启动导入任务
+            //启动导入任务
+            new ExcelImportProecess(event).process();
         }
         return request(super.createRequestPageTempletResponse("redirect:/apps/contacts/index"));
     }
@@ -500,7 +504,8 @@ public class ContactsController extends Handler {
         if (!super.esOrganFilter(request)) {
             return;
         }
-        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));        //只导出 数据删除状态 为 未删除的 数据
+        //只导出 数据删除状态 为 未删除的 数据
+        boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         Iterable<Contacts> contactsList = contactsRes.findByCreaterAndSharesAndOrgi(
                 logined.getId(), logined.getId(), orgi, null, null,
                 false, boolQueryBuilder, null, PageRequest.of(super.getP(request), super.getPs(request)));
@@ -659,8 +664,9 @@ public class ContactsController extends Handler {
                     super.createRequestPageTempletResponse("redirect:/apps/contacts/embed/index?msg=" + msg));
         }
 
+        //记录 数据变更 历史
         List<PropertiesEvent> events = PropertiesEventUtil.processPropertiesModify(
-                request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");    //记录 数据变更 历史
+                request, contacts, data, "id", "orgi", "creater", "createtime", "updatetime");
         if (events.size() > 0) {
             String modifyid = MainUtils.getUUID();
             Date modifytime = new Date();

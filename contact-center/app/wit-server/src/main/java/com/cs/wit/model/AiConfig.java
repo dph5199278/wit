@@ -42,27 +42,44 @@ public class AiConfig implements java.io.Serializable{
 	
 	private String welcomemsg ;
 	private String waitmsg ;
-	
-	private boolean enableother ;	//启用外部机器人
-	private boolean otherfirst ;	//外部机器人优先
-	private String otherurl ;		//外部机器人URL
-	private boolean otherssl ;		//外部机器人启用SSL
-	private boolean otherlogin;		//需要登录
-	private String otherappkey;		//外部机器人APPKey
-	private String otherappsec;		//外部机器人AppSec
-	private String otherparam ;		//外部机器人参数
-	private String othermethod ;		//外部机器人请求方式  ， GET/POST
-	private String othertempletinput ;	//外部机器人输入格式化模板
-	private String othertempletoutput ;	//外部机器人输出格式化模板
-	
-	private String oqrdetailurl ;		//外部机器人内容URL
-	private String oqrdetailinput ;	//外部机器人详情输入格式化模板
-	private String oqrdetailoutput ;	//外部机器人详情输出格式化模板
-	
-	private boolean enablesuggest ;		//启用推荐
-	private String suggestmsg ;			//推荐的提示消息
-	
-	private String othersuggestmsg ;			//成功命中结果以后的 推荐消息
+
+	//启用外部机器人
+	private boolean enableother ;
+	//外部机器人优先
+	private boolean otherfirst ;
+	//外部机器人URL
+	private String otherurl ;
+	//外部机器人启用SSL
+	private boolean otherssl ;
+	//需要登录
+	private boolean otherlogin;
+	//外部机器人APPKey
+	private String otherappkey;
+	//外部机器人AppSec
+	private String otherappsec;
+	//外部机器人参数
+	private String otherparam ;
+	//外部机器人请求方式  ， GET/POST
+	private String othermethod ;
+	//外部机器人输入格式化模板
+	private String othertempletinput ;
+	//外部机器人输出格式化模板
+	private String othertempletoutput ;
+
+	//外部机器人内容URL
+	private String oqrdetailurl ;
+	//外部机器人详情输入格式化模板
+	private String oqrdetailinput ;
+	//外部机器人详情输出格式化模板
+	private String oqrdetailoutput ;
+
+	//启用推荐
+	private boolean enablesuggest ;
+	//推荐的提示消息
+	private String suggestmsg ;
+
+	//成功命中结果以后的 推荐消息
+	private String othersuggestmsg ;
 	
 	private boolean enableask = false;
 	private boolean askfirst = false;
@@ -70,16 +87,25 @@ public class AiConfig implements java.io.Serializable{
 	private boolean scenefirst = false;
 	private boolean enablekeyword = false;
 	private int keywordnum = 5;
-	
-	private boolean askqs ;	//询问访客是否解决问题
-	private int asktimes ;	//最长多久开始询问 默认 120秒（访客空闲时间超过120秒即断开链接）
-	private String asktipmsg ;//询问访客的文本 ， 例如：您的问题是否已经解决？
-	private String resolved ;	//已解决的提示文本
-	private String unresolved ;	//未解决的提示文本
-	private boolean redirectagent ;	//跳转到人工坐席
-	private String redirecturl ;	//跳转到其他URL
-	private boolean selectskill ;	//跳转到人工坐席之前开启选择技能组
-	private String selectskillmsg ;	//选择技能组的提示信息
+
+	//询问访客是否解决问题
+	private boolean askqs ;
+	//最长多久开始询问 默认 120秒（访客空闲时间超过120秒即断开链接）
+	private int asktimes ;
+	//询问访客的文本 ， 例如：您的问题是否已经解决？
+	private String asktipmsg ;
+	//已解决的提示文本
+	private String resolved ;
+	//未解决的提示文本
+	private String unresolved ;
+	//跳转到人工坐席
+	private boolean redirectagent ;
+	//跳转到其他URL
+	private String redirecturl ;
+	//跳转到人工坐席之前开启选择技能组
+	private boolean selectskill ;
+	//选择技能组的提示信息
+	private String selectskillmsg ;
 	
 	private String noresultmsg ;
 	

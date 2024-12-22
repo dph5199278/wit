@@ -74,7 +74,8 @@ public class UserProxy {
             return msg;
         } else {
             // 此时 msg 是 new_user_success
-            user.setSuperadmin(false); // 不支持创建第二个系统管理员
+            // 不支持创建第二个系统管理员
+            user.setSuperadmin(false);
 
             if (StringUtils.isNotBlank(user.getPassword())) {
                 user.setPassword(Md5Utils.doubleMd5(user.getPassword()));

@@ -39,30 +39,47 @@ public class AgentStatus implements java.io.Serializable, Comparable<AgentStatus
      */
     private static final long serialVersionUID = 5883426846142132613L;
 
-    private String id;                     // 坐席ID
-    private String agentno;                // 坐席号码
-    private Date logindate;                // 登陆时间
-    private String status = MainContext.AgentStatusEnum.NOTREADY.toString();        //坐席状态
-    private String orgi;                   // 租户ID
-    private String agentserviceid;         // 会话ID
-    private int serusernum = 10;           // 最大服务用户数量
+    // 坐席ID
+    private String id;
+    // 坐席号码
+    private String agentno;
+    // 登陆时间
+    private Date logindate;
+    //坐席状态
+    private String status = MainContext.AgentStatusEnum.NOTREADY.toString();
+    // 租户ID
+    private String orgi;
+    // 会话ID
+    private String agentserviceid;
+    // 最大服务用户数量
+    private int serusernum = 10;
 
-    private boolean busy;                  // 是否忙
-    private boolean connected;             // 是否连接，临时字段，不存储，代表socketio是否连接
+    // 是否忙
+    private boolean busy;
+    // 是否连接，临时字段，不存储，代表socketio是否连接
+    private boolean connected;
 
     private Date createtime = new Date();
-    private int users;                     // 已接入的 用户数量
+    // 已接入的 用户数量
+    private int users;
     @SuppressWarnings("unused")
-    private int maxusers;                  // 最大允许接入的用户数量
+    // 最大允许接入的用户数量
+    private int maxusers;
     @SuppressWarnings("unused")
-    private int initmaxusers;              // 最大允许接入的用户数量
-    private boolean pulluser;              // 是否允许坐席自己拉取用户
-    private String username;               // 坐席用户名
-    private String name;                   // 坐席姓名
+    // 最大允许接入的用户数量
+    private int initmaxusers;
+    // 是否允许坐席自己拉取用户
+    private boolean pulluser;
+    // 坐席用户名
+    private String username;
+    // 坐席姓名
+    private String name;
 
-    private Date updatetime;               // 最后一次状态更新时间，通常是 坐席 接入新客户的时候更新
+    // 最后一次状态更新时间，通常是 坐席 接入新客户的时候更新
+    private Date updatetime;
 
-    private String workstatus;             // 工作状态 ， 坐席的工作状态，计算绩效用 ， 示忙、示闲对应的更详细的 工作状态
+    // 工作状态 ， 坐席的工作状态，计算绩效用 ， 示忙、示闲对应的更详细的 工作状态
+    private String workstatus;
 
     private String userid;
 

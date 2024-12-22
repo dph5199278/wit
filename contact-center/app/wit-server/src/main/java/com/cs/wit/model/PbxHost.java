@@ -37,26 +37,36 @@ public class PbxHost implements java.io.Serializable{
 	private static final long serialVersionUID = 3932323765657445180L;
 	private String id;
 	private String name;
-	private String hostname ;	//host name
-	private String ipaddr ;		//IP
+	//host name
+	private String hostname ;
+	//IP
+	private String ipaddr ;
 	private int port ;
-	private String password ;	//pbx host password
+	//pbx host password
+	private String password ;
 	
 	private boolean connected ;
 	
 	private boolean callcenter ;
 
 	
-	private String recordpath ;	//录音文件存储路径
+	//录音文件存储路径
+	private String recordpath ;
 	
-	private String asrrecordpath ;	//ASR结果文件存储路径
-	private String ttsrecordpath ;	//TTS结果文件存储路径
-	private String ivrpath ;	//IVR文件路径
-	private String fspath ;		//FreeSwitch安装路径
-	private String device ;	//设备厂商
+	//ASR结果文件存储路径
+	private String asrrecordpath ;
+	//TTS结果文件存储路径
+	private String ttsrecordpath ;
+	//IVR文件路径
+	private String ivrpath ;
+	//FreeSwitch安装路径
+	private String fspath ;
+	//设备厂商
+	private String device ;
 	
 	
-	private boolean afterprocess ;	//启用坐席后处理功能
+	//启用坐席后处理功能
+	private boolean afterprocess ;
 	
 	private String orgi;
 	
@@ -64,9 +74,11 @@ public class PbxHost implements java.io.Serializable{
 	
 	private boolean sipautoanswer ;
 	
-	private String abscodec = "PCMA";	//默认的 呼叫编码 
+	//默认的 呼叫编码
+	private String abscodec = "PCMA";
 	
-	private String callbacktype ;	//回呼送号 号码
+	//回呼送号 号码
+	private String callbacktype ;
 	private String callbacknumber ;
 	
 	private String creater ;
@@ -75,16 +87,24 @@ public class PbxHost implements java.io.Serializable{
 	private String aiid ;
 	private String sceneid ;
 	
-	private String welcomemsg ;		//欢迎提示语
-	private String waitmsg ;		//等待提示语
-	private String tipmessage ;		//识别完成提示语
+	//欢迎提示语
+	private String welcomemsg ;
+	//等待提示语
+	private String waitmsg ;
+	//识别完成提示语
+	private String tipmessage ;
 	
-	private boolean enablewebrtc ;	//启用WEBRTC
-	private String webrtcaddress; 	//WebRTC访问地址
-	private String webrtcport; 		//WebRTC端口
-	private boolean webrtcssl;		//启用SSL
+	//启用WEBRTC
+	private boolean enablewebrtc ;
+	//WebRTC访问地址
+	private String webrtcaddress;
+	//WebRTC端口
+	private String webrtcport;
+	//启用SSL
+	private boolean webrtcssl;
 	
-	private boolean dissipphone ;	//外呼的时候，是否隐藏SIP话机上的号码
+	//外呼的时候，是否隐藏SIP话机上的号码
+	private boolean dissipphone ;
 	
 	
 	private Date createtime = new Date();

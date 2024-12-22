@@ -148,7 +148,8 @@ public class ChatbotProxy {
         data.setChatype(chatype);
         data.setChannel(channel);
         data.setMsgtype(msgtype);
-        data.setUsession(data.getUserid());                //agentUser作为 session id
+        //agentUser作为 session id
+        data.setUsession(data.getUserid());
         data.setCalltype(direction);
         data.setUpdatetime(System.currentTimeMillis());
         return createMessage(data, direction);

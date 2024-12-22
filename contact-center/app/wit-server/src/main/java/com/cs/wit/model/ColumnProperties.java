@@ -34,24 +34,41 @@ public class ColumnProperties implements java.io.Serializable {
 	private String id;
 	private String modelid;
 	private String dataid ;
-	private String dataname ; 	//如果存放的是指标，则此处为指标名称
+	//如果存放的是指标，则此处为指标名称
+	private String dataname ;
 	private String title ;
-	private String colname;//列标题
-	private String border;//边框
-	private String width;//列宽度
-	private String format;//列数据格式化
-	private String decimalcount;//小数位数
-	private String sepsymbol;//分隔符
-	private String font;///文字大小
-	private String alignment;//对齐方式
-	private String fontstyle;//字体样式
-	private String fontcolor;//字体颜色
-	private String cur;//货币
-	private String timeformat;//日期时间
-	private String hyp;//超链接
-	private String prefix;//前缀
-	private String suffix;//后缀
-	private String paramname ;//参数名
+	//列标题
+	private String colname;
+	//边框
+	private String border;
+	//列宽度
+	private String width;
+	//列数据格式化
+	private String format;
+	//小数位数
+	private String decimalcount;
+	//分隔符
+	private String sepsymbol;
+	///文字大小
+	private String font;
+	//对齐方式
+	private String alignment;
+	//字体样式
+	private String fontstyle;
+	//字体颜色
+	private String fontcolor;
+	//货币
+	private String cur;
+	//日期时间
+	private String timeformat;
+	//超链接
+	private String hyp;
+	//前缀
+	private String prefix;
+	//后缀
+	private String suffix;
+	//参数名
+	private String paramname ;
 	private String orgi;
 	private int sortindex;
 	

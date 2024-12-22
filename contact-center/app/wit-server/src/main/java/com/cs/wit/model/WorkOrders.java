@@ -50,32 +50,52 @@ public class WorkOrders extends ESBean implements UKAgg {
 
     private String id = MainUtils.getUUID();
 
-    private String orderno;    //工单编号
+    //工单编号
+    private String orderno;
     private String sessionid;
 
-    private String title;        //标题
-    private String content;    //内容
-    private float price;        //问题价格
-    private String keyword;    //关键词
-    private String summary;    //摘要
-    private boolean anonymous;        //修改功能 未 是否有上传附件
+    //标题
+    private String title;
+    //内容
+    private String content;
+    //问题价格
+    private float price;
+    //关键词
+    private String keyword;
+    //摘要
+    private String summary;
+    //修改功能 未 是否有上传附件
+    private boolean anonymous;
 
-    private boolean top;        //是否置顶
-    private boolean essence;    //是否精华
-    private boolean accept;    //是否已采纳最佳答案
-    private boolean finish;    //结贴
+    //是否置顶
+    private boolean top;
+    //是否精华
+    private boolean essence;
+    //是否已采纳最佳答案
+    private boolean accept;
+    //结贴
+    private boolean finish;
 
-    private int answers;        //回答数量
+    //回答数量
+    private int answers;
 
 
-    private int views;            //阅读数量
-    private int followers;        //关注数量
-    private int collections;    //收藏数量
-    private int comments;        //评论数量
-    private boolean frommobile;    //是否移动端提问
-    private String status;    //	状态
-    private String wotype;    //工单类型
-    private boolean datastatus;    //数据状态，是否删除 , 逻辑删除
+    //阅读数量
+    private int views;
+    //关注数量
+    private int followers;
+    //收藏数量
+    private int collections;
+    //评论数量
+    private int comments;
+    //是否移动端提问
+    private boolean frommobile;
+    //	状态
+    private String status;
+    //工单类型
+    private String wotype;
+    //数据状态，是否删除 , 逻辑删除
+    private boolean datastatus;
 
     private String taskid;
     private String orderid;
@@ -85,23 +105,29 @@ public class WorkOrders extends ESBean implements UKAgg {
 
     private String ani;
 
-    private String cate;    //工单分类
+    //工单分类
+    private String cate;
 
-    private String priority;    //优先级
+    //优先级
+    private String priority;
 
     private Contacts contacts;
     private String cusid;
 
-    private String initiator;    //发起人 ， 可以是多人发起的工单
+    //发起人 ， 可以是多人发起的工单
+    private String initiator;
 
     private String bpmid;
 
     private String tags;
 
-    private String accdept;//	受理部门
-    private String accuser;    //受理人
+    //	受理部门
+    private String accdept;
+    //受理人
+    private String accuser;
 
-    private boolean assigned;    //已分配
+    //已分配
+    private boolean assigned;
 
     private String username;
     private String orgi;
@@ -117,21 +143,24 @@ public class WorkOrders extends ESBean implements UKAgg {
     private String memo;
 
 
-    private String organ;        //
-    private String agent;        //
+    private String organ;
+    private String agent;
 
     private String shares;
 
     private String skill;
     private int rowcount;
-    private String key;        //变更用处，修改为 OrderID
+    //变更用处，修改为 OrderID
+    private String key;
 
 
     private User user;
 
-    private User current;    //当前处理人
+    //当前处理人
+    private User current;
 
-    private Organ currentorgan;    //处理部门
+    //处理部门
+    private Organ currentorgan;
 
     private Favorites fav;
 

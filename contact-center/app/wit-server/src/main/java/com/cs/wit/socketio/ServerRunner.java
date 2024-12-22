@@ -107,7 +107,8 @@ public class ServerRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         server.start();
-        MainContext.setIMServerStatus(true);    // IMServer 启动成功
+        // IMServer 启动成功
+        MainContext.setIMServerStatus(true);
     }
 
     @PreDestroy

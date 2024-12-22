@@ -44,10 +44,13 @@ public class RouterRules implements java.io.Serializable{
 	private boolean allow ;
 	private boolean falsebreak ;
 	
-	private int routerinx ;		//路由规则 顺序
+	//路由规则 顺序
+	private int routerinx ;
 	
-	private String routercontent ;	//路由规则内容
-	private String field = "destination_number" ;			//字段 , 默认值destination_number
+	//路由规则内容
+	private String routercontent ;
+	//字段 , 默认值destination_number
+	private String field = "destination_number" ;
 	
 	@Id
 	@Column(length = 32)

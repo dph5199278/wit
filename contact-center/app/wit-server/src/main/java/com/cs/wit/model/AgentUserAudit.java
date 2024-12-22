@@ -24,9 +24,12 @@ import java.util.HashMap;
  */
 public class AgentUserAudit implements Serializable {
 
-    private String agentUserId;                  // AgentUserId
-    private HashMap<String, String> subscribers; // 订阅者 userId:权限
-    private String orgi;                         // 租户ID
+    // AgentUserId
+    private String agentUserId;
+    // 订阅者 userId:权限
+    private HashMap<String, String> subscribers;
+    // 租户ID
+    private String orgi;
 
 
     public AgentUserAudit(final String orgi, final String agentUserId, final HashMap<String, String> subscribers) {
@@ -66,7 +69,8 @@ public class AgentUserAudit implements Serializable {
      * @param userId
      */
     public void addSubscriber(final String userId) {
-        addSubscriber(userId, "RST"); // 具备RST权限
+        // 具备RST权限
+        addSubscriber(userId, "RST");
     }
 
 

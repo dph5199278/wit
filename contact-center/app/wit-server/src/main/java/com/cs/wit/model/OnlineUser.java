@@ -81,8 +81,10 @@ public class OnlineUser implements java.io.Serializable  {
     private String contactsid;
 
 
-    private int invitetimes; // 邀请次数
-    private String invitestatus; // 邀请状态
+    // 邀请次数
+    private int invitetimes;
+    // 邀请状态
+    private String invitestatus;
     private int refusetimes;
 
     private Contacts contacts;

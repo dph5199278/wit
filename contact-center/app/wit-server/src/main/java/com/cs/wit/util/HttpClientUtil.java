@@ -141,7 +141,8 @@ public class HttpClientUtil {
     public static String doPost(String apiUrl, String json) throws IOException {
         HttpPost httpPost = new HttpPost(apiUrl);
         httpPost.setConfig(requestConfig);
-        StringEntity stringEntity = new StringEntity(json, "UTF-8");//解决中文乱码问题
+        //解决中文乱码问题
+        StringEntity stringEntity = new StringEntity(json, "UTF-8");
         stringEntity.setContentEncoding("UTF-8");
         stringEntity.setContentType("application/json");
         httpPost.setEntity(stringEntity);
@@ -164,7 +165,8 @@ public class HttpClientUtil {
         HttpPost httpPost = new HttpPost(apiUrl);
         httpPost.setHeader("Authorization", "Basic Y2hhdG9wZXJhOjEyMw==");
         httpPost.setConfig(requestConfig);
-        StringEntity stringEntity = new StringEntity(json,"UTF-8");//解决中文乱码问题
+        //解决中文乱码问题
+        StringEntity stringEntity = new StringEntity(json,"UTF-8");
         stringEntity.setContentEncoding("UTF-8");
         stringEntity.setContentType("application/json");
         httpPost.setEntity(stringEntity);
@@ -186,7 +188,8 @@ public class HttpClientUtil {
     public static String doPost(String apiUrl, String[] json) throws IOException {
         HttpPost httpPost = new HttpPost(apiUrl);
         httpPost.setConfig(requestConfig);
-        StringEntity stringEntity = new StringEntity(String.valueOf(json), "UTF-8");//解决中文乱码问题
+        //解决中文乱码问题
+        StringEntity stringEntity = new StringEntity(String.valueOf(json), "UTF-8");
         stringEntity.setContentEncoding("UTF-8");
         stringEntity.setContentType("application/json");
         httpPost.setEntity(stringEntity);
@@ -262,7 +265,8 @@ public class HttpClientUtil {
   
         try {  
             httpPost.setConfig(requestConfig);  
-            StringEntity stringEntity = new StringEntity(json.toString(),"UTF-8");//解决中文乱码问题  
+            //解决中文乱码问题  
+            StringEntity stringEntity = new StringEntity(json.toString(),"UTF-8");
             stringEntity.setContentEncoding("UTF-8");  
             stringEntity.setContentType("application/json");  
             httpPost.setEntity(stringEntity);  

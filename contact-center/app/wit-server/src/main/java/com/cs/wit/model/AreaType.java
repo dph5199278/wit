@@ -42,10 +42,12 @@ public class AreaType implements java.io.Serializable{
 	private String creater;
 	private String username ;
 	
-	private String area	;//分类备注描述信息
+	//分类备注描述信息
+	private String area	;
 	
 	private Date updatetime ;
-	private String parentid ;		//父级ID
+	//父级ID
+	private String parentid ;
 	private String orgi ;
 	
 	@Id

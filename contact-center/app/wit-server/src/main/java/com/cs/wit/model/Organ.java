@@ -48,7 +48,8 @@ public class Organ implements java.io.Serializable {
     private String username;
     private Date updatetime;
     private String orgi;
-    private String orgid;    // 企业ID
+    // 企业ID
+    private String orgid;
 
     @Id
     @Column(length = 32)

@@ -493,7 +493,8 @@ public class ACDAgentService {
             if (agentStatus == null) {
                 // 没有满足条件的坐席，留言
                 agentService.setLeavemsg(true);
-                agentService.setLeavemsgstatus(MainContext.LeaveMsgStatus.NOTPROCESS.toString()); //未处理的留言
+                //未处理的留言
+                agentService.setLeavemsgstatus(MainContext.LeaveMsgStatus.NOTPROCESS.toString());
             }
 
             if (onlineUser != null) {

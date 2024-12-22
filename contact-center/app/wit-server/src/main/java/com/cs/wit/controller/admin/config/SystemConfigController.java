@@ -222,7 +222,8 @@ public class SystemConfigController extends Handler {
                     sslFilePath.getParentFile().mkdirs();
                 }
                 Properties prop = new Properties();
-                FileOutputStream oFile = new FileOutputStream(sslFilePath);//true表示追加打开
+                //true表示追加打开
+                FileOutputStream oFile = new FileOutputStream(sslFilePath);
                 prop.setProperty("key-store-password", encryptor.encryption(systemConfig.getJkspassword()));
                 prop.setProperty("key-store", systemConfig.getJksfile());
                 prop.store(oFile, "SSL Properties File");

@@ -136,7 +136,8 @@ public class MediaController extends Handler {
             sf.setData(jpaBlobHelper.createBlob(multipart.getInputStream(), multipart.getSize()));
             streamingFileRes.save(sf);
             String fileURL = "/res/image?id=" + fileid;
-            notify = new UploadStatus("0", fileURL); //图片直接发送给 客户，不用返回
+            //图片直接发送给 客户，不用返回
+            notify = new UploadStatus("0", fileURL);
         } else {
             notify = new UploadStatus("请选择图片文件");
         }

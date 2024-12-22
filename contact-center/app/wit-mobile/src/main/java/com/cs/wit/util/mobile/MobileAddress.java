@@ -18,15 +18,23 @@ package com.cs.wit.util.mobile;
 
 public class MobileAddress {
     private static final String ZH = "中国";
-	private String id ;			//ID
-	private String code ;		//号段编码
-	private String country ;	//国家
-	private String province ;	//省份
-	private String city ;		//城市
-	private String isp ;		//运营商
+	//ID
+	private String id ;
+	//号段编码
+	private String code ;
+	//国家
+	private String country ;
+	//省份
+	private String province ;
+	//城市
+	private String city ;
+	//运营商
+	private String isp ;
 	
-	private String areacode ;	//区号
-	private String zipcode ;	//邮编
+	//区号
+	private String areacode ;
+	//邮编
+	private String zipcode ;
 	
 	public MobileAddress(String code , String areacode , String province , String city , String isp){
 		this.code = code ;

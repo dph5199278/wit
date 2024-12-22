@@ -37,20 +37,29 @@ public class Extention implements java.io.Serializable{
 	private static final long serialVersionUID = 3932323765657445180L;
 	private String id;
 	private String extention;
-	private String hostid ;	//Or IP
+	//Or IP
+	private String hostid ;
 	private String agentno;
-	private String password ;	//pbx host password
+	//pbx host password
+	private String password ;
 	
-	private String extype ;		//分机类型 ： 直线分机 : IVR分机：组分机 ： 队列分机 ：会议分机
-	private String subtype = MainContext.DTMFType.SATISF.toString() ;	//二级类型，如果是 IVR分机，则显示IVR类型：满意度调查，密码，身份证号 ， 银行卡号
+	//分机类型 ： 直线分机 : IVR分机：组分机 ： 队列分机 ：会议分机
+	private String extype ;
+	//二级类型，如果是 IVR分机，则显示IVR类型：满意度调查，密码，身份证号 ， 银行卡号
+	private String subtype = MainContext.DTMFType.SATISF.toString() ;
 	
-	private boolean callout;	//是否允许外呼 OutBound
-	private boolean playnum ;	//是否播报工号
+	//是否允许外呼 OutBound
+	private boolean callout;
+	//是否播报工号
+	private boolean playnum ;
 	
-	private boolean record ;	//是否录音
+	//是否录音
+	private boolean record ;
 	
-	private String description ;	//描述信息·
-	private String mediapath ;		//播报工号录音
+	//描述信息·
+	private String description ;
+	//播报工号录音
+	private String mediapath ;
 	
 	private String siptrunk ;
 	
@@ -59,18 +68,27 @@ public class Extention implements java.io.Serializable{
 	private String aiid ;
 	private String sceneid ;
 	
-	private String welcomemsg ;		//欢迎提示语
-	private String waitmsg ;		//等待提示语
-	private String tipmessage ;		//识别完成提示语
+	//欢迎提示语
+	private String welcomemsg ;
+	//等待提示语
+	private String waitmsg ;
+	//识别完成提示语
+	private String tipmessage ;
 	
-	private String errormessage ;		//异常完成提示语
+	//异常完成提示语
+	private String errormessage ;
 	
-	private boolean enablewebrtc ;	//启用WEBRTC
+	//启用WEBRTC
+	private boolean enablewebrtc ;
 	
-	private String bustype;//业务类型（电销/问卷）
-	private String proid;//（产品ID）
-	private String queid;//（问卷ID）
-	private String aitype;//机器人类型（smartai/businessai）
+	//业务类型（电销/问卷）
+	private String bustype;
+	//（产品ID）
+	private String proid;
+	//（问卷ID）
+	private String queid;
+	//机器人类型（smartai/businessai）
+	private String aitype;
 	
 	private String orgi;
 	private String creater ;

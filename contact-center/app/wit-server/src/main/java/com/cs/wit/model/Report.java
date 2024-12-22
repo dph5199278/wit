@@ -43,27 +43,39 @@ public class Report extends ESBean implements java.io.Serializable {
 	private static final long serialVersionUID = -5781401948807231526L;
 	private String id = MainUtils.getUUID();
 	private String name;
-	private String reporttype; //0 代表动态报表  1 代表自助查询报表
+	//0 代表动态报表  1 代表自助查询报表
+	private String reporttype;
 	private String viewtype;
-	private String code;         //变更用处，修改为 报表code
+	//变更用处，修改为 报表code
+	private String code;
 	private String orgi;
-	private int objectcount;    //用来标记报表默认打开是否加载数据
-	private String dicid;    //目录ID
+	//用来标记报表默认打开是否加载数据
+	private int objectcount;
+	//目录ID
+	private String dicid;
 	private String description;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
 	private Date createtime = new Date();
-	private String html;            //改变用处，用于存储 是否允许里面访问移动端报表
+	//改变用处，用于存储 是否允许里面访问移动端报表
+	private String html;
 	private String status;
-	private String rolename;        //变更用处，标记为 动态报表 默认为 null 或者 0 都是 自助查询，1表示自定义报表
-	private String userid;            //变更用处，标记为 仪表盘的 属主ID
-	private String blacklist;        //变更用处，用于区分是否是  仪表盘
-	private String reportpackage;    //报表路径
-	private String useacl;            //启用权限控制    ,  变更用处，  用于控制是否覆盖上级目录的权限
-	private String reportmodel;    //自助查询的是 保存 Model 的ID
+	//变更用处，标记为 动态报表 默认为 null 或者 0 都是 自助查询，1表示自定义报表
+	private String rolename;
+	//变更用处，标记为 仪表盘的 属主ID
+	private String userid;
+	//变更用处，用于区分是否是  仪表盘
+	private String blacklist;
+	//报表路径
+	private String reportpackage;
+	//启用权限控制    ,  变更用处，  用于控制是否覆盖上级目录的权限
+	private String useacl;
+	//自助查询的是 保存 Model 的ID
+	private String reportmodel;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
 	@Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
-	private Date updatetime;        //修改时间
+	//修改时间
+	private Date updatetime;
 
 
 	private boolean datastatus;
@@ -73,10 +85,14 @@ public class Report extends ESBean implements java.io.Serializable {
 	private String tabtype;
 	private String username;
 	private String useremail;
-	private boolean cache;//1启用缓存，0不启用
-	private String extparam;        //默认使用 player 打开
-	private String targetreport;//reporttype=shortcuts 的时候的目标报表
-	private String source ;			//报表来源，如果是在  事件设计器里创建的 报表，则此字段不为空，无法保存
+	//1启用缓存，0不启用
+	private boolean cache;
+	//默认使用 player 打开
+	private String extparam;
+	//reporttype=shortcuts 的时候的目标报表
+	private String targetreport;
+	//报表来源，如果是在  事件设计器里创建的 报表，则此字段不为空，无法保存
+	private String source ;
 
 	private List<ReportModel> reportModels = new ArrayList<ReportModel>();
 

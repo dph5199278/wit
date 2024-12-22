@@ -28,28 +28,37 @@ public class Level implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = -4752204091160546556L;
 	private String name;
-	private String formatName ;			//定义维度钻取列的时候使用
+	//定义维度钻取列的时候使用
+	private String formatName ;
 	private String nameValue ;
 	private Level parent;
 	private String rename ;
 	private String code ;
 	private int depth = 0;
 	private Object value;
-	private String leveltype; // row , col
+	// row , col
+	private String leveltype;
 	private int colspan = 0;
 	private int rowspan = 0;
 	private String dimname ;
 	private List<Level> childeren;
 	private List<List<Level>> title;
-	private boolean total = false;		//是否是汇总行
-	private boolean first ;		//汇总行位置， 首个/末个
+	//是否是汇总行
+	private boolean total = false;
+	//汇总行位置， 首个/末个
+	private boolean first ;
 	private int index ;
-	private String level ;		//Uni Name
-	private String url ;		//定义钻取使用
-	private String target ;		//定义钻取使用
-	private String description; //标题描述
+	//Uni Name
+	private String level ;
+	//定义钻取使用
+	private String url ;
+	//定义钻取使用
+	private String target ;
+	//标题描述
+	private String description;
 	
-	private String model	;	//区分 数据来源用处 ， 事件设计器里用到的，别处暂时未用到 ， 不序列化
+	//区分 数据来源用处 ， 事件设计器里用到的，别处暂时未用到 ， 不序列化
+	private String model	;
 	
 	private List<ValueData> valueData ;
 	//private List<String> firstTitle ;

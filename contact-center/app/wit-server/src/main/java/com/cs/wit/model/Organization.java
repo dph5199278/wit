@@ -43,10 +43,14 @@ public class Organization implements java.io.Serializable {
     private String id;
     private String name;
     private String code;
-    private String orgtype;                  // 机构类型
-    private String orgscale;                 // 规模
-    private String orgindustry;              // 行业
-    private Date createtime = new Date();    // 创建时间
+    // 机构类型
+    private String orgtype;
+    // 规模
+    private String orgscale;
+    // 行业
+    private String orgindustry;
+    // 创建时间
+    private Date createtime = new Date();
     private String logo;
     private String memo;
 

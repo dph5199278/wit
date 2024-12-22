@@ -50,6 +50,7 @@ public interface AgentServiceRepository extends JpaRepository<AgentService, Stri
 
     List<AgentService> findByUseridAndOrgiAndStatus(String userid, String orgi, String status, Sort sort);
 
-    Page<AgentService> findAll(Specification<AgentService> spec, Pageable pageable);  //分页按条件查询
+    //分页按条件查询
+    Page<AgentService> findAll(Specification<AgentService> spec, Pageable pageable);
 
 }

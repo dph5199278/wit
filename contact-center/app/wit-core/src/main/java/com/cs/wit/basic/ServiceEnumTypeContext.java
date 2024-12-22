@@ -63,12 +63,18 @@ public class ServiceEnumTypeContext {
 
   public enum CallServiceStatus {
     INQUENE("就绪", 1),
-    RING("振铃", 2),            //振铃
-    INCALL("应答", 3),            //应答
-    BRIDGE("桥接", 4),            //桥接
-    HOLD("已挂起", 5),            //已挂起
-    HANGUP("已挂机", 6),           //已挂机
-    OFFLINE("离线", 7);            //离线
+    //振铃
+    RING("振铃", 2),
+    //应答
+    INCALL("应答", 3),
+    //桥接
+    BRIDGE("桥接", 4),
+    //已挂起
+    HOLD("已挂起", 5),
+    //已挂机
+    HANGUP("已挂机", 6),
+    //离线
+    OFFLINE("离线", 7);
 
     private final String name;
     private final int index;
