@@ -295,9 +295,9 @@ public class ESDataExchangeImpl {
         int size = page.getPageSize() * (page.getPageNumber() + 1);
 
         Aggregation aggregition = new Aggregation.Builder()
-            .terms(AggregationBuilders.terms().name(aggField).field(aggField).size(size).build())
-            .aggregations("apstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.name("apstatus").field("apstatus")))
-            .aggregations("callstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.name("callstatus").field("callstatus")))
+            .terms(AggregationBuilders.terms().field(aggField).size(size).build())
+            .aggregations("apstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.field("apstatus")))
+            .aggregations("callstatus", AggregationBuilders.terms(aggBuilder -> aggBuilder.field("callstatus")))
             .build();
 
         NativeQuery query = NativeQuery.builder()

@@ -19,7 +19,7 @@ package com.cs.wit.persistence.es;
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
-import co.elastic.clients.elasticsearch._types.query_dsl.RangeQuery;
+import co.elastic.clients.elasticsearch._types.query_dsl.TermRangeQuery;
 import com.cs.wit.model.Contacts;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.UserRepository;
@@ -83,17 +83,17 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
         } else {
             boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
+        TermRangeQuery.Builder termRangeQuery = new TermRangeQuery.Builder().field("createtime");
         if (begin != null) {
-            rangeQuery.from(String.valueOf(begin.getTime()));
+            termRangeQuery.from(String.valueOf(begin.getTime()));
         }
         if (end != null) {
-            rangeQuery.to(String.valueOf(end.getTime()));
+            termRangeQuery.to(String.valueOf(end.getTime()));
         } else {
-            rangeQuery.to(String.valueOf(System.currentTimeMillis()));
+            termRangeQuery.to(String.valueOf(System.currentTimeMillis()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery.build()._toQuery());
+            boolQueryBuilder.must(QueryBuilders.range().term(termRangeQuery.build()).build()._toQuery());
         }
         if (StringUtils.isNotBlank(q)) {
             boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
@@ -131,17 +131,17 @@ public class ContactsRepositoryImpl implements ContactsEsCommonRepository {
         } else {
             boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
+        TermRangeQuery.Builder termRangeQuery = new TermRangeQuery.Builder().field("createtime");
         if (begin != null) {
-            rangeQuery.from(String.valueOf(begin.getTime()));
+            termRangeQuery.from(String.valueOf(begin.getTime()));
         }
         if (end != null) {
-            rangeQuery.to(String.valueOf(end.getTime()));
+            termRangeQuery.to(String.valueOf(end.getTime()));
         } else {
-            rangeQuery.to(String.valueOf(System.currentTimeMillis()));
+            termRangeQuery.to(String.valueOf(System.currentTimeMillis()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery.build()._toQuery());
+            boolQueryBuilder.must(QueryBuilders.range().term(termRangeQuery.build()).build()._toQuery());
         }
         if (StringUtils.isNotBlank(q)) {
             boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());

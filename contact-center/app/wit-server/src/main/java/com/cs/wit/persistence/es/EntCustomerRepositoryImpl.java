@@ -16,6 +16,7 @@
  */
 package com.cs.wit.persistence.es;
 
+import co.elastic.clients.elasticsearch._types.query_dsl.TermRangeQuery;
 import com.cs.wit.model.EntCustomer;
 import com.cs.wit.model.User;
 import com.cs.wit.persistence.repository.UserRepository;
@@ -88,17 +89,17 @@ public class EntCustomerRepositoryImpl implements EntCustomerEsCommonRepository 
         } else {
             boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
+        TermRangeQuery.Builder termRangeQuery = new TermRangeQuery.Builder().field("createtime");
         if (begin != null) {
-            rangeQuery.from(String.valueOf(begin.getTime()));
+            termRangeQuery.from(String.valueOf(begin.getTime()));
         }
         if (end != null) {
-            rangeQuery.to(String.valueOf(end.getTime()));
+            termRangeQuery.to(String.valueOf(end.getTime()));
         } else {
-            rangeQuery.to(String.valueOf(System.currentTimeMillis()));
+            termRangeQuery.to(String.valueOf(System.currentTimeMillis()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery.build()._toQuery());
+            boolQueryBuilder.must(QueryBuilders.range().term(termRangeQuery.build()).build()._toQuery());
         }
         if (!StringUtils.isBlank(q)) {
             boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());
@@ -120,17 +121,17 @@ public class EntCustomerRepositoryImpl implements EntCustomerEsCommonRepository 
         } else {
             boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("datastatus").value(Boolean.FALSE.toString())));
         }
-        RangeQuery.Builder rangeQuery = QueryBuilders.range().field("createtime");
+        TermRangeQuery.Builder termRangeQuery = new TermRangeQuery.Builder().field("createtime");
         if (begin != null) {
-            rangeQuery.from(DATE_FORMAT.format(begin));
+            termRangeQuery.from(DATE_FORMAT.format(begin));
         }
         if (end != null) {
-            rangeQuery.to(DATE_FORMAT.format(end));
+            termRangeQuery.to(DATE_FORMAT.format(end));
         } else {
-            rangeQuery.to(DATE_FORMAT.format(new Date()));
+            termRangeQuery.to(DATE_FORMAT.format(new Date()));
         }
         if (begin != null || end != null) {
-            boolQueryBuilder.must(rangeQuery.build()._toQuery());
+            boolQueryBuilder.must(QueryBuilders.range().term(termRangeQuery.build()).build()._toQuery());
         }
         if (!StringUtils.isBlank(q)) {
             boolQueryBuilder.must(QueryBuilders.queryString().query(q).defaultOperator(Operator.And).build()._toQuery());

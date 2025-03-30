@@ -19,6 +19,7 @@ package com.cs.wit.persistence.es;
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
+import co.elastic.clients.elasticsearch._types.query_dsl.TermRangeQuery;
 import com.cs.wit.model.Topic;
 import com.cs.wit.util.es.SearchTools;
 import java.util.ArrayList;
@@ -86,11 +87,11 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         }
 
         BoolQuery.Builder beginFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("begintime").build()._toQuery())
-            .should(QueryBuilders.range().field("begintime").to(
-                String.valueOf(System.currentTimeMillis())).build()._toQuery());
+            .should(QueryBuilders.range().term(new TermRangeQuery.Builder().field("begintime").to(
+                String.valueOf(System.currentTimeMillis())).build()).build()._toQuery());
         BoolQuery.Builder endFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("endtime").build()._toQuery())
-            .should(QueryBuilders.range().field("endtime").from(
-                String.valueOf(System.currentTimeMillis())).build()._toQuery());
+            .should(QueryBuilders.range().term(new TermRangeQuery.Builder().field("endtime").from(
+            String.valueOf(System.currentTimeMillis())).build()).build()._toQuery());
 
         NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
             .withFilter(QueryBuilders.bool().must(beginFilter.build()._toQuery()).must(endFilter.build()._toQuery()).build()._toQuery())
@@ -141,9 +142,11 @@ public class TopicRepositoryImpl implements TopicEsCommonRepository {
         Page<Topic> pages = null;
 
         BoolQuery.Builder beginFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("begintime").build()._toQuery())
-            .should(QueryBuilders.range().field("begintime").to(String.valueOf(System.currentTimeMillis())).build()._toQuery());
+            .should(QueryBuilders.range().term(new TermRangeQuery.Builder().field("begintime").to(
+                String.valueOf(System.currentTimeMillis())).build()).build()._toQuery());
         BoolQuery.Builder endFilter = QueryBuilders.bool().should(QueryBuilders.exists().field("endtime").build()._toQuery())
-            .should(QueryBuilders.range().field("endtime").from(String.valueOf(System.currentTimeMillis())).build()._toQuery());
+            .should(QueryBuilders.range().term(new TermRangeQuery.Builder().field("endtime").from(
+                String.valueOf(System.currentTimeMillis())).build()).build()._toQuery());
 
         NativeQueryBuilder searchQueryBuilder = new NativeQueryBuilder().withQuery(boolQueryBuilder.build()._toQuery())
             .withFilter(QueryBuilders.bool().must(beginFilter.build()._toQuery()).must(endFilter.build()._toQuery()).build()._toQuery())

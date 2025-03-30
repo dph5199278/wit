@@ -20,6 +20,7 @@ import co.elastic.clients.elasticsearch._types.query_dsl.Operator;
 import co.elastic.clients.elasticsearch._types.query_dsl.Query;
 import co.elastic.clients.elasticsearch._types.query_dsl.QueryBuilders;
 
+import co.elastic.clients.elasticsearch._types.query_dsl.TermRangeQuery;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.FormFilterItem;
@@ -55,16 +56,16 @@ public class SearchTools {
             } else {
                 switch (formFilterItem.getCond()) {
                     case "01":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "02":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "03":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "04":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "05":
                         tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
@@ -116,16 +117,16 @@ public class SearchTools {
             } else {
                 switch (formFilterItem.getCond()) {
                     case "01":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "02":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).from(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "03":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "04":
-                        tempQueryBuilder = QueryBuilders.range().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()._toQuery();
+                        tempQueryBuilder = QueryBuilders.range().term(new TermRangeQuery.Builder().field(formFilterItem.getField()).to(formFilterItem.getValue()).build()).build()._toQuery();
                         break;
                     case "05":
                         tempQueryBuilder = QueryBuilders.term(builder -> builder.field(formFilterItem.getField()).value(formFilterItem.getValue()));
