@@ -96,7 +96,7 @@ services:
       - --lower_case_table_names=1
 
   redis:
-    image: redis:6.2.12
+    image: redis:6.2.17
     environment:
       - REDIS_PASSWORD=${DB_PASSWD:-123456}
     restart: always
