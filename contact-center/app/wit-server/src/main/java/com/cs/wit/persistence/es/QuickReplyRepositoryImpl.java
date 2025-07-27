@@ -34,6 +34,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.client.elc.NativeQueryBuilder;
+import org.springframework.data.elasticsearch.core.query.DeleteQuery;
 import org.springframework.data.elasticsearch.core.query.HighlightQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.query.highlight.Highlight;
@@ -223,7 +224,7 @@ public class QuickReplyRepositoryImpl implements QuickReplyEsCommonRepository {
         boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("orgi").value(orgi)));
         boolQueryBuilder.must(QueryBuilders.term(builder -> builder.field("cate").value(cate)));
         deleteQuery.withQuery(boolQueryBuilder.build()._toQuery());
-        operations.delete(deleteQuery.build(), QuickReply.class);
+        operations.delete(DeleteQuery.builder(deleteQuery.build()).build(), QuickReply.class);
     }
 
     @Override

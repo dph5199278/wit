@@ -64,7 +64,7 @@ services:
       - artemis
 
   artemis:
-    image: apache/activemq-artemis:2.37.0-alpine
+    image: apache/activemq-artemis:2.40.0-alpine
     restart: always
     environment:
       - ARTEMIS_USER=artemis
@@ -108,7 +108,7 @@ services:
   elasticsearch:
     # checkout spring data elasticsearch's document to known which version of es should be used.
     # https://docs.spring.io/spring-data/elasticsearch/reference/elasticsearch/versions.html
-    image: elastic/elasticsearch:8.15.5
+    image: elastic/elasticsearch:8.18.1
     restart: always
     ports:
       - "9200:9200"
