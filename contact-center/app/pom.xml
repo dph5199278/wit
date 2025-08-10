@@ -38,7 +38,7 @@
         <bcprov.version>1.78.1</bcprov.version>
         <fastjson2.version>2.0.57</fastjson2.version>
         <guava.version>33.3.1-jre</guava.version>
-        <hutool.version>6.0.0-M21</hutool.version>
+        <hutool.version>7.0.0-M1</hutool.version>
         <ip2region.version>2.7.0</ip2region.version>
         <jasypt.version>1.9.3</jasypt.version>
         <pinyin4j.version>2.6.1</pinyin4j.version>
@@ -145,7 +145,7 @@
             </dependency>
             <!-- Hutool -->
             <dependency>
-                <groupId>org.dromara.hutool</groupId>
+                <groupId>cn.hutool.v7</groupId>
                 <artifactId>hutool-bom</artifactId>
                 <version>${hutool.version}</version>
                 <type>pom</type>

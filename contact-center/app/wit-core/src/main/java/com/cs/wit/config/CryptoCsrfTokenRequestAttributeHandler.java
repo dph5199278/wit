@@ -24,7 +24,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Optional;
 import java.util.function.Supplier;
-import org.dromara.hutool.crypto.SecureUtil;
+import cn.hutool.v7.crypto.SecureUtil;
 import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
