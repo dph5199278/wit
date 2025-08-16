@@ -39,6 +39,12 @@ public interface KnowledgeTypeRepository extends
 	KnowledgeType findByNameAndOrgi(String name, String orgi);
 
 	KnowledgeType findByNameAndOrgiAndIdNot(String name, String orgi, String id);
-	
-	Page<KnowledgeType> findAll(Specification<KnowledgeType> spec, Pageable pageable);  //分页按条件查询
+
+	/**
+	 * 分页按条件查询
+	 * @param spec
+	 * @param pageable
+	 * @return
+	 */
+	Page<KnowledgeType> findAll(Specification<KnowledgeType> spec, Pageable pageable);
 }
