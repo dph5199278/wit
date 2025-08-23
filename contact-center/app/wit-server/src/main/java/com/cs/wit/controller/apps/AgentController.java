@@ -95,7 +95,7 @@
  import java.util.Set;
  import jakarta.servlet.http.HttpServletRequest;
  import jakarta.servlet.http.HttpServletResponse;
- import javax.validation.Valid;
+ import jakarta.validation.Valid;
  import lombok.RequiredArgsConstructor;
  import org.apache.commons.lang.StringUtils;
  import org.slf4j.Logger;

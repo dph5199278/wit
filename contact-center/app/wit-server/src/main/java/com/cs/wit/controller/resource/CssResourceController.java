@@ -20,7 +20,7 @@ import com.cs.wit.controller.Handler;
 import com.cs.wit.util.Menu;
 import java.io.IOException;
 import jakarta.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;

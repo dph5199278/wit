@@ -29,7 +29,7 @@ import com.cs.wit.util.Menu;
 import java.util.Date;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;

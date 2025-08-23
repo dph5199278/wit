@@ -25,7 +25,7 @@ import com.cs.wit.persistence.repository.PbxHostRepository;
 import com.cs.wit.util.Menu;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.lang.NonNull;

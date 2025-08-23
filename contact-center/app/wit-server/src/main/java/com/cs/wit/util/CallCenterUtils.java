@@ -55,7 +55,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import jakarta.persistence.criteria.CriteriaBuilder.In;
 import jakarta.persistence.criteria.Predicate;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import co.elastic.clients.elasticsearch._types.query_dsl.BoolQuery;
 import org.springframework.data.domain.PageImpl;

@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import jakarta.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.PageImpl;

@@ -16,7 +16,7 @@
  */
 package com.cs.wit.model;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 public class CustomerGroupForm {
 	@Valid
