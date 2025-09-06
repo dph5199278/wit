@@ -158,7 +158,7 @@ class CUP$parser$actions {
 		int eleft = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int eright = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(0 - e.intValue()); 
+		 RESULT = -e;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;
@@ -185,7 +185,7 @@ class CUP$parser$actions {
 		int e2left = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int e2right = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e2 = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(e1.intValue() % e2.intValue()); 
+		 RESULT = e1 % e2;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;
@@ -200,7 +200,7 @@ class CUP$parser$actions {
 		int e2left = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int e2right = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e2 = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(e1.intValue() / e2.intValue()); 
+		 RESULT = e1 / e2;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;
@@ -215,7 +215,7 @@ class CUP$parser$actions {
 		int e2left = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int e2right = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e2 = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(e1.intValue() * e2.intValue()); 
+		 RESULT = e1 * e2;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;
@@ -230,7 +230,7 @@ class CUP$parser$actions {
 		int e2left = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int e2right = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e2 = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(e1.intValue() - e2.intValue()); 
+		 RESULT = e1 - e2;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;
@@ -245,7 +245,7 @@ class CUP$parser$actions {
 		int e2left = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).left;
 		int e2right = ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right;
 		Integer e2 = (Integer)((Symbol) CUP$parser$stack.elementAt(CUP$parser$top-0)).value;
-		 RESULT = new Integer(e1.intValue() + e2.intValue()); 
+		 RESULT = e1 + e2;
               CUP$parser$result = new Symbol(3/*expr*/, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)).left, ((Symbol)CUP$parser$stack.elementAt(CUP$parser$top-0)).right, RESULT);
             }
           return CUP$parser$result;

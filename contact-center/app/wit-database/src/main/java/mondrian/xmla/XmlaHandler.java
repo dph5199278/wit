@@ -403,7 +403,7 @@ public class XmlaHandler {
                         Float f = (Float) inputValue;
                         // See if it can be an integer or long
                         long lval = f.longValue();
-                        if (f.equals(new Float(lval))) {
+                        if (f.equals((float) lval)) {
                             // It can be converted from double to long
                             // without loss of precision.
                             setValueAndType(lval);
@@ -419,7 +419,7 @@ public class XmlaHandler {
                         Double d = (Double) inputValue;
                         // See if it can be an integer or long
                         long lval = d.longValue();
-                        if (d.equals(new Double(lval))) {
+                        if (d.equals((double) lval)) {
                             // It can be converted from double to long
                             // without loss of precision.
                             setValueAndType(lval);

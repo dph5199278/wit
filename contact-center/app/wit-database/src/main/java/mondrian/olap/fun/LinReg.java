@@ -579,7 +579,7 @@ public abstract class LinReg extends FunDefBase {
             } else {
                 double x = d.doubleValue();
                 double yf = value.intercept + value.slope * x;
-                yfs.add(new Double(yf));
+                yfs.add(yf);
             }
         }
 

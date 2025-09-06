@@ -124,7 +124,7 @@ public class Vba {
             return number.doubleValue();
         } else {
             final String s = String.valueOf(expression);
-            return new Double(s);
+            return Double.parseDouble(s);
         }
     }
 
@@ -158,7 +158,7 @@ public class Vba {
             try {
                 return Integer.parseInt(s);
             } catch (NumberFormatException e) {
-                return new Double(s).intValue();
+                return Double.valueOf(s).intValue();
             }
         }
     }

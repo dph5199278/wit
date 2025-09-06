@@ -128,12 +128,12 @@ public class Util extends XOMUtil {
     /**
      * Placeholder which indicates a value NULL.
      */
-    public static final Object nullValue = new Double(FunUtil.DoubleNull);
+    public static final Object nullValue = FunUtil.DoubleNull;
 
     /**
      * Placeholder which indicates an EMPTY value.
      */
-    public static final Object EmptyValue = new Double(FunUtil.DoubleEmpty);
+    public static final Object EmptyValue = FunUtil.DoubleEmpty;
 
     /**
      * Cumulative time spent accessing the database.

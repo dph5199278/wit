@@ -263,6 +263,7 @@ public class RolapEvaluator implements Evaluator {
         return new RolapEvaluator(root);
     }
 
+    @Override
     public RolapCube getMeasureCube() {
         final RolapMember measure = currentMembers[0];
         if (measure instanceof RolapStoredMeasure) {
@@ -271,6 +272,7 @@ public class RolapEvaluator implements Evaluator {
         return null;
     }
 
+    @Override
     public boolean mightReturnNullForUnrelatedDimension() {
         if (!MondrianProperties.instance()
             .IgnoreMeasureForNonJoiningDimension.get())
@@ -281,6 +283,7 @@ public class RolapEvaluator implements Evaluator {
         return virtualCube.isVirtual();
     }
 
+    @Override
     public boolean needToReturnNullForUnrelatedDimension(Member[] members) {
         assert mightReturnNullForUnrelatedDimension()
             : "Should not even call this method if nulls are impossible";
@@ -297,10 +300,12 @@ public class RolapEvaluator implements Evaluator {
         return !nonJoiningDimensions.isEmpty();
     }
 
+    @Override
     public boolean nativeEnabled() {
         return nativeEnabled;
     }
 
+    @Override
     public boolean currentIsEmpty() {
         // If a cell evaluates to null, it is always deemed empty.
         Object o = evaluateCurrent();
@@ -324,6 +329,7 @@ public class RolapEvaluator implements Evaluator {
            || (o instanceof Number && ((Number) o).intValue() == 0);
     }
 
+    @Override
     public Member getPreviousContext(Hierarchy hierarchy) {
         for (RolapEvaluator e = this; e != null; e = e.parent) {
             for (int i = commandCount - 1; i > 0;) {
@@ -337,10 +343,12 @@ public class RolapEvaluator implements Evaluator {
         return null;
     }
 
+    @Override
     public final QueryTiming getTiming() {
         return root.execution.getQueryTiming();
     }
 
+    @Override
     public final int savepoint() {
         final int commandCount1 = commandCount;
         if (commands[commandCount - 1] == Command.SAVEPOINT) {
@@ -356,6 +364,7 @@ public class RolapEvaluator implements Evaluator {
         return commandCount1;
     }
 
+    @Override
     public final void setNativeEnabled(boolean nativeEnabled) {
         if (nativeEnabled != this.nativeEnabled) {
             ensureCommandCapacity(commandCount + 2);
@@ -369,10 +378,12 @@ public class RolapEvaluator implements Evaluator {
         return LOGGER;
     }
 
+    @Override
     public final Member[] getMembers() {
         return currentMembers;
     }
 
+    @Override
     public final Member[] getNonAllMembers() {
         if (nonAllMembers == null) {
             nonAllMembers = new RolapMember[root.nonAllPositionCount];
@@ -401,22 +412,27 @@ public class RolapEvaluator implements Evaluator {
         return root.cube;
     }
 
+    @Override
     public final Query getQuery() {
         return root.query;
     }
 
+    @Override
     public final int getDepth() {
         return 0;
     }
 
+    @Override
     public final RolapEvaluator getParent() {
         return parent;
     }
 
+    @Override
     public final SchemaReader getSchemaReader() {
         return root.schemaReader;
     }
 
+    @Override
     public Date getQueryStartTime() {
         return root.getQueryStartTime();
     }
@@ -425,24 +441,28 @@ public class RolapEvaluator implements Evaluator {
         return root.currentDialect;
     }
 
+    @Override
     public final RolapEvaluator push(Member[] members) {
         final RolapEvaluator evaluator = _push(null);
         evaluator.setContext(members);
         return evaluator;
     }
 
+    @Override
     public final RolapEvaluator push(Member member) {
         final RolapEvaluator evaluator = _push(null);
         evaluator.setContext(member);
         return evaluator;
     }
 
+    @Override
     public final Evaluator push(boolean nonEmpty) {
         final RolapEvaluator evaluator = _push(null);
         evaluator.setNonEmpty(nonEmpty);
         return evaluator;
     }
 
+    @Override
     public final Evaluator push(boolean nonEmpty, boolean nativeEnabled) {
         final RolapEvaluator evaluator = _push(null);
         evaluator.setNonEmpty(nonEmpty);
@@ -450,6 +470,7 @@ public class RolapEvaluator implements Evaluator {
         return evaluator;
     }
 
+    @Override
     public final RolapEvaluator push() {
         return _push(null);
     }
@@ -490,12 +511,14 @@ public class RolapEvaluator implements Evaluator {
         return new RolapEvaluator(root, this, aggregationList);
     }
 
+    @Override
     public final void restore(int savepoint) {
         while (commandCount > savepoint) {
             ((Command) commands[--commandCount]).execute(this);
         }
     }
 
+    @Override
     public final Evaluator pushAggregation(List<List<Member>> list) {
         return _push(list);
     }
@@ -647,6 +670,7 @@ public class RolapEvaluator implements Evaluator {
         return slicerTuples;
     }
 
+    @Override
     public final Member setContext(Member member) {
         // Note: the body of this function is identical to calling
         // 'setContext(member, true)'. We inline the logic for performance.
@@ -686,6 +710,7 @@ public class RolapEvaluator implements Evaluator {
         return previous;
     }
 
+    @Override
     public final void setContext(Member member, boolean safe) {
         final RolapMemberBase m = (RolapMemberBase) member;
         final int ordinal = m.getHierarchy().getOrdinalInCube();
@@ -757,6 +782,7 @@ public class RolapEvaluator implements Evaluator {
         return true;
     }
 
+    @Override
     public final void setContext(List<Member> memberList) {
         for (int i = 0, n = memberList.size(); i < n; i++) {
             Member member = memberList.get(i);
@@ -765,6 +791,7 @@ public class RolapEvaluator implements Evaluator {
         }
     }
 
+    @Override
     public final void setContext(List<Member> memberList, boolean safe) {
         for (int i = 0, n = memberList.size(); i < n; i++) {
             Member member = memberList.get(i);
@@ -773,6 +800,7 @@ public class RolapEvaluator implements Evaluator {
         }
     }
 
+    @Override
     public final void setContext(Member[] members) {
         for (int i = 0, length = members.length; i < length; i++) {
             Member member = members[i];
@@ -782,6 +810,7 @@ public class RolapEvaluator implements Evaluator {
         }
     }
 
+    @Override
     public final void setContext(Member[] members, boolean safe) {
         for (int i = 0, length = members.length; i < length; i++) {
             Member member = members[i];
@@ -790,6 +819,7 @@ public class RolapEvaluator implements Evaluator {
         }
     }
 
+    @Override
     public final RolapMember getContext(Hierarchy hierarchy) {
         return currentMembers[((RolapHierarchy) hierarchy).getOrdinalInCube()];
     }
@@ -805,6 +835,7 @@ public class RolapEvaluator implements Evaluator {
         return currentMembers[hierarchy.getOrdinalInCube()];
     }
 
+    @Override
     public final Object evaluateCurrent() {
         // Get the member in the current context which is (a) calculated, and
         // (b) has the highest solve order. If there are no calculated members,
@@ -977,6 +1008,7 @@ public class RolapEvaluator implements Evaluator {
         return buf.toString();
     }
 
+    @Override
     public final Object getProperty(String name, Object defaultValue) {
         Object o = defaultValue;
         int maxSolve = Integer.MIN_VALUE;
@@ -1018,6 +1050,7 @@ public class RolapEvaluator implements Evaluator {
      *
      * @post return != null
      */
+    @Override
     public final String getFormatString() {
         final Exp formatExp =
             (Exp) getProperty(Property.FORMAT_EXP_PARSED.name, null);
@@ -1041,10 +1074,12 @@ public class RolapEvaluator implements Evaluator {
         return Format.get(formatString, root.connection.getLocale());
     }
 
+    @Override
     public final Locale getConnectionLocale() {
         return root.connection.getLocale();
     }
 
+    @Override
     public final String format(Object o) {
         if (o == Util.nullValue) {
             o = null;
@@ -1098,6 +1133,7 @@ public class RolapEvaluator implements Evaluator {
         return key;
     }
 
+    @Override
     public final Object getCachedResult(ExpCacheDescriptor cacheDescriptor) {
         // Look up a cached result, and if not present, compute one and add to
         // cache. Use a dummy value to represent nulls.
@@ -1140,10 +1176,12 @@ public class RolapEvaluator implements Evaluator {
         root.clearResultCache(clearValidResult);
     }
 
+    @Override
     public final boolean isNonEmpty() {
         return nonEmpty;
     }
 
+    @Override
     public final void setNonEmpty(boolean nonEmpty) {
         if (nonEmpty != this.nonEmpty) {
             ensureCommandCapacity(commandCount + 2);
@@ -1153,10 +1191,12 @@ public class RolapEvaluator implements Evaluator {
         }
     }
 
+    @Override
     public final RuntimeException newEvalException(Object context, String s) {
         return FunUtil.newEvalException((FunDef) context, s);
     }
 
+    @Override
     public final NamedSetEvaluator getNamedSetEvaluator(
         NamedSet namedSet,
         boolean create)
@@ -1164,6 +1204,7 @@ public class RolapEvaluator implements Evaluator {
         return root.evaluateNamedSet(namedSet, create);
     }
 
+    @Override
     public final SetEvaluator getSetEvaluator(
         Exp exp,
         boolean create)
@@ -1171,10 +1212,12 @@ public class RolapEvaluator implements Evaluator {
         return root.evaluateSet(exp, create);
     }
 
+    @Override
     public final int getMissCount() {
         return cellReader.getMissCount();
     }
 
+    @Override
     public final Object getParameterValue(ParameterSlot slot) {
         return root.getParameterValue(slot);
     }
@@ -1343,10 +1386,12 @@ public class RolapEvaluator implements Evaluator {
             "calculation " + calculation + " not on stack");
     }
 
+    @Override
     public final int getIterationLength() {
         return iterationLength;
     }
 
+    @Override
     public final void setIterationLength(int iterationLength) {
         ensureCommandCapacity(commandCount + 2);
         commands[commandCount++] = this.iterationLength;
@@ -1354,10 +1399,12 @@ public class RolapEvaluator implements Evaluator {
         this.iterationLength = iterationLength;
     }
 
+    @Override
     public final boolean isEvalAxes() {
         return evalAxes;
     }
 
+    @Override
     public final void setEvalAxes(boolean evalAxes) {
         if (evalAxes != this.evalAxes) {
             ensureCommandCapacity(commandCount + 2);
@@ -1405,6 +1452,7 @@ public class RolapEvaluator implements Evaluator {
      * should be ignored.
      * @return boolean
      */
+    @Override
     public boolean shouldIgnoreUnrelatedDimensions() {
         return getCube().shouldIgnoreUnrelatedDimensions(
             getMeasureCube().getName());

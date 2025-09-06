@@ -71,7 +71,7 @@ public class RolapUtil {
     /**
      * Special cell value indicates that the value is not in cache yet.
      */
-    public static final Object valueNotReadyException = new Double(0);
+    public static final Object valueNotReadyException = (double) 0;
 
     /**
      * Hook to run when a query is executed. This should not be

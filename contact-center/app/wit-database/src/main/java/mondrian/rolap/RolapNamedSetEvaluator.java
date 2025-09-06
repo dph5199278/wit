@@ -70,6 +70,7 @@ class RolapNamedSetEvaluator
         this.namedSet = namedSet;
     }
 
+    @Override
     public TupleIterable evaluateTupleIterable(Evaluator evaluator) {
         ensureList(evaluator);
         return list;
@@ -179,6 +180,7 @@ class RolapNamedSetEvaluator
         return buf.toString();
     }
 
+    @Override
     public int currentOrdinal() {
         return currentOrdinal;
     }
@@ -187,11 +189,13 @@ class RolapNamedSetEvaluator
         this.currentOrdinal = index;
     }
 
+    @Override
     public Member[] currentTuple() {
         final List<Member> tuple = list.get(currentOrdinal);
         return tuple.toArray(new Member[tuple.size()]);
     }
 
+    @Override
     public Member currentMember() {
         return list.get(0, currentOrdinal);
     }

@@ -215,6 +215,7 @@ class MondrianServerImpl
         }
     }
 
+    @Override
     public int getId() {
         return id;
     }
@@ -227,14 +228,17 @@ class MondrianServerImpl
         return this.shepherd;
     }
 
+    @Override
     public List<String> getKeywords() {
         return KEYWORD_LIST;
     }
 
+    @Override
     public LockBox getLockBox() {
         return lockBox;
     }
 
+    @Override
     public AggregationManager getAggregationManager() {
         if (shutdown) {
             throw new MondrianException("Server already shutdown.");

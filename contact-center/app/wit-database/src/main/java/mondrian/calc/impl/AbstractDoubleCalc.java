@@ -46,7 +46,7 @@ public abstract class AbstractDoubleCalc
         if (d == FunUtil.DoubleNull) {
             return null;
         }
-        return new Double(d);
+        return d;
     }
 }
 

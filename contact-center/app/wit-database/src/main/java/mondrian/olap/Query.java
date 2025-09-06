@@ -877,12 +877,11 @@ public class Query extends QueryPart {
             if (value instanceof Number || value == null) {
                 return value;
             }
-            if (value instanceof String) {
-                String s = (String) value;
+            if (value instanceof String s) {
                 try {
-                    return new Integer(s);
+                    return Integer.valueOf(s);
                 } catch (NumberFormatException e) {
-                    return new Double(s);
+                    return Double.valueOf(s);
                 }
             }
             throw Util.newInternal(

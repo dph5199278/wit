@@ -124,31 +124,31 @@ public class lexer {
   public static void init() throws java.io.IOException
     {
       /* set up the keyword table */
-      keywords.put("package",    new Integer(sym.PACKAGE));
-      keywords.put("import",     new Integer(sym.IMPORT));
-      keywords.put("code",       new Integer(sym.CODE));
-      keywords.put("action",     new Integer(sym.ACTION));
-      keywords.put("parser",     new Integer(sym.PARSER));
-      keywords.put("terminal",   new Integer(sym.TERMINAL));
-      keywords.put("non",        new Integer(sym.NON));
-      keywords.put("nonterminal",new Integer(sym.NONTERMINAL));// [CSA]
-      keywords.put("init",       new Integer(sym.INIT));
-      keywords.put("scan",       new Integer(sym.SCAN));
-      keywords.put("with",       new Integer(sym.WITH));
-      keywords.put("start",      new Integer(sym.START));
-      keywords.put("precedence", new Integer(sym.PRECEDENCE));
-      keywords.put("left",       new Integer(sym.LEFT));
-      keywords.put("right",      new Integer(sym.RIGHT));
-      keywords.put("nonassoc",   new Integer(sym.NONASSOC));
+      keywords.put("package",    sym.PACKAGE);
+      keywords.put("import",     sym.IMPORT);
+      keywords.put("code",       sym.CODE);
+      keywords.put("action",     sym.ACTION);
+      keywords.put("parser",     sym.PARSER);
+      keywords.put("terminal",   sym.TERMINAL);
+      keywords.put("non",        sym.NON);
+      keywords.put("nonterminal",sym.NONTERMINAL);// [CSA]
+      keywords.put("init",       sym.INIT);
+      keywords.put("scan",       sym.SCAN);
+      keywords.put("with",       sym.WITH);
+      keywords.put("start",      sym.START);
+      keywords.put("precedence", sym.PRECEDENCE);
+      keywords.put("left",       sym.LEFT);
+      keywords.put("right",      sym.RIGHT);
+      keywords.put("nonassoc",   sym.NONASSOC);
 
       /* set up the table of single character symbols */
-      char_symbols.put(new Integer(';'), new Integer(sym.SEMI));
-      char_symbols.put(new Integer(','), new Integer(sym.COMMA));
-      char_symbols.put(new Integer('*'), new Integer(sym.STAR));
-      char_symbols.put(new Integer('.'), new Integer(sym.DOT));
-      char_symbols.put(new Integer('|'), new Integer(sym.BAR));
-      char_symbols.put(new Integer('['), new Integer(sym.LBRACK));
-      char_symbols.put(new Integer(']'), new Integer(sym.RBRACK));
+      char_symbols.put((int) ';', sym.SEMI);
+      char_symbols.put((int) ',', sym.COMMA);
+      char_symbols.put((int) '*', sym.STAR);
+      char_symbols.put((int) '.', sym.DOT);
+      char_symbols.put((int) '|', sym.BAR);
+      char_symbols.put((int) '[', sym.LBRACK);
+      char_symbols.put((int) ']', sym.RBRACK);
 
       /* read two characters of lookahead */
       next_char = System.in.read();
@@ -275,7 +275,7 @@ public class lexer {
     {
       Integer result;
 
-      result = (Integer)char_symbols.get(new Integer((char)ch));
+      result = (Integer)char_symbols.get((char)ch);
       if (result == null) 
 	return -1;
       else
@@ -349,7 +349,7 @@ public class lexer {
    */
   protected static Symbol do_code_string() throws java.io.IOException
     {
-      StringBuffer result = new StringBuffer();
+      StringBuilder result = new StringBuilder();
 
       /* at this point we have lookahead of "{:" -- swallow that */
       advance(); advance();
@@ -365,7 +365,7 @@ public class lexer {
 	    }
 
 	  /* otherwise record the char and move on */
-	  result.append(new Character((char)next_char));
+	  result.append((char)next_char);
 	  advance();
 	}
 
@@ -530,7 +530,7 @@ public class lexer {
 
 	  /* if we get here, we have an unrecognized character */
 	  emit_warn("Unrecognized character '" + 
-	    new Character((char)next_char) + "'(" + next_char + 
+	    (char)next_char + "'(" + next_char +
 	    ") -- ignored");
 
 	  /* advance past it */

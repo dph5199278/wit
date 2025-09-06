@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import mondrian.calc.Calc;
 import mondrian.calc.DummyExp;
@@ -365,8 +366,8 @@ public class RankFunDef extends FunDefBase {
     }
 
     private static boolean valueNotReady(Object value) {
-        return value == RolapUtil.valueNotReadyException
-            || value == new Double(Double.NaN);
+        return Objects.equals(value, RolapUtil.valueNotReadyException)
+            || Objects.equals(value, Double.NaN);
     }
 
     /**
