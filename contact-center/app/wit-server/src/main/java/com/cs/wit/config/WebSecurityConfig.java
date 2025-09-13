@@ -22,7 +22,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer.FrameOptionsConfig;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.servlet.util.matcher.PathPatternRequestMatcher;
 
 /**
  * @author Dely
@@ -36,33 +36,33 @@ public class WebSecurityConfig {
         return http
             // apiTokenFilterSecurityInterceptor
             .addFilterAfter(
-                new ApiRequestMatchingFilter(new AntPathRequestMatcher("/api/**")),
+                new ApiRequestMatchingFilter(PathPatternRequestMatcher.withDefaults().matcher("/api/**")),
                 BasicAuthenticationFilter.class)
             // tokenInfoTokenFilterSecurityInterceptor
             .addFilterAfter(
                 DelegateRequestMatchingFilter.builder()
                 // autoConfig
-                .addRequestMatcher(new AntPathRequestMatcher("/autoconfig/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/autoconfig/**"))
                 // configprops
-                .addRequestMatcher(new AntPathRequestMatcher("/configprops/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/configprops/**"))
                 // beans
-                .addRequestMatcher(new AntPathRequestMatcher("/beans/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/beans/**"))
                 // dump
-                .addRequestMatcher(new AntPathRequestMatcher("/dump/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/dump/**"))
                 // env
-                .addRequestMatcher(new AntPathRequestMatcher("/env/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/env/**"))
                 // health(Bypass actuator api)
-                //.addRequestMatcher(new AntPathRequestMatcher("/health/**"))
+                //.addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/health/**"))
                 // info
-                //.addRequestMatcher(new AntPathRequestMatcher("/info/**"))
+                //.addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/info/**"))
                 // mappings
-                .addRequestMatcher(new AntPathRequestMatcher("/mappings/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/mappings/**"))
                 // metrics(Bypass actuator api)
-                //.addRequestMatcher(new AntPathRequestMatcher("/metrics/**"))
+                //.addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/metrics/**"))
                 // trace
-                .addRequestMatcher(new AntPathRequestMatcher("/trace/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/trace/**"))
                 // druid
-                .addRequestMatcher(new AntPathRequestMatcher("/druid/**"))
+                .addRequestMatcher(PathPatternRequestMatcher.withDefaults().matcher("/druid/**"))
                 .build(),
                 ApiRequestMatchingFilter.class)
             // https://github.com/spring-projects/spring-security/issues/13568
