@@ -15,7 +15,7 @@
   <description>数据库模块</description>
 
   <properties>
-    <tomcat.version>10.1.44</tomcat.version>
+    <tomcat.version>10.1.45</tomcat.version>
   </properties>
 
   <dependencies>
