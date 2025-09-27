@@ -16,7 +16,6 @@
  */
 package com.cs.wit.util.ip;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ConcurrentHashMap;
@@ -24,14 +23,19 @@ import java.util.concurrent.ConcurrentMap;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.lionsoul.ip2region.xdb.LongByteArray;
 import org.lionsoul.ip2region.xdb.Searcher;
+import org.lionsoul.ip2region.xdb.Version;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StreamUtils;
 import org.springframework.util.StringUtils;
 
+/**
+ * The type Ip tools.
+ * @author Dely
+ */
 @Component
 @Slf4j
 @RequiredArgsConstructor
@@ -45,6 +49,9 @@ public class IPTools {
 
 	private final static IP EMPTY = new IP();
 
+	/**
+	 * Sets .
+	 */
 	@PostConstruct
 	public void setup() {
 		try {
@@ -52,10 +59,10 @@ public class IPTools {
 					"classpath:/config/ip2region.xdb");
 			log.info("init with file [{}]", resource.getURL());
 			if(resource.exists()) {
-				try(InputStream inputStream = resource.getInputStream();
-						ByteArrayOutputStream outputStream = new ByteArrayOutputStream((int)resource.contentLength())) {
-					StreamUtils.copy(inputStream, outputStream);
-					_searcher = Searcher.newWithBuffer(outputStream.toByteArray());
+				long length = resource.contentLength();
+				try(InputStream inputStream = resource.getInputStream()) {
+					LongByteArray byteArray = loadContent(inputStream, length);
+					_searcher = Searcher.newWithBuffer(Version.IPv4, byteArray);
 				}
 			}
 		} catch (IOException e) {
@@ -63,6 +70,12 @@ public class IPTools {
 		}
 	}
 
+	/**
+	 * Find geography ip.
+	 *
+	 * @param remote the remote
+	 * @return the ip
+	 */
 	public IP findGeography(String remote) {
 		// 先找缓存
 		if (caches.containsKey(remote)) {
@@ -74,26 +87,26 @@ public class IPTools {
 		try {
 			String region = _searcher.search(StringUtils.hasText(remote) ? remote : "127.0.0.1");
 			if(StringUtils.hasText(region)){
-				String[] regions = region.split("[\\|]");
-				if(regions.length == 5){
+				String[] regions = regions(region);
+				if(regions.length == 5) {
 					ip = new IP();
 					ip.setCountry(regions[0]);
-					if(StringUtils.hasText(regions[1]) && !regions[1].equalsIgnoreCase("null")){
+					if(StringUtils.hasText(regions[1]) && !"null".equalsIgnoreCase(regions[1])){
 						ip.setRegion(regions[1]);
 					}else{
 						ip.setRegion("");
 					}
-					if(StringUtils.hasText(regions[2]) && !regions[2].equalsIgnoreCase("null")){
+					if(StringUtils.hasText(regions[2]) && !"null".equalsIgnoreCase(regions[2])){
 						ip.setProvince(regions[2]);
 					}else{
 						ip.setProvince("");
 					}
-					if(StringUtils.hasText(regions[3]) && !regions[3].equalsIgnoreCase("null")){
+					if(StringUtils.hasText(regions[3]) && !"null".equalsIgnoreCase(regions[3])){
 						ip.setCity(regions[3]);
 					}else{
 						ip.setCity("");
 					}
-					if(StringUtils.hasText(regions[4]) && !regions[4].equalsIgnoreCase("null")){
+					if(StringUtils.hasText(regions[4]) && !"null".equalsIgnoreCase(regions[4])){
 						ip.setIsp(regions[4]);
 					}else{
 						ip.setIsp("");
@@ -106,5 +119,38 @@ public class IPTools {
 		// 缓存并返回
 		caches.put(remote, ip);
 		return ip;
+	}
+
+	private LongByteArray loadContent(InputStream inputStream, long contentLength) throws IOException {
+		long toRead = contentLength;
+
+		LongByteArray byteArray;
+		int rLen;
+		for(byteArray = new LongByteArray(); toRead > 0L; toRead -= rLen) {
+			byte[] buff = new byte[(int)Math.min(toRead, 2147479552L)];
+			rLen = inputStream.read(buff);
+			if (rLen != buff.length) {
+				throw new IOException("incomplete read: read bytes should be " + buff.length + ", got `" + rLen + "`");
+			}
+
+			byteArray.append(buff);
+		}
+
+		return byteArray;
+	}
+
+	private String[] regions(String region) {
+		String[] regions = region.split("[\\|]");
+		if(regions.length != 4) {
+			return regions;
+		}
+
+		String[] rtn = new String[5];
+		rtn[0] = regions[0];
+		rtn[1] = "0";
+		rtn[2] = regions[1];
+		rtn[3] = regions[2];
+		rtn[4] = regions[3];
+		return rtn;
 	}
 }
