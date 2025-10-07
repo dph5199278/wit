@@ -40,9 +40,22 @@ import org.springframework.util.StringUtils;
 @Slf4j
 @RequiredArgsConstructor
 public class IPTools {
-	private Searcher _searcher = null;
+
+	/**
+	 * IPV4 Only
+	 */
+	private Searcher searcherV4 = null;
+	/**
+	 * IPV6 Only
+	 */
+	private Searcher searcherV6 = null;
 
 	private final ConcurrentMap<String, IP> caches = new ConcurrentHashMap<>();
+
+	/**
+	 * IPV4 Regex
+	 */
+	private final String IPV4_REGEX = "^(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$";
 
 	@NonNull
 	private final ApplicationContext applicationContext;
@@ -54,20 +67,46 @@ public class IPTools {
 	 */
 	@PostConstruct
 	public void setup() {
+		initSearchV4();
+		initSearchV6();
+	}
+
+	/**
+	 * Init IPV4 Search
+	 */
+	private void initSearchV4() {
 		try {
-			final Resource resource = applicationContext.getResource(
-					"classpath:/config/ip2region.xdb");
-			log.info("init with file [{}]", resource.getURL());
-			if(resource.exists()) {
-				long length = resource.contentLength();
-				try(InputStream inputStream = resource.getInputStream()) {
-					LongByteArray byteArray = loadContent(inputStream, length);
-					_searcher = Searcher.newWithBuffer(Version.IPv4, byteArray);
-				}
-			}
+			searcherV4 = initSearch("classpath:/config/ip2region_v4.xdb", Version.IPv4);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Init IPV6 Search
+	 */
+	private void initSearchV6() {
+		try {
+			searcherV6 = initSearch("classpath:/config/ip2region_v6.xdb", Version.IPv6);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private Searcher initSearch(String innerDbFile, Version ipVersion)
+			throws IOException {
+		Searcher searcher = null;
+		final Resource resource = applicationContext.getResource(
+				innerDbFile);
+		log.info("init with file [{}]", resource.getURL());
+		if(resource.exists()) {
+			long length = resource.contentLength();
+			try(InputStream inputStream = resource.getInputStream()) {
+				LongByteArray byteArray = loadContent(inputStream, length);
+				searcher = Searcher.newWithBuffer(ipVersion, byteArray);
+			}
+		}
+		return searcher;
 	}
 
 	/**
@@ -85,7 +124,18 @@ public class IPTools {
 		// 缓存找不到，再来查询
 		IP ip = EMPTY;
 		try {
-			String region = _searcher.search(StringUtils.hasText(remote) ? remote : "127.0.0.1");
+			final String remoteIp = StringUtils.hasText(remote) ? remote : "127.0.0.1";
+			String region = null;
+			if(remoteIp.matches(IPV4_REGEX)) {
+				if(null != searcherV4) {
+					region = searcherV4.search(remoteIp);
+				}
+			}
+			else {
+				if (null != searcherV6) {
+					region = searcherV6.search(remoteIp);
+				}
+			}
 			if(StringUtils.hasText(region)){
 				String[] regions = regions(region);
 				if(regions.length == 5) {
