@@ -16,13 +16,8 @@
  */
 package com.cs.wit.basic;
 
-import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.IAcsClient;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsRequest;
-import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
-import com.aliyuncs.http.MethodType;
-import com.aliyuncs.profile.DefaultProfile;
-import com.aliyuncs.profile.IClientProfile;
+import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
+import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.cs.wit.model.AdType;
 import com.cs.wit.model.Dict;
 import com.cs.wit.model.JobDetail;
@@ -975,24 +970,18 @@ public class MainUtils {
                 System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
                 System.setProperty("sun.net.client.defaultReadTimeout", "10000");
                 //初始化ascClient需要的几个参数
-                //短信API产品名称（短信产品名固定，无需修改）
-                final String product = "Dysmsapi";
+                com.aliyun.teaopenapi.models.Config smsConfig = new com.aliyun.teaopenapi.models.Config();
                 //短信API产品域名（接口地址固定，无需修改）
-                final String domain = "dysmsapi.aliyuncs.com";
+                smsConfig.endpoint = "dysmsapi.aliyuncs.com";
                 //替换成你的AK
                 //你的accessKeyId,参考本文档步骤2
-                final String accessKeyId = systemMessage.getAppkey();
+                smsConfig.accessKeyId = systemMessage.getAppkey();
                 //你的accessKeySecret，参考本文档步骤2
-                final String accessKeySecret = systemMessage.getAppsec();
-                //初始化ascClient,暂时不支持多region（请勿修改）
-                IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId,
-                        accessKeySecret);
-                DefaultProfile.addEndpoint("cn-hangzhou", product, domain);
-                IAcsClient acsClient = new DefaultAcsClient(profile);
+                smsConfig.accessKeySecret = systemMessage.getAppsec();
+                //初始化ascClient（请勿修改）
+                com.aliyun.dysmsapi20170525.Client acsClient = new com.aliyun.dysmsapi20170525.Client(smsConfig);
                 //组装请求对象
                 SendSmsRequest request = new SendSmsRequest();
-                //使用post提交
-                request.setSysMethod(MethodType.POST);
                 //必填:待发送手机号。支持以逗号分隔的形式进行批量调用，批量上限为1000个手机号码,批量调用相对于单条调用及时性稍有延迟,验证码类型的短信推荐使用单条调用的方式
                 request.setPhoneNumbers(phone);
                 //必填:短信签名-可在短信控制台中找到
@@ -1007,12 +996,13 @@ public class MainUtils {
                 //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
                 request.setOutId("yourOutId");
                 //请求失败这里会抛ClientException异常
-                SendSmsResponse sendSmsResponse = acsClient.getAcsResponse(request);
-                if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
+                SendSmsResponse sendSmsResponse = acsClient.sendSms(request);
+                if (sendSmsResponse.getBody().getCode() != null && "OK".equals(
+                    sendSmsResponse.getBody().getCode())) {
                     return true;
-                } else if (StringUtils.isNotBlank(sendSmsResponse.getMessage())) {
+                } else if (StringUtils.isNotBlank(sendSmsResponse.getBody().getMessage())) {
                     try {
-                        throw new Exception("短信发送失败，原因：" + sendSmsResponse.getMessage());
+                        throw new Exception("短信发送失败，原因：" + sendSmsResponse.getBody().getMessage());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

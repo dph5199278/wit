@@ -35,7 +35,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- tools -->
-        <bcprov.version>1.78.1</bcprov.version>
         <fastjson2.version>2.0.59</fastjson2.version>
         <guava.version>33.3.1-jre</guava.version>
         <hutool.version>7.0.0-M1</hutool.version>
@@ -59,9 +58,12 @@
         <netty-socketio.version>2.0.12</netty-socketio.version>
 
         <wechat-mp.version>4.7.0</wechat-mp.version>
-        <ali-sdk-core.version>4.7.3</ali-sdk-core.version>
-        <ali-sms-sdk.version>2.2.1</ali-sms-sdk.version>
-
+        <!-- SMS -->
+        <dysmsapi20170525.version>4.2.0</dysmsapi20170525.version>
+        <credentials-java.version>1.0.1</credentials-java.version>
+        <tea.version>1.3.1</tea.version>
+        <org.jacoco.agent.version>0.8.8</org.jacoco.agent.version>
+        <okhttp.version>4.12.0</okhttp.version>
         <!-- OSS -->
         <minio.version>8.5.17</minio.version>
 
@@ -199,24 +201,35 @@
             <!-- SMS -->
             <dependency>
                 <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-core</artifactId>
-                <version>${ali-sdk-core.version}</version>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${dysmsapi20170525.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>credentials-java</artifactId>
+                <version>${credentials-java.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.bouncycastle</groupId>
-                        <artifactId>bcprov-jdk15on</artifactId>
+                        <groupId>com.aliyun</groupId>
+                        <artifactId>tea</artifactId>
                     </exclusion>
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>org.bouncycastle</groupId>
-                <artifactId>bcprov-jdk18on</artifactId>
-                <version>${bcprov.version}</version>
+                <groupId>com.aliyun</groupId>
+                <artifactId>tea</artifactId>
+                <version>${tea.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-                <version>${ali-sms-sdk.version}</version>
+                <groupId>org.jacoco</groupId>
+                <artifactId>org.jacoco.agent</artifactId>
+                <version>${org.jacoco.agent.version}</version>
+                <classifier>runtime</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${okhttp.version}</version>
             </dependency>
 
             <!-- OSS -->
