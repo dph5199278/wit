@@ -55,7 +55,7 @@
         <elasticsearch-client.version>8.18.1</elasticsearch-client.version>
 
         <!-- Websocket -->
-        <netty-socketio.version>2.0.12</netty-socketio.version>
+        <netty-socketio.version>2.0.13</netty-socketio.version>
 
         <wechat-mp.version>4.7.0</wechat-mp.version>
         <!-- SMS -->
