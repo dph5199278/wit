@@ -76,7 +76,7 @@ public class IPTools {
 	 */
 	private void initSearchV4() {
 		try {
-			searcherV4 = initSearch("classpath:/config/ip2region_v4.xdb", Version.IPv4);
+			searcherV4 = initSearch("classpath:/config/ip2region_v4.xdb", "file:./config/ip2region_v4.xdb", Version.IPv4);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -87,24 +87,33 @@ public class IPTools {
 	 */
 	private void initSearchV6() {
 		try {
-			searcherV6 = initSearch("classpath:/config/ip2region_v6.xdb", Version.IPv6);
+			searcherV6 = initSearch("classpath:/config/ip2region_v6.xdb", "file:./config/ip2region_v6.xdb", Version.IPv6);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Searcher initSearch(String innerDbFile, Version ipVersion)
+	private Searcher initSearch(String innerDbFile, String outerDbFile, Version ipVersion)
 			throws IOException {
 		Searcher searcher = null;
-		final Resource resource = applicationContext.getResource(
-				innerDbFile);
-		log.info("init with file [{}]", resource.getURL());
+		// 优先找外部资源
+		Resource resource = applicationContext.getResource(
+				outerDbFile);
+		if(!resource.exists()) {
+			// 外部找不到找内置资源
+			resource = applicationContext.getResource(
+					innerDbFile);
+		}
 		if(resource.exists()) {
+			log.info(ipVersion.name + " init with file [{}]", resource.getURL());
 			long length = resource.contentLength();
 			try(InputStream inputStream = resource.getInputStream()) {
 				LongByteArray byteArray = loadContent(inputStream, length);
 				searcher = Searcher.newWithBuffer(ipVersion, byteArray);
 			}
+		}
+		else {
+			log.warn(ipVersion.name + " not found with file");
 		}
 		return searcher;
 	}
