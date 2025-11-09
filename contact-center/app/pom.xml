@@ -48,7 +48,6 @@
         <artemis.version>2.40.0</artemis.version>
 
         <!-- sql -->
-        <mysql.version>9.0.0</mysql.version>
         <druid-spring-boot-3-starter.version>1.2.27</druid-spring-boot-3-starter.version>
 
         <!-- elasticsearch -->
