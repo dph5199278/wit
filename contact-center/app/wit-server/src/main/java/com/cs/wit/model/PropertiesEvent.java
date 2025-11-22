@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_propertiesevent")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class PropertiesEvent implements java.io.Serializable{
 
 	/**

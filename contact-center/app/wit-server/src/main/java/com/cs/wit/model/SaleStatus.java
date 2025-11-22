@@ -31,7 +31,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_sales_status")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SaleStatus implements java.io.Serializable{
 	/**
 	 * 默认序列ID

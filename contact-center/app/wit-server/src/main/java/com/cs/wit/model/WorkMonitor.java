@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_work_monitor")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class WorkMonitor implements java.io.Serializable {
 
 	/**

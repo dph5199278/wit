@@ -32,7 +32,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_organ")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Organ implements java.io.Serializable {
 
     private static final long serialVersionUID = 1115593425069549681L;

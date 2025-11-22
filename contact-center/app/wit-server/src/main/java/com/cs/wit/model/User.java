@@ -37,7 +37,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "cs_user")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class User implements java.io.Serializable {
     private static final long serialVersionUID = 1L;
 

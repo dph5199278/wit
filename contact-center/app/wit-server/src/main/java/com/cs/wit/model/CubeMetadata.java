@@ -28,7 +28,6 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "uk_cubemetadata")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CubeMetadata implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	public String id ;

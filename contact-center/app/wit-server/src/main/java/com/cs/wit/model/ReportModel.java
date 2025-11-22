@@ -35,7 +35,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_reportmodel")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class ReportModel implements java.io.Serializable {
 	/**
 	 * 

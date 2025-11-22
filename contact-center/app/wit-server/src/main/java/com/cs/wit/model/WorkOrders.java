@@ -37,7 +37,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "workorders", createIndex = false)
 @Entity
 @Table(name = "uk_workorders")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class WorkOrders extends ESBean implements UKAgg {
     /**
      *

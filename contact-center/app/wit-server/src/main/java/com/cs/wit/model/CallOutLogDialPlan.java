@@ -33,7 +33,6 @@ import org.hibernate.annotations.NotFoundAction;
  */
 @Entity
 @Table(name = "cs_callout_log_dialplan")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CallOutLogDialPlan implements java.io.Serializable{
     /**
      *

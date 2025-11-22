@@ -36,7 +36,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "orderscomment")
 @Entity
 @Table(name = "uk_orderscomment")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class OrdersComment implements UKAgg {
 
     private static final long serialVersionUID = -4911955236794918875L;

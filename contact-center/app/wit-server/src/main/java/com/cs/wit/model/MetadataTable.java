@@ -37,7 +37,6 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "uk_tabletask")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class MetadataTable implements java.io.Serializable{
 	/**
 	 * 

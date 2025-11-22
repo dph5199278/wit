@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_quick_type")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class QuickType implements java.io.Serializable{
 
 	/**

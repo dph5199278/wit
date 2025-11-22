@@ -31,7 +31,6 @@ import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name = "cs_callout_dialplan")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CallOutDialplan {
 
     private String id;

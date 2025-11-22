@@ -26,11 +26,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "uk_agentuser")
-@Proxy(lazy = false)
 public class AgentUser implements Serializable, Comparable<AgentUser> {
     private static final long serialVersionUID = -8657469468192323550L;
     private String id;

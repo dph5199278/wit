@@ -25,11 +25,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "uk_onlineuser")
-@Proxy(lazy = false)
 public class OnlineUser implements java.io.Serializable  {
     /**
      *

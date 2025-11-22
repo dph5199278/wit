@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_inviterecord")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class InviteRecord {
     private String id;
     private String orgi;

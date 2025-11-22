@@ -37,7 +37,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Entity
 @Table(name = "uk_chat_message")
 @Document(indexName = "chat_message")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class ChatMessage implements java.io.Serializable {
     /**
      *

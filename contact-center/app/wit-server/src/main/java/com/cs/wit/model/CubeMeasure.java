@@ -29,7 +29,6 @@ import jakarta.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "uk_cubemeasure")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CubeMeasure implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;

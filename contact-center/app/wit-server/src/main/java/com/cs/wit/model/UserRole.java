@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_userrole")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class UserRole implements java.io.Serializable {
     /**
      *

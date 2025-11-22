@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_consult_invite")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CousultInvite implements java.io.Serializable {
 
     /**

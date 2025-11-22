@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_ai_snsaccount")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class AiSNSAccount implements java.io.Serializable{
 	/**
 	 * 

@@ -31,7 +31,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_call_performance")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CallMonitorPerformance implements java.io.Serializable {
 
 

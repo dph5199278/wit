@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_xiaoe_config")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class AiConfig implements java.io.Serializable{
 	/**
 	 * 

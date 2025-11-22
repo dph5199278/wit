@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_area_type")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class AreaType implements java.io.Serializable{
 
 	/**

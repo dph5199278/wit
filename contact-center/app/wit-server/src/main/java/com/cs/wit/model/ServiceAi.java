@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_ai")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class ServiceAi implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	

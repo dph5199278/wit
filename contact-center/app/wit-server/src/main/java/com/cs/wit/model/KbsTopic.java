@@ -38,7 +38,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "kbs_topic")
 @Entity
 @Table(name = "uk_kbs_topic")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class KbsTopic extends ESBean implements java.io.Serializable , UKAgg{
 	/**
 	 *

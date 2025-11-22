@@ -35,7 +35,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_jobdetail")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class JobDetail implements Serializable {
 
     /**

@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_xiaoe_kbs_type")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class KnowledgeType implements java.io.Serializable{
 
 	/**

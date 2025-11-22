@@ -29,7 +29,6 @@ import jakarta.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "uk_cube")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Cube implements java.io.Serializable{
 	/**
 	 * 

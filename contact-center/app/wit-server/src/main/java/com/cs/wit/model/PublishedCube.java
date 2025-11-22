@@ -29,7 +29,6 @@ import org.apache.commons.codec.binary.Base64;
 import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "uk_publishedcube")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class PublishedCube implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;

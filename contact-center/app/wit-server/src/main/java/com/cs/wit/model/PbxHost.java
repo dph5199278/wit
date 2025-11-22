@@ -29,7 +29,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_callcenter_pbxhost")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class PbxHost implements java.io.Serializable{
 	/**
 	 * 

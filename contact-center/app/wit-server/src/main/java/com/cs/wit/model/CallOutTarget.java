@@ -25,7 +25,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "cs_callout_targets")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CallOutTarget {
 
     private String id;

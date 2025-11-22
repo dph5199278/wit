@@ -24,11 +24,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "uk_agentservice")
-@Proxy(lazy = false)
 public class AgentServiceSatis implements Serializable {
 	private static final long serialVersionUID = -5052623717164550681L;
 

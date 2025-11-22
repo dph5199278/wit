@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_xiaoe_topic_item")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class TopicItem implements java.io.Serializable{
 
 	/**

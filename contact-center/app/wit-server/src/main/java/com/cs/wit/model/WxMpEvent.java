@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_wxmpevent")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class WxMpEvent implements java.io.Serializable{
 
 	/**

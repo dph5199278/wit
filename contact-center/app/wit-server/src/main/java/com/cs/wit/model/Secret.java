@@ -23,11 +23,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name="uk_secret")
-@Proxy(lazy=false)
 public class Secret implements java.io.Serializable{
 	/**
 	 * 

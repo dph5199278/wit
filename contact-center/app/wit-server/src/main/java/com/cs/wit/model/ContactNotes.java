@@ -32,7 +32,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "contact_notes")
 @Entity
 @Table(name = "cs_contact_notes")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class ContactNotes {
 
     private String id = MainUtils.getUUID();

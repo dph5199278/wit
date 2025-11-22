@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_callcenter_media")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Media implements java.io.Serializable{
 	/**
 	 * 

@@ -31,7 +31,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_agentstatus")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class AgentStatus implements java.io.Serializable, Comparable<AgentStatus> {
 
     /**

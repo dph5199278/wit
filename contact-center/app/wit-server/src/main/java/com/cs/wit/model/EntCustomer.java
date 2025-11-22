@@ -33,7 +33,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "entcustomer")
 @Entity
 @Table(name = "uk_entcustomer")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class EntCustomer extends ESBean implements java.io.Serializable {
 
 	/**

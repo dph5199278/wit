@@ -39,7 +39,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "xiaoe_topic")
 @Entity
 @Table(name = "uk_xiaoe_topic")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Topic implements java.io.Serializable{
 	/**
 	 *

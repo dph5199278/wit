@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_callcenter_siptrunk")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SipTrunk implements java.io.Serializable{
 	/**
 	 * 

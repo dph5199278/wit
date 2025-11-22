@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_act_role")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class UKefuCallOutRole implements java.io.Serializable{
 
 	/**

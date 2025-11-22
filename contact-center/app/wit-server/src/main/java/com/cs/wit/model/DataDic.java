@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_datadic")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class DataDic implements java.io.Serializable {
 	/**
 	 * 

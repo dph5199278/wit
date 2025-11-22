@@ -34,7 +34,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_act_formfilter")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class FormFilter implements Serializable {
 
 	/**

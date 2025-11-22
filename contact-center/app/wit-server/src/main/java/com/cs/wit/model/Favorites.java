@@ -36,7 +36,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "favorites", createIndex = false)
 @Entity
 @Table(name = "uk_favorites")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Favorites implements java.io.Serializable {
     private static final long serialVersionUID = 8667838872697390231L;
     private String id = MainUtils.getUUID();

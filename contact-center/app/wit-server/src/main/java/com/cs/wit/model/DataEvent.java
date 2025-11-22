@@ -33,7 +33,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_dataevent")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class DataEvent implements java.io.Serializable{
 
 	/**

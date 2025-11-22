@@ -22,11 +22,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name="uk_tagrelation")
-@Proxy(lazy=false)
 public class TagRelation implements java.io.Serializable{
 	/**
 	 * 

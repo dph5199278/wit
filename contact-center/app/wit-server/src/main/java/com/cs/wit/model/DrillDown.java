@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_drilldown")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class DrillDown implements java.io.Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String id ;

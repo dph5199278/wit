@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_ad_position")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class AdType implements java.io.Serializable{
 
 	/**

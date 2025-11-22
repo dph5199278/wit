@@ -27,7 +27,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_work_session")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class WorkSession implements java.io.Serializable{
 	/**
 	 * 坐席监控表 -- 实体类

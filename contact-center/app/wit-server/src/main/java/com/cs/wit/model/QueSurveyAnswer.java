@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_que_survey_answer")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class QueSurveyAnswer implements java.io.Serializable{
 
 	/**

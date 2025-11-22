@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_sessionconfig")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SessionConfig implements java.io.Serializable{
 	/**
 	 * 

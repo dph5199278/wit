@@ -35,7 +35,6 @@ import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 @Table(name = "uk_reportfilter")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class ReportFilter implements java.io.Serializable{
 	/**
 	 * 

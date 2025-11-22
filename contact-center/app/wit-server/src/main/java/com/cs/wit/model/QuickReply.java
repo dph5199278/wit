@@ -32,7 +32,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "quickreply")
 @Entity
 @Table(name = "uk_quickreply")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class QuickReply {
 
 	private String id  = MainUtils.getUUID();

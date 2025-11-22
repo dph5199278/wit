@@ -32,7 +32,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_xiaoe_scene")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Scene implements java.io.Serializable{
 	/**
 	 * 

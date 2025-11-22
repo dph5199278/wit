@@ -32,7 +32,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_act_filter_his")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class UKefuCallOutFilter implements Serializable{
 
 	/**

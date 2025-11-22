@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_cube_type")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CubeType implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	

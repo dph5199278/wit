@@ -30,7 +30,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_tableproperties")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class TableProperties implements java.io.Serializable,Cloneable{
 	private static final long serialVersionUID = 3601436061896426576L;
 

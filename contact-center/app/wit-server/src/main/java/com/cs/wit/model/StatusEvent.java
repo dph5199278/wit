@@ -28,11 +28,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "uk_callcenter_event")
-@Proxy(lazy = false)
 public class StatusEvent implements Serializable, Comparable<StatusEvent>{
 
 	/**

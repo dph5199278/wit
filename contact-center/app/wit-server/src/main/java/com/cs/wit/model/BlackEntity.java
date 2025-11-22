@@ -26,7 +26,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_blacklist")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class BlackEntity implements java.io.Serializable{
 	/**
 	 * 

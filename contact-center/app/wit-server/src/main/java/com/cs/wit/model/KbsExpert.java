@@ -29,7 +29,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_kbs_expert")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class KbsExpert implements java.io.Serializable{
 	/**
 	 * 

@@ -34,7 +34,6 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Document(indexName = "publishedreport")
 @Entity
 @Table(name = "uk_publishedreport")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class PublishedReport implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;

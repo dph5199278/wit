@@ -28,7 +28,6 @@ import jakarta.persistence.Table;
  */
 @Entity
 @Table(name = "cs_organ_user")
-@org.hibernate.annotations.Proxy(lazy = false)
 @IdClass(OrganUserId.class)
 public class OrganUser implements java.io.Serializable {
 

@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_kbs_type")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class KbsType implements java.io.Serializable{
 
 	/**

@@ -30,7 +30,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_tenant")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Tenant implements java.io.Serializable{
 	/**
 	 * 

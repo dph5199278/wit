@@ -25,7 +25,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "cs_chatbot")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class Chatbot {
 
     private String id;

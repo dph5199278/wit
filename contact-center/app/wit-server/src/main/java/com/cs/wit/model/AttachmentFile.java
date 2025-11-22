@@ -24,11 +24,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "uk_attachment_file")
-@Proxy(lazy = false)
 public class AttachmentFile implements Serializable {
 	private static final long serialVersionUID = -8657469468192323550L;
 	

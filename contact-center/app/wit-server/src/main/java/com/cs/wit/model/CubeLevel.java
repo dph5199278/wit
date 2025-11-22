@@ -31,7 +31,6 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 @Entity
 @Table(name = "uk_cubelevel")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CubeLevel implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
 	private String id ;

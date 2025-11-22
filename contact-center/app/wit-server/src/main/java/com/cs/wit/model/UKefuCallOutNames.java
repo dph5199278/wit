@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_act_callnames")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class UKefuCallOutNames implements java.io.Serializable{
 	
 	

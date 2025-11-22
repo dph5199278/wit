@@ -24,11 +24,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Proxy;
 
 @Entity
 @Table(name = "cs_stream_file")
-@Proxy(lazy = false)
 public class StreamingFile implements java.io.Serializable {
 
     private String id;

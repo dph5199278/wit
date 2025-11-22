@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_snsaccount")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SNSAccount {
     private String id;
 

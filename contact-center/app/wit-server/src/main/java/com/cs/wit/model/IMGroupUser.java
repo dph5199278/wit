@@ -29,7 +29,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_imgroup_user")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class IMGroupUser implements java.io.Serializable{
 	/**
 	 * 

@@ -32,7 +32,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_log_request")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class RequestLog implements java.io.Serializable  {
 	
 	

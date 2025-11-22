@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_systemconfig")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SystemConfig implements java.io.Serializable{
 	/**
 	 * 

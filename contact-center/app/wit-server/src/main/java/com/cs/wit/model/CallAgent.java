@@ -28,7 +28,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_act_callagent")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class CallAgent implements java.io.Serializable{
 	/**
 	 * 

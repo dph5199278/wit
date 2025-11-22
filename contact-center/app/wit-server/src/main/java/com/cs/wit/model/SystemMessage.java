@@ -31,7 +31,6 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "uk_system_message")
-@org.hibernate.annotations.Proxy(lazy = false)
 public class SystemMessage implements java.io.Serializable {
 	/**
 	 * 
