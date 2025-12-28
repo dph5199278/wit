@@ -16,6 +16,7 @@
  */
 package com.cs.wit.util.ip;
 
+import jakarta.annotation.PreDestroy;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.concurrent.ConcurrentHashMap;
@@ -211,5 +212,23 @@ public class IPTools {
 		rtn[3] = regions[2];
 		rtn[4] = regions[3];
 		return rtn;
+	}
+
+	@PreDestroy
+	public void removal() {
+		if(null != searcherV4) {
+			try {
+				searcherV4.close();
+			} catch (IOException e) {
+				log.warn(searcherV4.getIPVersion().name + " search tool failed to close", e);
+			}
+		}
+		if(null != searcherV6) {
+			try {
+				searcherV6.close();
+			} catch (IOException e) {
+				log.warn(searcherV6.getIPVersion().name + " search tool failed to close", e);
+			}
+		}
 	}
 }
