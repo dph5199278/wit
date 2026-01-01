@@ -151,26 +151,10 @@ public class IPTools {
 				if(regions.length == 5) {
 					ip = new IP();
 					ip.setCountry(regions[0]);
-					if(StringUtils.hasText(regions[1]) && !"null".equalsIgnoreCase(regions[1])){
-						ip.setRegion(regions[1]);
-					}else{
-						ip.setRegion("");
-					}
-					if(StringUtils.hasText(regions[2]) && !"null".equalsIgnoreCase(regions[2])){
-						ip.setProvince(regions[2]);
-					}else{
-						ip.setProvince("");
-					}
-					if(StringUtils.hasText(regions[3]) && !"null".equalsIgnoreCase(regions[3])){
-						ip.setCity(regions[3]);
-					}else{
-						ip.setCity("");
-					}
-					if(StringUtils.hasText(regions[4]) && !"null".equalsIgnoreCase(regions[4])){
-						ip.setIsp(regions[4]);
-					}else{
-						ip.setIsp("");
-					}
+					ip.setRegion(regions[1]);
+					ip.setProvince(regions[2]);
+					ip.setCity(regions[3]);
+					ip.setIsp(regions[4]);
 				}
 			}
 		}
@@ -201,6 +185,12 @@ public class IPTools {
 
 	private String[] regions(String region) {
 		String[] regions = region.split("[\\|]");
+
+		// format
+		for(int i = 0, size = regions.length; i < size; i++) {
+			regions[i] = StringUtils.hasText(regions[i]) && !"null".equalsIgnoreCase(regions[i]) ? regions[i] : "";
+		}
+
 		if(regions.length != 4) {
 			return regions;
 		}
