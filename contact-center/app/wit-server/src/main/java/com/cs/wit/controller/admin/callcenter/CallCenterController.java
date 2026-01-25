@@ -18,6 +18,7 @@ package com.cs.wit.controller.admin.callcenter;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.model.PbxHost;
 import com.cs.wit.persistence.interfaces.CallCenterInterface;
@@ -46,7 +47,7 @@ public class CallCenterController extends Handler {
     @Menu(type = "callcenter", subtype = "callcenter", admin = true)
     public ModelAndView index(ModelMap map, HttpServletRequest request) {
         List<PbxHost> pbxHostList = pbxHostRes.findByOrgi(super.getOrgi(request));
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+        if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
             CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean("callcenter");
 
             for (PbxHost pbxHost : pbxHostList) {
@@ -64,7 +65,7 @@ public class CallCenterController extends Handler {
     @Menu(type = "callcenter", subtype = "pbxhost", admin = true)
     public ModelAndView pbxhost(ModelMap map, HttpServletRequest request) {
         List<PbxHost> pbxHostList = pbxHostRes.findByOrgi(super.getOrgi(request));
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+        if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
             CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean("callcenter");
 
             for (PbxHost pbxHost : pbxHostList) {
@@ -95,7 +96,7 @@ public class CallCenterController extends Handler {
                 pbxHost.setOrgi(super.getOrgi(request));
                 pbxHost.setCreater(super.getUser(request).getId());
                 pbxHostRes.save(pbxHost);
-                if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+                if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
                     CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean(
                             "callcenter");
                     //noinspection ConstantConditions
@@ -139,7 +140,7 @@ public class CallCenterController extends Handler {
                 destHost.setPassword(pbxHost.getPassword());
             }
             pbxHostRes.save(destHost);
-            if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+            if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
                 CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean(
                         "callcenter");
                 //noinspection ConstantConditions
@@ -165,7 +166,7 @@ public class CallCenterController extends Handler {
     public ModelAndView mediadelete(@Valid String id) {
         if (!StringUtils.isBlank(id)) {
             pbxHostRes.deleteById(id);
-            if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+            if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
                 CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean(
                         "callcenter");
                 //noinspection ConstantConditions

@@ -22,6 +22,7 @@
  import com.cs.wit.basic.Constants;
  import com.cs.wit.basic.MainContext;
  import com.cs.wit.basic.MainUtils;
+ import com.cs.wit.basic.ModuleContext;
  import com.cs.wit.cache.Cache;
  import com.cs.wit.controller.Handler;
  import com.cs.wit.exception.CSKefuException;
@@ -535,7 +536,7 @@
      @RequestMapping("/workorders/list")
      @Menu(type = "apps", subtype = "workorderslist")
      public ModelAndView workorderslist(HttpServletRequest request, String contactsid, ModelMap map) {
-         if (MainContext.hasModule(Constants.CSKEFU_MODULE_WORKORDERS) && StringUtils.isNotBlank(contactsid)) {
+         if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_WORKORDERS) && StringUtils.isNotBlank(contactsid)) {
              DataExchangeInterface dataExchange = (DataExchangeInterface) MainContext.getContext().getBean(
                      "workorders");
              //noinspection ConstantConditions

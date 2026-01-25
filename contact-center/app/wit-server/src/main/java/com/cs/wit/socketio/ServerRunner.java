@@ -21,6 +21,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.cs.wit.acd.ACDVisitorDispatcher;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.mq.SocketioConnEventSubscription;
 import com.cs.wit.peer.PeerSyncEntIM;
@@ -88,7 +89,7 @@ public class ServerRunner implements CommandLineRunner {
     @Bean(name = "callCenterNamespace")
     public SocketIONamespace getCallCenterIMSocketIONameSpace(SocketIOServer server) {
         SocketIONamespace callCenterSocketIONameSpace = null;
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+        if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
             Constructor<?> constructor;
             try {
                 constructor = Class.forName(

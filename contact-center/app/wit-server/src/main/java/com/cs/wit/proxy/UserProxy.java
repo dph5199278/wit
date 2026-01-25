@@ -13,6 +13,7 @@ package com.cs.wit.proxy;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.model.Organ;
 import com.cs.wit.model.OrganUser;
 import com.cs.wit.model.Role;
@@ -246,7 +247,7 @@ public class UserProxy {
             }
         }
 
-        if (user.isCallcenter() && MainContext.hasModule(Constants.CSKEFU_MODULE_CALLOUT)) {
+        if (user.isCallcenter() && ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLOUT)) {
             if (StringUtils.isNotBlank(user.getSipaccount())) {
                 Optional<User> opt = userRes.findOneBySipaccountAndDatastatus(
                         user.getSipaccount(), false);
@@ -384,7 +385,7 @@ public class UserProxy {
             }
         }
 
-        if (user.isCallcenter() && MainContext.hasModule(Constants.CSKEFU_MODULE_CALLOUT)) {
+        if (user.isCallcenter() && ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLOUT)) {
             if (StringUtils.isNotBlank(user.getSipaccount())) {
                 if (userRes.findOneBySipaccountAndDatastatus(
                         user.getSipaccount(), false).isPresent()) {

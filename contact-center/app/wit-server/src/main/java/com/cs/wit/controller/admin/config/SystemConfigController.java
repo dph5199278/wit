@@ -20,6 +20,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.basic.TextEncryptor;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.model.Dict;
@@ -88,7 +89,7 @@ public class SystemConfigController extends Handler {
     @Menu(type = "admin", subtype = "config", admin = true)
     public ModelAndView index(ModelMap map, HttpServletRequest request, @Valid String execute) throws SQLException {
         map.addAttribute("server", server);
-        if (MainContext.hasModule(Constants.CSKEFU_MODULE_ENTIM)) {
+        if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_ENTIM)) {
             map.addAttribute(Constants.CSKEFU_MODULE_ENTIM, true);
         }
         if (request.getSession().getAttribute(Constants.CSKEFU_SYSTEM_INFOACQ) != null) {
@@ -155,14 +156,14 @@ public class SystemConfigController extends Handler {
     @RequestMapping("/startentim")
     @Menu(type = "admin", subtype = "startentim", admin = true)
     public ModelAndView startentim(ModelMap map, HttpServletRequest request) throws SQLException {
-        MainContext.enableModule(Constants.CSKEFU_MODULE_ENTIM);
+        ModuleContext.enableModule(Constants.CSKEFU_MODULE_ENTIM);
         return request(super.createRequestPageTempletResponse("redirect:/admin/config/index"));
     }
 
     @RequestMapping("/stopentim")
     @Menu(type = "admin", subtype = "stopentim", admin = true)
     public ModelAndView stopentim(ModelMap map, HttpServletRequest request) throws SQLException {
-        MainContext.removeModule(Constants.CSKEFU_MODULE_ENTIM);
+        ModuleContext.removeModule(Constants.CSKEFU_MODULE_ENTIM);
         return request(super.createRequestPageTempletResponse("redirect:/admin/config/index"));
     }
 

@@ -1038,26 +1038,6 @@ public class MainContext {
     }
 
     /**
-     * 开启模块
-     *
-     * @param moduleName
-     */
-    @Deprecated
-    public static void enableModule(final String moduleName) {
-        ModuleContext.enableModule(moduleName);
-    }
-
-    @Deprecated
-    public static boolean hasModule(final String moduleName) {
-        return ModuleContext.hasModule(moduleName);
-    }
-
-    @Deprecated
-    public static void removeModule(final String moduleName) {
-        ModuleContext.removeModule(moduleName);
-    }
-
-    /**
      * 获得Model
      *
      * @return

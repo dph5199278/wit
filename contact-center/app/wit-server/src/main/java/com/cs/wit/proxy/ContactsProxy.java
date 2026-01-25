@@ -12,6 +12,7 @@ package com.cs.wit.proxy;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.exception.CSKefuException;
 import com.cs.wit.model.AgentUser;
@@ -175,7 +176,7 @@ public class ContactsProxy {
      * 检查Skype渠道是否被建立
      */
     public boolean isSkypeSetup(final String orgi) {
-        return MainContext.hasModule(Constants.CSKEFU_MODULE_SKYPE) && snsAccountRes.countBySnstypeAndOrgi(
+        return ModuleContext.hasModule(Constants.CSKEFU_MODULE_SKYPE) && snsAccountRes.countBySnstypeAndOrgi(
                 Constants.CSKEFU_MODULE_SKYPE, orgi) > 0;
     }
 

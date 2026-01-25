@@ -18,6 +18,7 @@ package com.cs.wit.controller.admin.callcenter;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.controller.Handler;
 import com.cs.wit.model.PbxHost;
 import com.cs.wit.persistence.interfaces.CallCenterInterface;
@@ -94,7 +95,7 @@ public class CallCenterResourceController extends Handler {
             pbxHost.setOrgi(super.getOrgi(request));
             pbxHostRes.save(pbxHost);
 
-            if (MainContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
+            if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CALLCENTER)) {
                 CallCenterInterface callCenterImpl = (CallCenterInterface) MainContext.getContext().getBean(
                         "callcenter");
                 callCenterImpl.init(pbxHost);

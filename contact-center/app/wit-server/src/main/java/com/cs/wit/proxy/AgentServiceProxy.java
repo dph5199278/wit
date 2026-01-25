@@ -18,6 +18,7 @@ package com.cs.wit.proxy;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.model.AgentService;
 import com.cs.wit.model.AgentServiceSummary;
 import com.cs.wit.model.AgentUser;
@@ -129,11 +130,11 @@ public class AgentServiceProxy {
         }
         agentUserContactsRes.findOneByUseridAndOrgi(
                 agentService.getUserid(), agentService.getOrgi()).ifPresent(p -> {
-            if (MainContext.hasModule(Constants.CSKEFU_MODULE_CONTACTS) && StringUtils.isNotBlank(
+            if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_CONTACTS) && StringUtils.isNotBlank(
                     p.getContactsid())) {
                 contactsRes.findOneById(p.getContactsid()).ifPresent(k -> map.addAttribute("contacts", k));
             }
-            if (MainContext.hasModule(Constants.CSKEFU_MODULE_WORKORDERS) && StringUtils.isNotBlank(
+            if (ModuleContext.hasModule(Constants.CSKEFU_MODULE_WORKORDERS) && StringUtils.isNotBlank(
                     p.getContactsid())) {
                 DataExchangeInterface dataExchange = (DataExchangeInterface) MainContext.getContext().getBean(
                         "workorders");

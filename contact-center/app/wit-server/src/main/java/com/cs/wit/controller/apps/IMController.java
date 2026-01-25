@@ -22,6 +22,7 @@ import com.cs.wit.acd.ACDWorkMonitor;
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.basic.MainUtils;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.basic.TextEncryptor;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.controller.Handler;
@@ -811,7 +812,7 @@ public class IMController extends Handler {
                     boolean isEnableExchangeAgentType = false;
 
                     // 是否使用机器人客服
-                    if (invite.isAi() && MainContext.hasModule(Constants.CSKEFU_MODULE_CHATBOT)) {
+                    if (invite.isAi() && ModuleContext.hasModule(Constants.CSKEFU_MODULE_CHATBOT)) {
                         // 查找机器人
                         Optional<Chatbot> optional = chatbotRes.findById(invite.getAiid());
                         if (optional.isPresent()) {

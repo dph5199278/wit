@@ -18,6 +18,7 @@ package com.cs.wit;
 
 import com.cs.wit.basic.Constants;
 import com.cs.wit.basic.MainContext;
+import com.cs.wit.basic.ModuleContext;
 import com.cs.wit.config.AppCtxRefreshEventListener;
 import jakarta.servlet.MultipartConfigElement;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,13 +42,13 @@ public class Application {
      */
     static {
         // CRM模块
-        MainContext.enableModule(Constants.CSKEFU_MODULE_CONTACTS);
+        ModuleContext.enableModule(Constants.CSKEFU_MODULE_CONTACTS);
 
         // 会话监控模块 Customer Chats Audit
-        MainContext.enableModule(Constants.CSKEFU_MODULE_CCA);
+        ModuleContext.enableModule(Constants.CSKEFU_MODULE_CCA);
 
         // 企业聊天模块
-        MainContext.enableModule(Constants.CSKEFU_MODULE_ENTIM);
+        ModuleContext.enableModule(Constants.CSKEFU_MODULE_ENTIM);
     }
 
     @Value("${web.upload-path}")
