@@ -107,9 +107,8 @@ public class IPTools {
 		}
 		if(resource.exists()) {
 			log.info(ipVersion.name + " init with file [{}]", resource.getURL());
-			long length = resource.contentLength();
 			try(InputStream inputStream = resource.getInputStream()) {
-				LongByteArray byteArray = loadContent(inputStream, length);
+				LongByteArray byteArray = Searcher.loadContentFromInputStream(inputStream);
 				searcher = Searcher.newWithBuffer(ipVersion, byteArray);
 			}
 		}
@@ -163,24 +162,6 @@ public class IPTools {
 		// 缓存并返回
 		caches.put(remote, ip);
 		return ip;
-	}
-
-	private LongByteArray loadContent(InputStream inputStream, long contentLength) throws IOException {
-		long toRead = contentLength;
-
-		LongByteArray byteArray;
-		int rLen;
-		for(byteArray = new LongByteArray(); toRead > 0L; toRead -= rLen) {
-			byte[] buff = new byte[(int)Math.min(toRead, 2147479552L)];
-			rLen = inputStream.read(buff);
-			if (rLen != buff.length) {
-				throw new IOException("incomplete read: read bytes should be " + buff.length + ", got `" + rLen + "`");
-			}
-
-			byteArray.append(buff);
-		}
-
-		return byteArray;
 	}
 
 	private String[] regions(String region) {
