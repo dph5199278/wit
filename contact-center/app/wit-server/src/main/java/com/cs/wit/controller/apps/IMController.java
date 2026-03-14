@@ -98,6 +98,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.lang.NonNull;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -420,6 +421,7 @@ public class IMController extends Handler {
      */
     @RequestMapping("/online")
     @Menu(type = "im", subtype = "online", access = true)
+    @Transactional
     public SseEmitter callable(
             HttpServletRequest request,
             final @Valid String orgi,
@@ -446,7 +448,7 @@ public class IMController extends Handler {
                     // 执行了 邀请/再次邀请后终端的
                     OnlineUserProxy.webIMClients.removeClient(userid, client, false);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("[online] error on completion for user {}", userid, e);
                 }
             });
             emitter.onTimeout(() -> {
@@ -455,7 +457,7 @@ public class IMController extends Handler {
                     // 正常的超时断开
                     OnlineUserProxy.webIMClients.removeClient(userid, client, true);
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    logger.error("[online] error on timeout for user {}", userid, e);
                 }
             });
 
