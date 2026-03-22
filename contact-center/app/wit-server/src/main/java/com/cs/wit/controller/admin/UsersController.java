@@ -17,8 +17,10 @@
 package com.cs.wit.controller.admin;
 
 import com.cs.wit.controller.Handler;
+import com.cs.wit.model.OrganUser;
 import com.cs.wit.model.User;
 import com.cs.wit.model.UserRole;
+import com.cs.wit.persistence.repository.OrganUserRepository;
 import com.cs.wit.persistence.repository.UserRepository;
 import com.cs.wit.persistence.repository.UserRoleRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
@@ -51,6 +53,9 @@ public class UsersController extends Handler {
 
     @NonNull
     private final UserRoleRepository userRoleRes;
+
+    @NonNull
+    private OrganUserRepository organUserRes;
 
     @RequestMapping("/index")
     @Menu(type = "admin", subtype = "user")
@@ -92,13 +97,22 @@ public class UsersController extends Handler {
     public ModelAndView delete(HttpServletRequest request, @Valid User user) {
         String msg = "admin_user_delete";
         if (user != null) {
-            List<UserRole> userRole = userRoleRes.findByOrgiAndUser(super.getOrgiByTenantshare(request), user);
-            //删除用户的时候，同时删除用户对应的
-            userRoleRes.deleteAll(userRole);
-            user = userRepository.getOne(user.getId());
-            user.setDatastatus(true);
-            userRepository.save(user);
-            OnlineUserProxy.clean(super.getOrgi(request));
+            User dbUser = userRepository.getOne(user.getId());
+            if(dbUser.isSuperadmin()) {
+                msg = "admin_user_abandoned";
+            }
+            else {
+                List<UserRole> userRole = userRoleRes.findByOrgiAndUser(super.getOrgiByTenantshare(request), user);
+                //删除用户的时候，同时删除用户对应的
+                userRoleRes.deleteAll(userRole);
+                // 删除用户对应的组织机构关系
+                List<OrganUser> organUsers = organUserRes.findByUserid(user.getId());
+                organUserRes.deleteAll(organUsers);
+
+                userRepository.delete(dbUser);
+
+                OnlineUserProxy.clean(super.getOrgi(request));
+            }
         } else {
             msg = "admin_user_not_exist";
         }
