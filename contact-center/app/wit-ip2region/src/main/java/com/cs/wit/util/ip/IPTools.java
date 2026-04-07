@@ -1,6 +1,5 @@
 /*
- * Copyright (C) 2017 优客服-多渠道客服系统
- * Modifications copyright (C) 2018-2019 Chatopera Inc, <https://www.chatopera.com>
+ * Copyright (C) 2026 Dely<https://github.com/dph5199278>, All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +60,7 @@ public class IPTools {
 	@NonNull
 	private final ApplicationContext applicationContext;
 
-	private final static IP EMPTY = new IP();
+	private final static IP EMPTY = IP.builder().build();
 
 	/**
 	 * Sets .
@@ -148,12 +147,13 @@ public class IPTools {
 			if(StringUtils.hasText(region)){
 				String[] regions = regions(region);
 				if(regions.length == 5) {
-					ip = new IP();
-					ip.setCountry(regions[0]);
-					ip.setProvince(regions[1]);
-					ip.setCity(regions[2]);
-					ip.setIsp(regions[3]);
-					ip.setRegion(regions[4]);
+					ip = IP.builder()
+					.country(regions[0])
+					.province(regions[1])
+					.city(regions[2])
+					.isp(regions[3])
+					.region(regions[4])
+					.build();
 				}
 			}
 		}
