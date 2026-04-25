@@ -41,7 +41,7 @@
         <ip2region.version>3.3.4</ip2region.version>
         <jasypt.version>1.9.3</jasypt.version>
         <pinyin4j.version>2.6.1</pinyin4j.version>
-        <poi-ooxml.version>5.4.1</poi-ooxml.version>
+        <poi-ooxml.version>5.5.1</poi-ooxml.version>
         <snakeyaml.version>2.6</snakeyaml.version>
 
         <!-- message queue -->
