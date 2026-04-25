@@ -31,15 +31,18 @@ public class WebSseEmitterClient {
     private ConcurrentMap<String, WebIMClient> imClientsMap = new ConcurrentHashMap<>();
 
     public List<WebIMClient> getClients(String userid) {
-
+        if (StringUtils.isBlank(userid)) {
+            logger.warn("[getClients] userid is blank");
+            return new ArrayList<>();
+        }
         Collection<WebIMClient> values = imClientsMap.values();
-        List<WebIMClient> clients = new ArrayList<WebIMClient>();
+        List<WebIMClient> clients = new ArrayList<>();
         for (WebIMClient client : values) {
-            if (client.getUserid().equals(userid)) {
+            if (client != null && userid.equals(client.getUserid())) {
                 clients.add(client);
             }
         }
-//        logger.info("[getClients] get clients for userId {}, size {}", userid, clients.size());
+        logger.info("[getClients] get clients for userId {}, size {}", userid, clients.size());
         return clients;
     }
 
@@ -48,25 +51,27 @@ public class WebSseEmitterClient {
     }
 
     public void putClient(String userid, WebIMClient client) {
-//        logger.info("[putClient] userid {} client {}", userid, client.getClient());
+        if (StringUtils.isBlank(userid) || client == null) {
+            logger.warn("[putClient] invalid parameters: userid={}, client={}", userid, client);
+            return;
+        }
+        logger.info("[putClient] userid {} client {}", userid, client.getClient());
         imClientsMap.put(client.getClient(), client);
     }
 
     public void removeClient(String userid, String client, boolean timeout) throws Exception {
-//        logger.info("[removeClient] remove client {} for userid {}", client, userid);
-        List<WebIMClient> keyClients = this.getClients(userid);
-        for (int i = 0; i < keyClients.size(); i++) {
-            WebIMClient webIMClient = keyClients.get(i);
-            if (StringUtils.equals(webIMClient.getClient(), client)) {
-
-                imClientsMap.remove(client);
-                keyClients.remove(i);
-                break;
-            }
+        if (StringUtils.isBlank(userid) || StringUtils.isBlank(client)) {
+            logger.warn("[removeClient] invalid parameters: userid={}, client={}", userid, client);
+            return;
         }
-        if (keyClients.size() == 0 && timeout == true) {
+        logger.info("[removeClient] remove client {} for userid {}", client, userid);
+        // Remove from map directly using client ID as key
+        imClientsMap.remove(client);
+        // Check if user has any remaining clients
+        List<WebIMClient> remainingClients = this.getClients(userid);
+        if (remainingClients.isEmpty() && timeout) {
             OnlineUserProxy.offline(userid, userid);
-//            logger.info("[removeClient] set onlineUser {} as offline.", userid);
+            logger.info("[removeClient] set onlineUser {} as offline.", userid);
         }
     }
 }
