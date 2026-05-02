@@ -34,6 +34,7 @@ import com.cs.wit.persistence.repository.OnlineUserRepository;
 import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.socketio.message.ChatMessage;
 import com.cs.wit.socketio.message.Message;
+import jakarta.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,7 +42,6 @@ import java.util.Optional;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.data.domain.Page;
@@ -56,28 +56,28 @@ public class WebIMTask {
 
     private final static Logger logger = LoggerFactory.getLogger(WebIMTask.class);
 
-    @Autowired
+    @Resource
     private ACDPolicyService acdPolicyService;
 
-    @Autowired
+    @Resource
     private ACDAgentService acdAgentService;
 
-    @Autowired
+    @Resource
     private AgentUserTaskRepository agentUserTaskRes;
 
-    @Autowired
+    @Resource
     private OnlineUserRepository onlineUserRes;
 
-    @Autowired
+    @Resource
     private JobDetailRepository jobDetailRes;
 
-    @Autowired
+    @Resource
     private TaskExecutor webimTaskExecutor;
 
-    @Autowired
+    @Resource
     private PeerSyncIM peerSyncIM;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     @Scheduled(fixedDelay = 5000, initialDelay = 20000) // 处理超时消息，每5秒执行一次

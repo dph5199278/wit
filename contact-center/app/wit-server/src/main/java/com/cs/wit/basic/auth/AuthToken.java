@@ -18,12 +18,12 @@ package com.cs.wit.basic.auth;
 import com.cs.wit.cache.RedisKey;
 import com.cs.wit.model.User;
 import com.cs.wit.util.SerializeUtil;
+import jakarta.annotation.Resource;
 import java.time.Duration;
 import jakarta.annotation.PostConstruct;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
@@ -39,7 +39,7 @@ public class AuthToken {
     @Value("${spring.session.timeout}")
     private Duration timeout;
 
-    @Autowired
+    @Resource
     private AuthRedisTemplate authRedisTemplate;
 
     private ValueOperations<String, String> redisValOps;

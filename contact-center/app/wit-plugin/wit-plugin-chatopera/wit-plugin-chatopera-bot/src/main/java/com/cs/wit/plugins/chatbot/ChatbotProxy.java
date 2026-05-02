@@ -40,16 +40,16 @@ public class ChatbotProxy {
     @Value("${" + ChatbotConstants.BOT_PROVIDER + ":" + ChatbotConstants.DEFAULT_BOT_PROVIDER + "}")
     private String botServiecProvider;
 
-    @Autowired
+    @Resource
     private BrokerPublisher brokerPublisher;
 
-    @Autowired
+    @Resource
     private ChatbotRepository chatbotRes;
 
-    @Autowired
+    @Resource
     private ChatMessageRepository chatMessageRes;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     /**

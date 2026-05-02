@@ -23,10 +23,10 @@ import com.cs.wit.persistence.repository.OnlineUserRepository;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/online/user")
 public class ApiOnlineUserController extends Handler {
 
-    @Autowired
+    @Resource
     private OnlineUserRepository onlineUserRepository;
 
     /**

@@ -18,13 +18,13 @@ package com.cs.wit.aspect;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.model.OnlineUser;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Component;
 public class OnlineUserAspect {
     private final static Logger logger = LoggerFactory.getLogger(OnlineUserAspect.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     /**

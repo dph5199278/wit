@@ -14,12 +14,12 @@ package com.cs.wit.proxy;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.AttachmentFile;
 import com.cs.wit.persistence.repository.AttachmentRepository;
+import jakarta.annotation.Resource;
 import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +29,7 @@ public class AttachmentProxy {
     @Value("${web.upload-path}")
     private String path;
 
-    @Autowired
+    @Resource
     private AttachmentRepository attachementRes;
 
     public String processAttachmentFile(

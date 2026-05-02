@@ -24,11 +24,11 @@ import com.cs.wit.model.AgentUserAudit;
 import com.cs.wit.mq.AgentAuditSubscription;
 import com.cs.wit.util.SerializeUtil;
 import com.google.gson.JsonObject;
+import jakarta.annotation.Resource;
 import java.io.Serializable;
 import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
@@ -41,14 +41,14 @@ public class AgentAuditProxy {
     private final static Logger logger = LoggerFactory.getLogger(AgentAuditProxy.class);
 
     @Lazy
-    @Autowired
+    @Resource
     private AgentAuditSubscription agentAuditSubscription;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     @Lazy
-    @Autowired
+    @Resource
     private AgentUserProxy agentUserProxy;
 
     /**

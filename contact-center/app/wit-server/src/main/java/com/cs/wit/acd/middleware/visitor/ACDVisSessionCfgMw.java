@@ -23,10 +23,10 @@ import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.basic.MainUtils;
 import com.cs.wit.model.AgentReport;
 import com.cs.wit.model.SessionConfig;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -38,10 +38,10 @@ import org.springframework.stereotype.Component;
 public class ACDVisSessionCfgMw extends BaseACDComposeContextMw {
     private final static Logger logger = LoggerFactory.getLogger(ACDVisSessionCfgMw.class);
 
-    @Autowired
+    @Resource
     private ACDPolicyService acdPolicyService;
 
-    @Autowired
+    @Resource
     private ACDWorkMonitor acdWorkMonitor;
 
     @Override

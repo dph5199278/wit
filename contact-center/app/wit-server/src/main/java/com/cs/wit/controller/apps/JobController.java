@@ -24,11 +24,11 @@ import com.cs.wit.model.JobTask;
 import com.cs.wit.persistence.repository.JobDetailRepository;
 import com.cs.wit.util.Menu;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.annotation.Resource;
 import java.text.ParseException;
 import java.util.Date;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +39,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/apps/job")
 public class JobController extends Handler {
 	
-	@Autowired
+	@Resource
 	private JobDetailRepository jobRes ;
 	/**
 	 * 跳转到修改执行时间的页面

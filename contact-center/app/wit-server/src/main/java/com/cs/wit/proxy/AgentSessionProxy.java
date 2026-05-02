@@ -18,10 +18,10 @@ package com.cs.wit.proxy;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.mq.AgentSessionSubscription;
 import com.google.gson.JsonObject;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,10 +33,10 @@ import org.springframework.stereotype.Component;
 public class AgentSessionProxy {
     private final static Logger logger = LoggerFactory.getLogger(AgentSessionProxy.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
-    @Autowired
+    @Resource
     private AgentSessionSubscription agentSessionSubscription;
 
     /**

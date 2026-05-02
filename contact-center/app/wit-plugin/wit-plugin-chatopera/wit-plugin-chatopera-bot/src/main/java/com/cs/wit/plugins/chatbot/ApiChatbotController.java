@@ -66,16 +66,16 @@ import java.util.List;
 public class ApiChatbotController extends Handler {
     private final static Logger logger = LoggerFactory.getLogger(ApiChatbotController.class);
 
-    @Autowired
+    @Resource
     private ChatbotRepository chatbotRes;
 
-    @Autowired
+    @Resource
     private SNSAccountRepository snsAccountRes;
 
-    @Autowired
+    @Resource
     private UserRepository userRes;
 
-    @Autowired
+    @Resource
     private ConsultInviteRepository consultInviteRes;
 
     private final static String botServiecProvider = SystemEnvHelper.getenv(

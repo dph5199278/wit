@@ -22,23 +22,23 @@ import com.cs.wit.model.AgentReport;
 import com.cs.wit.model.AgentStatus;
 import com.cs.wit.model.WorkMonitor;
 import com.cs.wit.persistence.repository.WorkMonitorRepository;
+import jakarta.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ACDWorkMonitor {
     private final static Logger logger = LoggerFactory.getLogger(ACDWorkMonitor.class);
 
-    @Autowired
+    @Resource
     private WorkMonitorRepository workMonitorRes;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     /**

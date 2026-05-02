@@ -21,10 +21,10 @@ import com.cs.wit.acd.ACDQueueService;
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.acd.basic.ACDMessageHelper;
 import com.cs.wit.basic.MainContext;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -36,10 +36,10 @@ import org.springframework.stereotype.Component;
 public class ACDVisServiceMw extends BaseACDComposeContextMw {
     private final static Logger logger = LoggerFactory.getLogger(ACDVisServiceMw.class);
 
-    @Autowired
+    @Resource
     private ACDQueueService acdQueueService;
 
-    @Autowired
+    @Resource
     private ACDMessageHelper acdMessageHelper;
 
     @Override

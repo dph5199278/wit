@@ -21,19 +21,19 @@ import com.cs.wit.acd.ACDWorkMonitor;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.model.AgentReport;
 import com.cs.wit.persistence.repository.AgentReportRepository;
+import jakarta.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AgentStatusProxy {
     private final static Logger logger = LoggerFactory.getLogger(AgentStatusProxy.class);
 
-    @Autowired
+    @Resource
     private AgentReportRepository agentReportRes;
 
-    @Autowired
+    @Resource
     private ACDWorkMonitor acdWorkMonitor;
 
     private SocketIONamespace agentNamespace;

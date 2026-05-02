@@ -20,12 +20,12 @@ import com.cs.wit.controller.Handler;
 import com.cs.wit.model.Skill;
 import com.cs.wit.persistence.repository.SkillRepository;
 import com.cs.wit.util.Menu;
+import jakarta.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +42,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/skill")
 public class AgentSkillController extends Handler{
 	
-	@Autowired
+	@Resource
 	private SkillRepository skillRepository;
 
     @RequestMapping("/index")

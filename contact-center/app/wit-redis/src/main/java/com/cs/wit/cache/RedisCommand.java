@@ -15,6 +15,7 @@
  */
 package com.cs.wit.cache;
 
+import jakarta.annotation.Resource;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.ListOperations;
 import org.springframework.data.redis.core.RedisCallback;
@@ -50,7 +50,7 @@ public class RedisCommand {
      * 使用StringRedisTemplate而不是RedisTemplate解决序列化问题
      * https://stackoverflow.com/questions/13215024/weird-redis-key-with-spring-data-jedis
      */
-    @Autowired
+    @Resource
     private StringRedisTemplate redis;
 
     @PostConstruct

@@ -30,11 +30,11 @@ import com.cs.wit.proxy.AgentStatusProxy;
 import com.cs.wit.util.Menu;
 import com.cs.wit.util.RestResult;
 import com.cs.wit.util.RestResultType;
+import jakarta.annotation.Resource;
 import java.util.Date;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,22 +49,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/servicequene")
 public class ApiServiceQueneController extends Handler {
 
-    @Autowired
+    @Resource
     private AgentStatusProxy agentStatusProxy;
 
-    @Autowired
+    @Resource
     private ACDWorkMonitor acdWorkMonitor;
 
-    @Autowired
+    @Resource
     private ACDPolicyService acdPolicyService;
 
-    @Autowired
+    @Resource
     private AgentStatusRepository agentStatusRes;
 
-    @Autowired
+    @Resource
     private ACDAgentService acdAgentService;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     /**

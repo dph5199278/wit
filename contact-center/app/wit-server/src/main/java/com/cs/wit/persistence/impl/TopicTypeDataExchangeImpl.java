@@ -19,13 +19,13 @@ package com.cs.wit.persistence.impl;
 import com.cs.wit.model.KnowledgeType;
 import com.cs.wit.persistence.interfaces.DataExchangeInterface;
 import com.cs.wit.persistence.repository.KnowledgeTypeRepository;
+import jakarta.annotation.Resource;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("topictype")
 public class TopicTypeDataExchangeImpl implements DataExchangeInterface{
-	@Autowired
+	@Resource
 	private KnowledgeTypeRepository knowledgeTypeRes ;
 	
 	public KnowledgeType getDataByIdAndOrgi(String id, String orgi){

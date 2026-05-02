@@ -23,6 +23,7 @@ import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import com.cs.wit.basic.TextEncryptor;
 import com.cs.wit.exception.InstantMessagingExceptionListener;
+import jakarta.annotation.Resource;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -30,7 +31,6 @@ import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 
@@ -51,7 +51,7 @@ public class MessagingServerConfigure {
     @Value("${uk.im.server.threads:100}")
     private int threads;
 
-    @Autowired
+    @Resource
     private TextEncryptor encryptor;
 
     @Bean(name = "webimport")

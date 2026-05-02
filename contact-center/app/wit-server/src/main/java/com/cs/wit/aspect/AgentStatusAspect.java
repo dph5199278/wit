@@ -17,12 +17,12 @@ package com.cs.wit.aspect;
 
 import com.cs.wit.cache.Cache;
 import com.cs.wit.model.AgentStatus;
+import jakarta.annotation.Resource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Component;
 public class AgentStatusAspect {
     private final static Logger logger = LoggerFactory.getLogger(AgentStatusAspect.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     @After("execution(* com.cs.wit.persistence.repository.AgentStatusRepository.save(..))")

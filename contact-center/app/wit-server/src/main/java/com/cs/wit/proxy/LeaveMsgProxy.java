@@ -18,17 +18,17 @@ package com.cs.wit.proxy;
 import com.cs.wit.model.LeaveMsg;
 import com.cs.wit.model.SNSAccount;
 import com.cs.wit.persistence.repository.SNSAccountRepository;
+import jakarta.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LeaveMsgProxy {
     private final static Logger logger = LoggerFactory.getLogger(LeaveMsgProxy.class);
 
-    @Autowired
+    @Resource
     private SNSAccountRepository snsAccountRes;
 
     /**

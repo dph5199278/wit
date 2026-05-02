@@ -45,16 +45,16 @@ public class ChatbotController extends Handler {
 
     private final static Logger logger = LoggerFactory.getLogger(ChatbotController.class);
 
-    @Autowired
+    @Resource
     private ChatbotRepository chatbotRes;
 
-    @Autowired
+    @Resource
     private SNSAccountRepository snsAccountRes;
 
-    @Autowired
+    @Resource
     private UserProxy userProxy;
 
-    @Autowired
+    @Resource
     private SNSAccountRepository snsAccountRepository;
 
     private final static String botServiecProvider = SystemEnvHelper.getenv(

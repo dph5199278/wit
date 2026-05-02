@@ -22,10 +22,10 @@ import com.cs.wit.acd.ACDPolicyService;
 import com.cs.wit.acd.basic.ACDComposeContext;
 import com.cs.wit.model.AgentService;
 import com.cs.wit.model.AgentStatus;
+import jakarta.annotation.Resource;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -34,10 +34,10 @@ import org.springframework.stereotype.Component;
 public class ACDVisAllocatorMw extends BaseACDComposeContextMw {
     private final static Logger logger = LoggerFactory.getLogger(ACDVisAllocatorMw.class);
 
-    @Autowired
+    @Resource
     private ACDAgentService acdAgentService;
 
-    @Autowired
+    @Resource
     private ACDPolicyService acdPolicyService;
 
     @Override

@@ -22,6 +22,7 @@ import com.cs.wit.cache.RedisCommand;
 import com.cs.wit.cache.RedisKey;
 import com.cs.wit.model.AgentUser;
 import com.cs.wit.proxy.AgentAuditProxy;
+import jakarta.annotation.Resource;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -34,7 +35,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -43,13 +43,13 @@ public class AgentUserAspect {
 
     private final static Logger logger = LoggerFactory.getLogger(AgentUserAspect.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
-    @Autowired
+    @Resource
     private RedisCommand redisCommand;
 
-    @Autowired
+    @Resource
     private AgentAuditProxy agentAuditProxy;
 
     @After("execution(* com.cs.wit.persistence.repository.AgentUserRepository.save(..))")

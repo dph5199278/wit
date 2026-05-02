@@ -22,12 +22,12 @@ import com.cs.wit.proxy.OnlineUserProxy;
 import com.cs.wit.util.Menu;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,13 +41,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ApiAppsController extends Handler {
     private final static Logger logger = LoggerFactory.getLogger(ApiAppsController.class);
 
-    @Autowired
+    @Resource
     private OnlineUserRepository onlineUserRes;
 
-    @Autowired
+    @Resource
     private InviteRecordRepository inviteRecordRes;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     @RequestMapping(method = RequestMethod.POST)

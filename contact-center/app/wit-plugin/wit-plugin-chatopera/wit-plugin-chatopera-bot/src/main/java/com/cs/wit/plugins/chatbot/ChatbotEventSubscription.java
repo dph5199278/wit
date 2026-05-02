@@ -45,13 +45,13 @@ import java.net.MalformedURLException;
 public class ChatbotEventSubscription {
     private final static Logger logger = LoggerFactory.getLogger(ChatbotEventSubscription.class);
 
-    @Autowired
+    @Resource
     private Cache cache;
 
-    @Autowired
+    @Resource
     private AgentUserRepository agentUserRes;
 
-    @Autowired
+    @Resource
     private ChatbotRepository chatbotRes;
 
     // 机器人服务提供地址
@@ -65,7 +65,7 @@ public class ChatbotEventSubscription {
     @Value("${" + ChatbotConstants.THRESHOLD_FAQ_SUGG_REPLY + ":0.6}")
     private double thresholdFaqSuggReply;
 
-    @Autowired
+    @Resource
     private ChatbotProxy chatbotProxy;
 
     /**

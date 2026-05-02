@@ -20,12 +20,12 @@ import com.cs.wit.acd.ACDWorkMonitor;
 import com.cs.wit.basic.MainContext;
 import com.cs.wit.cache.Cache;
 import com.cs.wit.model.User;
+import jakarta.annotation.Resource;
 import java.util.TimeZone;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +35,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ApplicationController extends Handler {
     private final static Logger logger = LoggerFactory.getLogger(ApplicationController.class);
 
-    @Autowired
+    @Resource
     private ACDWorkMonitor acdWorkMonitor;
 
     @Value("${git.build.version}")
@@ -50,7 +50,7 @@ public class ApplicationController extends Handler {
     @Value("${application.customer.entity}")
     private String appCustomerEntity;
 
-    @Autowired
+    @Resource
     private Cache cache;
 
     @RequestMapping("/")

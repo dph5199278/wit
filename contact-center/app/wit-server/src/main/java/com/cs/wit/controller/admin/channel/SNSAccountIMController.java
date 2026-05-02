@@ -28,13 +28,13 @@ import com.cs.wit.persistence.repository.SNSAccountRepository;
 import com.cs.wit.persistence.repository.SecretRepository;
 import com.cs.wit.util.Base62;
 import com.cs.wit.util.Menu;
+import jakarta.annotation.Resource;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -50,13 +50,13 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/admin/im")
 public class SNSAccountIMController extends Handler {
 
-    @Autowired
+    @Resource
     private SNSAccountRepository snsAccountRes;
 
-    @Autowired
+    @Resource
     private ConsultInviteRepository invite;
 
-    @Autowired
+    @Resource
     private SecretRepository secRes;
 
     @RequestMapping("/index")

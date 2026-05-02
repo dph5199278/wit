@@ -31,6 +31,7 @@ import com.cs.wit.model.User;
 import com.cs.wit.persistence.blob.JpaBlobHelper;
 import com.cs.wit.persistence.repository.StreamingFileRepository;
 import com.cs.wit.persistence.repository.TenantRepository;
+import jakarta.annotation.Resource;
 import java.io.IOException;
 import java.util.Map;
 import jakarta.servlet.http.Cookie;
@@ -39,15 +40,12 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 
-@SuppressWarnings("SpringJavaAutowiredFieldsWarningInspection")
 @Controller
 @SessionAttributes
 @NoArgsConstructor
@@ -56,15 +54,15 @@ public class Handler {
     public final static int PAGE_SIZE_TW = 20;
     public final static int PAGE_SIZE_HA = 100;
     private static final Logger logger = LoggerFactory.getLogger(Handler.class);
-    @Autowired
+    @Resource
     private TenantRepository tenantRes;
-    @Autowired
+    @Resource
     private JpaBlobHelper jpaBlobHelper;
-    @Autowired
+    @Resource
     private StreamingFileRepository streamingFileRes;
-    @Autowired
+    @Resource
     private Cache cache;
-    @Autowired
+    @Resource
     private AuthToken authToken;
     private long startTime = System.currentTimeMillis();
 
