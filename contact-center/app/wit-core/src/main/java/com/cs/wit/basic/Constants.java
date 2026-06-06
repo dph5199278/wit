@@ -75,7 +75,7 @@ public class Constants {
     /**
      * 分布式存储
      */
-    public final static String MINIO_BUCKET = "chatopera";
+    public final static String OSS_BUCKET = "wit";
 
 
     /**
