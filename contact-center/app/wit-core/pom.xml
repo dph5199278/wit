@@ -115,8 +115,8 @@
 
     <!-- OSS -->
     <dependency>
-      <groupId>io.minio</groupId>
-      <artifactId>minio</artifactId>
+      <groupId>com.github.davidmoten</groupId>
+      <artifactId>aws-lightweight-client-java</artifactId>
     </dependency>
 
     <!-- Thumbnailator -->

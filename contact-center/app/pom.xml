@@ -64,7 +64,7 @@
         <org.jacoco.agent.version>0.8.8</org.jacoco.agent.version>
         <okhttp.version>4.12.0</okhttp.version>
         <!-- OSS -->
-        <minio.version>8.5.17</minio.version>
+        <aws-lightweight-client-java.version>0.1.24</aws-lightweight-client-java.version>
 
         <!-- maven plugin -->
         <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
@@ -233,9 +233,9 @@
 
             <!-- OSS -->
             <dependency>
-                <groupId>io.minio</groupId>
-                <artifactId>minio</artifactId>
-                <version>${minio.version}</version>
+                <groupId>com.github.davidmoten</groupId>
+                <artifactId>aws-lightweight-client-java</artifactId>
+                <version>${aws-lightweight-client-java.version}</version>
             </dependency>
 
             <!-- Thumbnailator -->
