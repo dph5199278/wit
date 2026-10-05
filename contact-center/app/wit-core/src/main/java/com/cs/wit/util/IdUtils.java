@@ -16,8 +16,13 @@
 
 package com.cs.wit.util;
 
+import cn.hutool.v7.core.data.id.IdUtil;
+import java.time.Instant;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * IdUtils
@@ -27,6 +32,10 @@ import java.util.UUID;
  * @date 2023-05 add
  */
 public class IdUtils {
+
+  private static final Random RANDOM = ThreadLocalRandom.current();
+
+  private static final AtomicLong LAST_UUID_V7_TIME = new AtomicLong(0);
 
   /**
    * @return 返回用UUID去自定义加密的值
@@ -47,7 +56,7 @@ public class IdUtils {
    * @return 获取无分隔符的UUID
    */
   public static String getUUID() {
-    return UUID.randomUUID().toString().replace("-", "");
+    return IdUtil.simpleUUID();
   }
 
   /**
@@ -58,4 +67,58 @@ public class IdUtils {
     return session.replaceAll("-", "");
   }
 
+  /**
+   * Gets uuid 7.
+   *
+   * @return the uuid 7
+   */
+  public static UUID getUuid7() {
+    long now = Instant.now().toEpochMilli();
+
+    // 低12位预留给序列号
+    long base = now << 12;
+
+    while (true) {
+      long last = LAST_UUID_V7_TIME.get();
+      long candidate = base;
+
+      // 时钟回退或同毫秒内序列溢出
+      if (candidate <= last) {
+        // 单调递增
+        candidate = last + 1;
+      }
+
+      if (LAST_UUID_V7_TIME.compareAndSet(last, candidate)) {
+        long timestamp = candidate >> 12;
+
+        // 12位序列号
+        long seq = candidate & 0xFFF;
+
+        // 62位随机数（保证安全性）
+        long random62 = RANDOM.nextLong() & 0x3FFFFFFFFFFFFFFFL;
+
+        // 时间戳占位0-47
+        // 版本号7占位48-51
+        // 序列号占位52-63
+        long mostSigBits = (timestamp << 16)
+            | (0x7L << 12)
+            | seq;
+
+        // 变体10占位62-63
+        long leastSigBits = (0x2L << 62)
+            | random62;
+
+        return new UUID(mostSigBits, leastSigBits);
+      }
+    }
+  }
+
+  /**
+   * Gets uuid 7 str.
+   *
+   * @return the uuid 7 str
+   */
+  public static String getUuid7Str() {
+    return IdUtils.getUUID().replaceAll("-", "");
+  }
 }

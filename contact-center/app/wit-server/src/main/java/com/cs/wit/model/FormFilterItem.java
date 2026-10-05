@@ -17,14 +17,12 @@
 
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_act_formfilter_item")
@@ -35,7 +33,7 @@ public class FormFilterItem  implements java.io.Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String id  = MainUtils.getUUID();
+	private String id  = IdUtils.getUuid7Str();
 	
 	private String formfilterid;
 	
@@ -67,8 +65,6 @@ public class FormFilterItem  implements java.io.Serializable{
 	 */
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")	
 	public String getId() {
 		return id;
 	}

@@ -20,11 +20,9 @@ package com.cs.wit.model;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_onlineuser")
@@ -105,8 +103,6 @@ public class OnlineUser implements java.io.Serializable  {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "assigned")
     public String getId() {
         return this.id;
     }

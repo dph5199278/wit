@@ -23,7 +23,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
+
 /**
  * 坐席监控表 -- 实体类
  */
@@ -101,8 +102,8 @@ public class CallMonitor implements java.io.Serializable {
 	
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")	
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

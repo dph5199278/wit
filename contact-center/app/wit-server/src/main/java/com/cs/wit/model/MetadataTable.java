@@ -31,7 +31,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 import org.hibernate.annotations.Where;
 
 
@@ -129,8 +129,8 @@ public class MetadataTable implements java.io.Serializable{
 	 */
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

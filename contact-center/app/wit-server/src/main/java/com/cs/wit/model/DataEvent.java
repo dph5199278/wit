@@ -29,7 +29,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 
 @Entity
 @Table(name = "uk_dataevent")
@@ -63,8 +63,8 @@ public class DataEvent implements java.io.Serializable{
 	
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")	
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

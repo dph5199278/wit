@@ -16,15 +16,13 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -34,7 +32,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Table(name = "uk_quickreply")
 public class QuickReply {
 
-	private String id  = MainUtils.getUUID();
+	private String id  = IdUtils.getUuid7Str();
 
 	//标题
 	private String title ;
@@ -59,8 +57,6 @@ public class QuickReply {
 
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")
 	public String getId() {
 		return id;
 	}

@@ -16,7 +16,7 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import java.io.Serializable;
 import java.util.Date;
 import jakarta.persistence.Column;
@@ -25,7 +25,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 
 @Entity
 @Table(name = "uk_agentuser")
@@ -67,7 +67,7 @@ public class AgentUser implements Serializable, Comparable<AgentUser> {
     private String status;
     private String appid;
     private String sessiontype;
-    private String contextid = MainUtils.getUUID();
+    private String contextid = IdUtils.getUuid7Str();
     private String agentserviceid;
     private String orgi;
     private long ordertime = System.currentTimeMillis();
@@ -153,8 +153,8 @@ public class AgentUser implements Serializable, Comparable<AgentUser> {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
+    @Uuid7IdGeneratorType
     public String getId() {
         return this.id;
     }

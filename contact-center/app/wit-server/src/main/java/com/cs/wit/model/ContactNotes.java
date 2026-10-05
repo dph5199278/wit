@@ -16,15 +16,13 @@
 
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -34,7 +32,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 @Table(name = "cs_contact_notes")
 public class ContactNotes {
 
-    private String id = MainUtils.getUUID();
+    private String id = IdUtils.getUuid7Str();
     private String contactid;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @Field(type = FieldType.Date, format = {}, pattern = "uuuu-MM-dd HH:mm:ss.SSS")
@@ -52,8 +50,6 @@ public class ContactNotes {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "assigned")
     public String getId() {
         return id;
     }

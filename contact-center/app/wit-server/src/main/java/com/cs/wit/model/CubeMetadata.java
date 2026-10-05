@@ -25,7 +25,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
+
 @Entity
 @Table(name = "uk_cubemetadata")
 public class CubeMetadata implements java.io.Serializable{
@@ -50,8 +51,8 @@ public class CubeMetadata implements java.io.Serializable{
 	
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

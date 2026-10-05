@@ -25,9 +25,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 
 @Entity
 @Table(name = "cs_callout_dialplan")
@@ -59,8 +59,8 @@ public class CallOutDialplan {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
+    @Uuid7IdGeneratorType
     public String getId() {
         return id;
     }

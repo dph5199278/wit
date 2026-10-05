@@ -18,7 +18,7 @@
 
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import jakarta.persistence.Column;
@@ -26,7 +26,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Transient;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -36,7 +36,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class KbsTopicComment implements UKAgg {
 
     private static final long serialVersionUID = -4911955236794918875L;
-    private String id = MainUtils.getUUID();
+    private String id = IdUtils.getUuid7Str();
     private String username;
     private String creater;
 
@@ -83,8 +83,8 @@ public class KbsTopicComment implements UKAgg {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
+    @Uuid7IdGeneratorType
     public String getId() {
         return id;
     }

@@ -27,7 +27,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 
 @Entity
 @Table(name = "uk_agentstatus")
@@ -87,8 +87,8 @@ public class AgentStatus implements java.io.Serializable, Comparable<AgentStatus
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "uuid")
+    @GeneratedValue
+    @Uuid7IdGeneratorType
     public String getId() {
         return id;
     }

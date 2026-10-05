@@ -16,18 +16,16 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -40,7 +38,7 @@ public class Report extends ESBean implements java.io.Serializable {
 	 *
 	 */
 	private static final long serialVersionUID = -5781401948807231526L;
-	private String id = MainUtils.getUUID();
+	private String id = IdUtils.getUuid7Str();
 	private String name;
 	//0 代表动态报表  1 代表自助查询报表
 	private String reporttype;
@@ -99,8 +97,6 @@ public class Report extends ESBean implements java.io.Serializable {
 
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")
 	public String getId() {
 		return id;
 	}

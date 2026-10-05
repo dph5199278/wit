@@ -16,21 +16,21 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
 
 @Entity
 @Table(name = "uk_ai")
 public class ServiceAi implements java.io.Serializable{
 	private static final long serialVersionUID = 1115593425069549681L;
 	
-	private String id = MainUtils.getUUID() ;
+	private String id = IdUtils.getUuid7Str() ;
 	private String name ;
 	private String code ;
 	
@@ -48,8 +48,8 @@ public class ServiceAi implements java.io.Serializable{
 	
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

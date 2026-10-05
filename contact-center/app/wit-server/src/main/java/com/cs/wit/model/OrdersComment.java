@@ -17,17 +17,15 @@
 
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -39,7 +37,7 @@ import org.springframework.data.elasticsearch.annotations.FieldType;
 public class OrdersComment implements UKAgg {
 
     private static final long serialVersionUID = -4911955236794918875L;
-    private String id = MainUtils.getUUID();
+    private String id = IdUtils.getUuid7Str();
     private String username;
     private String creater;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSS")
@@ -87,8 +85,6 @@ public class OrdersComment implements UKAgg {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "paymentableGenerator")
-    @GenericGenerator(name = "paymentableGenerator", strategy = "assigned")
     public String getId() {
         return id;
     }

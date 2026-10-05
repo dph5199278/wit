@@ -16,15 +16,13 @@
  */
 package com.cs.wit.model;
 
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
 
 
 /**
@@ -42,7 +40,7 @@ public class Scene implements java.io.Serializable{
 	 * 
 	 */
 	
-	private String id  = MainUtils.getUUID();
+	private String id  = IdUtils.getUuid7Str();
 	
 	private String sessionid ;
 	
@@ -122,8 +120,6 @@ public class Scene implements java.io.Serializable{
 	 */
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")	
 	public String getId() {
 		return id;
 	}

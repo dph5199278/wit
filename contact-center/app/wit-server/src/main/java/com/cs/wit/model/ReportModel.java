@@ -19,18 +19,17 @@ package com.cs.wit.model;
 
 
 import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import com.cs.wit.util.bi.ReportData;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.apache.commons.codec.binary.Base64;
-import org.hibernate.annotations.GenericGenerator;
 
 
 @Entity
@@ -40,7 +39,7 @@ public class ReportModel implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String id = MainUtils.getUUID();
+	private String id = IdUtils.getUuid7Str();
 	private String posx ;
 	private String posy ;
 	private String poswidth;
@@ -203,8 +202,6 @@ public class ReportModel implements java.io.Serializable {
 	 */
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")	
 	public String getId() {
 		return id;
 	}

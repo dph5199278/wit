@@ -26,9 +26,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+import com.cs.wit.hibernate.id.Uuid7IdGeneratorType;
+
 @Entity
 @Table(name = "uk_cubelevel")
 public class CubeLevel implements java.io.Serializable{
@@ -62,8 +63,8 @@ public class CubeLevel implements java.io.Serializable{
 	 */
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue
+	@Uuid7IdGeneratorType
 	public String getId() {
 		return id;
 	}

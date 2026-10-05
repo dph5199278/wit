@@ -17,17 +17,15 @@
 package com.cs.wit.model;
 
 import com.cs.wit.basic.MainContext;
-import com.cs.wit.basic.MainUtils;
+import com.cs.wit.util.IdUtils;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "uk_agentservice")
@@ -39,7 +37,7 @@ public class AgentService implements Serializable {
 	private long times;
 	private Date servicetime;
 	private String orgi;
-	private String id = MainUtils.getUUID();
+	private String id = IdUtils.getUuid7Str();
 	private String username;
 	private String userid;
 	private String channel;
@@ -239,8 +237,6 @@ public class AgentService implements Serializable {
 
 	@Id
 	@Column(length = 32)
-	@GeneratedValue(generator = "system-uuid")
-	@GenericGenerator(name = "system-uuid", strategy = "assigned")
 	public String getId() {
 		return this.id;
 	}

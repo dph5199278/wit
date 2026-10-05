@@ -16,20 +16,18 @@
  */
 package com.cs.wit.socketio.message;
 
-import com.cs.wit.basic.MainUtils;
 import com.cs.wit.proxy.OnlineUserProxy;
+import com.cs.wit.util.IdUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import org.apache.commons.lang3.StringUtils;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
@@ -43,7 +41,7 @@ public class ChatMessage implements java.io.Serializable {
      */
     private static final long serialVersionUID = 3520656734252136303L;
 
-    private String id = MainUtils.getUUID();
+    private String id = IdUtils.getUuid7Str();
     private String appid;
     private String userid;
     private String username;
@@ -256,8 +254,6 @@ public class ChatMessage implements java.io.Serializable {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "assigned")
     public String getId() {
         return id;
     }

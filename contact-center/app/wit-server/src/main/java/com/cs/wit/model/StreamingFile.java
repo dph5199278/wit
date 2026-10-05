@@ -19,11 +19,9 @@ package com.cs.wit.model;
 import java.sql.Blob;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "cs_stream_file")
@@ -51,8 +49,6 @@ public class StreamingFile implements java.io.Serializable {
 
     @Id
     @Column(length = 32)
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name = "system-uuid", strategy = "assigned")
     public String getId() {
         return id;
     }
